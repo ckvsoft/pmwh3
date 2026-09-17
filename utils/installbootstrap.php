@@ -113,10 +113,15 @@ class InstallBootstrap
         return (string) self::installState()['token_code'];
     }
 
-    /** Absolute path of the token file the operator has to create. */
+    /**
+     * Absolute path of the token file the operator has to create --
+     * inside the PMWH3 MODULE directory (next to module.json), NOT
+     * the cevian root: the operator must have write access to the
+     * module folder itself, which is what a legitimate deploy needs.
+     */
     public static function securityTokenPath(): string
     {
-        return rtrim(getcwd(), '/') . '/' . self::securityTokenName();
+        return __DIR__ . '/../' . self::securityTokenName();
     }
 
     /**
