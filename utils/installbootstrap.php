@@ -347,7 +347,7 @@ class InstallBootstrap
             // baseline presence does not change the routing: the
             // bootstrap step (P2) plays it when missing -- probing the
             // CONNECT here only decides db-step recovery vs. onwards
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             // module DB unreachable/missing from the stored config --
             // the 'db' step owns the recovery UX (form memory +
             // admin-login fields help to fix credentials)
@@ -619,7 +619,7 @@ class InstallBootstrap
                     [\PDO::ATTR_TIMEOUT => 5]);
             return ['rows' => [['label' => 'Database connect', 'ok' => true,
                 'detail' => 'ok']]];
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $msg = $e->getMessage();
         }
 
@@ -632,7 +632,7 @@ class InstallBootstrap
                     return ['rows' => [['label' => 'Database connect',
                         'ok'     => true,
                         'detail' => 'ok (empty database created by installer)']]];
-                } catch (Throwable $e2) {
+                } catch (\Throwable $e2) {
                     \pmwh3\Utils\ErrorHandler::trace(
                             '[InstallBootstrap.databaseProbe] connect failed after CREATE: '
                             . $e2->getMessage());
@@ -705,7 +705,7 @@ class InstallBootstrap
                     try {
                         $pdo->prepare('GRANT ALL PRIVILEGES ON `' . $bare
                                 . "`.* TO {$target}")->execute();
-                    } catch (Throwable $e) {
+                    } catch (\Throwable $e) {
                         \pmwh3\Utils\ErrorHandler::trace(
                                 '[InstallBootstrap.tryCreateDatabase] GRANT '
                                 . $target . ' skipped: ' . $e->getMessage());
@@ -715,14 +715,14 @@ class InstallBootstrap
                 try {
                     $pdo->prepare('GRANT ALL PRIVILEGES ON `' . $bare
                             . "`.* TO CURRENT_USER()")->execute();
-                } catch (Throwable $e) {
+                } catch (\Throwable $e) {
                     \pmwh3\Utils\ErrorHandler::trace(
                             '[InstallBootstrap.tryCreateDatabase] GRANT skipped: '
                             . $e->getMessage());
                 }
             }
             return true;
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             \pmwh3\Utils\ErrorHandler::trace(
                     '[InstallBootstrap.tryCreateDatabase] failed: '
                     . $e->getMessage());
@@ -983,7 +983,7 @@ class InstallBootstrap
         try {
             $pdo = new \PDO($dsn, (string) $node['user'],
                     (string) $node['pass'], [\PDO::ATTR_TIMEOUT => 5]);
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $msg = $e->getMessage();
             // distinguish the failure classes BEFORE any CREATE
             // attempt: a wrong DNS user/password (1045 access denied)
@@ -1026,7 +1026,7 @@ class InstallBootstrap
                 try {
                     $pdo = new \PDO($dsn, (string) $node['user'],
                             (string) $node['pass'], [\PDO::ATTR_TIMEOUT => 5]);
-                } catch (Throwable $e2) {
+                } catch (\Throwable $e2) {
                     \pmwh3\Utils\ErrorHandler::trace(
                             '[InstallBootstrap.dnsStatus] reconnect failed: '
                             . $e2->getMessage());
@@ -1063,7 +1063,7 @@ class InstallBootstrap
                 if ($st->fetchColumn() === $t) {
                     $found[] = $t;
                 }
-            } catch (Throwable $e) {
+            } catch (\Throwable $e) {
                 // table listing failed -> schema clearly incomplete
             }
         }
@@ -1159,7 +1159,7 @@ class InstallBootstrap
                             $seed = $type;
                             break;
                         }
-                    } catch (Throwable $e3) {
+                    } catch (\Throwable $e3) {
                     }
                 }
             }
@@ -1167,11 +1167,11 @@ class InstallBootstrap
                 try {
                     \pmwh3\Config\LazyConfig::set('DNS_TYPE', $seed);
                     $steps['pmwh3 config'] = 'ok (DNS_TYPE=' . $seed . ')';
-                } catch (Throwable $e3) {
+                } catch (\Throwable $e3) {
                     $steps['pmwh3 config'] = 'FAIL: ' . $e3->getMessage();
                 }
             }
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $steps['dns schema'] = 'FAIL: ' . $e->getMessage();
             return ['ok' => false, 'steps' => $steps];
         } finally {            // only purge the temp file WE materialized from the paste
