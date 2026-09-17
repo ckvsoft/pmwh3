@@ -79,15 +79,16 @@ class InstallBootstrap
 
     private static function stateFile(): string
     {
-        // In the MODULE directory (next to module.json + token), NOT
-        // the cevian root: the installer already requires the module
-        // dir to be writable (module.json, token), so the form memory
-        // lives where we are GUARANTEED write access. A cwd()-relative
-        // var/ path can silently fail (php-fpm user depends on the
-        // deployment) and then every reload renders EMPTY wizard
-        // fields.
-        $dir = __DIR__ . '/../var';
-        return $dir . '/pmwh3_install_state.json';
+        // Cevian-root var/ (php-fpm writable there -- fdpm error logs
+        // live in the same folder). The module directory is NOT
+        // php-writable on operator-managed deployments (the token file
+        // exists precisely because the OPERATOR has access, PHP may
+        // not) -- storing the state there regenerated the token name
+        // every request and the freshly created token file "never
+        // existed". Form memory + token state therefore both live in
+        // the cevian root; write failures are logged clearly and the
+        // token itself can be re-created from the displayed name.
+        return rtrim(getcwd(), '/') . '/var/pmwh3_install_state.json';
     }
 
     private static function installState(): array
@@ -162,8 +163,8 @@ class InstallBootstrap
     {
         @unlink(self::securityTokenPath());
         @unlink(self::stateFile());
-        // legacy location (earlier releases used the cwd's var/)
-        @unlink(rtrim(getcwd(), '/') . '/var/pmwh3_install_state.json');
+        // cleanup of the wrongly located copy (regression window only)
+        @unlink(__DIR__ . '/../var/pmwh3_install_state.json');
     }
 
     /**
