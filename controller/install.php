@@ -34,13 +34,15 @@ class Install extends \ckvsoft\mvc\BaseController
 
         $this->installRender('pmwh3/install', [
             'activeBox' => 'install',
-            // pre-login page: only the HOST is prefilled as a server
-            // hint. Name/user/pass deliberately stay blank --
-            // pre-filling them would leak the FRAMEWORK's DB identity
-            // (config.json) into an anonymous page.
-            'frameworkHost' => $this->frameworkDbHint('host'),
-            'frameworkName' => '',
-            'frameworkUser' => '',
+            // pre-login page: fields stay BLANK. After a failed run()
+            // attempt the previously submitted values are reset from
+            // that attempt's own request (session from the client),
+            // never prefilled from the framework config.json --
+            // pre-filling real creds would leak the DB identity into
+            // an anonymous page source.
+            'frameworkHost'
+                    => (string) ($_SESSION['pmwh3']['install_form']['db_host'] ?? ''),
+            'frameworkName' => '', 'frameworkUser' => '',
             'sysChecks' => \pmwh3\Utils\InstallBootstrap::systemChecks(),
         ]);
     }
@@ -92,6 +94,7 @@ class Install extends \ckvsoft\mvc\BaseController
                     $fails[] = $label . ': ' . $d;
                 }
             }
+            $this->rememberForm($in);
             $this->flash('error', implode('<br />', $fails), 'install');
         }
 
@@ -103,18 +106,14 @@ class Install extends \ckvsoft\mvc\BaseController
                 'login');
     }
 
-    /** Pre-login: use only safe host prefill (name/user/pass stay empty). */
-    private function frameworkDbHint(string $field): string
+    /** Remember the LAST attempt's host for the re-render (session only). */
+    private function rememberForm(array $in): void
     {
-        if ($field !== 'host') {
-            return '';
+        if (!isset($_SESSION)) {
+            @session_start();
         }
-        $path = rtrim(getcwd(), '/') . '/config/config.json';
-        if (is_file($path)) {
-            $json = json_decode((string) file_get_contents($path), true);
-            return (string) ($json['database']['host'] ?? '');
-        }
-        return '';
+        $_SESSION['pmwh3']['install_form']['db_host']
+                = (string) ($in['db_host'] ?? '');
     }
     /**
      * Minimal pre-login page render (no pmwh3 menu, no login state):

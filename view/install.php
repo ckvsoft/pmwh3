@@ -23,7 +23,7 @@
                 <?php endif; ?>
             </table>
 
-            <form action="<?= BASE_URI ?>pmwh3/install/run" method="post" data-confirm="<?php echo __('Run the pmwh3 install? This writes the module config, creates the schema, RBAC roles and the admin user.'); ?>" data-confirm-type="change">
+            <form autocomplete="off" action="<?= BASE_URI ?>pmwh3/install/run" method="post" data-confirm="<?php echo __('Run the pmwh3 install? This writes the module config, creates the schema, RBAC roles and the admin user.'); ?>" data-confirm-type="change">
                 <table>
                     <tr>
                         <th colspan="2"><?php echo __('Module database (pmwh3 data store)'); ?></th>
@@ -34,11 +34,11 @@
                     </tr>
                     <tr>
                         <td><?php echo __('DB name'); ?></td>
-                        <td><input name="db_name" required value="<?= htmlspecialchars((string) ($this->data['frameworkName'] ?? '')) ?>"></td>
+                        <td><input name="db_name" required autocomplete="off"></td>
                     </tr>
                     <tr>
                         <td><?php echo __('DB user'); ?></td>
-                        <td><input name="db_user" required value="<?= htmlspecialchars((string) ($this->data['frameworkUser'] ?? '')) ?>"></td>
+                        <td><input name="db_user" required autocomplete="off"></td>
                     </tr>
                     <tr>
                         <td><?php echo __('DB password'); ?></td>
