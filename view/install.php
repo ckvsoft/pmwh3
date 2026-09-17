@@ -43,10 +43,16 @@
                         <small style="color: green;">&#10003; <?php echo __('Prerequisites OK (verified in step 2).'); ?></small>
                     </td></tr>
                 <?php } ?>
-                <?php if (($this->data['step'] ?? '') === 'dns'): ?>
+                <?php if (($this->data['step'] ?? '') === 'dns' && ($this->data['dnsStatus']['nodeFound'] ?? false) && !($this->data['dnsStatus']['tablesOk'] ?? false)): ?>
                     <tr>
                         <td style="white-space: nowrap; float:left;"><strong style="color:red;">FAIL</strong></td>
                         <td>DNS schema &mdash; <?php echo htmlspecialchars((string) (($this->data['dnsStatus']['detail'] ?? ''))); ?></td>
+                    </tr>
+                <?php elseif (($this->data['step'] ?? '') === 'dns'): ?>
+                    <tr>
+                        <td colspan="2">
+                            <small><?php echo __('DNS connection not saved yet -- configure it below (this step).'); ?></small>
+                        </td>
                     </tr>
                 <?php endif; ?>
             </table>
