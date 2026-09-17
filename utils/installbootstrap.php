@@ -235,6 +235,63 @@ class InstallBootstrap
     // Run the whole bootstrap
     // ----------------------------------------------------------------
 
+    // ----------------------------------------------------------------
+    // Multi-step wizard (cevian installer style)
+    // ----------------------------------------------------------------
+
+    /**
+     * Which wizard step applies RIGHT NOW. Each step is confirmed
+     * explicitly before the next one opens (cevian installer style),
+     * no all-in-one submission chain:
+     *  token     - security token file (step 0)
+     *  config    - DB + DNS form (phase 1 -> writes module.json)
+     *  dns       - DNS schema apply (when the dns node needs a schema)
+     *  bootstrap - admin password only (phase 2 -> baseline+RBAC)
+     */
+    public static function wizardStep(): string
+    {
+        if (!self::securityTokenOk()) {
+            return 'token';
+        }
+        $blocker = self::installBlocker();
+        if (str_contains($blocker, 'placeholder')
+                || str_contains($blocker, 'module.json')) {
+            return 'config';
+        }
+
+        // module.json is real: module DB reachable AND baseline played?
+        $mj = self::moduleJson();
+        $in = [];
+        if (!empty($mj['database'])) {
+            foreach (['db_host' => 'host', 'db_name' => 'name',
+                      'db_user' => 'user', 'db_pass' => 'pass'] as $k => $j) {
+                $in[$k] = (string) ($mj['database'][$j] ?? '');
+            }
+            $in['db_port'] = (int) ($mj['database']['port'] ?? 3306);
+        }
+        try {
+            $dsn = 'mysql:host=' . $in['db_host'] . ';port=' . $in['db_port']
+                    . ';dbname=' . $in['db_name'];
+            $pdo = new \PDO($dsn, $in['db_user'], $in['db_pass'],
+                    [\PDO::ATTR_TIMEOUT => 5]);
+            $st = $pdo->prepare('SHOW TABLES LIKE :t');
+            $st->execute([':t' => 'pmwh3_menu']);
+            if ($st->fetchColumn() !== 'pmwh3_menu') {
+                // baseline not played yet: DNS schema gates the
+                // bootstrap step; a broken/uncreated module DB sends
+                // the operator back to the config step (its form
+                // memory + admin-login fields help to fix credentials)
+                $dns = self::dnsStatus();
+                return !empty($dns['tablesOk']) ? 'bootstrap' : 'dns';
+            }
+        } catch (Throwable $e) {
+            // module DB unreachable/missing from the stored config --
+            // 'config' step owns the recovery UX (probe + admin login)
+            return 'config';
+        }
+        return 'bootstrap';
+    }
+
     /**
      * @param array $in installer input: db_host/db_name/db_user/db_pass,
     /**
