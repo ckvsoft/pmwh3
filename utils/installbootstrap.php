@@ -97,6 +97,23 @@ class InstallBootstrap
                     || ($dns['name'] ?? '') === 'DNS_DB_NAME') {
                 return 'DNS database connection not configured (installer step 4)';
             }
+            // bootstrap (roles, permissions, ADMIN CUSTOMER) may still
+            // be pending: the updater's fresh path plays the baseline
+            // on the FIRST page visit already, so 'baseline exists +
+            // dns node ok' is NOT a completed install -- without this
+            // check the wizard flashed 'already installed', bounced to
+            // the login and the admin user never existed. The
+            // freshly-installed flag is the designed marker; the admin
+            // customer row is the ground truth when the flag is gone.
+            if (is_file(rtrim(getcwd(), '/') . '/var/pmwh3_freshly_installed.flag')) {
+                return 'bootstrap pending (baseline played, roles/admin not created yet)';
+            }
+            $admin = $mod->selectOne(
+                    'SELECT id FROM pmwh3_customers WHERE customer = :c LIMIT 1',
+                    ['c' => self::ADMIN_NAME]);
+            if (!$admin) {
+                return 'admin customer missing (bootstrap step not run)';
+            }
             return '';
         } catch (\Throwable $e) {
             return 'probe failed: ' . $e->getMessage();
@@ -210,18 +227,22 @@ class InstallBootstrap
     {
         $stateFile = self::stateFile();
         $state = self::installState();
-        $fields = ['db_host', 'db_name', 'db_user', 'dns_host', 'dns_name',
-            'dns_user', 'dns_same', 'perms_confirmed'];
         if (is_array($in)) {
-            $filled = false;
-            foreach ($fields as $f) {
-                $v = trim((string) ($in[$f] ?? ''));
+            // each wizard form owns ONLY its own fields -- a POST from
+            // another step must never wipe them. The old "write every
+            // known field, absent ones as ''" logic erased the
+            // perms_confirmed marker on EVERY form POST, which is why
+            // the wizard bounced back to the permissions step after
+            // step 3 and again after the DNS step.
+            $owns = [
+                '1'        => ['db_host', 'db_name', 'db_user'],
+                'dns_conn' => ['dns_host', 'dns_name', 'dns_user', 'dns_same'],
+            ][(string) ($in['phase'] ?? '')] ?? [];
+            foreach ($owns as $f) {
+                // checkbox semantics: an absent key means UNchecked
                 $state['form'][$f] = (string) ($in[$f] ?? '');
-                if ($v !== '') {
-                    $filled = true;
-                }
             }
-            if ($filled) {
+            if ($owns) {
                 self::writeState($stateFile, $state);
             }
         }
@@ -318,15 +339,14 @@ class InstallBootstrap
             }
             $in['db_port'] = (int) ($mj['database']['port'] ?? 3306);
         }
-        $baselineOk = false;
         try {
             $dsn = 'mysql:host=' . $in['db_host'] . ';port=' . $in['db_port']
                     . ';dbname=' . $in['db_name'];
             $pdo = new \PDO($dsn, $in['db_user'], $in['db_pass'],
                     [\PDO::ATTR_TIMEOUT => 5]);
-            $st = $pdo->prepare('SHOW TABLES LIKE :t');
-            $st->execute([':t' => 'pmwh3_menu']);
-            $baselineOk = $st->fetchColumn() === 'pmwh3_menu';
+            // baseline presence does not change the routing: the
+            // bootstrap step (P2) plays it when missing -- probing the
+            // CONNECT here only decides db-step recovery vs. onwards
         } catch (Throwable $e) {
             // module DB unreachable/missing from the stored config --
             // the 'db' step owns the recovery UX (form memory +
