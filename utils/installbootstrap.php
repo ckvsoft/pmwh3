@@ -788,18 +788,35 @@ class InstallBootstrap
             $in['dns_host'] = $in['db_host'] ?? '';
         }
         try {
-            $done = self::writeDnsNode($in);
-            $rows = self::dnsStatus();
-            $steps['module.json (dns node)'] = $done ? 'ok' : 'FAIL: write';
-            $steps['dns database'] = ($rows['dbExists'] ?? false)
-                    ? 'reachable (' . ($rows['detail'] ?? '') . ')'
-                    : 'FAIL: ' . ($rows['detail'] ?? 'not reachable');
-            if (!($rows['tablesOk'] ?? false)) {
-                // schema form opens in the NEXT step render, not here
+            // probe FIRST, write only on success: wrong credentials
+            // must NOT be persisted -- the operator stays on the
+            // connection form with the remembered values instead of
+            // being bounced to the schema form with a broken node
+            $mj = self::moduleJson();
+            $mainDb = (array) ($mj['database'] ?? []);
+            $same = !empty($in['dns_same']);
+            $probeIn = [
+                'db_host' => $same ? (string) ($mainDb['host'] ?? '') : (string) $in['dns_host'],
+                'db_port' => (int) ($mainDb['port'] ?? 3306),
+                'db_name' => (string) $in['dns_name'],
+                'db_user' => $same ? (string) ($mainDb['user'] ?? '') : (string) $in['dns_user'],
+                'db_pass' => $same ? (string) ($mainDb['pass'] ?? '') : (string) $in['dns_pass'],
+                'db_admin_user' => '',
+                'db_admin_pass' => '',
+            ];
+            $probe = self::databaseProbe($probeIn);
+            $row = $probe['rows'][0] ?? ['ok' => false, 'detail' => 'connect failed'];
+            if (!$row['ok']) {
+                $steps['dns database'] = 'FAIL: ' . $row['detail'];
+                return ['ok' => false, 'steps' => $steps];
+            }
+            self::writeDnsNode($in);
+            $steps['module.json (dns node)'] = 'ok';
+            $steps['dns database'] = $row['detail'];
+            if (!self::dnsStatus()['tablesOk']) {
                 $steps['dns schema'] = 'missing (apply in the next step)';
             }
-            return ['ok' => $done && ($rows['dbExists'] ?? false),
-                    'steps' => $steps];
+            return ['ok' => true, 'steps' => $steps];
         } catch (\Throwable $e) {
             $steps['dns node'] = 'FAIL: ' . $e->getMessage();
             return ['ok' => false, 'steps' => $steps];
@@ -922,6 +939,29 @@ class InstallBootstrap
             $pdo = new \PDO($dsn, (string) $node['user'],
                     (string) $node['pass'], [\PDO::ATTR_TIMEOUT => 5]);
         } catch (Throwable $e) {
+            $msg = $e->getMessage();
+            // distinguish the failure classes BEFORE any CREATE
+            // attempt: a wrong DNS user/password (1045 access denied)
+            // must not be reported as a missing database, and an
+            // unreachable host has nothing to do with the schema
+            if (str_contains($msg, 'Access denied')
+                    || (string) $e->getCode() === '1045') {
+                \pmwh3\Utils\ErrorHandler::trace(
+                        '[InstallBootstrap.dnsStatus] access denied: ' . $msg);
+                return ['nodeFound' => true, 'dbExists' => false,
+                    'tablesOk' => false,
+                    'detail' => 'access denied -- check the DNS database'
+                            . ' user/password (use "change DNS connection")',
+                    'missing' => []];
+            }
+            if (str_contains($msg, '2002') || str_contains($msg, 'Connection refused')) {
+                \pmwh3\Utils\ErrorHandler::trace(
+                        '[InstallBootstrap.dnsStatus] host unreachable: ' . $msg);
+                return ['nodeFound' => true, 'dbExists' => false,
+                    'tablesOk' => false,
+                    'detail' => 'DNS database host unreachable -- check host/port',
+                    'missing' => []];
+            }
             // try to create the missing empty DNS database (same-conn
             // credentials or the separate ones from the node)
             $probeIn = [
