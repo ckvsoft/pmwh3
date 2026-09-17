@@ -143,6 +143,20 @@ class InstallBootstrap
         @unlink(rtrim(getcwd(), '/') . '/var/pmwh3_install_state.json');
     }
 
+    /** Non-SECRET form memory (host/name/user/dns), state file based. */
+    public static function formRemember(?array $in = null): array
+    {
+        $stateFile = rtrim(getcwd(), '/') . '/var/pmwh3_install_state.json';
+        $state = self::installState();
+        if (is_array($in)) {
+            foreach (['db_host', 'db_name', 'db_user', 'dns_name'] as $f) {
+                $state['form'][$f] = (string) ($in[$f] ?? '');
+            }
+            @file_put_contents($stateFile, json_encode($state, JSON_PRETTY_PRINT));
+        }
+        return (array) ($state['form'] ?? []);
+    }
+
     /** Read modules/pmwh3/module.json as an array ([] when missing). */
     private static function moduleJson(): array
     {

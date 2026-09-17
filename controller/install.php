@@ -54,18 +54,19 @@ class Install extends \ckvsoft\mvc\BaseController
         $phase2 = !str_contains($blocker, 'placeholder')
                 && !str_contains($blocker, 'module.json');
 
+        // remember the operator's NON-SECRET form values in the
+        // installer STATE file (var/pmwh3_install_state.json) -- NOT
+        // the PHP session, so a fresh session (or a different browser)
+        // sees the same careful prefetch.
+        $form = \pmwh3\Utils\InstallBootstrap::formRemember();
+
         $this->installRender('pmwh3/install', [
             'activeBox' => 'install',
             'phase2'    => $phase2,
-            // the fields the operator typed stay (session-only);
-            'frameworkHost'
-                    => (string) ($_SESSION['pmwh3']['install_form']['db_host'] ?? ''),
-            'frameworkName'
-                    => (string) ($_SESSION['pmwh3']['install_form']['db_name'] ?? ''),
-            'frameworkUser'
-                    => (string) ($_SESSION['pmwh3']['install_form']['db_user'] ?? ''),
-            'frameworkDnsName'
-                    => (string) ($_SESSION['pmwh3']['install_form']['dns_name'] ?? ''),
+            'frameworkHost'   => (string) ($form['db_host'] ?? ''),
+            'frameworkName'   => (string) ($form['db_name'] ?? ''),
+            'frameworkUser'   => (string) ($form['db_user'] ?? ''),
+            'frameworkDnsName' => (string) ($form['dns_name'] ?? ''),
             'sysChecks' => \pmwh3\Utils\InstallBootstrap::systemChecks(),
         ]);
     }
