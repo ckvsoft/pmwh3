@@ -34,9 +34,13 @@ class Install extends \ckvsoft\mvc\BaseController
 
         $this->installRender('pmwh3/install', [
             'activeBox' => 'install',
+            // pre-login page: only the HOST is prefilled as a server
+            // hint. Name/user/pass deliberately stay blank --
+            // pre-filling them would leak the FRAMEWORK's DB identity
+            // (config.json) into an anonymous page.
             'frameworkHost' => $this->frameworkDbHint('host'),
-            'frameworkName' => $this->frameworkDbHint('name'),
-            'frameworkUser' => $this->frameworkDbHint('user'),
+            'frameworkName' => '',
+            'frameworkUser' => '',
             'sysChecks' => \pmwh3\Utils\InstallBootstrap::systemChecks(),
         ]);
     }
@@ -99,17 +103,19 @@ class Install extends \ckvsoft\mvc\BaseController
                 'login');
     }
 
-    /** Prefill hint from the framework's own config.json (same server). */
+    /** Pre-login: use only safe host prefill (name/user/pass stay empty). */
     private function frameworkDbHint(string $field): string
     {
+        if ($field !== 'host') {
+            return '';
+        }
         $path = rtrim(getcwd(), '/') . '/config/config.json';
         if (is_file($path)) {
             $json = json_decode((string) file_get_contents($path), true);
-            return (string) ($json['database'][$field] ?? '');
+            return (string) ($json['database']['host'] ?? '');
         }
         return '';
     }
-
     /**
      * Minimal pre-login page render (no pmwh3 menu, no login state):
      * framework header/footer around the wizard view.
