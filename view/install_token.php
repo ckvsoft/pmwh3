@@ -1,15 +1,29 @@
-<h1>Step 0 &mdash; Security file</h1>
+<div class="pmwh3-content">
+    <div class="widget">
+        <div class="entry tool">
+            <h2><?php echo __('Install pmwh3'); ?></h2>
 
-<?php if (!\pmwh3\Utils\InstallBootstrap::securityTokenOk()): ?>
-    <p>Security file missing &#x274C;</p>
-    <p><?php echo __('Please create the EMPTY security file in the ROOT directory:'); ?>
-       <strong><?= htmlspecialchars((string) ($this->data['tokenName'] ?? '?')) ?></strong>
-       (e.g. <code>touch &lt;cevian-root&gt;/<?= htmlspecialchars((string) ($this->data['tokenName'] ?? '?')) ?></code>
-       or upload an empty file with your FTP client).</p>
-    <form method="post" action="checkToken">
-        <button class="button" type="submit" name="check" value="1"><?php echo __('Check again'); ?></button>
-    </form>
-<?php else: ?>
-    <p>Security file found &#x2705;</p>
-    <a href="<?= BASE_URI ?>pmwh3/install" class="button"><?php echo __('Next &rarr;'); ?></a>
-<?php endif; ?>
+            <?php if (!\pmwh3\Utils\InstallBootstrap::securityTokenOk()) { ?>
+                <p>
+                    <strong style="color:red">&#10060; <?php echo __('Security file missing'); ?></strong><br>
+                    <?php echo __('Please create the EMPTY security file in the Cevian root directory:'); ?><br>
+                    <code><strong><?php echo htmlspecialchars((string) ($this->data['tokenName'] ?? '?')); ?></strong></code><br>
+                    <small><?php echo __('e.g. "touch <cevian-root>/<filename>" via SSH or an empty upload with your FTP client.'); ?></small>
+                </p>
+                <div class="pmwh3-form-actions">
+                    <form action="<?= BASE_URI ?>pmwh3/install/checkToken" method="post">
+                        <input class="button small-action save" type="submit" name="check" value="<?php echo __('Check again'); ?>">
+                    </form>
+                </div>
+            <?php } else { ?>
+                <p>
+                    <strong style="color:green">&#9989; <?php echo __('Security file found'); ?></strong><br>
+                    <?php echo __('Continue to the install wizard:'); ?>
+                </p>
+                <div class="pmwh3-form-actions">
+                    <a class="button small-action save" href="<?= BASE_URI ?>pmwh3/install"><?php echo __('Next'); ?></a>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
+</div>

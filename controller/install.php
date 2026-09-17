@@ -150,13 +150,16 @@ class Install extends \ckvsoft\mvc\BaseController
      */
     private function installRender($view, $data = null)
     {
-        // cevian-INSTALLER look: standalone minimal page (its own css),
-        // NOT the pmwh3 app chrome.
+        // THE SITE's look: pmwh3 app chrome (header/footer/pmwh3.css)
+        // -- the operator's own design, same as the login page; no
+        // pmwh3 menu (the module isn't usable pre-install).
         $this->renderPage([
-            ['view' => 'pmwh3/inc_header'],
+            ['view' => '/inc/header', 'data' => ['title' => __('Install pmwh3')]],
             ['view' => $view, 'data' => ['data' => $data]],
-            ['view' => 'pmwh3/inc_footer'],
-        ]);
+            ['view' => '/inc/footer'],
+                ],
+                "<style>" . $this->loadHelper("css", ['method' => 'getCss', 'args' => ['inc/css/pmwh3.css']]) . "</style>"
+        );
     }
 
     /** Pre-login flash: Auth-based flash redirect (framework Auth helper). */
