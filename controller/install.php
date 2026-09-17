@@ -45,17 +45,27 @@ class Install extends \ckvsoft\mvc\BaseController
             return;
         }
 
+        // two-phase: blocker 'module.json ... placeholder' (or
+        // missing file) -> config wizard (phase 1); real module.json
+        // but missing tables -> bootstrap wizard (phase 2, only admin
+        // password) -- the DB caches are per-request, so phase 2 runs
+        // in a FRESH request.
+        $blocker = \pmwh3\Utils\InstallBootstrap::installBlocker();
+        $phase2 = !str_contains($blocker, 'placeholder')
+                && !str_contains($blocker, 'module.json');
+
         $this->installRender('pmwh3/install', [
             'activeBox' => 'install',
-            // pre-login page: fields stay BLANK. After a failed run()
-            // attempt the previously submitted values are reset from
-            // that attempt's own request (session from the client),
-            // never prefilled from the framework config.json --
-            // pre-filling real creds would leak the DB identity into
-            // an anonymous page source.
+            'phase2'    => $phase2,
+            // the fields the operator typed stay (session-only);
             'frameworkHost'
                     => (string) ($_SESSION['pmwh3']['install_form']['db_host'] ?? ''),
-            'frameworkName' => '', 'frameworkUser' => '',
+            'frameworkName'
+                    => (string) ($_SESSION['pmwh3']['install_form']['db_name'] ?? ''),
+            'frameworkUser'
+                    => (string) ($_SESSION['pmwh3']['install_form']['db_user'] ?? ''),
+            'frameworkDnsName'
+                    => (string) ($_SESSION['pmwh3']['install_form']['dns_name'] ?? ''),
             'sysChecks' => \pmwh3\Utils\InstallBootstrap::systemChecks(),
         ]);
     }
@@ -87,20 +97,27 @@ class Install extends \ckvsoft\mvc\BaseController
         }
 
         $input = new \ckvsoft\Input();
-        $input->post('db_host', true)
-                ->post('db_name', true)
-                ->post('db_user', true)
-                ->post('db_pass', true)
+        $input->post('phase')
+                ->post('db_host')
+                ->post('db_name')
+                ->post('db_user')
+                ->post('db_pass')
                 ->post('dns_same')
                 ->post('dns_host')
                 ->post('dns_name')
                 ->post('dns_user')
                 ->post('dns_pass')
-                ->post('admin_password', true);
+                ->post('admin_password');
         $input->submit();
 
         $in = $input->fetch() ?: [];
-        if (!empty($in['dns_same'])) {
+        if (empty($in['phase'])) {
+            $in['phase'] = ((\pmwh3\Utils\InstallBootstrap::installBlocker() !== ''
+                    && !str_contains(\pmwh3\Utils\InstallBootstrap::installBlocker(), 'placeholder')) ? '2' : '1');
+        }
+        if (empty($in['dns_same']) && $in['phase'] === '1') {
+            // separate dns db: the form only collects the NAME (same
+            // server / user as the module db), fill the rest
             $in['dns_host'] = $in['db_host'];
             $in['dns_name'] = trim((string) ($in['dns_name'] ?? ''));
             $in['dns_user'] = $in['db_user'];
@@ -108,7 +125,9 @@ class Install extends \ckvsoft\mvc\BaseController
         }
 
         try {
-            $result = \pmwh3\Utils\InstallBootstrap::run($in);
+            $result = $in['phase'] === '2'
+                ? \pmwh3\Utils\InstallBootstrap::runPhase2($in)
+                : \pmwh3\Utils\InstallBootstrap::runPhase1($in);
         } catch (\Throwable $e) {
             $result = ['ok' => false, 'steps' => ['installer' => 'FAIL: ' . $e->getMessage()]];
         }
@@ -125,6 +144,18 @@ class Install extends \ckvsoft\mvc\BaseController
             }
             $this->rememberForm($in);
             $this->flash('error', implode('<br />', $fails), 'install');
+        }
+
+        if ($in['phase'] === '1') {
+            // config persisted -> NEW request for the bootstrap phase
+            // (module DB caches are per-request)
+            $this->flash('success',
+                    htmlspecialchars(implode(': ', array_merge(...[['step 1/2'],
+                        array_map(fn($l, $d) => "$l: $d",
+                            array_keys($result['steps']),
+                            array_values($result['steps']))
+                    ]))),
+                    'install');
         }
 
         $this->flash('success',

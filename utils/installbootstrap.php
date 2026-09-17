@@ -189,11 +189,36 @@ class InstallBootstrap
      *   dns_same (+dns_* when separate), admin_password.
      * @return array ['ok' => bool, 'steps' => [label => detail]]
      */
-    public static function run(array $in): array
+    /**
+     * PHASE 1: only write module.json from the form input. The DB
+     * bootstrap intentionally happens in a SEPARATE request (phase 2)
+     * -- the module DB caches are per-request and would otherwise
+     * still hold the half-initialized placeholder connection.
+     * @return array ['ok' => bool, 'steps' => [label => detail]]
+     */
+    public static function runPhase1(array $in): array
     {
         $steps = [];
+        self::assertInput($in, 'config');
 
-        self::assertInput($in);
+        try {
+            $n = self::writeModuleJson($in);
+            $steps['module.json'] = 'ok (' . $n . ' config nodes)';
+        } catch (\Throwable $e) {
+            $steps['module.json'] = 'FAIL: ' . $e->getMessage();
+            return ['ok' => false, 'steps' => $steps];
+        }
+        self::rememberForm($in);
+        return ['ok' => true, 'steps' => $steps];
+    }
+
+    /**
+     * PHASE 2: fresh request; module.json real by now. Baseline +
+     * RBAC + admin customer. */
+    public static function runPhase2(array $in): array
+    {
+        $steps = [];
+        self::assertInput($in, 'bootstrap');
 
         // 0. system prerequisites (Cevian version, PHP extensions, dirs)
         $checks = self::systemChecks($in);
@@ -204,15 +229,6 @@ class InstallBootstrap
                             = 'FAIL: ' . $row['detail'];
                 }
             }
-            return ['ok' => false, 'steps' => $steps];
-        }
-
-        // 1. module.json (must succeed first -- everything reads it)
-        try {
-            $n = self::writeModuleJson($in);
-            $steps['module.json'] = 'ok (' . $n . ' config nodes)';
-        } catch (\Throwable $e) {
-            $steps['module.json'] = 'FAIL: ' . $e->getMessage();
             return ['ok' => false, 'steps' => $steps];
         }
 
@@ -395,14 +411,18 @@ class InstallBootstrap
         return ['ok' => $ok, 'rows' => $rows];
     }
 
-    private static function assertInput(array $in): void
+    private static function assertInput(array $in, string $phase = 'config'): void
     {
-        foreach (['db_host', 'db_name', 'db_user', 'db_pass'] as $f) {
+        $required = ['db_host', 'db_name', 'db_user', 'db_pass'];
+        if ($phase === 'bootstrap') {
+            $required = ['admin_password'];
+        }
+        foreach ($required as $f) {
             if (trim((string) ($in[$f] ?? '')) === '') {
                 throw new CkvException(__('Missing fields') . " ({$f})");
             }
         }
-        if (empty($in['dns_same'])) {
+        if ($phase === 'config' && empty($in['dns_same'])) {
             foreach (['dns_host', 'dns_name', 'dns_user', 'dns_pass'] as $f) {
                 if (trim((string) ($in[$f] ?? '')) === '') {
                     throw new CkvException(__('Missing fields') . " ({$f})");

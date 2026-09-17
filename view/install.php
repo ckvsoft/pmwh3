@@ -23,7 +23,11 @@
                 <?php endif; ?>
             </table>
 
-            <form autocomplete="off" action="<?= BASE_URI ?>pmwh3/install/run" method="post" data-confirm="<?php echo __('Run the pmwh3 install? This writes the module config, creates the schema, RBAC roles and the admin user.'); ?>" data-confirm-type="change">
+            <input type="hidden" name="phase" value="<?= ($this->data['phase2'] ?? false) ? '2' : '1' ?>">
+            <form autocomplete="off" action="<?= BASE_URI ?>pmwh3/install/run" method="post" data-confirm="<?php echo ($this->data['phase2'] ?? false)
+                    ? __('Create schema, RBAC roles and the admin user with the credentials from step 1?')
+                    : __('Run the pmwh3 install? This writes the module config, creates the schema, RBAC roles and the admin user.'); ?>" data-confirm-type="change">
+            <?php if (!($this->data['phase2'] ?? false)) { ?>
                 <table>
                     <tr>
                         <th colspan="2"><?php echo __('Module database (pmwh3 data store)'); ?></th>
@@ -67,6 +71,7 @@
                         </td>
                     </tr>
 
+<?php } // phase2: database + dns sections skipped ?>
                     <tr>
                         <th colspan="2"><?php echo __('Ultimate admin user'); ?></th>
                     </tr>
