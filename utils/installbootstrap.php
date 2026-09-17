@@ -1253,8 +1253,12 @@ class InstallBootstrap
      */
     private static function createAdminCustomer(array $in): void
     {
-        $mod = Config::moduleDb();
-        $role = $mod->selectOne(
+        // the RBAC roles/permissions live in the FRAMEWORK database
+        // (created by createRoles()/Acl::addRole) -- querying them on
+        // the MODULE db (used here before) only worked on test
+        // stagings that had seeded the framework schema into the
+        // module DB as well. kvasny: 'roles doesn't exist'.
+        $role = Config::db()->selectOne(
                 "SELECT id FROM roles WHERE roleName = :n AND module = 'pmwh3' LIMIT 1",
                 ['n' => self::ADMIN_ROLE]);
         $roleId = (int) ($role['id'] ?? 0);
