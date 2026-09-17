@@ -418,7 +418,17 @@ class InstallBootstrap
     {
         $path = self::findModuleJsonPath();
         if ($path === null) {
-            throw new \RuntimeException('modules/pmwh3/module.json not found');
+            // Fresh deployment where module.json is intentionally NOT
+            // shipped (repo ships module.json.example): write it new
+            // in the module directory itself.
+            $path = __DIR__ . '/../module.json';
+        }
+        if (!is_writable(dirname($path))) {
+            throw new \RuntimeException(
+                'module directory not writable by PHP ('
+                . basename(dirname($path))
+                . '/): fix the filesystem permissions (e.g. chown to the php-fpm user) so the installer can write module.json'
+            );
         }
         $mainDb = [
             'type' => 'mysql',

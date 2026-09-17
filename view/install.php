@@ -34,11 +34,11 @@
                     </tr>
                     <tr>
                         <td><?php echo __('DB name'); ?></td>
-                        <td><input name="db_name" required autocomplete="off"></td>
+                        <td><input name="db_name" required value="<?= htmlspecialchars((string) ($this->data['frameworkName'] ?? '')) ?>" autocomplete="off"></td>
                     </tr>
                     <tr>
                         <td><?php echo __('DB user'); ?></td>
-                        <td><input name="db_user" required autocomplete="off"></td>
+                        <td><input name="db_user" required value="<?= htmlspecialchars((string) ($this->data['frameworkUser'] ?? '')) ?>" autocomplete="off"></td>
                     </tr>
                     <tr>
                         <td><?php echo __('DB password'); ?></td>
@@ -51,14 +51,15 @@
                     <tr>
                         <td colspan="2">
                             <label>
-                                <input type="checkbox" name="dns_same" value="1" checked>
+                                <input type="checkbox" name="dns_same" value="1"
+    <?= (($this->data['frameworkDnsName'] ?? '') !== '' && !($this->data['frameworkDnsSame'] ?? '')) ? '' : 'checked' ?>>
                                 <?php echo __('Same connection as the module database (same user may create the DNS tables)'); ?>
                             </label>
                         </td>
                     </tr>
                     <tr>
                         <td><?php echo __('DNS DB name'); ?></td>
-                        <td><input name="dns_name" placeholder="pdns"></td>
+                        <td><input name="dns_name" placeholder="pdns" value="<?= htmlspecialchars((string) ($this->data['frameworkDnsName'] ?? '')) ?>"></td>
                     </tr>
                     <tr>
                         <td colspan="2">
