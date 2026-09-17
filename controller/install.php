@@ -167,14 +167,11 @@ class Install extends \ckvsoft\mvc\BaseController
                 'login');
     }
 
-    /** Remember the LAST attempt's host for the re-render (session only). */
+    /** Remember the LAST attempt's form values (state-file based,
+     *  NON-secret values only: host/name/user/dns_name). */
     private function rememberForm(array $in): void
     {
-        if (!isset($_SESSION)) {
-            @session_start();
-        }
-        $_SESSION['pmwh3']['install_form']['db_host']
-                = (string) ($in['db_host'] ?? '');
+        \pmwh3\Utils\InstallBootstrap::formRemember($in);
     }
     /**
      * Minimal pre-login page render (no pmwh3 menu, no login state):
