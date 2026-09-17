@@ -13,9 +13,8 @@
 
             <table>
                 <tr><th colspan="2"><?php echo __('Requirements'); ?></th></tr>
-                <?php foreach (($this->data['sysChecks']['rows'] ?? []) as $ic): ?>
-                    <?php if (($this->data['step'] ?? '') !== 'perms'
-                            && !preg_match('/(extension |writable|Cevian)/i', (string) $ic['label'])) continue; ?>
+                <?php if (($this->data['step'] ?? '') === 'perms') { ?>
+                    <?php foreach (($this->data['sysChecks']['rows'] ?? []) as $ic): ?>
                     <tr>
                         <td style="white-space: nowrap; float:left;">
                             <strong style="color: <?php echo $ic['ok'] ? 'green' : 'red'; ?>; font-weight: bold;">
@@ -25,22 +24,25 @@
                         <td><?php echo htmlspecialchars((string) $ic['label']); ?>
                             &mdash; <?php echo htmlspecialchars($ic['detail']); ?></td>
                     </tr>
-                <?php endforeach; ?>
-                <?php if (($this->data['step'] ?? '') === 'perms'): ?>
-                <tr>
-                    <td style="white-space: nowrap; float:left;">
-                        <strong style="color: green;">OK/FAIL</strong>
-                    </td>
-                    <td>var/ write probe &mdash; <?php echo \pmwh3\Utils\InstallBootstrap::stateWriteProbe()
-                            ? 'writable'
-                            : 'NOT writable (create a file fails — check disk/quota/chmod)'; ?></td>
-                </tr>
-                <?php endif; ?>
-                <?php if (!($this->data['sysChecks']['ok'] ?? true) || (($this->data['step'] ?? '') === 'perms' && !\pmwh3\Utils\InstallBootstrap::stateWriteProbe())): ?>
+                    <?php endforeach; ?>
+                    <tr>
+                        <td style="white-space: nowrap; float:left;">
+                            <strong style="color: <?php echo \pmwh3\Utils\InstallBootstrap::stateWriteProbe() ? 'green' : 'red'; ?>; font-weight: bold;">
+                                <?php echo \pmwh3\Utils\InstallBootstrap::stateWriteProbe() ? 'OK' : 'FAIL'; ?>
+                            </strong>
+                        </td>
+                        <td>var/ write probe (create &amp; delete) &mdash; <?php echo \pmwh3\Utils\InstallBootstrap::stateWriteProbe()
+                                ? 'writable'
+                                : 'NOT writable (file create fails — check disk/quota/chmod)'; ?></td>
+                    </tr>
                     <tr><td colspan="2">
                         <small><?php echo __('Fix the failed requirements and click "Check again" below -- Install cannot run until then.'); ?></small>
                     </td></tr>
-                <?php endif; ?>
+                <?php } else { ?>
+                    <tr><td colspan="2">
+                        <small style="color: green;">&#10003; <?php echo __('Prerequisites OK (verified in step 1).'); ?></small>
+                    </td></tr>
+                <?php } ?>
                 <?php if (($this->data['step'] ?? '') === 'dns'): ?>
                     <tr>
                         <td style="white-space: nowrap; float:left;"><strong style="color:red;">FAIL</strong></td>
