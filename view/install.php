@@ -27,6 +27,7 @@
             <form autocomplete="off" action="<?= BASE_URI ?>pmwh3/install/run" method="post" data-confirm="<?php echo ($this->data['phase2'] ?? false)
                     ? __('Create schema, RBAC roles and the admin user with the credentials from step 1?')
                     : __('Run the pmwh3 install? This writes the module config, creates the schema, RBAC roles and the admin user.'); ?>" data-confirm-type="change">
+            <?php $dnsSame = (bool) ($this->data['frameworkDnsSame'] ?? false); ?>
             <?php if (!($this->data['phase2'] ?? false)) { ?>
                 <table>
                     <tr>
@@ -57,7 +58,7 @@
                             <label>
                                 <input type="checkbox" name="dns_same" value="1" id="dns_same"
                                        onchange="document.getElementById('dns_separate').style.display = this.checked ? 'none' : 'table-row';"
-                                       <?= ($this->data['frameworkDnsName'] ?? '') !== '' ? '' : 'checked' ?>>
+                                       <?= $dnsSame ? 'checked' : '' ?>>
                                 <?php echo __('Same connection as the module database (same user may create the DNS tables)'); ?>
                             </label>
                         </td>
@@ -67,17 +68,17 @@
                         <td><input name="dns_name" placeholder="pdns" value="<?= htmlspecialchars((string) ($this->data['frameworkDnsName'] ?? '')) ?>"></td>
                     </tr>
                 </table>
-                <table style="width:100%; display: none;" id="dns_separate">
+                <table style="width:100%; display: <?= $dnsSame ? 'none' : 'table-row'; ?>;" id="dns_separate">
                     <tr>
                         <td colspan="2"><small><?php echo __('Separate DNS database connection (only with "Same connection" UNCHECKED):'); ?></small></td>
                     </tr>
                     <tr>
                         <td><?php echo __('DNS DB host'); ?></td>
-                        <td><input name="dns_host" placeholder="<?= htmlspecialchars((string) ($this->data['frameworkHost'] ?? 'localhost')) ?>" style="border:1px solid #ccc;"></td>
+                        <td><input name="dns_host" value="<?= htmlspecialchars((string) ($this->data['frameworkDnsHost'] ?? '')) ?>" placeholder="<?= htmlspecialchars((string) ($this->data['frameworkHost'] ?? 'localhost')) ?>" style="border:1px solid #ccc;"></td>
                     </tr>
                     <tr>
                         <td><?php echo __('DNS DB user'); ?></td>
-                        <td><input name="dns_user" autocomplete="off"></td>
+                        <td><input name="dns_user" autocomplete="off" value="<?= htmlspecialchars((string) ($this->data['frameworkDnsUser'] ?? '')) ?>"></td>
                     </tr>
                     <tr>
                         <td><?php echo __('DNS DB password'); ?></td>

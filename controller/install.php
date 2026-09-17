@@ -67,6 +67,11 @@ class Install extends \ckvsoft\mvc\BaseController
             'frameworkName'   => (string) ($form['db_name'] ?? ''),
             'frameworkUser'   => (string) ($form['db_user'] ?? ''),
             'frameworkDnsName' => (string) ($form['dns_name'] ?? ''),
+            'frameworkDnsHost' => (string) ($form['dns_host'] ?? ''),
+            'frameworkDnsUser' => (string) ($form['dns_user'] ?? ''),
+            'frameworkDnsSame' => isset($form['dns_same'])
+                ? trim((string) $form['dns_same']) !== ''
+                : trim((string) ($form['dns_name'] ?? '')) === '',
             'sysChecks' => \pmwh3\Utils\InstallBootstrap::systemChecks(),
         ]);
     }
@@ -112,6 +117,17 @@ class Install extends \ckvsoft\mvc\BaseController
         $input->submit();
 
         $in = $input->fetch() ?: [];
+        // Input::fetch() array_filters empty values away -- hidden
+        // fields (Submit) vanish entirely. Refill them straight from
+        // $_POST so rememberForm() can't wipe fields with ''. NO
+        // unit editor dump concern: the stray keys set no defaults.
+        foreach (['phase', 'db_host', 'db_name', 'db_user', 'db_pass',
+                  'dns_same', 'dns_host', 'dns_name', 'dns_user', 'dns_pass',
+                  'admin_password'] as $k) {
+            if (!array_key_exists($k, $in) && array_key_exists($k, $_POST)) {
+                $in[$k] = (string) $_POST[$k];
+            }
+        }
         if (empty($in['phase'])) {
             $in['phase'] = ((\pmwh3\Utils\InstallBootstrap::installBlocker() !== ''
                     && !str_contains(\pmwh3\Utils\InstallBootstrap::installBlocker(), 'placeholder')) ? '2' : '1');

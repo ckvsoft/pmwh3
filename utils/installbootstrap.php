@@ -77,9 +77,22 @@ class InstallBootstrap
     // really has server access, not just the URL).
     // ----------------------------------------------------------------
 
+    private static function stateFile(): string
+    {
+        // In the MODULE directory (next to module.json + token), NOT
+        // the cevian root: the installer already requires the module
+        // dir to be writable (module.json, token), so the form memory
+        // lives where we are GUARANTEED write access. A cwd()-relative
+        // var/ path can silently fail (php-fpm user depends on the
+        // deployment) and then every reload renders EMPTY wizard
+        // fields.
+        $dir = __DIR__ . '/../var';
+        return $dir . '/pmwh3_install_state.json';
+    }
+
     private static function installState(): array
     {
-        $stateFile = rtrim(getcwd(), '/') . '/var/pmwh3_install_state.json';
+        $stateFile = self::stateFile();
         $state = [];
         if (is_file($stateFile)) {
             $state = json_decode((string) file_get_contents($stateFile), true);
@@ -95,10 +108,18 @@ class InstallBootstrap
             $changed = true;
         }
         if ($changed) {
-            @mkdir(dirname($stateFile), 0775, true);
-            @file_put_contents($stateFile, json_encode($state, JSON_PRETTY_PRINT));
+            self::writeState($stateFile, $state);
         }
         return $state;
+    }
+
+    private static function writeState(string $stateFile, array $state): void
+    {
+        @mkdir(dirname($stateFile), 0775, true);
+        if (@file_put_contents($stateFile, json_encode($state, JSON_PRETTY_PRINT)) === false) {
+            error_log('pmwh3 installer: cannot write pmwh3_install_state.json ('
+                    . $stateFile . ') -- form memory disabled (permissions?)');
+        }
     }
 
     /** Token file name (stable in var/pmwh3_install_state.json). */
@@ -140,19 +161,34 @@ class InstallBootstrap
     public static function clearSecurityToken(): void
     {
         @unlink(self::securityTokenPath());
+        @unlink(self::stateFile());
+        // legacy location (earlier releases used the cwd's var/)
         @unlink(rtrim(getcwd(), '/') . '/var/pmwh3_install_state.json');
     }
 
-    /** Non-SECRET form memory (host/name/user/dns), state file based. */
+    /**
+     * Non-SECRET form memory (host/name/user + dns nodes), state file
+     * based. Secrets (db_pass/dns_pass/admin_password) are NEVER
+     * stored. On an empty post the previous memory is NOT wiped, so a
+     * validation failure can never blank all fields.
+     */
     public static function formRemember(?array $in = null): array
     {
-        $stateFile = rtrim(getcwd(), '/') . '/var/pmwh3_install_state.json';
+        $stateFile = self::stateFile();
         $state = self::installState();
+        $fields = ['db_host', 'db_name', 'db_user', 'dns_host', 'dns_name', 'dns_user', 'dns_same'];
         if (is_array($in)) {
-            foreach (['db_host', 'db_name', 'db_user', 'dns_name'] as $f) {
+            $filled = false;
+            foreach ($fields as $f) {
+                $v = trim((string) ($in[$f] ?? ''));
                 $state['form'][$f] = (string) ($in[$f] ?? '');
+                if ($v !== '') {
+                    $filled = true;
+                }
             }
-            @file_put_contents($stateFile, json_encode($state, JSON_PRETTY_PRINT));
+            if ($filled) {
+                self::writeState($stateFile, $state);
+            }
         }
         return (array) ($state['form'] ?? []);
     }
@@ -482,8 +518,15 @@ class InstallBootstrap
             'database' => $mainDb,
             'dns' => [
                 'table_prefix' => '',
+                // "same connection" = module DB host/user/pass, but the
+                // DNS database NAME is still the operator's choice (an
+                // own pdns database on the same server); empty name
+                // falls back to the module DB name.
                 'database' => !empty($in['dns_same'])
-                    ? $mainDb
+                    ? array_merge($mainDb, [
+                        'name' => trim((string) ($in['dns_name'] ?? '')) !== ''
+                            ? (string) $in['dns_name'] : $mainDb['name'],
+                    ])
                     : [
                         'type' => 'mysql',
                         'host' => (string) $in['dns_host'],
