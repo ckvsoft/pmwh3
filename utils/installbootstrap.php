@@ -462,6 +462,19 @@ class InstallBootstrap
         }
 
         // 5. ultimate admin customer + unlimited counters
+        // (persist the password policy from the POST first -- the
+        // baseline exists at this point, so pmwh3_configuration is
+        // writable, and createAdminCustomer validates against it)
+        try {
+            $pl = (int) ($in['password_length'] ?? 0);
+            if ($pl > 0) {
+                \pmwh3\Config\LazyConfig::set('PASSWORD_LENGTH', (string) $pl);
+                $steps['password policy'] = 'ok (PASSWORD_LENGTH=' . $pl . ')';
+            }
+        } catch (\Throwable $e) {
+            $steps['password policy'] = 'FAIL: ' . $e->getMessage();
+            return ['ok' => false, 'steps' => $steps];
+        }
         try {
             self::createAdminCustomer($in);
             $steps['admin customer'] = 'ok';
@@ -736,12 +749,21 @@ class InstallBootstrap
             if (trim((string) ($in['admin_password'] ?? '')) === '') {
                 throw new CkvException(__('Missing fields') . ' (admin_password)');
             }
-            // human message BEFORE the whole chain runs (the old silent
-            // path pasted ok and broke the login afterwards)
-            if (!\pmwh3\Utils\PasswordUtil::isValidLength((string) ($in['admin_password'] ?? ''))) {
+            // the chosen policy applies to THIS bootstrap run already:
+            // validate against the posted length, not the (possibly
+            // still unset) stored setting
+            $pl = (int) ($in['password_length'] ?? 0);
+            if ($pl !== 0 && ($pl < \pmwh3\Utils\PasswordUtil::MIN_FLOOR || $pl > 99)) {
+                throw new CkvException(sprintf(
+                        __('Invalid minimum length (allowed: %d-%d).'),
+                        \pmwh3\Utils\PasswordUtil::MIN_FLOOR, 99));
+            }
+            $eff = max(\pmwh3\Utils\PasswordUtil::MIN_FLOOR,
+                    $pl ?: \pmwh3\Utils\PasswordUtil::minLength());
+            if (strlen((string) $in['admin_password']) < $eff) {
                 throw new CkvException(sprintf(
                         __('The password must be at least %d characters long.'),
-                        \pmwh3\Utils\PasswordUtil::minLength()));
+                        $eff));
             }
             return;
         }

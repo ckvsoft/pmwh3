@@ -35,7 +35,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PMWH2 0.5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-17 17:12+0200\n"
+"POT-Creation-Date: 2026-09-17 17:49+0200\n"
 "PO-Revision-Date: 2005-11-11 14:10+0100\n"
 "Last-Translator: Christian Kvasny <pmwh@ckvsoft.at>\n"
 "Language-Team: english <pmwh@ckvsoft.at>\n"
@@ -878,7 +878,11 @@ msgstr ""
 msgid "User name"
 msgstr ""
 
-#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:208
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:209
+msgid "Min. password length"
+msgstr ""
+
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:215
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/ftp/edit.php:40
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/customer/overview.php:71
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/customer/edit.php:101
@@ -886,6 +890,7 @@ msgstr ""
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/email/details_email.php:82
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/databases/details.php:86
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/database/details.php:88
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:208
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/customer/edit.php:99
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/ftp/edit.php:38
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/databases/details.php:84
@@ -897,32 +902,38 @@ msgstr ""
 msgid "Password"
 msgstr "Password"
 
-#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:213
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:222
+#, php-format
 msgid ""
-"Minimum length: see PASSWORD_LENGTH default 12. The user becomes the "
-"\"Ultimate Admin\" role with all pmwh3 permissions."
+"Minimum length: %d (PASSWORD_LENGTH). The user becomes the \"Ultimate "
+"Admin\" role with all pmwh3 permissions."
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:230
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:220
 msgid ""
 "Create schema, RBAC roles and the admin user with the credentials from steps "
 "3-4?"
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:231
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:221
 msgid "Create admin user and finish installation (step 5)"
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:240
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:230
 msgid "What this installer does"
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:242
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:232
 msgid ""
 "Requirements (own step): writes nothing -- filesystem + PHP + Cevian checks "
 "with check-again."
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:243
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:233
 msgid ""
 "Module database: writes the database node of modules/pmwh3/module.json, "
@@ -930,6 +941,7 @@ msgid ""
 "login)."
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:244
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:234
 msgid ""
 "DNS database (one form): choose the adapter schema (PowerDNS / MyDNS), "
@@ -939,6 +951,7 @@ msgid ""
 "pmwh3-side."
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:245
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:235
 msgid ""
 "Bootstrap: plays the pmwh3 baseline schema, creates the RBAC roles pmwh3 / "
@@ -946,6 +959,7 @@ msgid ""
 "ultimate admin customer (\"admin\") with unlimited counters."
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:246
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:236
 msgid ""
 "Afterwards you log in on the normal login page with the admin password "
@@ -5649,6 +5663,11 @@ msgstr ""
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/email.php:505
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/email.php:562
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/email.php:612
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/installbootstrap.php:750
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/installbootstrap.php:773
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/installbootstrap.php:776
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/installbootstrap.php:781
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/installbootstrap.php:791
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/installbootstrap.php:737
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/installbootstrap.php:744
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/installbootstrap.php:747
@@ -9208,6 +9227,16 @@ msgstr ""
 msgid "At least one destination is required"
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/installbootstrap.php:758
+#, php-format
+msgid "Invalid minimum length (allowed: %d-%d)."
+msgstr ""
+
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/installbootstrap.php:765
+#, php-format
+msgid "The password must be at least %d characters long."
+msgstr ""
+
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/customermanager.php:253
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/customermanager.php:252
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/customermanager.php:251
@@ -9718,6 +9747,12 @@ msgstr ""
 #: /tmp/pmwh3_schema_seed.php:210 /tmp/pmwh3_schema_seed.php:209
 #: /tmp/pmwh3_schema_seed.php:208 /tmp/pmwh3_schema_seed.php:212
 msgid "Wblist"
+msgstr ""
+
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:213
+msgid ""
+"Minimum length: see PASSWORD_LENGTH default 12. The user becomes the "
+"\"Ultimate Admin\" role with all pmwh3 permissions."
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/details.php:448

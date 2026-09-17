@@ -5,7 +5,7 @@ namespace pmwh3\Utils;
 /**
  * Central password policies.
  *
- * PASSWORD_LENGTH (default 12) drives both the length of generated
+ * PASSWORD_LENGTH (default 8) drives both the length of generated
  * passwords and the minimum length enforced for passwords chosen in
  * forms (never below 6).
  */
@@ -20,16 +20,16 @@ class PasswordUtil
      */
     public static function minLength(): int
     {
-        return max(self::MIN_FLOOR, (int) \pmwh3\Config\LazyConfig::get('PASSWORD_LENGTH', 12));
+        return max(self::MIN_FLOOR, (int) \pmwh3\Config\LazyConfig::get('PASSWORD_LENGTH', 8));
     }
 
     /**
      * The configured generated-password length (PASSWORD_LENGTH,
-     * fallback 12). Never below MIN_FLOOR.
+     * fallback 8). Never below MIN_FLOOR.
      */
     public static function defaultLength(): int
     {
-        return max(self::MIN_FLOOR, (int) \pmwh3\Config\LazyConfig::get('PASSWORD_LENGTH', 12));
+        return max(self::MIN_FLOOR, (int) \pmwh3\Config\LazyConfig::get('PASSWORD_LENGTH', 8));
     }
 
     /**

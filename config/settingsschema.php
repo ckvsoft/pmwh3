@@ -113,7 +113,7 @@ class SettingsSchema
                 'label'   => 'Generated Password Length',
                 'help'    => 'Length for generated passwords and minimum length for passwords chosen in forms.',
                 'type'    => 'int',
-                'default' => '12',
+                'default' => '8',
                 'level'   => '1',
             ],
             'RESERVED_NAMES' => [
