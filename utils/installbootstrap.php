@@ -109,7 +109,7 @@ class InstallBootstrap
                 return 'bootstrap pending (baseline played, roles/admin not created yet)';
             }
             $admin = $mod->selectOne(
-                    'SELECT id FROM pmwh3_customers WHERE customer = :c LIMIT 1',
+                    'SELECT cid FROM pmwh3_customers WHERE customer = :c LIMIT 1',
                     ['c' => self::ADMIN_NAME]);
             if (!$admin) {
                 return 'admin customer missing (bootstrap step not run)';

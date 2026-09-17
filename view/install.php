@@ -205,7 +205,6 @@
                             <td><input value="admin" disabled></td>
                         </tr>
                         <tr>
-                        <tr>
                             <td><?php echo __('Min. password length'); ?></td>
                             <td><input type="number" name="password_length" min="6" max="99"
                                        value="<?= (int) \pmwh3\Config\LazyConfig::get('PASSWORD_LENGTH', 8) ?>"
