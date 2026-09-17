@@ -115,13 +115,12 @@ class Install extends \ckvsoft\mvc\BaseController
             $in['phase'] = ((\pmwh3\Utils\InstallBootstrap::installBlocker() !== ''
                     && !str_contains(\pmwh3\Utils\InstallBootstrap::installBlocker(), 'placeholder')) ? '2' : '1');
         }
-        if (empty($in['dns_same']) && $in['phase'] === '1') {
-            // separate dns db: the form only collects the NAME (same
-            // server / user as the module db), fill the rest
-            $in['dns_host'] = $in['db_host'];
-            $in['dns_name'] = trim((string) ($in['dns_name'] ?? ''));
-            $in['dns_user'] = $in['db_user'];
-            $in['dns_pass'] = $in['db_pass'];
+        if ($in['phase'] === '1') {
+            // field-level defaults for the separate-DNS path: host
+            // falls back to the module DB host when left blank
+            if (trim((string) ($in['dns_host'] ?? '')) === '') {
+                $in['dns_host'] = $in['db_host'] ?? '';
+            }
         }
 
         try {
@@ -147,6 +146,7 @@ class Install extends \ckvsoft\mvc\BaseController
         }
 
         if ($in['phase'] === '1') {
+            $this->rememberForm($in);
             // config persisted -> NEW request for the bootstrap phase
             // (module DB caches are per-request)
             $this->flash('success',

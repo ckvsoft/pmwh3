@@ -208,7 +208,7 @@ class InstallBootstrap
             $steps['module.json'] = 'FAIL: ' . $e->getMessage();
             return ['ok' => false, 'steps' => $steps];
         }
-        self::rememberForm($in);
+        // (form-remember happens controller-side, session only)
         return ['ok' => true, 'steps' => $steps];
     }
 

@@ -55,19 +55,38 @@
                     <tr>
                         <td colspan="2">
                             <label>
-                                <input type="checkbox" name="dns_same" value="1"
-    <?= (($this->data['frameworkDnsName'] ?? '') !== '' && !($this->data['frameworkDnsSame'] ?? '')) ? '' : 'checked' ?>>
+                                <input type="checkbox" name="dns_same" value="1" id="dns_same"
+                                       onchange="document.getElementById('dns_separate').style.display = this.checked ? 'none' : 'table-row';"
+                                       <?= ($this->data['frameworkDnsName'] ?? '') !== '' ? '' : 'checked' ?>>
                                 <?php echo __('Same connection as the module database (same user may create the DNS tables)'); ?>
                             </label>
                         </td>
                     </tr>
-                    <tr>
-                        <td><?php echo __('DNS DB name'); ?></td>
-                        <td><input name="dns_name" placeholder="pdns" value="<?= htmlspecialchars((string) ($this->data['frameworkDnsName'] ?? '')) ?>"></td>
+                    <tr id="dns_separate" style="<?= ($this->data['frameworkDnsName'] ?? '') !== '' ? '' : 'display:none;' ?>">
+                        <td colspan="2" style="padding:0;">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td><?php echo __('DNS DB host'); ?></td>
+                                    <td><input name="dns_host" placeholder="<?= htmlspecialchars((string) ($this->data['frameworkHost'] ?? 'localhost')) ?>"></td>
+                                </tr>
+                                <tr>
+                                    <td><?php echo __('DNS DB name'); ?></td>
+                                    <td><input name="dns_name" placeholder="pdns" value="<?= htmlspecialchars((string) ($this->data['frameworkDnsName'] ?? '')) ?>"></td>
+                                </tr>
+                                <tr>
+                                    <td><?php echo __('DNS DB user'); ?></td>
+                                    <td><input name="dns_user" autocomplete="off"></td>
+                                </tr>
+                                <tr>
+                                    <td><?php echo __('DNS DB password'); ?></td>
+                                    <td><input type="password" name="dns_pass" autocomplete="off"></td>
+                                </tr>
+                            </table>
+                        </td>
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <small><?php echo __('With "same connection" the DNS adapter uses the module DB credentials; the DNS database name is set here (e.g. an own pdns database on the same server).'); ?></small>
+                            <small><?php echo __('With "same connection" the DNS adapter uses the module DB credentials and only the DNS database NAME matters (e.g. an own pdns database on the same server). When unchecked, provide host/name/user/password of the DNS database.'); ?></small>
                         </td>
                     </tr>
 
