@@ -45,6 +45,28 @@ class InstallBootstrap
      * table is missing (baseline not played for this module DB).
      * See installBlocker() for the reason (empty = installable ok).
      */
+    /**
+     * Step-2 confirmation: the operator explicitly accepted the
+     * prerequisite checks (they are green at POST time -- the view
+     * only renders the continue button in that case). A FAIL in any
+     * check revokes the marker so the wizard returns to this step.
+     */
+    public static function permsConfirm(array $in = []): bool
+    {
+        $sys = self::systemChecks();
+        $stateFile = self::stateFile();
+        $state = self::installState();
+        if (!$sys['ok'] || !self::stateWriteProbe()) {
+            unset($state['form']['perms_confirmed']);
+            self::writeState($stateFile, $state);
+            return false;
+        }
+        $state['form']['perms_confirmed'] = '1';
+        self::writeState($stateFile, $state);
+        return true;
+    }
+
+    /** Did installation already run (no placeholder config)? */
     public static function needsInstall(): bool
     {
         return self::installBlocker() !== '';
@@ -177,7 +199,8 @@ class InstallBootstrap
     {
         $stateFile = self::stateFile();
         $state = self::installState();
-        $fields = ['db_host', 'db_name', 'db_user', 'dns_host', 'dns_name', 'dns_user', 'dns_same'];
+        $fields = ['db_host', 'db_name', 'db_user', 'dns_host', 'dns_name',
+            'dns_user', 'dns_same', 'perms_confirmed'];
         if (is_array($in)) {
             $filled = false;
             foreach ($fields as $f) {
@@ -258,10 +281,14 @@ class InstallBootstrap
         if (!self::securityTokenOk()) {
             return 'token';
         }
-        // step 1: filesystem + framework prerequisites, verified as
-        // their own screen BEFORE any form is offered
+        // step 2: filesystem + framework prerequisites -- its OWN,
+        // explicit step: the wizard STAYS here until the checks pass
+        // AND the operator explicitly confirmed them (check-again
+        // cycle first, then continue). NO silent skip on green.
         $sys = self::systemChecks();
-        if (!$sys['ok'] || !self::stateWriteProbe()) {
+        $state = self::installState();
+        if (!$sys['ok'] || !self::stateWriteProbe()
+                || empty($state['form']['perms_confirmed'])) {
             return 'perms';
         }
         $blocker = self::installBlocker();

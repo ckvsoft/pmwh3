@@ -150,6 +150,14 @@ class Install extends \ckvsoft\mvc\BaseController
                 $result = \pmwh3\Utils\InstallBootstrap::runDnsSchema($in);
             } elseif (($in['phase'] ?? '') === 'dns_conn') {
                 $result = \pmwh3\Utils\InstallBootstrap::runDnsConn($in);
+            } elseif (($in['phase'] ?? '') === 'perms_ok') {
+                // step-2 explicit confirmation (cevian style): green
+                // checks accepted; the wizard opens the NEXT lens only
+                // after this POST
+                $ok = \pmwh3\Utils\InstallBootstrap::permsConfirm($in);
+                $result = ['ok' => $ok, 'steps' => $ok
+                        ? ['prerequisites' => 'confirmed (all checks green)']
+                        : ['prerequisites' => 'FAIL: checks not green -- fix and check again']];
             } elseif ($in['phase'] === '2') {
                 $result = \pmwh3\Utils\InstallBootstrap::runPhase2($in);
             } else {

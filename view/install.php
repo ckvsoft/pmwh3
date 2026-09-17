@@ -3,10 +3,10 @@
         <div class="entry tool">
             <h2><?php echo __('Install pmwh3'); ?> — <?php
                 $stepTitles = [
-                    'perms'     => __('Step 1/4: prerequisites'),
-                    'db'        => __('Step 2/4: module database'),
-                    'dns'       => __('Step 3/4: DNS database'),
-                    'bootstrap' => __('Step 4/4: create schema, roles, admin'),
+                    'perms'     => __('Step 2/5: permissions prerequisites'),
+                    'db'        => __('Step 3/5: module database'),
+                    'dns'       => __('Step 4/5: DNS database'),
+                    'bootstrap' => __('Step 5/5: create schema, roles, admin'),
                 ];
                 echo $stepTitles[$this->data['step'] ?? ''] ?? __('Install pmwh3');
             ?></h2>
@@ -40,7 +40,7 @@
                     </td></tr>
                 <?php } else { ?>
                     <tr><td colspan="2">
-                        <small style="color: green;">&#10003; <?php echo __('Prerequisites OK (verified in step 1).'); ?></small>
+                        <small style="color: green;">&#10003; <?php echo __('Prerequisites OK (verified in step 2).'); ?></small>
                     </td></tr>
                 <?php } ?>
                 <?php if (($this->data['step'] ?? '') === 'dns'): ?>
@@ -54,6 +54,12 @@
             <?php if (($this->data['step'] ?? '') === 'perms') { ?>
                 <div class="pmwh3-form-actions">
                     <a class="button small-action" href="<?= BASE_URI ?>pmwh3/install"><?php echo __('Check again'); ?></a>
+                    <?php if (($this->data['sysChecks']['ok'] ?? false) && \pmwh3\Utils\InstallBootstrap::stateWriteProbe()): ?>
+                    <form style="display:inline" autocomplete="off" action="<?= BASE_URI ?>pmwh3/install/run" method="post">
+                        <input type="hidden" name="phase" value="perms_ok">
+                        <button type="submit" class="button small-action save"><?php echo __('Continue to the database (step 3)'); ?></button>
+                    </form>
+                    <?php endif; ?>
                 </div>
             <?php } ?>
 
@@ -64,7 +70,7 @@
                 <input type="hidden" name="phase" value="1">
                 <table>
                     <tr>
-                        <th colspan="2"><?php echo __('Step 2 of 4: module database (pmwh3 data store)'); ?></th>
+                        <th colspan="2"><?php echo __('Step 3 of 5: module database (pmwh3 data store)'); ?></th>
                     </tr>
                     <tr>
                         <td><?php echo __('DB host'); ?></td>
@@ -110,7 +116,7 @@
                     <input type="hidden" name="phase" value="dns_conn">
                     <table>
                         <tr>
-                            <th colspan="2"><?php echo __('Step 3 of 4: DNS database (PowerDNS / MyDNS)'); ?></th>
+                            <th colspan="2"><?php echo __('Step 4 of 5: DNS database (PowerDNS / MyDNS)'); ?></th>
                         </tr>
                         <tr>
                             <td colspan="2">
@@ -156,7 +162,7 @@
                 <?php } else { ?>
                 <form autocomplete="off" action="<?= BASE_URI ?>pmwh3/install/run" method="post" enctype="multipart/form-data">
                     <table>
-                        <tr><th colspan="2"><?php echo __('Step 3 of 4: apply DNS schema'); ?></th></tr>
+                        <tr><th colspan="2"><?php echo __('Step 4 of 5: apply DNS schema'); ?></th></tr>
                         <tr>
                             <td colspan="2">
                                 <small><?php echo __('Choose the bundled schema snapshot (pdns = PowerDNS, mydns = MyDNS), or supply your own SQL file / paste the statements:'); ?></small>
@@ -191,7 +197,7 @@
             <?php } else { ?>
                 <form autocomplete="off" action="<?= BASE_URI ?>pmwh3/install/run" method="post">
                     <table>
-                        <tr><th colspan="2"><?php echo __('Step 4 of 4: create schema, roles, admin user'); ?></th></tr>
+                        <tr><th colspan="2"><?php echo __('Step 5 of 5: create schema, roles, admin user'); ?></th></tr>
                         <tr>
                             <td colspan="2">
                                 <small><?php echo __('Configuration is checked (module database + DNS). Confirming now plays the pmwh3 baseline into the module database, creates the RBAC roles, registers all permissions and seeds the pmwh3 configuration (DNS adapter type was pre-configured while applying the DNS schema).'); ?></small>
@@ -214,7 +220,7 @@
                     <input type="hidden" name="phase" value="2">
                     <div class="pmwh3-form-actions">
                         <button type="submit" class="button small-action"
-                                data-confirm="<?php echo __('Create schema, RBAC roles and the admin user with the credentials from step 1?'); ?>"
+                                data-confirm="<?php echo __('Create schema, RBAC roles and the admin user with the credentials from steps 3-4?'); ?>"
                                 data-confirm-type="change"><?php echo __('Install (step 3)'); ?></button>
                     </div>
                 </form>
