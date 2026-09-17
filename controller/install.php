@@ -133,12 +133,13 @@ class Install extends \ckvsoft\mvc\BaseController
             }
         }
         if (empty($in['phase'])) {
-            $in['phase'] = ((\pmwh3\Utils\InstallBootstrap::installBlocker() !== ''
-                    && !str_contains(\pmwh3\Utils\InstallBootstrap::installBlocker(), 'placeholder')) ? '2' : '1');
+            $ws = \pmwh3\Utils\InstallBootstrap::wizardStep();
+            $in['phase'] = ['db' => '1', 'dns' => 'dns_conn',
+                'bootstrap' => '2'][$ws] ?? '1';
         }
-        if ($in['phase'] === '1') {
-            // field-level defaults for the separate-DNS path: host
-            // falls back to the module DB host when left blank
+        if ($in['phase'] === 'dns_conn') {
+            // field-level default: host falls back to the module DB
+            // host when left blank
             if (trim((string) ($in['dns_host'] ?? '')) === '') {
                 $in['dns_host'] = $in['db_host'] ?? '';
             }
@@ -147,10 +148,12 @@ class Install extends \ckvsoft\mvc\BaseController
         try {
             if (($in['phase'] ?? '') === 'dns') {
                 $result = \pmwh3\Utils\InstallBootstrap::runDnsSchema($in);
+            } elseif (($in['phase'] ?? '') === 'dns_conn') {
+                $result = \pmwh3\Utils\InstallBootstrap::runDnsConn($in);
             } elseif ($in['phase'] === '2') {
                 $result = \pmwh3\Utils\InstallBootstrap::runPhase2($in);
             } else {
-                $result = \pmwh3\Utils\InstallBootstrap::runPhase1($in);
+                $result = \pmwh3\Utils\InstallBootstrap::runDbStep($in);
             }
         } catch (\Throwable $e) {
             $result = ['ok' => false, 'steps' => ['installer' => 'FAIL: ' . $e->getMessage()]];
@@ -168,36 +171,16 @@ class Install extends \ckvsoft\mvc\BaseController
             }
             $this->rememberForm($in);
             $this->flash('error', implode('<br />', $fails), 'install');
+            return;
         }
 
-        if ($in['phase'] === '1') {
-            $this->rememberForm($in);
-            // config persisted -> NEW request for the bootstrap phase
-            // (module DB caches are per-request)
-            $this->flash('success',
-                    htmlspecialchars(implode(': ', array_merge(...[['step 1/2'],
-                        array_map(fn($l, $d) => "$l: $d",
-                            array_keys($result['steps']),
-                            array_values($result['steps']))
-                    ]))),
-                    'install');
-        }
-
-        if ($in['phase'] === 'dns') {
-            $this->flash('success',
-                    htmlspecialchars(implode('<br />', array_map(
-                        fn($l, $d) => "$l: $d", array_keys($result['steps']),
-                        array_values($result['steps'])
-                    ))),
-                    'install');
-        }
-
+        $this->rememberForm($in);
         $this->flash('success',
                 htmlspecialchars(implode('<br />', array_map(
                     fn($l, $d) => "$l: $d", array_keys($result['steps']),
                     array_values($result['steps'])
                 ))),
-                ($in['phase'] === 'dns') ? 'install' : 'login');
+                ($in['phase'] === '2') ? 'login' : 'install');
     }
 
     /** Remember the LAST attempt's form values (state-file based,

@@ -242,15 +242,16 @@ class InstallBootstrap
     /**
      * Which wizard step applies RIGHT NOW. Each step is confirmed
      * explicitly before the next one opens (cevian installer style),
-     * no all-in-one submission chain:
+     * ONE topic per step, no all-in-one submission chain:
      *  token     - security token file (step 0)
-     *  perms     - system prerequisites: Cevian version, PHP exts,
-     *              var/ writability, module folder writability -- an
-     *              OWN step (with check-again) so a chmod/chown can be
-     *              verified in isolation before touching the forms
-     *  config    - DB + DNS form (phase 1 -> writes module.json)
-     *  dns       - DNS schema apply (when the dns node needs a schema)
-     *  bootstrap - admin password only (phase 2 -> baseline+RBAC)
+     *  perms     - prerequisites: Cevian version, PHP exts, var/
+     *              writability, module folder writability (own step,
+     *              check-again) (step 1)
+     *  db        - module database form, writes the module.json
+     *              database node (step 2)
+     *  dns       - DNS database form + schema apply, writes the
+     *              module.json dns node (step 3)
+     *  bootstrap - admin password only (step 4)
      */
     public static function wizardStep(): string
     {
@@ -258,7 +259,7 @@ class InstallBootstrap
             return 'token';
         }
         // step 1: filesystem + framework prerequisites, verified as
-        // their own screen BEFORE the config form is offered
+        // their own screen BEFORE any form is offered
         $sys = self::systemChecks();
         if (!$sys['ok'] || !self::stateWriteProbe()) {
             return 'perms';
@@ -266,10 +267,10 @@ class InstallBootstrap
         $blocker = self::installBlocker();
         if (str_contains($blocker, 'placeholder')
                 || str_contains($blocker, 'module.json')) {
-            return 'config';
+            return 'db';
         }
 
-        // module.json is real: module DB reachable AND baseline played?
+        // module.json is real: module DB reachable?
         $mj = self::moduleJson();
         $in = [];
         if (!empty($mj['database'])) {
@@ -279,6 +280,7 @@ class InstallBootstrap
             }
             $in['db_port'] = (int) ($mj['database']['port'] ?? 3306);
         }
+        $baselineOk = false;
         try {
             $dsn = 'mysql:host=' . $in['db_host'] . ';port=' . $in['db_port']
                     . ';dbname=' . $in['db_name'];
@@ -286,18 +288,20 @@ class InstallBootstrap
                     [\PDO::ATTR_TIMEOUT => 5]);
             $st = $pdo->prepare('SHOW TABLES LIKE :t');
             $st->execute([':t' => 'pmwh3_menu']);
-            if ($st->fetchColumn() !== 'pmwh3_menu') {
-                // baseline not played yet: DNS schema gates the
-                // bootstrap step; a broken/uncreated module DB sends
-                // the operator back to the config step (its form
-                // memory + admin-login fields help to fix credentials)
-                $dns = self::dnsStatus();
-                return !empty($dns['tablesOk']) ? 'bootstrap' : 'dns';
-            }
+            $baselineOk = $st->fetchColumn() === 'pmwh3_menu';
         } catch (Throwable $e) {
             // module DB unreachable/missing from the stored config --
-            // 'config' step owns the recovery UX (probe + admin login)
-            return 'config';
+            // the 'db' step owns the recovery UX (form memory +
+            // admin-login fields help to fix credentials)
+            return 'db';
+        }
+
+        // DNS step, independently of WHERE the baseline stands
+        if (empty($mj['dns']['database']['name'])) {
+            return 'dns';
+        }
+        if (!self::dnsStatus()['tablesOk']) {
+            return 'dns';
         }
         return 'bootstrap';
     }
@@ -322,46 +326,6 @@ class InstallBootstrap
                     . $dir);
         }
         return $ok;
-    }
-
-    /**
-     * @param array $in installer input: db_host/db_name/db_user/db_pass,
-    /**
-     * PHASE 1: only write module.json from the form input. The DB
-     * bootstrap intentionally happens in a SEPARATE request (phase 2)
-     * -- the module DB caches are per-request and would otherwise
-     * still hold the half-initialized placeholder connection.
-     * @return array ['ok' => bool, 'steps' => [label => detail]]
-     */
-    public static function runPhase1(array $in): array
-    {
-        $steps = [];
-        self::assertInput($in, 'config');
-
-        // 0. requirements incl. LIVE DB probe (with dbname; creates the
-        // missing empty database when the credentials allow it) -- do
-        // NOT write module.json blind: a failing connect would only
-        // surface at P2 baseline time otherwise.
-        $checks = self::systemChecks($in);
-        if (!$checks['ok']) {
-            foreach ($checks['rows'] as $row) {
-                if (!$row['ok']) {
-                    $steps['requirement: ' . $row['label']]
-                            = 'FAIL: ' . $row['detail'];
-                }
-            }
-            return ['ok' => false, 'steps' => $steps];
-        }
-
-        try {
-            $n = self::writeModuleJson($in);
-            $steps['module.json'] = 'ok (' . $n . ' config nodes)';
-        } catch (\Throwable $e) {
-            $steps['module.json'] = 'FAIL: ' . $e->getMessage();
-            return ['ok' => false, 'steps' => $steps];
-        }
-        // (form-remember happens controller-side, session only)
-        return ['ok' => true, 'steps' => $steps];
     }
 
     /**
@@ -708,26 +672,99 @@ class InstallBootstrap
         }
     }
 
-    private static function assertInput(array $in, string $phase = 'config'): void
+    private static function assertInput(array $in, string $phase = 'db'): void
     {
-        $required = ['db_host', 'db_name', 'db_user', 'db_pass'];
         if ($phase === 'bootstrap') {
-            $required = ['admin_password'];
+            if (trim((string) ($in['admin_password'] ?? '')) === '') {
+                throw new CkvException(__('Missing fields') . ' (admin_password)');
+            }
+            return;
         }
+        if ($phase === 'dns_conn') {
+            if (empty($in['dns_same'])) {
+                foreach (['dns_host', 'dns_name', 'dns_user', 'dns_pass'] as $f) {
+                    if (trim((string) ($in[$f] ?? '')) === '') {
+                        throw new CkvException(__('Missing fields') . " ({$f})");
+                    }
+                }
+            } elseif (trim((string) ($in['dns_name'] ?? '')) === '') {
+                throw new CkvException(__('Missing fields') . ' (dns_name)');
+            }
+            return;
+        }
+        // 'db' step: module database only
+        $required = ['db_host', 'db_name', 'db_user', 'db_pass'];
         foreach ($required as $f) {
             if (trim((string) ($in[$f] ?? '')) === '') {
                 throw new CkvException(__('Missing fields') . " ({$f})");
             }
         }
-        if ($phase === 'config' && empty($in['dns_same'])) {
-            foreach (['dns_host', 'dns_name', 'dns_user', 'dns_pass'] as $f) {
-                if (trim((string) ($in[$f] ?? '')) === '') {
-                    throw new CkvException(__('Missing fields') . " ({$f})");
+    }
+
+    /**
+     * PHASE 'db' (was phase 1): write the module.json DATABASE node
+     * only. The DNS node is written later by the step-3 form
+     * (runDnsConn) -- one topic per wizard step. An ALREADY existing
+     * dns node is preserved on re-runs (DB recovery).
+     */
+    public static function runDsnStep(array $in): array
+    {
+        return self::runDbStep($in);
+    }
+
+    public static function runDbStep(array $in): array
+    {
+        $steps = [];
+        self::assertInput($in, 'db');
+
+        // 0. requirements incl. LIVE DB probe (with dbname; creates the
+        // missing empty database when the credentials allow it) -- do
+        // NOT write module.json blind: a failing connect would only
+        // surface at P2 baseline time otherwise.
+        $checks = self::systemChecks($in);
+        if (!$checks['ok']) {
+            foreach ($checks['rows'] as $row) {
+                if (!$row['ok']) {
+                    $steps['requirement: ' . $row['label']]
+                            = 'FAIL: ' . $row['detail'];
                 }
             }
+            return ['ok' => false, 'steps' => $steps];
         }
-        if ($phase === 'bootstrap' && trim((string) ($in['admin_password'] ?? '')) === '') {
-            throw new CkvException('Admin password required');
+
+        try {
+            $n = self::writeModuleJson($in);
+            $steps['module.json (database node)'] = 'ok (' . $n . ' nodes)';
+        } catch (\Throwable $e) {
+            $steps['module.json'] = 'FAIL: ' . $e->getMessage();
+            return ['ok' => false, 'steps' => $steps];
+        }
+        return ['ok' => true, 'steps' => $steps];
+    }
+
+    public static function runDnsConn(array $in): array
+    {
+        $steps = [];
+        self::assertInput($in, 'dns_conn');
+        if (trim((string) ($in['dns_host'] ?? '')) === '') {
+            $in['dns_host'] = $in['db_host'] ?? '';
+        }
+        try {
+            $done = self::writeDnsNode($in);
+            $rows = self::dnsStatus();
+            $steps['module.json (dns node)'] = $done ? 'ok' : 'FAIL: write';
+            $steps['dns database'] = ($rows['dbExists'] ?? false)
+                    ? 'reachable (' . ($rows['detail'] ?? '') . ')'
+                    : 'FAIL: ' . ($rows['detail'] ?? 'not reachable');
+            if (!($rows['tablesOk'] ?? false)) {
+                // schema form opens in the NEXT step render, not here
+                $steps['dns schema'] = 'missing (apply in the next step)';
+            }
+            return ['ok' => $done && ($rows['dbExists'] ?? false),
+                    'steps' => $steps];
+        } catch (\Throwable $e) {
+            $steps['dns node'] = 'FAIL: ' . $e->getMessage();
+            return ['ok' => false, 'steps' => $steps];
         }
     }
 
@@ -757,38 +794,67 @@ class InstallBootstrap
         if (!empty($in['db_port']) && (int) $in['db_port'] !== 3306) {
             $mainDb['port'] = (int) $in['db_port'];
         }
+        // preserve an already written dns node (re-run of the db step
+        // must not wipe the step-3 result)
+        $existing = self::moduleJson();
+        $nodes = count(array_filter([
+                    'database' => true,
+                    'dns' => !empty($existing['dns']['database']),
+                ]));
         $data = [
             'name' => 'pmwh3',
             'version' => '3.0.82',
             'description' => 'PhpMyWebHosting',
             'core' => false,
             'database' => $mainDb,
-            'dns' => [
-                'table_prefix' => '',
-                // "same connection" = module DB host/user/pass, but the
-                // DNS database NAME is still the operator's choice (an
-                // own pdns database on the same server); empty name
-                // falls back to the module DB name.
-                'database' => !empty($in['dns_same'])
-                    ? array_merge($mainDb, [
-                        'name' => trim((string) ($in['dns_name'] ?? '')) !== ''
-                            ? (string) $in['dns_name'] : $mainDb['name'],
-                    ])
-                    : [
-                        'type' => 'mysql',
-                        'host' => (string) $in['dns_host'],
-                        'name' => (string) $in['dns_name'],
-                        'user' => (string) $in['dns_user'],
-                        'pass' => (string) $in['dns_pass'],
-                    ],
-            ],
         ];
+        if (!empty($existing['dns']['database'])) {
+            $data['dns'] = $existing['dns'];
+        }
         $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
         if (@file_put_contents($path, $json . "\n") === false) {
             throw new \RuntimeException(
                     "cannot write {$path} (permissions?) -- make modules/pmwh3 writable for the web user and retry");
         }
-        return 2;
+        return $nodes;
+    }
+
+    /**
+     * Merge the dns node into the EXISTING module.json (step 3 form
+     * part 1, runDnsConn): the database node must survive untouched.
+     */
+    private static function writeDnsNode(array $in): bool
+    {
+        $path = self::findModuleJsonPath();
+        if ($path === null || !is_writable(dirname($path))) {
+            throw new \RuntimeException(
+                    'module.json missing or not writable (complete the database step first)');
+        }
+        $data = self::moduleJson();
+        if (empty($data['database'])) {
+            throw new \RuntimeException('module.json has no database node (complete the database step first)');
+        }
+        $mainDb = $data['database'];
+        $data['dns'] = [
+            'table_prefix' => (string) ($data['dns']['table_prefix'] ?? ''),
+            'database' => !empty($in['dns_same'])
+                ? array_merge($mainDb, [
+                    'name' => trim((string) ($in['dns_name'] ?? '')) !== ''
+                        ? (string) $in['dns_name'] : (string) $mainDb['name'],
+                ])
+                : [
+                    'type' => 'mysql',
+                    'host' => (string) $in['dns_host'],
+                    'name' => (string) $in['dns_name'],
+                    'user' => (string) $in['dns_user'],
+                    'pass' => (string) $in['dns_pass'],
+                ],
+        ];
+        $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+        if (@file_put_contents($path, $json . "\n") === false) {
+            throw new \RuntimeException("cannot write {$path} (permissions?)");
+        }
+        return true;
     }
 
     // ----------------------------------------------------------------
