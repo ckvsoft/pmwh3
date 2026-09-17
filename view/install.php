@@ -1,11 +1,21 @@
 <div class="pmwh3-content">
     <div class="widget">
         <div class="entry tool">
-            <h2><?php echo __('Install pmwh3'); ?> — Schritt <?= ($this->data['step'] === 'config') ? '1' : (($this->data['step'] === 'dns') ? '2' : '3'); ?>/3</h2>
+            <h2><?php echo __('Install pmwh3'); ?> — <?php
+                $stepTitles = [
+                    'perms'     => __('Step 1/4: prerequisites'),
+                    'config'    => __('Step 2/4: configuration'),
+                    'dns'       => __('Step 3/4: DNS schema'),
+                    'bootstrap' => __('Step 4/4: create schema, roles, admin'),
+                ];
+                echo $stepTitles[$this->data['step'] ?? ''] ?? __('Install pmwh3');
+            ?></h2>
 
             <table>
                 <tr><th colspan="2"><?php echo __('Requirements'); ?></th></tr>
                 <?php foreach (($this->data['sysChecks']['rows'] ?? []) as $ic): ?>
+                    <?php if (($this->data['step'] ?? '') !== 'perms'
+                            && !preg_match('/(extension |writable|Cevian)/i', (string) $ic['label'])) continue; ?>
                     <tr>
                         <td style="white-space: nowrap; float:left;">
                             <strong style="color: <?php echo $ic['ok'] ? 'green' : 'red'; ?>; font-weight: bold;">
@@ -16,9 +26,19 @@
                             &mdash; <?php echo htmlspecialchars($ic['detail']); ?></td>
                     </tr>
                 <?php endforeach; ?>
-                <?php if (!($this->data['sysChecks']['ok'] ?? true)): ?>
+                <?php if (($this->data['step'] ?? '') === 'perms'): ?>
+                <tr>
+                    <td style="white-space: nowrap; float:left;">
+                        <strong style="color: green;">OK/FAIL</strong>
+                    </td>
+                    <td>var/ write probe &mdash; <?php echo \pmwh3\Utils\InstallBootstrap::stateWriteProbe()
+                            ? 'writable'
+                            : 'NOT writable (create a file fails — check disk/quota/chmod)'; ?></td>
+                </tr>
+                <?php endif; ?>
+                <?php if (!($this->data['sysChecks']['ok'] ?? true) || (($this->data['step'] ?? '') === 'perms' && !\pmwh3\Utils\InstallBootstrap::stateWriteProbe())): ?>
                     <tr><td colspan="2">
-                        <small><?php echo __('Fix the failed requirements and reload this page -- Install cannot run until then.'); ?></small>
+                        <small><?php echo __('Fix the failed requirements and click "Check again" below -- Install cannot run until then.'); ?></small>
                     </td></tr>
                 <?php endif; ?>
                 <?php if (($this->data['step'] ?? '') === 'dns'): ?>
@@ -29,13 +49,19 @@
                 <?php endif; ?>
             </table>
 
+            <?php if (($this->data['step'] ?? '') === 'perms') { ?>
+                <div class="pmwh3-form-actions">
+                    <a class="button small-action" href="<?= BASE_URI ?>pmwh3/install"><?php echo __('Check again'); ?></a>
+                </div>
+            <?php } ?>
+
             <?php $step = $this->data['step'] ?? 'config'; ?>
             <?php if ($step === 'config') { ?>
             <form autocomplete="off" action="<?= BASE_URI ?>pmwh3/install/run" method="post">
                 <input type="hidden" name="phase" value="1">
                 <table>
                     <tr>
-                        <th colspan="2"><?php echo __('Step 1 of 3: module database (pmwh3 data store)'); ?></th>
+                        <th colspan="2"><?php echo __('Step 2 of 4: module database (pmwh3 data store)'); ?></th>
                     </tr>
                     <tr>
                         <td><?php echo __('DB host'); ?></td>
@@ -118,7 +144,7 @@
             <?php } elseif ($step === 'dns') { ?>
                 <form autocomplete="off" action="<?= BASE_URI ?>pmwh3/install/run" method="post" enctype="multipart/form-data">
                     <table>
-                        <tr><th colspan="2"><?php echo __('Step 2 of 3: apply DNS schema'); ?></th></tr>
+                        <tr><th colspan="2"><?php echo __('Step 3 of 4: apply DNS schema'); ?></th></tr>
                         <tr>
                             <td colspan="2">
                                 <small><?php echo __('Choose the bundled schema snapshot (pdns = PowerDNS, mydns = MyDNS), or supply your own SQL file / paste the statements:'); ?></small>
@@ -152,7 +178,7 @@
             <?php } else { ?>
                 <form autocomplete="off" action="<?= BASE_URI ?>pmwh3/install/run" method="post">
                     <table>
-                        <tr><th colspan="2"><?php echo __('Step 3 of 3: create schema, roles and admin user'); ?></th></tr>
+                        <tr><th colspan="2"><?php echo __('Step 4 of 4: create schema, roles, admin user'); ?></th></tr>
                         <tr>
                             <td colspan="2">
                                 <small><?php echo __('Configuration is checked (module database + DNS). Confirming now plays the pmwh3 baseline into the module database, creates the RBAC roles, registers all permissions and seeds the pmwh3 configuration (DNS adapter type was pre-configured while applying the DNS schema).'); ?></small>

@@ -244,6 +244,10 @@ class InstallBootstrap
      * explicitly before the next one opens (cevian installer style),
      * no all-in-one submission chain:
      *  token     - security token file (step 0)
+     *  perms     - system prerequisites: Cevian version, PHP exts,
+     *              var/ writability, module folder writability -- an
+     *              OWN step (with check-again) so a chmod/chown can be
+     *              verified in isolation before touching the forms
      *  config    - DB + DNS form (phase 1 -> writes module.json)
      *  dns       - DNS schema apply (when the dns node needs a schema)
      *  bootstrap - admin password only (phase 2 -> baseline+RBAC)
@@ -252,6 +256,12 @@ class InstallBootstrap
     {
         if (!self::securityTokenOk()) {
             return 'token';
+        }
+        // step 1: filesystem + framework prerequisites, verified as
+        // their own screen BEFORE the config form is offered
+        $sys = self::systemChecks();
+        if (!$sys['ok'] || !self::stateWriteProbe()) {
+            return 'perms';
         }
         $blocker = self::installBlocker();
         if (str_contains($blocker, 'placeholder')
@@ -290,6 +300,28 @@ class InstallBootstrap
             return 'config';
         }
         return 'bootstrap';
+    }
+
+    /**
+     * Real write probe (not just is_writable flags): writes + deletes
+     * a probe file in the cevian var/ dir. catches the deployments
+     * where mkdir owns the directory but the FILE create fails
+     * (audit rules, immutable bits, disk-full).
+     */
+    public static function stateWriteProbe(): bool
+    {
+        $dir = rtrim(getcwd(), '/') . '/var';
+        $probe = $dir . '/pmwh3_write_probe_' . bin2hex(random_bytes(4));
+        $ok = @file_put_contents($probe, 'ok') !== false;
+        if ($ok) {
+            @unlink($probe);
+        }
+        if (!$ok) {
+            \pmwh3\Utils\ErrorHandler::trace(
+                    '[InstallBootstrap.stateWriteProbe] write probe failed in '
+                    . $dir);
+        }
+        return $ok;
     }
 
     /**
