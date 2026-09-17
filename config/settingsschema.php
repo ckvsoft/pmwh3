@@ -267,6 +267,112 @@ class SettingsSchema
                 'on_save' => 'updateApacheconfig',
             ],
 
+
+            // ============================================================
+            // DNS (adapter selection first, then its backend settings)
+            // ============================================================
+            'DNS_TYPE' => [
+                'group'      => self::GROUP_DNS,
+                'label'      => 'DNS Backend',
+                'help'       => 'Adapters detected automatically from utils/dns/. Adding a new adapter only requires dropping the file in.',
+                'type'       => 'select',
+                'default'    => 'pdns',
+                'options_fn' => 'dnsAdapters',
+                'level'      => '0',
+            ],
+
+            'PDNS_API_URL' => [
+                'group'   => self::GROUP_DNS,
+                'label'   => 'PowerDNS API base URL',
+                'help'    => 'Base URL of the PowerDNS HTTP API, e.g. http://pdns:8081/api/v1. Required for DNSSEC zone signing / disabling. If empty, DNSSEC is read-only.',
+                'type'    => 'text',
+                'default' => '',
+                'level'   => '1',
+            ],
+
+            'PDNS_API_KEY' => [
+                'group'   => self::GROUP_DNS,
+                'label'   => 'PowerDNS API key',
+                'help'    => 'Value of the api-key= setting in pdns.conf. Sent as the X-API-Key header.',
+                'type'    => 'password',
+                'default' => '',
+                'level'   => '1',
+            ],
+
+            'PDNS_API_SERVER_ID' => [
+                'group'   => self::GROUP_DNS,
+                'label'   => 'PowerDNS API server id',
+                'help'    => 'Server identifier in the API path (.../api/v1/servers/<server_id>/...). Defaults to "localhost", which is correct for almost every install.',
+                'type'    => 'text',
+                'default' => 'localhost',
+                'level'   => '1',
+            ],
+
+            'DNS_SERVERS' => [
+                'group'   => self::GROUP_DNS,
+                'label'   => 'Nameservers',
+                'help'    => 'One per line. The first is treated as the primary NS in the SOA record.',
+                'type'    => 'textarea',
+                'default' => '',
+                'level'   => '0',
+                'on_save' => 'updateNameservers',
+            ],
+
+            'MX_SERVERS' => [
+                'group'   => self::GROUP_DNS,
+                'label'   => 'MX Servers',
+                'help'    => 'One per line. Used to populate MX records on new zones.',
+                'type'    => 'textarea',
+                'default' => '',
+                'level'   => '0',
+            ],
+
+            'DNS_REFRESH' => [
+                'group'   => self::GROUP_DNS,
+                'label'   => 'SOA Refresh',
+                'type'    => 'int',
+                'default' => '10800',
+                'level'   => '1',
+                'on_save' => 'updateSoaTimers',
+            ],
+
+            'DNS_RETRY' => [
+                'group'   => self::GROUP_DNS,
+                'label'   => 'SOA Retry',
+                'type'    => 'int',
+                'default' => '3600',
+                'level'   => '1',
+                'on_save' => 'updateSoaTimers',
+            ],
+
+            'DNS_EXPIRE' => [
+                'group'   => self::GROUP_DNS,
+                'label'   => 'SOA Expire',
+                'type'    => 'int',
+                'default' => '604800',
+                'level'   => '1',
+                'on_save' => 'updateSoaTimers',
+            ],
+
+            'DNS_MINIMUM' => [
+                'group'   => self::GROUP_DNS,
+                'label'   => 'SOA Minimum',
+                'type'    => 'int',
+                'default' => '3600',
+                'level'   => '1',
+                'on_save' => 'updateSoaTimers',
+            ],
+
+            'DNS_TTL' => [
+                'group'   => self::GROUP_DNS,
+                'label'   => 'Default Record TTL',
+                'type'    => 'int',
+                'default' => '3600',
+                'level'   => '1',
+                'on_save' => 'updateSoaTimers',
+            ],
+
+
             // ============================================================
             // EMAIL
             // ============================================================
@@ -389,35 +495,6 @@ class SettingsSchema
                 'level'   => '1',
             ],
 
-            // ============================================================
-            // DNS
-            // ============================================================
-            'DNS_SERVERS' => [
-                'group'   => self::GROUP_DNS,
-                'label'   => 'Nameservers',
-                'help'    => 'One per line. The first is treated as the primary NS in the SOA record.',
-                'type'    => 'textarea',
-                'default' => '',
-                'level'   => '0',
-                'on_save' => 'updateNameservers',
-            ],
-            'MX_SERVERS' => [
-                'group'   => self::GROUP_DNS,
-                'label'   => 'MX Servers',
-                'help'    => 'One per line. Used to populate MX records on new zones.',
-                'type'    => 'textarea',
-                'default' => '',
-                'level'   => '0',
-            ],
-            'DNS_TYPE' => [
-                'group'      => self::GROUP_DNS,
-                'label'      => 'DNS Backend',
-                'help'       => 'Adapters detected automatically from utils/dns/. Adding a new adapter only requires dropping the file in.',
-                'type'       => 'select',
-                'default'    => 'pdns',
-                'options_fn' => 'dnsAdapters',
-                'level'      => '0',
-            ],
             'FILTER_POLICY_TYPE' => [
                 'group'   => self::GROUP_EMAIL,
                 'label'   => 'Filter policy export',
@@ -480,75 +557,11 @@ class SettingsSchema
             ],
             'BACKUP_DIR' => [
                 'group'   => self::GROUP_SYSTEM,
-                'label'   => 'Backup directory',
-                'help'    => 'Directory for pmwh3 SQL dumps. Must NOT be inside the source tree and must be writable by the web server user. The directory is created on first backup.',
+                'label'   => 'Backup directory (admin)',
+                'help'    => 'Target for the ADMIN-side backups (Tools): pmwh3 database dumps, not a customer-facing webspace backup. Must NOT be inside the source tree and must be writable by the web server user. The directory is created on first backup.',
                 'type'    => 'text',
                 'default' => '/vhome/backup/pmwh3',
                 'level'   => '0',
-            ],
-            'PDNS_API_URL' => [
-                'group'   => self::GROUP_DNS,
-                'label'   => 'PowerDNS API base URL',
-                'help'    => 'Base URL of the PowerDNS HTTP API, e.g. http://pdns:8081/api/v1. Required for DNSSEC zone signing / disabling. If empty, DNSSEC is read-only.',
-                'type'    => 'text',
-                'default' => '',
-                'level'   => '1',
-            ],
-            'PDNS_API_KEY' => [
-                'group'   => self::GROUP_DNS,
-                'label'   => 'PowerDNS API key',
-                'help'    => 'Value of the api-key= setting in pdns.conf. Sent as the X-API-Key header.',
-                'type'    => 'password',
-                'default' => '',
-                'level'   => '1',
-            ],
-            'PDNS_API_SERVER_ID' => [
-                'group'   => self::GROUP_DNS,
-                'label'   => 'PowerDNS API server id',
-                'help'    => 'Server identifier in the API path (.../api/v1/servers/<server_id>/...). Defaults to "localhost", which is correct for almost every install.',
-                'type'    => 'text',
-                'default' => 'localhost',
-                'level'   => '1',
-            ],
-            'DNS_REFRESH' => [
-                'group'   => self::GROUP_DNS,
-                'label'   => 'SOA Refresh',
-                'type'    => 'int',
-                'default' => '10800',
-                'level'   => '1',
-                'on_save' => 'updateSoaTimers',
-            ],
-            'DNS_RETRY' => [
-                'group'   => self::GROUP_DNS,
-                'label'   => 'SOA Retry',
-                'type'    => 'int',
-                'default' => '3600',
-                'level'   => '1',
-                'on_save' => 'updateSoaTimers',
-            ],
-            'DNS_EXPIRE' => [
-                'group'   => self::GROUP_DNS,
-                'label'   => 'SOA Expire',
-                'type'    => 'int',
-                'default' => '604800',
-                'level'   => '1',
-                'on_save' => 'updateSoaTimers',
-            ],
-            'DNS_MINIMUM' => [
-                'group'   => self::GROUP_DNS,
-                'label'   => 'SOA Minimum',
-                'type'    => 'int',
-                'default' => '3600',
-                'level'   => '1',
-                'on_save' => 'updateSoaTimers',
-            ],
-            'DNS_TTL' => [
-                'group'   => self::GROUP_DNS,
-                'label'   => 'Default Record TTL',
-                'type'    => 'int',
-                'default' => '3600',
-                'level'   => '1',
-                'on_save' => 'updateSoaTimers',
             ],
 
             // ============================================================
@@ -757,11 +770,11 @@ class SettingsSchema
             'ERRORLOG_TARGET' => [
                 'group'   => self::GROUP_ERRORLOG,
                 'label'   => 'Errorlog target',
-                'help'    => 'Where errors are written. "file" writes to the log path the cevian deployment configures (php_settings.error_log_path in config/app.json, default var/log/error.log). "syslog" goes to the system logger (not viewable in the Errorlog viewer). "db" persists into pmwh3_errorlog (table created on first write).',
+                'help'    => 'Where errors are written. "file" writes to the log path the cevian config defines (default var/log/error.log); the Errorlog viewer reads that file. "syslog" goes to the system logger (viewer: no). "db" persists into pmwh3_errorlog (table created on first write).',
                 'type'    => 'select',
                 'default' => 'file',
                 'options' => [
-                    'file'   => 'File (cevian log path)',
+                    'file'   => 'File',
                     'syslog' => 'Syslog',
                     'db'     => 'Database',
                 ],

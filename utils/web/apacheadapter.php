@@ -22,7 +22,7 @@ class ApacheAdapter implements WebAdapterInterface
 {
 
     public static function getKey(): string  { return 'apache'; }
-    public static function getName(): string { return 'Apache (pmwh3_web_subdomains)'; }
+    public static function getName(): string { return 'Apache'; }
 
     public static function isAvailable(): bool
     {
