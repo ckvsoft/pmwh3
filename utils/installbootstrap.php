@@ -77,8 +77,7 @@ class InstallBootstrap
     // really has server access, not just the URL).
     // ----------------------------------------------------------------
 
-    /** Random token file name (stable in var/pmwh3_install_state.json). */
-    public static function securityTokenName(): string
+    private static function installState(): array
     {
         $stateFile = rtrim(getcwd(), '/') . '/var/pmwh3_install_state.json';
         $state = [];
@@ -86,12 +85,32 @@ class InstallBootstrap
             $state = json_decode((string) file_get_contents($stateFile), true);
             $state = is_array($state) ? $state : [];
         }
+        $changed = false;
         if (empty($state['token_name'])) {
             $state['token_name'] = 'pmwh3_install_' . bin2hex(random_bytes(8)) . '.txt';
+            $changed = true;
+        }
+        if (empty($state['token_code'])) {
+            $state['token_code'] = 'pmwh3-' . bin2hex(random_bytes(12));
+            $changed = true;
+        }
+        if ($changed) {
             @mkdir(dirname($stateFile), 0775, true);
             @file_put_contents($stateFile, json_encode($state, JSON_PRETTY_PRINT));
         }
-        return (string) $state['token_name'];
+        return $state;
+    }
+
+    /** Token file name (stable in var/pmwh3_install_state.json). */
+    public static function securityTokenName(): string
+    {
+        return (string) self::installState()['token_name'];
+    }
+
+    /** Exact content the file must contain (server-side generated). */
+    public static function securityTokenCode(): string
+    {
+        return (string) self::installState()['token_code'];
     }
 
     /** Absolute path of the token file the operator has to create. */
@@ -100,10 +119,19 @@ class InstallBootstrap
         return rtrim(getcwd(), '/') . '/' . self::securityTokenName();
     }
 
-    /** True when the token file exists in the Cevian root (server access proof). */
+    /**
+     * True when the token file EXISTS in the Cevian root AND contains
+     * the expected code line. Pure file-presence does NOT count --
+     * the operator must have written the displayed code into the
+     * file (proves real server file access, not just URL access).
+     */
     public static function securityTokenOk(): bool
     {
-        return is_file(self::securityTokenPath());
+        $path = self::securityTokenPath();
+        if (!is_file($path)) {
+            return false;
+        }
+        return hash_equals(self::securityTokenCode(), trim((string) file_get_contents($path)));
     }
 
     /** Drop state + token (after a successful install). */

@@ -35,11 +35,15 @@ class Install extends \ckvsoft\mvc\BaseController
         // Step 0: security token (proof of server access, mirroring
         // the cevian core installer). The wizard opens only after the
         // token file exists.
+        // Step 0 requires the return statement below to actually halt
+        // the render chain; the wizard view MUST NOT render eagerly.
         if (!\pmwh3\Utils\InstallBootstrap::securityTokenOk()) {
             $this->installRender('pmwh3/install_token', [
                 'activeBox' => 'install',
                 'tokenName' => \pmwh3\Utils\InstallBootstrap::securityTokenName(),
+                'tokenCode' => \pmwh3\Utils\InstallBootstrap::securityTokenCode(),
             ]);
+            return;
         }
 
         $this->installRender('pmwh3/install', [
