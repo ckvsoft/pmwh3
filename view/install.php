@@ -62,28 +62,29 @@
                             </label>
                         </td>
                     </tr>
-                    <tr id="dns_separate" style="<?= ($this->data['frameworkDnsName'] ?? '') !== '' ? '' : 'display:none;' ?>">
-                        <td colspan="2" style="padding:0;">
-                            <table style="width:100%;">
-                                <tr>
-                                    <td><?php echo __('DNS DB host'); ?></td>
-                                    <td><input name="dns_host" placeholder="<?= htmlspecialchars((string) ($this->data['frameworkHost'] ?? 'localhost')) ?>"></td>
-                                </tr>
-                                <tr>
-                                    <td><?php echo __('DNS DB name'); ?></td>
-                                    <td><input name="dns_name" placeholder="pdns" value="<?= htmlspecialchars((string) ($this->data['frameworkDnsName'] ?? '')) ?>"></td>
-                                </tr>
-                                <tr>
-                                    <td><?php echo __('DNS DB user'); ?></td>
-                                    <td><input name="dns_user" autocomplete="off"></td>
-                                </tr>
-                                <tr>
-                                    <td><?php echo __('DNS DB password'); ?></td>
-                                    <td><input type="password" name="dns_pass" autocomplete="off"></td>
-                                </tr>
-                            </table>
-                        </td>
+                    <tr>
+                        <td><?php echo __('DNS DB name'); ?></td>
+                        <td><input name="dns_name" placeholder="pdns" value="<?= htmlspecialchars((string) ($this->data['frameworkDnsName'] ?? '')) ?>"></td>
                     </tr>
+                </table>
+                <table style="width:100%; display: none;" id="dns_separate">
+                    <tr>
+                        <td colspan="2"><small><?php echo __('Separate DNS database connection (only with "Same connection" UNCHECKED):'); ?></small></td>
+                    </tr>
+                    <tr>
+                        <td><?php echo __('DNS DB host'); ?></td>
+                        <td><input name="dns_host" placeholder="<?= htmlspecialchars((string) ($this->data['frameworkHost'] ?? 'localhost')) ?>" style="border:1px solid #ccc;"></td>
+                    </tr>
+                    <tr>
+                        <td><?php echo __('DNS DB user'); ?></td>
+                        <td><input name="dns_user" autocomplete="off"></td>
+                    </tr>
+                    <tr>
+                        <td><?php echo __('DNS DB password'); ?></td>
+                        <td><input type="password" name="dns_pass" autocomplete="off"></td>
+                    </tr>
+                </table>
+                <table style="width:100%; border-collapse: collapse;">
                     <tr>
                         <td colspan="2">
                             <small><?php echo __('With "same connection" the DNS adapter uses the module DB credentials and only the DNS database NAME matters (e.g. an own pdns database on the same server). When unchecked, provide host/name/user/password of the DNS database.'); ?></small>
