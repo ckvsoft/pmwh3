@@ -86,6 +86,17 @@ class InstallBootstrap
             if (!$mod->tableExists('pmwh3_menu')) {
                 return 'pmwh3_menu missing (baseline not played)';
             }
+            // wizard step 4 (DNS) is mandatory: a module.json written
+            // by the db step alone is NOT a completed install -- the
+            // dns node decides whether the wizard is still open. This
+            // also covers the re-run case (baseline already played in
+            // an earlier test, module.json freshly rewritten): without
+            // this check the wizard would bounce to the login.
+            $dns = (array) ($module['dns']['database'] ?? []);
+            if (trim((string) ($dns['name'] ?? '')) === ''
+                    || ($dns['name'] ?? '') === 'DNS_DB_NAME') {
+                return 'DNS database connection not configured (installer step 4)';
+            }
             return '';
         } catch (\Throwable $e) {
             return 'probe failed: ' . $e->getMessage();

@@ -64,7 +64,8 @@
             <?php } ?>
 
             <?php $step = $this->data['step'] ?? 'db'; ?>
-            <?php $nodeFound = (bool) ($this->data['dnsStatus']['nodeFound'] ?? false); ?>
+            <?php $nodeFound = (bool) ($this->data['dnsStatus']['nodeFound'] ?? false)
+                    && empty($this->data['dnsReconf']); ?>
             <?php if ($step === 'db') { ?>
             <form autocomplete="off" action="<?= BASE_URI ?>pmwh3/install/run" method="post">
                 <input type="hidden" name="phase" value="1">
@@ -163,6 +164,13 @@
                 <form autocomplete="off" action="<?= BASE_URI ?>pmwh3/install/run" method="post" enctype="multipart/form-data">
                     <table>
                         <tr><th colspan="2"><?php echo __('Step 4 of 5: apply DNS schema'); ?></th></tr>
+                        <tr>
+                            <td colspan="2"><small>
+                                <?php echo __('DNS connection saved. Schema status:'); ?>
+                                <?php echo htmlspecialchars((string) ($this->data['dnsStatus']['detail'] ?? '')); ?>
+                                &mdash; <a href="<?= BASE_URI ?>pmwh3/install?reconf=1"><?php echo __('change DNS connection'); ?></a>
+                            </small></td>
+                        </tr>
                         <tr>
                             <td colspan="2">
                                 <small><?php echo __('Choose the bundled schema snapshot (pdns = PowerDNS, mydns = MyDNS), or supply your own SQL file / paste the statements:'); ?></small>

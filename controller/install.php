@@ -70,6 +70,7 @@ class Install extends \ckvsoft\mvc\BaseController
                 ? trim((string) $form['dns_same']) !== ''
                 : trim((string) ($form['dns_name'] ?? '')) === '',
             'dnsStatus' => \pmwh3\Utils\InstallBootstrap::dnsStatus(),
+            'dnsReconf' => isset($_GET['reconf']),
             'sysChecks' => \pmwh3\Utils\InstallBootstrap::systemChecks(),
         ]);
     }
