@@ -41,9 +41,10 @@ Config::moduleDb()->executeSqlFile($root . "/modules/pmwh3/inc/sql/0.0.0_baselin
 t("needsInstall (placeholder)", InstallBootstrap::needsInstall());
 
 $in = [
-    "db_host" => "172.17.0.2", "db_name" => "pmwh3_test",
-    "db_user" => (string) (getenv('TEST_DB_USER') ?: 'pmtst'),
-    "db_pass" => (string) (getenv('TEST_DB_PASS') ?: ''),
+    "db_host" => (string) (getenv('TEST_DB_HOST') ?: '127.0.0.1'),
+    "db_name" => (string) (getenv('TEST_DB_NAME') ?: 'pmwh3_test'),
+                "db_user" => (string) (getenv('TEST_DB_USER') ?: 'pmtst'),
+            "db_pass" => (string) getenv('TEST_DB_PASS'),
     "dns_same" => "1", "dns_name" => (string) (getenv('TEST_DNS_DB_NAME') ?: 'mydns_test'),
     "admin_password" => "TestInstall12!",
 ];

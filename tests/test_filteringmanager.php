@@ -2,7 +2,7 @@
 declare(strict_types=1);
 /**
  * FilteringManager integration test against pmwh3_test on the
- * developer mysql80. Applies the 3.0.17 migration (idempotent), seeds
+ * test database. Applies the 3.0.17 migration (idempotent), seeds
  * policy rows, verifies the inheritance chain resolution and the
  * external_map settings shape.
  */

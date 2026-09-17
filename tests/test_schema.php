@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-// Test-Schemas auf dem developer mysql80 anlegen (idempotent).
+// Test-Schemas  (idempotent; env-driven TEST_DB_*).
 // Creds via Environment: TEST_DB_HOST/PORT/USER/PASS (docker run -e ...).
 //   mydns_test: exakt die Legacy-Spalten aus ck000005_pmwh2.mydns_*
 //   pdns_test:  die 4 vom PdnsAdapter benutzten Tabellen (domains, records,

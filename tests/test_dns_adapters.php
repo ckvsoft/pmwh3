@@ -2,7 +2,7 @@
 declare(strict_types=1);
 /**
  * Adapter-Lifecycle-Tests für MyDNS- und PowerDNS-Adapter.
- * Läuft gegen die Test-DBs (mydns_test / pdns_test auf dem developer
+ * Runs against the TEST_DB_* databases (mydns_test / pdns_test on the dev
  * mysql80); DNS_TYPE kommt aus pmwh3_test.pmwh3_configuration (Seed
  * via test_schema.php <adapter>).
  *
