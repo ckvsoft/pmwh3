@@ -45,14 +45,11 @@ class Install extends \ckvsoft\mvc\BaseController
             return;
         }
 
-        // two-phase: blocker 'module.json ... placeholder' (or
-        // missing file) -> config wizard (phase 1); real module.json
-        // but missing tables -> bootstrap wizard (phase 2, only admin
-        // password) -- the DB caches are per-request, so phase 2 runs
-        // in a FRESH request.
-        $blocker = \pmwh3\Utils\InstallBootstrap::installBlocker();
-        $phase2 = !str_contains($blocker, 'placeholder')
-                && !str_contains($blocker, 'module.json');
+        // two-phase config handled by WIZARD STEPS now (cevian
+        // installer style): each step is confirmed independently:
+        // 'config' (DB+DNS form, module.json write) -> 'dns' (schema
+        // apply when needed) -> 'bootstrap' (admin password only).
+        $step = \pmwh3\Utils\InstallBootstrap::wizardStep();
 
         // remember the operator's NON-SECRET form values in the
         // installer STATE file (var/pmwh3_install_state.json) -- NOT
@@ -62,7 +59,7 @@ class Install extends \ckvsoft\mvc\BaseController
 
         $this->installRender('pmwh3/install', [
             'activeBox' => 'install',
-            'phase2'    => $phase2,
+            'step'      => $step,
             'frameworkHost'   => (string) ($form['db_host'] ?? ''),
             'frameworkName'   => (string) ($form['db_name'] ?? ''),
             'frameworkUser'   => (string) ($form['db_user'] ?? ''),

@@ -1,7 +1,7 @@
 <div class="pmwh3-content">
     <div class="widget">
         <div class="entry tool">
-            <h2><?php echo __('Install pmwh3'); ?></h2>
+            <h2><?php echo __('Install pmwh3'); ?> — Schritt <?= ($this->data['step'] === 'config') ? '1' : (($this->data['step'] === 'dns') ? '2' : '3'); ?>/3</h2>
 
             <table>
                 <tr><th colspan="2"><?php echo __('Requirements'); ?></th></tr>
@@ -21,17 +21,21 @@
                         <small><?php echo __('Fix the failed requirements and reload this page -- Install cannot run until then.'); ?></small>
                     </td></tr>
                 <?php endif; ?>
+                <?php if (($this->data['step'] ?? '') === 'dns'): ?>
+                    <tr>
+                        <td style="white-space: nowrap; float:left;"><strong style="color:red;">FAIL</strong></td>
+                        <td>DNS schema &mdash; <?php echo htmlspecialchars((string) (($this->data['dnsStatus']['detail'] ?? ''))); ?></td>
+                    </tr>
+                <?php endif; ?>
             </table>
 
-            <input type="hidden" name="phase" value="<?= ($this->data['phase2'] ?? false) ? '2' : '1' ?>">
-            <form autocomplete="off" action="<?= BASE_URI ?>pmwh3/install/run" method="post" data-confirm="<?php echo ($this->data['phase2'] ?? false)
-                    ? __('Create schema, RBAC roles and the admin user with the credentials from step 1?')
-                    : __('Run the pmwh3 install? This writes the module config, creates the schema, RBAC roles and the admin user.'); ?>" data-confirm-type="change">
-            <?php $dnsSame = (bool) ($this->data['frameworkDnsSame'] ?? false); ?>
-            <?php if (!($this->data['phase2'] ?? false)) { ?>
+            <?php $step = $this->data['step'] ?? 'config'; ?>
+            <?php if ($step === 'config') { ?>
+            <form autocomplete="off" action="<?= BASE_URI ?>pmwh3/install/run" method="post">
+                <input type="hidden" name="phase" value="1">
                 <table>
                     <tr>
-                        <th colspan="2"><?php echo __('Module database (pmwh3 data store)'); ?></th>
+                        <th colspan="2"><?php echo __('Step 1 of 3: module database (pmwh3 data store)'); ?></th>
                     </tr>
                     <tr>
                         <td><?php echo __('DB host'); ?></td>
@@ -66,6 +70,8 @@
                         <td><?php echo __('Admin password'); ?></td>
                         <td><input type="password" name="db_admin_pass" autocomplete="off"></td>
                     </tr>
+
+                    <tr>
                         <th colspan="2"><?php echo __('DNS database (PowerDNS / MyDNS)'); ?></th>
                     </tr>
                     <tr>
@@ -73,7 +79,7 @@
                             <label>
                                 <input type="checkbox" name="dns_same" value="1" id="dns_same"
                                        onchange="document.getElementById('dns_separate').style.display = this.checked ? 'none' : 'table-row';"
-                                       <?= $dnsSame ? 'checked' : '' ?>>
+                                       <?= !empty($this->data['frameworkDnsSame']) ? 'checked' : '' ?>>
                                 <?php echo __('Same connection as the module database (same user may create the DNS tables)'); ?>
                             </label>
                         </td>
@@ -83,7 +89,7 @@
                         <td><input name="dns_name" placeholder="pdns" value="<?= htmlspecialchars((string) ($this->data['frameworkDnsName'] ?? '')) ?>"></td>
                     </tr>
                 </table>
-                <table style="width:100%; display: <?= $dnsSame ? 'none' : 'table-row'; ?>;" id="dns_separate">
+                <table style="width:100%; display: <?= !empty($this->data['frameworkDnsSame']) ? 'none' : 'table-row'; ?>;" id="dns_separate">
                     <tr>
                         <td colspan="2"><small><?php echo __('Separate DNS database connection (only with "Same connection" UNCHECKED):'); ?></small></td>
                     </tr>
@@ -99,53 +105,20 @@
                         <td><?php echo __('DNS DB password'); ?></td>
                         <td><input type="password" name="dns_pass" autocomplete="off"></td>
                     </tr>
-                </table>
-                <table style="width:100%; border-collapse: collapse;">
                     <tr>
                         <td colspan="2">
                             <small><?php echo __('With "same connection" the DNS adapter uses the module DB credentials and only the DNS database NAME matters (e.g. an own pdns database on the same server). When unchecked, provide host/name/user/password of the DNS database.'); ?></small>
                         </td>
                     </tr>
-
-<?php } // phase2: database + dns sections skipped ?>
-                    <tr>
-                        <?php $dnsStatus = $this->data['dnsStatus'] ?? []; ?>
-                        <?php if (($this->data['phase2'] ?? false)
-                                && ($dnsStatus['nodeFound'] ?? false)
-                                && !($dnsStatus['tablesOk'] ?? false)) { ?>
-                            <td colspan="2" style="border-top:1px solid #ccc;">
-                                <small style="color:#b00;"><?php echo __('DNS database: ') . htmlspecialchars((string) ($dnsStatus['detail'] ?? '')); ?> — <?php echo __('The wizard continues after the DNS schema is applied (section below).'); ?></small>
-                            </td>
-                        <?php } ?>
-                    </tr>
-                    <tr>
-                        <th colspan="2"><?php echo __('Ultimate admin user'); ?></th>
-                    </tr>
-                    <tr>
-                        <td><?php echo __('User name'); ?></td>
-                        <td><input value="admin" disabled></td>
-                    </tr>
-                    <tr>
-                        <td><?php echo __('Password'); ?></td>
-                        <td><input type="password" name="admin_password" required></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <small><?php echo __('Minimum length: see PASSWORD_LENGTH default 12. The user becomes the "Ultimate Admin" role with all pmwh3 permissions.'); ?></small>
-                        </td>
-                    </tr>
                 </table>
                 <div class="pmwh3-form-actions">
-                    <button type="submit" class="button small-action save"><?php echo __('Install'); ?></button>
+                    <button type="submit" class="button small-action save"><?php echo __('Save configuration (step 1)'); ?></button>
                 </div>
             </form>
-
-            <?php if (($this->data['phase2'] ?? false)
-                    && ($this->data['dnsStatus']['nodeFound'] ?? false)
-                    && !($this->data['dnsStatus']['tablesOk'] ?? false)) { ?>
+            <?php } elseif ($step === 'dns') { ?>
                 <form autocomplete="off" action="<?= BASE_URI ?>pmwh3/install/run" method="post" enctype="multipart/form-data">
                     <table>
-                        <tr><th colspan="2"><?php echo __('Apply DNS schema'); ?></th></tr>
+                        <tr><th colspan="2"><?php echo __('Step 2 of 3: apply DNS schema'); ?></th></tr>
                         <tr>
                             <td colspan="2">
                                 <small><?php echo __('Choose the bundled schema snapshot (pdns = PowerDNS, mydns = MyDNS), or supply your own SQL file / paste the statements:'); ?></small>
@@ -176,20 +149,48 @@
                                 data-confirm-type="change"><?php echo __('Apply DNS schema'); ?></button>
                     </div>
                 </form>
+            <?php } else { ?>
+                <form autocomplete="off" action="<?= BASE_URI ?>pmwh3/install/run" method="post">
+                    <table>
+                        <tr><th colspan="2"><?php echo __('Step 3 of 3: create schema, roles and admin user'); ?></th></tr>
+                        <tr>
+                            <td colspan="2">
+                                <small><?php echo __('Configuration is checked (module database + DNS). Confirming now plays the pmwh3 baseline into the module database, creates the RBAC roles, registers all permissions and seeds the pmwh3 configuration (DNS adapter type was pre-configured while applying the DNS schema).'); ?></small>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php echo __('User name'); ?></td>
+                            <td><input value="admin" disabled></td>
+                        </tr>
+                        <tr>
+                            <td><?php echo __('Password'); ?></td>
+                            <td><input type="password" name="admin_password" required></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <small><?php echo __('Minimum length: see PASSWORD_LENGTH default 12. The user becomes the "Ultimate Admin" role with all pmwh3 permissions.'); ?></small>
+                            </td>
+                        </tr>
+                    </table>
+                    <input type="hidden" name="phase" value="2">
+                    <div class="pmwh3-form-actions">
+                        <button type="submit" class="button small-action"
+                                data-confirm="<?php echo __('Create schema, RBAC roles and the admin user with the credentials from step 1?'); ?>"
+                                data-confirm-type="change"><?php echo __('Install (step 3)'); ?></button>
+                    </div>
+                </form>
             <?php } ?>
         </div>
     </div>
 
-    <?php $installHint = BASE_URI . 'config/config_example.json'; ?>
     <div class="widget">
         <div class="entry tool">
             <h3><?php echo __('What this installer does'); ?></h3>
             <p><small>
-                1. <?php echo __('Writes the real modules/pmwh3/module.json (DB + DNS nodes) -- the shipped file is a placeholder.'); ?><br>
-                2. <?php echo __('Plays the pmwh3 baseline schema (fresh install: single schema.sql, no legacy migration replay).'); ?><br>
-                3. <?php echo __('Creates the RBAC roles pmwh3 / Ultimate Admin / Reseller / Customer and registers all pmwh3 permissions.'); ?><br>
-                4. <?php echo __('Creates the ultimate admin customer ("admin") with unlimited counters.'); ?><br>
-                5. <?php echo __('Afterwards you log in on the normal login page with the admin password chosen above.'); ?>
+                1. <?php echo __('Step 1 -- writes the real modules/pmwh3/module.json (DB + DNS nodes) and checks/creates the databases.'); ?><br>
+                2. <?php echo __('Step 2 -- applies the DNS schema when the configured DNS database lacks it (bundled snapshots or your own SQL) and pre-configures DNS_TYPE pmwh3-side.'); ?><br>
+                3. <?php echo __('Step 3 -- plays the pmwh3 baseline schema, creates the RBAC roles pmwh3 / Ultimate Admin / Reseller / Customer, registers all pmwh3 permissions and the ultimate admin customer ("admin") with unlimited counters.'); ?><br>
+                4. <?php echo __('Afterwards you log in on the normal login page with the admin password chosen above.'); ?>
             </small></p>
         </div>
     </div>

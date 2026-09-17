@@ -237,9 +237,6 @@ class InstallBootstrap
 
     /**
      * @param array $in installer input: db_host/db_name/db_user/db_pass,
-     *   dns_same (+dns_* when separate), admin_password.
-     * @return array ['ok' => bool, 'steps' => [label => detail]]
-     */
     /**
      * PHASE 1: only write module.json from the form input. The DB
      * bootstrap intentionally happens in a SEPARATE request (phase 2)
@@ -640,7 +637,7 @@ class InstallBootstrap
                 }
             }
         }
-        if (trim((string) ($in['admin_password'] ?? '')) === '') {
+        if ($phase === 'bootstrap' && trim((string) ($in['admin_password'] ?? '')) === '') {
             throw new CkvException('Admin password required');
         }
     }
@@ -865,11 +862,41 @@ class InstallBootstrap
             $db = Config::moduleDb(null, 'dns.database');
             $stmts = $db->executeSqlFile($srcPath);
             $steps['dns schema'] = 'ok (' . $stmts . ' statements applied)';
+
+            // PRE-CONFIGURE pmwh3 so the Options UI needs no rework:
+            // the applied schema decides the adapter. Choice wins;
+            // otherwise autodetect from the tables that now exist.
+            $seed = $choice;
+            if ($seed !== 'pdns' && $seed !== 'mydns') {
+                $mj2 = self::moduleJson();
+                $prefix2 = (string) ($mj2['dns']['table_prefix'] ?? '');
+                foreach ([[$prefix2 . 'domains', 'pdns'],
+                          [$prefix2 . 'records', 'pdns'],
+                          [$prefix2 . 'mydns_soa', 'mydns'],
+                          [$prefix2 . 'mydns_rr', 'mydns']] as [$t, $type]) {
+                    try {
+                        $st2 = $db->prepare('SHOW TABLES LIKE :t');
+                        $st2->execute([':t' => $t]);
+                        if ($st2->fetchColumn() === $t) {
+                            $seed = $type;
+                            break;
+                        }
+                    } catch (Throwable $e3) {
+                    }
+                }
+            }
+            if ($seed === 'pdns' || $seed === 'mydns') {
+                try {
+                    \pmwh3\Config\LazyConfig::set('DNS_TYPE', $seed);
+                    $steps['pmwh3 config'] = 'ok (DNS_TYPE=' . $seed . ')';
+                } catch (Throwable $e3) {
+                    $steps['pmwh3 config'] = 'FAIL: ' . $e3->getMessage();
+                }
+            }
         } catch (Throwable $e) {
             $steps['dns schema'] = 'FAIL: ' . $e->getMessage();
             return ['ok' => false, 'steps' => $steps];
-        } finally {
-            // only purge the temp file WE materialized from the paste
+        } finally {            // only purge the temp file WE materialized from the paste
             if (str_contains($srcPath, '/pmwh3_dns_schema_')
                     && $srcPath === rtrim(getcwd(), '/') . '/var/pmwh3_dns_schema_'
                        . basename($srcPath)) {
