@@ -235,8 +235,8 @@ class InstallBootstrap
             // the wizard bounced back to the permissions step after
             // step 3 and again after the DNS step.
             $owns = [
-                '1'        => ['db_host', 'db_name', 'db_user'],
-                'dns_conn' => ['dns_host', 'dns_name', 'dns_user', 'dns_same'],
+                '1'   => ['db_host', 'db_name', 'db_user'],
+                'dns' => ['dns_type', 'dns_host', 'dns_name', 'dns_user', 'dns_same'],
             ][(string) ($in['phase'] ?? '')] ?? [];
             foreach ($owns as $f) {
                 // checkbox semantics: an absent key means UNchecked
@@ -738,15 +738,20 @@ class InstallBootstrap
             }
             return;
         }
-        if ($phase === 'dns_conn') {
+        if ($phase === 'dns') {
+            $type = trim((string) ($in['dns_type'] ?? ''));
+            if ($type !== 'pdns' && $type !== 'mydns') {
+                throw new CkvException(__('Missing fields') . ' (dns_type)');
+            }
+            if (trim((string) ($in['dns_name'] ?? '')) === '') {
+                throw new CkvException(__('Missing fields') . ' (dns_name)');
+            }
             if (empty($in['dns_same'])) {
-                foreach (['dns_host', 'dns_name', 'dns_user', 'dns_pass'] as $f) {
+                foreach (['dns_host', 'dns_user', 'dns_pass'] as $f) {
                     if (trim((string) ($in[$f] ?? '')) === '') {
                         throw new CkvException(__('Missing fields') . " ({$f})");
                     }
                 }
-            } elseif (trim((string) ($in['dns_name'] ?? '')) === '') {
-                throw new CkvException(__('Missing fields') . ' (dns_name)');
             }
             return;
         }
@@ -800,18 +805,22 @@ class InstallBootstrap
         return ['ok' => true, 'steps' => $steps];
     }
 
-    public static function runDnsConn(array $in): array
+    /**
+     * PHASE 'dns' (step 4, ONE form): adapter choice + connection +
+     * optional DB admin + schema application in a single action:
+     *  1. probe the DNS database (creates the missing empty database
+     *     with the form user or the optional DB admin login)
+     *  2. write the dns node into module.json (only on a green probe)
+     *  3. apply the BUNDLED schema of the chosen adapter (pdns/mydns,
+     *     CREATE TABLE IF NOT EXISTS -- idempotent)
+     *  4. verify the tables + pre-configure DNS_TYPE
+     */
+    public static function runDnsStep(array $in): array
     {
         $steps = [];
-        self::assertInput($in, 'dns_conn');
-        if (trim((string) ($in['dns_host'] ?? '')) === '') {
-            $in['dns_host'] = $in['db_host'] ?? '';
-        }
+        self::assertInput($in, 'dns');
         try {
-            // probe FIRST, write only on success: wrong credentials
-            // must NOT be persisted -- the operator stays on the
-            // connection form with the remembered values instead of
-            // being bounced to the schema form with a broken node
+            // 1) probe (and create when missing) the DNS database
             $mj = self::moduleJson();
             $mainDb = (array) ($mj['database'] ?? []);
             $same = !empty($in['dns_same']);
@@ -821,8 +830,8 @@ class InstallBootstrap
                 'db_name' => (string) $in['dns_name'],
                 'db_user' => $same ? (string) ($mainDb['user'] ?? '') : (string) $in['dns_user'],
                 'db_pass' => $same ? (string) ($mainDb['pass'] ?? '') : (string) $in['dns_pass'],
-                'db_admin_user' => '',
-                'db_admin_pass' => '',
+                'db_admin_user' => (string) ($in['db_admin_user'] ?? ''),
+                'db_admin_pass' => (string) ($in['db_admin_pass'] ?? ''),
             ];
             $probe = self::databaseProbe($probeIn);
             $row = $probe['rows'][0] ?? ['ok' => false, 'detail' => 'connect failed'];
@@ -830,15 +839,31 @@ class InstallBootstrap
                 $steps['dns database'] = 'FAIL: ' . $row['detail'];
                 return ['ok' => false, 'steps' => $steps];
             }
+            $steps['dns database'] = $row['detail'];
+
+            // 2) write the dns node -- the probe was green, these
+            //    credentials are good
             self::writeDnsNode($in);
             $steps['module.json (dns node)'] = 'ok';
-            $steps['dns database'] = $row['detail'];
-            if (!self::dnsStatus()['tablesOk']) {
-                $steps['dns schema'] = 'missing (apply in the next step)';
+
+            // 3) apply the bundled schema for the CHOSEN adapter
+            $apply = self::runDnsSchema(
+                    ['dns_schema_choice' => (string) $in['dns_type']]);
+            foreach ($apply['steps'] as $l => $d) {
+                $steps[$l] = $d;
             }
-            return ['ok' => true, 'steps' => $steps];
+            if (!$apply['ok']) {
+                return ['ok' => false, 'steps' => $steps];
+            }
+
+            // 4) verify the tables actually exist now
+            $st = self::dnsStatus();
+            $steps['dns tables'] = !empty($st['tablesOk'])
+                    ? 'ok (adapter ' . (string) $in['dns_type'] . ')'
+                    : 'FAIL: ' . ($st['detail'] ?? 'schema tables still missing');
+            return ['ok' => !empty($st['tablesOk']), 'steps' => $steps];
         } catch (\Throwable $e) {
-            $steps['dns node'] = 'FAIL: ' . $e->getMessage();
+            $steps['dns step'] = 'FAIL: ' . $e->getMessage();
             return ['ok' => false, 'steps' => $steps];
         }
     }

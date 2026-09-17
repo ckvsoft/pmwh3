@@ -48,12 +48,6 @@
                         <td style="white-space: nowrap; float:left;"><strong style="color:red;">FAIL</strong></td>
                         <td>DNS schema &mdash; <?php echo htmlspecialchars((string) (($this->data['dnsStatus']['detail'] ?? ''))); ?></td>
                     </tr>
-                <?php elseif (($this->data['step'] ?? '') === 'dns'): ?>
-                    <tr>
-                        <td colspan="2">
-                            <small><?php echo __('DNS connection not saved yet -- configure it below (this step).'); ?></small>
-                        </td>
-                    </tr>
                 <?php endif; ?>
             </table>
 
@@ -70,8 +64,6 @@
             <?php } ?>
 
             <?php $step = $this->data['step'] ?? 'db'; ?>
-            <?php $nodeFound = (bool) ($this->data['dnsStatus']['nodeFound'] ?? false)
-                    && empty($this->data['dnsReconf']); ?>
             <?php if ($step === 'db') { ?>
             <form autocomplete="off" action="<?= BASE_URI ?>pmwh3/install/run" method="post">
                 <input type="hidden" name="phase" value="1">
@@ -118,18 +110,38 @@
                 </div>
             </form>
             <?php } elseif ($step === 'dns') { ?>
-                <?php if (!$nodeFound) { ?>
                 <form autocomplete="off" action="<?= BASE_URI ?>pmwh3/install/run" method="post">
-                    <input type="hidden" name="phase" value="dns_conn">
+                    <input type="hidden" name="phase" value="dns">
                     <table>
                         <tr>
                             <th colspan="2"><?php echo __('Step 4 of 5: DNS database (PowerDNS / MyDNS)'); ?></th>
+                        </tr>
+                        <?php if (!empty($this->data['dnsStatus']['nodeFound'])): ?>
+                        <tr>
+                            <td colspan="2"><small>
+                                <?php echo __('Current DNS connection status:'); ?>
+                                <?php echo htmlspecialchars((string) ($this->data['dnsStatus']['detail'] ?? '')); ?>
+                            </small></td>
+                        </tr>
+                        <?php endif; ?>
+                        <tr>
+                            <td><?php echo __('DNS adapter schema'); ?></td>
+                            <td>
+                                <label><input type="radio" name="dns_type" value="pdns"
+                                        <?= (($this->data['dnsType'] ?? 'pdns') === 'pdns') ? 'checked' : '' ?>> PowerDNS</label>
+                                &nbsp;
+                                <label><input type="radio" name="dns_type" value="mydns"
+                                        <?= (($this->data['dnsType'] ?? '') === 'mydns') ? 'checked' : '' ?>> MyDNS</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><small><?php echo __('The chosen schema is applied automatically (idempotent, bundled snapshot from contrib/sql).'); ?></small></td>
                         </tr>
                         <tr>
                             <td colspan="2">
                                 <label>
                                     <input type="checkbox" name="dns_same" value="1" id="dns_same"
-                                           onchange="document.getElementById('dns_separate').style.display = this.checked ? 'none' : 'table-row';"
+                                           onchange="document.getElementById('dns_separate').style.display = this.checked ? 'none' : '';"
                                            <?= !empty($this->data['frameworkDnsSame']) ? 'checked' : '' ?>>
                                     <?php echo __('Same connection as the module database (same user may create the DNS tables)'); ?>
                                 </label>
@@ -137,77 +149,48 @@
                         </tr>
                         <tr>
                             <td><?php echo __('DNS DB name'); ?></td>
-                            <td><input name="dns_name" placeholder="pdns" value="<?= htmlspecialchars((string) ($this->data['frameworkDnsName'] ?? '')) ?>"></td>
+                            <td><input name="dns_name" placeholder="pdns" required value="<?= htmlspecialchars((string) ($this->data['frameworkDnsName'] ?? '')) ?>"></td>
                         </tr>
-                    </table>
-                    <table style="width:100%; display: <?= !empty($this->data['frameworkDnsSame']) ? 'none' : 'table-row'; ?>;" id="dns_separate">
+                        <tbody id="dns_separate" style="display: <?= !empty($this->data['frameworkDnsSame']) ? 'none' : ''; ?>;">
+                            <tr>
+                                <td colspan="2"><small><?php echo __('Separate DNS database connection (only with "Same connection" UNCHECKED):'); ?></small></td>
+                            </tr>
+                            <tr>
+                                <td><?php echo __('DNS DB host'); ?></td>
+                                <td><input name="dns_host" value="<?= htmlspecialchars((string) ($this->data['frameworkDnsHost'] ?? '')) ?>" placeholder="<?= htmlspecialchars((string) ($this->data['frameworkHost'] ?? 'localhost')) ?>"></td>
+                            </tr>
+                            <tr>
+                                <td><?php echo __('DNS DB user'); ?></td>
+                                <td><input name="dns_user" autocomplete="off" value="<?= htmlspecialchars((string) ($this->data['frameworkDnsUser'] ?? '')) ?>"></td>
+                            </tr>
+                            <tr>
+                                <td><?php echo __('DNS DB password'); ?></td>
+                                <td><input type="password" name="dns_pass" autocomplete="off"></td>
+                            </tr>
+                        </tbody>
                         <tr>
-                            <td colspan="2"><small><?php echo __('Separate DNS database connection (only with "Same connection" UNCHECKED):'); ?></small></td>
-                        </tr>
-                        <tr>
-                            <td><?php echo __('DNS DB host'); ?></td>
-                            <td><input name="dns_host" value="<?= htmlspecialchars((string) ($this->data['frameworkDnsHost'] ?? '')) ?>" placeholder="<?= htmlspecialchars((string) ($this->data['frameworkHost'] ?? 'localhost')) ?>" style="border:1px solid #ccc;"></td>
-                        </tr>
-                        <tr>
-                            <td><?php echo __('DNS DB user'); ?></td>
-                            <td><input name="dns_user" autocomplete="off" value="<?= htmlspecialchars((string) ($this->data['frameworkDnsUser'] ?? '')) ?>"></td>
-                        </tr>
-                        <tr>
-                            <td><?php echo __('DNS DB password'); ?></td>
-                            <td><input type="password" name="dns_pass" autocomplete="off"></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <small><?php echo __('With "same connection" the DNS adapter uses the module DB credentials and only the DNS database NAME matters (e.g. an own pdns database on the same server). When unchecked, provide host/name/user/password of the DNS database.'); ?></small>
-                            </td>
-                        </tr>
-                    </table>
-                    <div class="pmwh3-form-actions">
-                        <button type="submit" class="button small-action save"><?php echo __('Save DNS database (step 3)'); ?></button>
-                    </div>
-                </form>
-                <?php } else { ?>
-                <form autocomplete="off" action="<?= BASE_URI ?>pmwh3/install/run" method="post" enctype="multipart/form-data">
-                    <table>
-                        <tr><th colspan="2"><?php echo __('Step 4 of 5: apply DNS schema'); ?></th></tr>
-                        <tr>
-                            <td colspan="2"><small>
-                                <?php echo __('DNS connection saved. Schema status:'); ?>
-                                <?php echo htmlspecialchars((string) ($this->data['dnsStatus']['detail'] ?? '')); ?>
-                                &mdash; <a href="<?= BASE_URI ?>pmwh3/install?reconf=1"><?php echo __('change DNS connection'); ?></a>
-                            </small></td>
+                            <th colspan="2"><?php echo __('Database administrator (optional)'); ?></th>
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <small><?php echo __('Choose the bundled schema snapshot (pdns = PowerDNS, mydns = MyDNS), or supply your own SQL file / paste the statements:'); ?></small>
+                                <small><?php echo __('Only needed when the database user above may NOT create databases: the installer then uses this login once to create the DNS database and grant the user. Never stored.'); ?></small>
                             </td>
                         </tr>
                         <tr>
-                            <td><?php echo __('Schema'); ?></td>
-                            <td>
-                                <label><input type="radio" name="dns_schema_choice" value="pdns" checked> PowerDNS</label>
-                                &nbsp;
-                                <label><input type="radio" name="dns_schema_choice" value="mydns"> MyDNS</label>
-                            </td>
+                            <td><?php echo __('Admin user'); ?></td>
+                            <td><input name="db_admin_user" autocomplete="off"></td>
                         </tr>
                         <tr>
-                            <td><?php echo __('Own file (optional)'); ?></td>
-                            <td><input type="file" name="dns_schema_file" accept=".sql,text/plain"></td>
-                        </tr>
-                        <tr>
-                            <td><?php echo __('Pasted SQL'); ?></td>
-                            <td><textarea name="dns_schema_text" rows="6" style="width:100%;font-family:monospace;"
-                                          placeholder="CREATE TABLE ..."></textarea></td>
+                            <td><?php echo __('Admin password'); ?></td>
+                            <td><input type="password" name="db_admin_pass" autocomplete="off"></td>
                         </tr>
                     </table>
-                    <input type="hidden" name="phase" value="dns">
                     <div class="pmwh3-form-actions">
-                        <button type="submit" class="button small-action"
-                                data-confirm="<?php echo __('Run the selected DNS schema against the configured DNS database?'); ?>"
-                                data-confirm-type="change"><?php echo __('Apply DNS schema'); ?></button>
+                        <button type="submit" class="button small-action save"
+                                data-confirm="<?php echo __('Create the DNS database (when missing), save the connection and apply the chosen schema?'); ?>"
+                                data-confirm-type="change"><?php echo __('Save and apply DNS schema (step 4)'); ?></button>
                     </div>
                 </form>
-                <?php } ?>
             <?php } elseif ($step === 'bootstrap') { ?>
                 <form autocomplete="off" action="<?= BASE_URI ?>pmwh3/install/run" method="post">
                     <table>
@@ -248,7 +231,7 @@
             <p><small>
                 1. <?php echo __('Requirements (own step): writes nothing -- filesystem + PHP + Cevian checks with check-again.'); ?><br>
                 2. <?php echo __('Module database: writes the database node of modules/pmwh3/module.json, probes and creates the database (optionally via the database administrator login).'); ?><br>
-                3. <?php echo __('DNS database: writes the dns node, applies the schema when missing (bundled snapshots pdns/mydns, own file or pasted SQL) and pre-configures DNS_TYPE pmwh3-side.'); ?><br>
+                3. <?php echo __('DNS database (one form): choose the adapter schema (PowerDNS / MyDNS), connection (same as the module database or separate, optional database administrator for the CREATE), the installer creates the missing database, writes the dns node, applies the bundled schema and pre-configures DNS_TYPE pmwh3-side.'); ?><br>
                 4. <?php echo __('Bootstrap: plays the pmwh3 baseline schema, creates the RBAC roles pmwh3 / Ultimate Admin / Reseller / Customer, registers all permissions and the ultimate admin customer ("admin") with unlimited counters.'); ?><br>
                 5. <?php echo __('Afterwards you log in on the normal login page with the admin password chosen above.'); ?>
             </small></p>

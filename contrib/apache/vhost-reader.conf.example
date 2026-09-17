@@ -1,0 +1,92 @@
+# pmwh3 web stack: mod_perl vhost reader (startup <Perl> block).
+#
+# Reads the rendered vhost blocks from pmwh3_web_subdomains.data and
+# applies them as Apache configuration at startup. pmwh3 writes the
+# complete VirtualHost text (skeleton, ServerName/ServerAlias,
+# DocumentRoot, optional *:443 TLS block, ### START/END CUSTOM ###
+# section) via ApacheAdapter::buildVhostData() -- this reader only
+# SELECTs and add_config()s it, it never renders anything itself.
+#
+# Variables: @DB_HOST@ @DB_NAME@ @DB_USER@ @DB_PASS@ @WEBROOT@
+#
+# Install: drop into /etc/apache2/sites-enabled/ (e.g. as vhost.conf).
+# Requires mod_perl (the <IfModule> guard makes the file a no-op
+# without it -- and then no pmwh3 vhost is served, so make sure the
+# module is loaded). Rows are read ONCE at startup: restart Apache
+# after every pmwh3 vhost change (create/rename/delete, TLS rebind).
+#
+# Trust model: the `data` column is executed as Apache configuration.
+# Only pmwh3 (and your DB admins) can write it -- treat the pmwh3
+# database and the credentials in this file as privileged.
+
+ServerSignature Off
+ServerTokens Prod
+
+LogLevel info
+PerlWarn On
+
+<IfModule mod_perl.c>
+    <Perl>
+    use DBI;
+    use File::Path qw( make_path );
+    use Apache2::ServerUtil ();
+    use Apache2::Log;
+    use Apache2::Const -compile => qw(:log);
+    use APR::Const    -compile => qw(SUCCESS);
+
+    # --- pmwh3 database (rendered from contrib/render.vars) --------
+    my $dsn  = "dbi:mysql:database=@DB_NAME@;host=@DB_HOST@;port=3306";
+    my $user = "@DB_USER@";
+    my $pw   = "@DB_PASS@";
+
+    my $s = Apache2::ServerUtil->server;
+    $s->log_serror(Apache2::Log::LOG_MARK,Apache2::Const::LOG_INFO,APR::Const::SUCCESS,"PMWH3: (mod_perl) vhost reader starting");
+
+    my $db = DBI->connect($dsn, $user, $pw) or die $DBI::errstr;
+    $s->log_serror(Apache2::Log::LOG_MARK,Apache2::Const::LOG_INFO,APR::Const::SUCCESS,"PMWH3: database connection established");
+
+    # Explicit column list -- the reader must not depend on the
+    # table's column ORDER (positional SELECT * breaks whenever the
+    # schema evolves). alias/ip-mode rows carry no `data` and are
+    # skipped by the data <> '' filter anyway; the adapter filter
+    # keeps foreign web adapter rows out.
+    my $select = qq/SELECT subdomain, customer, path, data
+                      FROM pmwh3_web_subdomains
+                     WHERE adapter = 'apache' AND data <> ''
+                     ORDER BY domain/;
+    my $sth_select = $db->prepare($select);
+    $sth_select->execute() or die $DBI::errstr;
+
+    my $rows = $sth_select->rows;
+    my $basepath = "@WEBROOT@";
+
+    $s->log_serror(Apache2::Log::LOG_MARK,Apache2::Const::LOG_INFO,APR::Const::SUCCESS,"PMWH3: SQL query succeeded, $rows rows fetched");
+
+    my @row;
+    while( @row = $sth_select->fetchrow_array ) {
+        my $servername = $row[0];
+        my $customer   = $row[1];
+        my $dir        = $row[2];
+        my $data       = $row[3];
+
+        if ( defined( $data ) ){
+            $s->log_serror(Apache2::Log::LOG_MARK, Apache2::Const::LOG_DEBUG,APR::Const::SUCCESS,"PMWH3: load config for " . $servername);
+
+            # per-customer log dir + docroot, created on demand
+            my $logpath = $basepath . "/" . $customer . "/logs";
+            if ( !-d $logpath ) {
+                make_path( $logpath );
+            }
+            if ( !-d $dir ) {
+                $s->log_serror(Apache2::Log::LOG_MARK,Apache2::Const::LOG_INFO,APR::Const::SUCCESS,"PMWH3: create $dir");
+                make_path( $dir );
+            }
+
+            $s->add_config([split /\n/, $data]);
+        }
+    }
+
+    $s->log_serror(Apache2::Log::LOG_MARK,Apache2::Const::LOG_INFO,APR::Const::SUCCESS,"PMWH3: done");
+
+    </Perl>
+</IfModule>

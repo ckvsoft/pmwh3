@@ -70,7 +70,7 @@ class Install extends \ckvsoft\mvc\BaseController
                 ? trim((string) $form['dns_same']) !== ''
                 : trim((string) ($form['dns_name'] ?? '')) === '',
             'dnsStatus' => \pmwh3\Utils\InstallBootstrap::dnsStatus(),
-            'dnsReconf' => isset($_GET['reconf']),
+            'dnsType'   => (string) ($form['dns_type'] ?? 'pdns'),
             'sysChecks' => \pmwh3\Utils\InstallBootstrap::systemChecks(),
         ]);
     }
@@ -114,8 +114,7 @@ class Install extends \ckvsoft\mvc\BaseController
                 ->post('dns_name')
                 ->post('dns_user')
                 ->post('dns_pass')
-                ->post('dns_schema_choice')
-                ->post('dns_schema_text')
+                ->post('dns_type')
                 ->post('admin_password');
         $input->submit();
 
@@ -127,30 +126,20 @@ class Install extends \ckvsoft\mvc\BaseController
         foreach (['phase', 'db_host', 'db_name', 'db_user', 'db_pass',
                   'db_admin_user', 'db_admin_pass',
                   'dns_same', 'dns_host', 'dns_name', 'dns_user', 'dns_pass',
-                  'dns_schema_choice', 'dns_schema_text',
-                  'admin_password'] as $k) {
+                  'dns_type', 'admin_password'] as $k) {
             if (!array_key_exists($k, $in) && array_key_exists($k, $_POST)) {
                 $in[$k] = (string) $_POST[$k];
             }
         }
         if (empty($in['phase'])) {
             $ws = \pmwh3\Utils\InstallBootstrap::wizardStep();
-            $in['phase'] = ['db' => '1', 'dns' => 'dns_conn',
+            $in['phase'] = ['db' => '1', 'dns' => 'dns',
                 'bootstrap' => '2'][$ws] ?? '1';
-        }
-        if ($in['phase'] === 'dns_conn') {
-            // field-level default: host falls back to the module DB
-            // host when left blank
-            if (trim((string) ($in['dns_host'] ?? '')) === '') {
-                $in['dns_host'] = $in['db_host'] ?? '';
-            }
         }
 
         try {
             if (($in['phase'] ?? '') === 'dns') {
-                $result = \pmwh3\Utils\InstallBootstrap::runDnsSchema($in);
-            } elseif (($in['phase'] ?? '') === 'dns_conn') {
-                $result = \pmwh3\Utils\InstallBootstrap::runDnsConn($in);
+                $result = \pmwh3\Utils\InstallBootstrap::runDnsStep($in);
             } elseif (($in['phase'] ?? '') === 'perms_ok') {
                 // step-2 explicit confirmation (cevian style): green
                 // checks accepted; the wizard opens the NEXT lens only
