@@ -431,6 +431,23 @@ class InstallBootstrap
                     : 'missing (create failed)',
         ];
 
+        // Module directory writability: phase 1 must write the REAL
+        // module.json there. php-fpm may have NO write access even
+        // though the operator does (the token file exists precisely
+        // because the operator has access) -- surface that NOW as a
+        // FAIL row instead of decrypting it at P1 POST time. Detail
+        // stays path-less (pre-login leak protection): the module
+        // folder is the one the token file was created in.
+        $moduleDir = __DIR__ . '/..';
+        $moduleWritable = is_dir($moduleDir) && is_writable($moduleDir);
+        $rows[] = [
+            'label'  => 'module folder writable (for module.json)',
+            'ok'     => $moduleWritable,
+            'detail' => $moduleWritable
+                    ? 'writable'
+                    : 'not writable by PHP (chown the pmwh3 module folder to the php-fpm user)',
+        ];
+
         // DB-connect probe (when installer form data available)
         if (is_array($in) && !empty($in['db_host'])) {
             $dsn = 'mysql:host=' . (string) $in['db_host'] . ';port='
