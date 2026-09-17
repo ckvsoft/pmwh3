@@ -27,12 +27,12 @@ class Install extends \ckvsoft\mvc\BaseController
     public function index()
     {
         if (!\pmwh3\Utils\InstallBootstrap::needsInstall()) {
-            $this->flash('success', __('Install'),
-                    __('pmwh3 is already installed and configured.'));
-            $this->location(BASE_URI . 'pmwh3/general/overview');
+            $this->flash('success',
+                    __('pmwh3 is already installed and configured.'),
+                    'login');
         }
 
-        $this->render('pmwh3/install', [
+        $this->installRender('pmwh3/install', [
             'activeBox' => 'install',
             'frameworkHost' => $this->frameworkDbHint('host'),
             'frameworkName' => $this->frameworkDbHint('name'),
@@ -48,7 +48,7 @@ class Install extends \ckvsoft\mvc\BaseController
     public function run()
     {
         if (!\pmwh3\Utils\InstallBootstrap::needsInstall()) {
-            $this->location(BASE_URI . 'pmwh3/general/overview');
+            $this->location(BASE_URI . 'pmwh3/login');
         }
 
         $input = new \ckvsoft\Input();
@@ -79,18 +79,22 @@ class Install extends \ckvsoft\mvc\BaseController
         }
 
         if (!$result['ok']) {
+            $fails = [];
             foreach ($result['steps'] as $label => $detail) {
                 if (str_starts_with((string) $detail, 'FAIL')) {
-                    $this->flash('error', __('Install'), htmlspecialchars("{$label}: {$detail}"), 'install');
+                    $fails[] = $label . ': ' . $detail;
                 }
             }
-            $this->location(BASE_URI . 'pmwh3/install');
+            $this->flash('error', htmlspecialchars(implode('<br />', $fails)),
+                    'install');
         }
 
-        foreach ($result['steps'] as $label => $detail) {
-            $this->flash('success', __('Install'), "{$label}: {$detail}", 'login');
-        }
-        $this->location(BASE_URI . 'pmwh3/login');
+        $this->flash('success',
+                htmlspecialchars(implode('<br />', array_map(
+                    fn($l, $d) => "$l: $d", array_keys($result['steps']),
+                    array_values($result['steps'])
+                ))),
+                'login');
     }
 
     /** Prefill hint from the framework's own config.json (same server). */
@@ -102,5 +106,31 @@ class Install extends \ckvsoft\mvc\BaseController
             return (string) ($json['database'][$field] ?? '');
         }
         return '';
+    }
+
+    /**
+     * Minimal pre-login page render (no pmwh3 menu, no login state):
+     * framework header/footer around the wizard view.
+     */
+    private function installRender($view, $data = null)
+    {
+        $this->renderPage([
+            ['view' => '/inc/header', 'data' => ['title' => __('Install pmwh3')]],
+            ['view' => $view, 'data' => ['data' => $data]],
+            ['view' => '/inc/footer'],
+                ],
+                "<style>" . $this->loadHelper("css", ['method' => 'getCss', 'args' => ['inc/css/pmwh3.css']]) . "</style>"
+        );
+    }
+
+    /** Pre-login flash: Auth-based flash redirect (framework Auth helper). */
+    private function flash(string $kind, string $msg, string $target): void
+    {
+        \ckvsoft\Auth::sendFlashRedirect(
+                BASE_URI . 'pmwh3/' . $target,
+                $kind,
+                __('Install'),
+                $msg
+        );
     }
 }
