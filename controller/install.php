@@ -72,6 +72,7 @@ class Install extends \ckvsoft\mvc\BaseController
             'frameworkDnsSame' => isset($form['dns_same'])
                 ? trim((string) $form['dns_same']) !== ''
                 : trim((string) ($form['dns_name'] ?? '')) === '',
+            'dnsStatus' => \pmwh3\Utils\InstallBootstrap::dnsStatus(),
             'sysChecks' => \pmwh3\Utils\InstallBootstrap::systemChecks(),
         ]);
     }
@@ -115,6 +116,8 @@ class Install extends \ckvsoft\mvc\BaseController
                 ->post('dns_name')
                 ->post('dns_user')
                 ->post('dns_pass')
+                ->post('dns_schema_choice')
+                ->post('dns_schema_text')
                 ->post('admin_password');
         $input->submit();
 
@@ -126,6 +129,7 @@ class Install extends \ckvsoft\mvc\BaseController
         foreach (['phase', 'db_host', 'db_name', 'db_user', 'db_pass',
                   'db_admin_user', 'db_admin_pass',
                   'dns_same', 'dns_host', 'dns_name', 'dns_user', 'dns_pass',
+                  'dns_schema_choice', 'dns_schema_text',
                   'admin_password'] as $k) {
             if (!array_key_exists($k, $in) && array_key_exists($k, $_POST)) {
                 $in[$k] = (string) $_POST[$k];
@@ -144,9 +148,13 @@ class Install extends \ckvsoft\mvc\BaseController
         }
 
         try {
-            $result = $in['phase'] === '2'
-                ? \pmwh3\Utils\InstallBootstrap::runPhase2($in)
-                : \pmwh3\Utils\InstallBootstrap::runPhase1($in);
+            if (($in['phase'] ?? '') === 'dns') {
+                $result = \pmwh3\Utils\InstallBootstrap::runDnsSchema($in);
+            } elseif ($in['phase'] === '2') {
+                $result = \pmwh3\Utils\InstallBootstrap::runPhase2($in);
+            } else {
+                $result = \pmwh3\Utils\InstallBootstrap::runPhase1($in);
+            }
         } catch (\Throwable $e) {
             $result = ['ok' => false, 'steps' => ['installer' => 'FAIL: ' . $e->getMessage()]];
         }
@@ -178,12 +186,21 @@ class Install extends \ckvsoft\mvc\BaseController
                     'install');
         }
 
+        if ($in['phase'] === 'dns') {
+            $this->flash('success',
+                    htmlspecialchars(implode('<br />', array_map(
+                        fn($l, $d) => "$l: $d", array_keys($result['steps']),
+                        array_values($result['steps'])
+                    ))),
+                    'install');
+        }
+
         $this->flash('success',
                 htmlspecialchars(implode('<br />', array_map(
                     fn($l, $d) => "$l: $d", array_keys($result['steps']),
                     array_values($result['steps'])
                 ))),
-                'login');
+                ($in['phase'] === 'dns') ? 'install' : 'login');
     }
 
     /** Remember the LAST attempt's form values (state-file based,

@@ -706,6 +706,181 @@ class InstallBootstrap
     }
 
     // ----------------------------------------------------------------
+    // DNS schema step (wizard, post phase 1)
+    // ----------------------------------------------------------------
+
+    /**
+     * DNS database status resolved from the module.json dns node:
+     * - db reachable (present/created),
+     * - required tables present -- otherwise the operator has to
+     *   supply the DNS schema (paste or upload) which is applied via
+     *   the framework executeSqlFile on the dns.database node.
+     * @return array{nodeFound:bool,dbExists:bool,tablesOk:bool,detail:string,missing:list<string>}
+     */
+    public static function dnsStatus(): array
+    {
+        $mj = self::moduleJson();
+        $node = $mj['dns']['database'] ?? null;
+        if (!is_array($node) || empty($node['name'])) {
+            // phase 1 not done yet -- nothing to check
+            return ['nodeFound' => false, 'detail' => ''];
+        }
+        $dsn = 'mysql:host=' . (string) $node['host'] . ';port='
+                . (int) ($node['port'] ?? 3306) . ';dbname='
+                . (string) $node['name'];
+        try {
+            $pdo = new \PDO($dsn, (string) $node['user'],
+                    (string) $node['pass'], [\PDO::ATTR_TIMEOUT => 5]);
+        } catch (Throwable $e) {
+            // try to create the missing empty DNS database (same-conn
+            // credentials or the separate ones from the node)
+            $probeIn = [
+                'db_host' => (string) $node['host'],
+                'db_port' => (int) ($node['port'] ?? 3306),
+                'db_name' => (string) $node['name'],
+                'db_user' => (string) $node['user'],
+                'db_pass' => (string) $node['pass'],
+                'db_admin_user' => '',
+                'db_admin_pass' => '',
+            ];
+            $created = false;
+            if (trim((string) ($node['name'] ?? '')) !== '') {
+                $created = self::tryCreateDatabase($probeIn);
+            }
+            if ($created) {
+                try {
+                    $pdo = new \PDO($dsn, (string) $node['user'],
+                            (string) $node['pass'], [\PDO::ATTR_TIMEOUT => 5]);
+                } catch (Throwable $e2) {
+                    \pmwh3\Utils\ErrorHandler::trace(
+                            '[InstallBootstrap.dnsStatus] reconnect failed: '
+                            . $e2->getMessage());
+                    return ['nodeFound' => true, 'dbExists' => false,
+                        'tablesOk' => false,
+                        'detail' => 'DNS database could not be created or'
+                                . ' reached with the stored credentials',
+                        'missing' => []];
+                }
+            } else {
+                \pmwh3\Utils\ErrorHandler::trace(
+                        '[InstallBootstrap.dnsStatus] probe failed: '
+                        . $e->getMessage());
+                return ['nodeFound' => true, 'dbExists' => false,
+                    'tablesOk' => false,
+                    'detail' => 'DNS database does not exist and could not'
+                            . ' be created automatically',
+                    'missing' => []];
+            }
+        }
+
+        // required tables: PowerDNS (domains/records) or MyDNS
+        // (mydns_soa/mydns_rr), both honouring the node's table_prefix
+        $prefix = (string) ($mj['dns']['table_prefix'] ?? '');
+        $wanted = [
+            $prefix . 'domains', $prefix . 'records',
+            $prefix . 'mydns_soa', $prefix . 'mydns_rr',
+        ];
+        $found = [];
+        foreach ($wanted as $t) {
+            try {
+                $st = $pdo->prepare('SHOW TABLES LIKE :t');
+                $st->execute([':t' => $t]);
+                if ($st->fetchColumn() === $t) {
+                    $found[] = $t;
+                }
+            } catch (Throwable $e) {
+                // table listing failed -> schema clearly incomplete
+            }
+        }
+        $pdnsComplete = in_array($prefix . 'domains', $found, true)
+                && in_array($prefix . 'records', $found, true);
+        $mydnsComplete = in_array($prefix . 'mydns_soa', $found, true)
+                && in_array($prefix . 'mydns_rr', $found, true);
+        $tablesOk = $pdnsComplete || $mydnsComplete;
+        return [
+            'nodeFound' => true,
+            'dbExists'  => true,
+            'tablesOk'  => $tablesOk,
+            'detail'    => $tablesOk
+                    ? 'DNS database exists, schema tables found'
+                    : 'DNS database exists but the schema is missing'
+                        . ' (no PowerDNS/MyDNS tables found)',
+            'missing'   => array_diff($wanted, $found),
+        ];
+    }
+
+    /**
+     * Apply a DNS schema supplied by the operator (paste or upload)
+     * to the dns.database node connection via the framework's
+     * executeSqlFile (no raw exec handling here).
+     */
+    public static function runDnsSchema(array $in): array
+    {
+        $steps = [];
+        $mj = self::moduleJson();
+        if (empty($mj['dns']['database']['name'])) {
+            $steps['dns schema'] = 'FAIL: no dns.database node in module.json (complete phase 1 first)';
+            return ['ok' => false, 'steps' => $steps];
+        }
+
+        $srcPath = '';
+        // 1) bundled snapshot from contrib/sql (preferred: one click)
+        $choice = trim((string) ($in['dns_schema_choice'] ?? ''));
+        if ($choice === 'pdns' || $choice === 'mydns') {
+            $srcPath = __DIR__ . '/../contrib/sql/'
+                    . $choice . '_schema.sql';
+            if (!is_file($srcPath)) {
+                $steps['dns schema'] = 'FAIL: bundled schema missing (contrib/sql/' . $choice . '_schema.sql)';
+                return ['ok' => false, 'steps' => $steps];
+            }
+        } elseif (!empty($_FILES['dns_schema_file']['tmp_name'])
+                && is_uploaded_file($_FILES['dns_schema_file']['tmp_name'])) {
+            $srcPath = (string) $_FILES['dns_schema_file']['tmp_name'];
+        } elseif (trim((string) ($in['dns_schema_text'] ?? '')) !== '') {
+            $srcPath = rtrim(getcwd(), '/') . '/var/pmwh3_dns_schema_'
+                    . bin2hex(random_bytes(4)) . '.sql';
+            if (@file_put_contents($srcPath, (string) $in['dns_schema_text']) === false) {
+                $steps['dns schema'] = 'FAIL: cannot persist pasted schema to var/ (permissions)';
+                return ['ok' => false, 'steps' => $steps];
+            }
+        }
+        if ($srcPath === '') {
+            $steps['dns schema'] = 'FAIL: no schema supplied (paste SQL or choose a file)';
+            return ['ok' => false, 'steps' => $steps];
+        }
+
+        // make sure the DNS database exists before schema application
+        $st = self::dnsStatus();
+        if (isset($st['nodeFound']) && ($st['dbExists'] ?? false) === false) {
+            // empty db creation attempted inside dnsStatus already;
+            // re-probe once more here by re-reading the node
+            $st = self::dnsStatus();
+            if (($st['dbExists'] ?? false) === false) {
+                $steps['dns schema'] = 'FAIL: ' . ($st['detail'] ?? 'DNS database missing');
+                return ['ok' => false, 'steps' => $steps];
+            }
+        }
+
+        try {
+            $db = Config::moduleDb(null, 'dns.database');
+            $stmts = $db->executeSqlFile($srcPath);
+            $steps['dns schema'] = 'ok (' . $stmts . ' statements applied)';
+        } catch (Throwable $e) {
+            $steps['dns schema'] = 'FAIL: ' . $e->getMessage();
+            return ['ok' => false, 'steps' => $steps];
+        } finally {
+            // only purge the temp file WE materialized from the paste
+            if (str_contains($srcPath, '/pmwh3_dns_schema_')
+                    && $srcPath === rtrim(getcwd(), '/') . '/var/pmwh3_dns_schema_'
+                       . basename($srcPath)) {
+                @unlink($srcPath);
+            }
+        }
+
+        return ['ok' => true, 'steps' => $steps];
+    }
+
+    // ----------------------------------------------------------------
     // RBAC pieces
     // ----------------------------------------------------------------
 

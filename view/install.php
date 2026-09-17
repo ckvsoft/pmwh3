@@ -109,6 +109,16 @@
 
 <?php } // phase2: database + dns sections skipped ?>
                     <tr>
+                        <?php $dnsStatus = $this->data['dnsStatus'] ?? []; ?>
+                        <?php if (($this->data['phase2'] ?? false)
+                                && ($dnsStatus['nodeFound'] ?? false)
+                                && !($dnsStatus['tablesOk'] ?? false)) { ?>
+                            <td colspan="2" style="border-top:1px solid #ccc;">
+                                <small style="color:#b00;"><?php echo __('DNS database: ') . htmlspecialchars((string) ($dnsStatus['detail'] ?? '')); ?> — <?php echo __('The wizard continues after the DNS schema is applied (section below).'); ?></small>
+                            </td>
+                        <?php } ?>
+                    </tr>
+                    <tr>
                         <th colspan="2"><?php echo __('Ultimate admin user'); ?></th>
                     </tr>
                     <tr>
@@ -129,6 +139,44 @@
                     <button type="submit" class="button small-action save"><?php echo __('Install'); ?></button>
                 </div>
             </form>
+
+            <?php if (($this->data['phase2'] ?? false)
+                    && ($this->data['dnsStatus']['nodeFound'] ?? false)
+                    && !($this->data['dnsStatus']['tablesOk'] ?? false)) { ?>
+                <form autocomplete="off" action="<?= BASE_URI ?>pmwh3/install/run" method="post" enctype="multipart/form-data">
+                    <table>
+                        <tr><th colspan="2"><?php echo __('Apply DNS schema'); ?></th></tr>
+                        <tr>
+                            <td colspan="2">
+                                <small><?php echo __('Choose the bundled schema snapshot (pdns = PowerDNS, mydns = MyDNS), or supply your own SQL file / paste the statements:'); ?></small>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php echo __('Schema'); ?></td>
+                            <td>
+                                <label><input type="radio" name="dns_schema_choice" value="pdns" checked> PowerDNS</label>
+                                &nbsp;
+                                <label><input type="radio" name="dns_schema_choice" value="mydns"> MyDNS</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php echo __('Own file (optional)'); ?></td>
+                            <td><input type="file" name="dns_schema_file" accept=".sql,text/plain"></td>
+                        </tr>
+                        <tr>
+                            <td><?php echo __('Pasted SQL'); ?></td>
+                            <td><textarea name="dns_schema_text" rows="6" style="width:100%;font-family:monospace;"
+                                          placeholder="CREATE TABLE ..."></textarea></td>
+                        </tr>
+                    </table>
+                    <input type="hidden" name="phase" value="dns">
+                    <div class="pmwh3-form-actions">
+                        <button type="submit" class="button small-action"
+                                data-confirm="<?php echo __('Run the selected DNS schema against the configured DNS database?'); ?>"
+                                data-confirm-type="change"><?php echo __('Apply DNS schema'); ?></button>
+                    </div>
+                </form>
+            <?php } ?>
         </div>
     </div>
 
