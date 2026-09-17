@@ -41,7 +41,6 @@ class Install extends \ckvsoft\mvc\BaseController
             $this->installRender('pmwh3/install_token', [
                 'activeBox' => 'install',
                 'tokenName' => \pmwh3\Utils\InstallBootstrap::securityTokenName(),
-                'tokenCode' => \pmwh3\Utils\InstallBootstrap::securityTokenCode(),
             ]);
             return;
         }
@@ -65,6 +64,17 @@ class Install extends \ckvsoft\mvc\BaseController
      * POST from the install form: persist the module config and run
      * the whole bootstrap (baseline, RBAC, admin customer).
      */
+    /** "Check again" from step 0 (cevian-style discrete steps). */
+    public function checkToken()
+    {
+        if (\pmwh3\Utils\InstallBootstrap::securityTokenOk()) {
+            $this->location(BASE_URI . 'pmwh3/install');
+        }
+        $this->flash('error',
+                __('Security file still missing: ') . \pmwh3\Utils\InstallBootstrap::securityTokenName(),
+                'install');
+    }
+
     public function run()
     {
         if (!\pmwh3\Utils\InstallBootstrap::needsInstall()) {
@@ -140,13 +150,13 @@ class Install extends \ckvsoft\mvc\BaseController
      */
     private function installRender($view, $data = null)
     {
+        // cevian-INSTALLER look: standalone minimal page (its own css),
+        // NOT the pmwh3 app chrome.
         $this->renderPage([
-            ['view' => '/inc/header', 'data' => ['title' => __('Install pmwh3')]],
+            ['view' => 'pmwh3/inc_header'],
             ['view' => $view, 'data' => ['data' => $data]],
-            ['view' => '/inc/footer'],
-                ],
-                "<style>" . $this->loadHelper("css", ['method' => 'getCss', 'args' => ['inc/css/pmwh3.css']]) . "</style>"
-        );
+            ['view' => 'pmwh3/inc_footer'],
+        ]);
     }
 
     /** Pre-login flash: Auth-based flash redirect (framework Auth helper). */

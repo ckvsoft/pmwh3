@@ -1,16 +1,15 @@
-<div class="pmwh3-content">
-    <div class="widget">
-        <div class="entry tool">
-            <h2><?php echo __('Install pmwh3 &mdash; step 0: server access proof'); ?></h2>
-            <p>
-                <?php echo __('Before the wizard opens, prove that you have server access (same mechanism as the Cevian core installer): create the file'); ?>
-                <code><?php echo htmlspecialchars((string) ($this->data['tokenName'] ?? '?')); ?></code>
-                <?php echo __('in the Cevian root and put EXACTLY this line into it:'); ?>
-            </p>
-            <p><code><strong><?php echo htmlspecialchars((string) ($this->data['tokenCode'] ?? '?')); ?></strong></code></p>
-            <p><small><?php echo __('e.g. via SSH:'); ?></small></p>
-            <pre><code>echo "<?php echo htmlspecialchars((string) ($this->data['tokenCode'] ?? '?')); ?>" &gt; &lt;cevian-root&gt;/<?php echo htmlspecialchars((string) ($this->data['tokenName'] ?? '?')); ?></code></pre>
-            <p><small><?php echo __('Reload this page after creating the file. The wizard opens only when the file content matches. The token file and the installer state are removed after a successful install.'); ?></small></p>
-        </div>
-    </div>
-</div>
+<h1>Step 0 &mdash; Security file</h1>
+
+<?php if (!\pmwh3\Utils\InstallBootstrap::securityTokenOk()): ?>
+    <p>Security file missing &#x274C;</p>
+    <p><?php echo __('Please create the EMPTY security file in the ROOT directory:'); ?>
+       <strong><?= htmlspecialchars((string) ($this->data['tokenName'] ?? '?')) ?></strong>
+       (e.g. <code>touch &lt;cevian-root&gt;/<?= htmlspecialchars((string) ($this->data['tokenName'] ?? '?')) ?></code>
+       or upload an empty file with your FTP client).</p>
+    <form method="post" action="checkToken">
+        <button class="button" type="submit" name="check" value="1"><?php echo __('Check again'); ?></button>
+    </form>
+<?php else: ?>
+    <p>Security file found &#x2705;</p>
+    <a href="<?= BASE_URI ?>pmwh3/install" class="button"><?php echo __('Next &rarr;'); ?></a>
+<?php endif; ?>

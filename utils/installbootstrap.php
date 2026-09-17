@@ -120,18 +120,15 @@ class InstallBootstrap
     }
 
     /**
-     * True when the token file EXISTS in the Cevian root AND contains
-     * the expected code line. Pure file-presence does NOT count --
-     * the operator must have written the displayed code into the
-     * file (proves real server file access, not just URL access).
+     * True when the token file EXISTS in the Cevian root -- EXACTLY
+     * like the cevian core installer's step 1 (create the displayed
+     * empty file; the "Check again" button verifies the presence).
+     * A random 16-byte hex file name can only be created with real
+     * server file system access.
      */
     public static function securityTokenOk(): bool
     {
-        $path = self::securityTokenPath();
-        if (!is_file($path)) {
-            return false;
-        }
-        return hash_equals(self::securityTokenCode(), trim((string) file_get_contents($path)));
+        return is_file(self::securityTokenPath());
     }
 
     /** Drop state + token (after a successful install). */
