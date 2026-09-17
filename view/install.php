@@ -194,7 +194,7 @@
                     </div>
                 </form>
                 <?php } ?>
-            <?php } else { ?>
+            <?php } elseif ($step === 'bootstrap') { ?>
                 <form autocomplete="off" action="<?= BASE_URI ?>pmwh3/install/run" method="post">
                     <table>
                         <tr><th colspan="2"><?php echo __('Step 5 of 5: create schema, roles, admin user'); ?></th></tr>
