@@ -8,7 +8,9 @@
                     <strong style="color:red">&#10060; <?php echo __('Security file missing'); ?></strong><br>
                     <?php echo __('Please create the EMPTY security file in the Cevian root directory:'); ?><br>
                     <code><strong><?php echo htmlspecialchars((string) ($this->data['tokenName'] ?? '?')); ?></strong></code><br>
-                    <small><?php echo __('e.g. "touch <cevian-root>/<filename>" via SSH or an empty upload with your FTP client.'); ?></small>
+                    <small><?php echo __('Create it in the directory that contains the Cevian index.php -- via SSH right next to it next to index.php'); ?>
+                    <code>cd &lt;/pfad/zum/cevian&gt;; touch <?php echo htmlspecialchars((string) ($this->data['tokenName'] ?? '?')); ?></code>
+                    <?php echo __('or upload an empty file with your FTP client.'); ?></small>
                 </p>
                 <div class="pmwh3-form-actions">
                     <form action="<?= BASE_URI ?>pmwh3/install/checkToken" method="post">
