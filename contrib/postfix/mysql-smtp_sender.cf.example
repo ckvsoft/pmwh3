@@ -1,0 +1,15 @@
+# postfix mysql map -> pmwh3 consolidated mail tables
+#
+# wired in main.cf as (2nd map of smtpd_sender_login_maps):
+#   smtpd_sender_login_maps =
+#       proxy:mysql:/etc/postfix/sql/mysql-virtual_alias_maps.cf
+#       proxy:mysql:/etc/postfix/sql/mysql-smtp_sender.cf
+# a forward target may send as the forward source (destination list
+# of a pmwh3_mail_forwardings row may contain this login)
+#
+# Variables: @DB_HOST@ @DB_NAME@ @DB_USER@ @DB_PASS@
+user = @DB_USER@
+password = @DB_PASS@
+dbname = @DB_NAME@
+hosts = @DB_HOST@
+query = SELECT destination FROM pmwh3_mail_forwardings WHERE source='%s'

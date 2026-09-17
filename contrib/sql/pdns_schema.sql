@@ -1,5 +1,5 @@
 -- PowerDNS SQL schema (snapshot 2026-09-17, MariaDB).
--- Source: nu1-station live `pdns` database (SHOW CREATE TABLE),
+-- Source: ns1 live `pdns` database (SHOW CREATE TABLE),
 -- adjusted: CREATE TABLE IF NOT EXISTS + no AUTO_INCREMENT counters.
 -- Needed by pmwh3 PdnsAdapter: `domains` + `records`. The remaining
 -- tables (comments, domainmetadata, cryptokeys, supermasters,

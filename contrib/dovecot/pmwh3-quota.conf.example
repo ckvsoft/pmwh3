@@ -1,0 +1,62 @@
+# pmwh3 dovecot quota setup. Merge into the SAME dovecot.conf as
+# pmwh3-auth.conf.example (which carries the shared mysql pmwh3 {}
+# connection block).
+#
+# The authoritative quota driver is "count" (Dovecot's recommended
+# driver; the live stack runs it): usage is tracked inside Dovecot's
+# index files, pmwh3 displays it live via the doveadm HTTP API (see
+# pmwh3-doveadm.conf.example). No SQL writes are involved.
+#
+# OPTIONAL (commented out): quota-clone mirrors the current usage
+# into pmwh3_mail_accounts.used_bytes / used_messages via a SQL dict
+# -- only useful if you want the numbers in SQL besides the live
+# API. Uncomment the whole block to enable it; it reuses the mysql
+# pmwh3 {} connection block from pmwh3-auth.conf.example.
+#
+# Variables: none of its own.
+
+# --- authoritative quota (required) -------------------------------
+# add `quota = yes` to your existing mail_plugins block (plus
+# imap-quota for IMAP clients); quota_vsizes is required by the
+# count driver.
+
+mail_plugins {
+  quota = yes
+}
+
+quota_vsizes = yes
+
+quota "User quota" {
+  driver = count
+}
+
+# --- optional SQL mirror via quota-clone --------------------------
+# mail_plugins {
+#   quota_clone = yes
+# }
+#
+# dict_server {
+#   dict pmwh3quota {
+#     driver = sql
+#
+#     dict_map priv/quota/storage {
+#       sql_table = pmwh3_mail_accounts
+#       username_field = email
+#       value_field used_bytes {
+#       }
+#     }
+#
+#     dict_map priv/quota/messages {
+#       sql_table = pmwh3_mail_accounts
+#       username_field = email
+#       value_field used_messages {
+#       }
+#     }
+#   }
+# }
+#
+# quota_clone {
+#   dict proxy {
+#     name = pmwh3quota
+#   }
+# }

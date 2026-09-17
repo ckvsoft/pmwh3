@@ -1,0 +1,21 @@
+# doveadm HTTP API for pmwh3's live quota display (liveQuota()).
+#
+# pmwh3 reads the CURRENT quota usage per mailbox through this
+# listener (`doveadm quota get` over HTTP, same API Roundcube uses).
+# It is an internal endpoint: keep it inside the daemon network (do
+# not publish the port) and protect it with the shared secret.
+#
+# Merge into dovecot.conf.
+# Variables: @DOVEADM_PASSWORD@
+#
+# pmwh3 side (Options -> Email): DOVEADM_URL must point at this
+# listener (e.g. http://dovecot:24424) and DOVEADM_PASSWORD must
+# contain the SAME secret.
+
+doveadm_password = @DOVEADM_PASSWORD@
+
+service doveadm {
+  inet_listener doveadm-http {
+    port = 24424
+  }
+}

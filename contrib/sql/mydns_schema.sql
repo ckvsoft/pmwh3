@@ -1,5 +1,5 @@
 -- MyDNS SQL schema (snapshot 2026-09-17, MariaDB).
--- Source: ck000005_pmwh2 live legacy `mydns_soa` / `mydns_rr`
+-- Source: ns1 live legacy MyDNS tables `mydns_soa` / `mydns_rr`
 -- (SHOW CREATE TABLE), adjusted: CREATE TABLE IF NOT EXISTS +
 -- MyISAM kept because MyDNS-NG expects the legacy layout; pmwh3's
 -- MyDnsAdapter reads these tables read-mostly (origin/serial bump).

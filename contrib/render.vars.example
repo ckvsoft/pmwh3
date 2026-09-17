@@ -1,0 +1,46 @@
+# pmwh3 contrib render variables.
+#
+# Copy this file to render.vars (git-ignored), fill in the values,
+# then run:
+#   php contrib/render.php --check --vars render.vars
+#   php contrib/render.php --vars render.vars --out ~/pmwh3-contrib-out
+#
+# Every variable a template needs must be non-empty -- the renderer
+# fails with a list otherwise (a variable no template uses may stay
+# empty). Quotes around values are optional.
+
+# --- module database (the consolidated mail/web/ftp tables) -------
+# host as seen FROM THE DAEMONS (container name, IP or localhost)
+DB_HOST="localhost"
+DB_NAME="pmwh3"
+# daemons' DB user: SELECT is enough for postfix/dovecot/apache,
+# proftpd needs UPDATE/INSERT as well
+DB_USER=""
+DB_PASS=""
+
+# --- mail routing (postfix transport maps) ------------------------
+# THIS mail server's public IP: it identifies the domains this
+# server is the master MX for (postfix_transport.master_destination)
+MASTER_IP=""
+
+# --- dovecot / vmail ----------------------------------------------
+# vmail base directory (home = <vmail>/<domain>/<user>)
+VMAIL_HOME="/vhome/vmail"
+# shared secret for the doveadm HTTP API (= pmwh3 setting
+# DOVEADM_PASSWORD); keep the listener inside the daemon network
+DOVEADM_PASSWORD=""
+
+# --- web stack ----------------------------------------------------
+# customer webspace root (docroots, per-customer log dirs)
+WEBROOT="/vhome"
+
+# --- rspamd -------------------------------------------------------
+# pmwh3 panel base URL, scheme + host + path, no trailing slash
+# (the URL rspamd fetches the maps from)
+BASE_URL="https://host.example/cevian"
+# must equal the pmwh3 setting RSPAMD_MAP_TOKEN (openssl rand -hex 32)
+RSPAMD_MAP_TOKEN=""
+# rspamd controller as seen from the dovecot/sieve side (= pmwh3
+# settings RSPAMD_API_URL / RSPAMD_API_PASSWORD)
+RSPAMD_URL="http://rspamd:11334"
+RSPAMD_PASSWORD=""

@@ -1,0 +1,77 @@
+# pmwh3 FTP stack: mod_sql against the consolidated pmwh3_ftp_*
+# tables. Merge into your proftpd.conf (or drop it into an included
+# conf.d directory).
+#
+# Variables: @DB_HOST@ @DB_NAME@ @DB_USER@ @DB_PASS@
+#
+# Passwords: pmwh3 stores FTP passwords either plain
+# (ENCRYPT_FTP_PASS = N, the default) or as UNSALTED SHA-256 hex
+# (ENCRYPT_FTP_PASS = Y). Keep the salt file EMPTY (or remove the
+# SQLPasswordSaltFile line) -- a non-empty salt breaks verification
+# of pmwh3-written rows, because pmwh3 does not prepend any salt.
+# If you maintain salted rows outside pmwh3, create the salt file
+# once and never change it:
+#   head -c 16 /dev/urandom | od -An -tx1 | tr -d ' \n' > salt
+
+<IfModule mod_sql_passwd.c>
+    SQLPasswordEngine on
+    SQLPasswordEncoding hex
+    SQLPasswordSaltFile /etc/proftpd/salt Prepend
+</IfModule>
+
+<IfModule mod_sql.c>
+    AuthOrder		mod_sql.c
+    SQLBackend		mysql
+    SQLAuthTypes	Plaintext SHA256 Crypt Empty
+    SQLAuthenticate	users groups
+
+    SQLConnectInfo	@DB_NAME@@@DB_HOST@ @DB_USER@ @DB_PASS@
+
+    SQLUserInfo		pmwh3_ftp_accounts username password uid gid homedir NULL
+    SQLGroupInfo	pmwh3_ftp_groups groupname gid members
+
+    SQLMinID		500
+
+    SQLNamedQuery count SELECT "count FROM pmwh3_ftp_accounts WHERE username='%u'"
+    SQLNamedQuery used SELECT "pmwh3_ftp_quota_tallies.bytes_in_used FROM pmwh3_ftp_quota_tallies WHERE pmwh3_ftp_quota_tallies.name='%u'"
+    SQLNamedQuery avail SELECT "pmwh3_ftp_quota_limits.bytes_in_avail FROM pmwh3_ftp_quota_limits WHERE pmwh3_ftp_quota_limits.name='%u'"
+    SQLShowInfo PASS "230" "You've logged on %{count} times, %u"
+    SQLShowInfo PASS "230" "QuotaInfo: %{used}(used) / %{avail}(limit) bytes"
+
+    SQLLog PASS updatecount
+    SQLNamedQuery updatecount UPDATE "count=count+1, accessed=now() WHERE username='%u'" pmwh3_ftp_accounts
+
+    # FTP traffic feed into the pmwh3 traffic statistics
+    SQLNamedQuery traffic_update FREEFORM "INSERT INTO pmwh3_traffic(timestamp, domain, username, ftp) VALUES (now(), (SELECT domain FROM pmwh3_ftp_accounts WHERE username='%u' LIMIT 1), '%u', %b) ON DUPLICATE KEY UPDATE ftp = ftp + %b"
+
+    SQLLog STOR updatebytesin
+    SQLNamedQuery updatebytesin UPDATE "bytes_in = bytes_in + '%b' WHERE username = '%u'" pmwh3_ftp_accounts
+    SQLLog RETR updatebytesout
+    SQLNamedQuery updatebytesout UPDATE "bytes_out = bytes_out + '%b' WHERE username = '%u'" pmwh3_ftp_accounts
+
+    SQLLog STOR traffic_update
+    SQLLog RETR traffic_update
+
+    QuotaEngine on
+    QuotaDirectoryTally on
+    QuotaDisplayUnits Mb
+    QuotaShowQuotas on
+
+    SQLNamedQuery get-quota-limit SELECT "name, quota_type, per_session, limit_type, bytes_in_avail, bytes_out_avail, bytes_xfer_avail, files_in_avail, files_out_avail, files_xfer_avail FROM pmwh3_ftp_quota_limits WHERE name = '%{0}' AND quota_type = '%{1}'"
+
+    SQLNamedQuery get-quota-tally SELECT "name, quota_type, bytes_in_used, bytes_out_used, bytes_xfer_used, files_in_used, files_out_used, files_xfer_used FROM pmwh3_ftp_quota_tallies WHERE name = '%{0}' AND quota_type = '%{1}'"
+
+    SQLNamedQuery update-quota-tally UPDATE "bytes_in_used = bytes_in_used + %{0}, bytes_out_used = bytes_out_used + %{1}, bytes_xfer_used = bytes_xfer_used + %{2}, files_in_used = files_in_used + %{3}, files_out_used = files_out_used + %{4}, files_xfer_used = files_xfer_used + %{5} WHERE name = '%{6}' AND quota_type = '%{7}'" pmwh3_ftp_quota_tallies
+
+    SQLNamedQuery insert-quota-tally INSERT "%{0}, %{1}, %{2}, %{3}, %{4}, %{5}, %{6}, %{7}" pmwh3_ftp_quota_tallies
+
+    QuotaLimitTable sql:/get-quota-limit
+    QuotaTallyTable sql:/get-quota-tally/update-quota-tally/insert-quota-tally
+
+    QuotaLock /var/run/tally.lock
+
+    # Fallbacks for rows with NULL uid/gid (SQLUserInfo shell column
+    # is NULL here) -- adjust to your conventions.
+    SQLDefaultUID	101
+    SQLDefaultGID	65534
+</IfModule>

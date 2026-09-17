@@ -5,3 +5,5 @@ tests/tmp_module_placeholder.json
 *.bak-*
 *.po~
 module.json
+contrib/render.vars
+contrib/out/

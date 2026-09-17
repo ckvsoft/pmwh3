@@ -1,0 +1,15 @@
+# postfix mysql map -> pmwh3 consolidated mail tables
+#
+# wired in main.cf as (2nd map of virtual_alias_maps):
+#   virtual_alias_maps =
+#       proxy:mysql:/etc/postfix/sql/mysql-virtual_forwardings.cf
+#       proxy:mysql:/etc/postfix/sql/mysql-virtual_email2email.cf
+# loop breaker: maps a mailbox address to itself so virtual alias
+# expansion terminates on existing mailboxes
+#
+# Variables: @DB_HOST@ @DB_NAME@ @DB_USER@ @DB_PASS@
+user = @DB_USER@
+password = @DB_PASS@
+dbname = @DB_NAME@
+hosts = @DB_HOST@
+query = SELECT email FROM pmwh3_mail_accounts WHERE email='%s' AND active = 'Y'

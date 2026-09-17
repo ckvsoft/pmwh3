@@ -52,59 +52,16 @@ Current version: **3.0.82** · German documentation: [`README_de.md`](README_de.
      limits -1)
    - POST → baseline replay (`0.0.0_baseline.sql`, **fresh installs
      replay only the baseline**), RBAC roles `pmwh3 / Ultimate
-     Admin / Reseller / Customer`, 95 permission keys, the security
-     precheck enforcing **Cevian >= 0.18.3**, PHP extensions and
-     writable dirs — all automatic.
+     Admin / Reseller / Customer`, 95 permission keys, the
+     consolidated `pmwh3_mail_*` / `pmwh3_web_*` / `pmwh3_ftp_*`
+     stores, the security precheck enforcing **Cevian >= 0.18.3**,
+     PHP extensions and writable dirs — all automatic.
 
 5. **Log in** (`pmwh3/login`) as `admin`.
 
 The installer is **idempotent** — re-running is safe (no duplicate
 admin row, no duplicated permission grants). The wizard screen
 shows OK/FAIL per requirement before anything runs.
-
-## Requirements
-
-- **Cevian ≥ 0.18.3** (prerequisite — pmwh3 is a Cevian *module*)
-  - `Config::moduleDb()` / `Config::cachedDatabase()` (module DB node API)
-  - `Database::execDdl/tableExists/...` helpers
-  - Updater **fresh-install path** (baseline-only) + `SORT_NATURAL`
-    migration ordering (0.18.4)
-- PHP ≥ 8.0 with `pdo`, `pdo_mysql`, `mbstring` (see `SYSCHECK.md`)
-- MariaDB / MySQL ≥ 10.x
-- One MySQL/MariaDB database for the module (e.g. `pmwh3`); optional
-  separate databases per service (see *Service databases* below).
-
----
-
-## Installation (fresh install: copy + open URL)
-
-1. **Have Cevian running** (prerequisite). Copy the module into the
-   Cevian tree:
-   ```bash
-   cp -r pmwh3 /path/to/cevian/modules/
-   ```
-
-2. **Open the site URL** — the first pmwh3 page load redirects to
-   `pmwh3/install` whenever the all-in-one installer state is missing
-   (placeholder credentials in `module.json` or absent tables).
-
-3. **Fill the install wizard** (`pmwh3/install`):
-   - module DB credentials (host / name / user / pass) — written to
-     `modules/pmwh3/module.json`
-   - DNS database: `same as module DB` checkbox, or separate
-     `dns.database` values (existing pdns/MyDNS zone database)
-   - admin password → creates the Ultimate-Admin customer (all
-     limits `-1`)
-   - POST → baseline replay (`0.0.0_baseline.sql`, **fresh installs
-     replay only the baseline** — the migration chain is stamped as
-     applied), RBAC roles `pmwh3 / Ultimate Admin / Reseller /
-     Customer`, 95 permission keys, consolidated
-     `pmwh3_mail_* / pmwh3_web_* / pmwh3_ftp_*` stores — all automatic.
-
-4. **Log in** (`pmwh3/login`) as `admin`.
-
-The installer is **idempotent** — re-running is safe (no duplicate
-admin row, no duplicated permission grants).
 
 ---
 
@@ -172,24 +129,25 @@ installations actually need.)
 ## Mail quota model
 
 The assigned quota is `pmwh3_mail_accounts.quota_bytes`. **Usage**
-(`used_bytes` / `used_messages`) is written by the mail system's
-quota driver into the **same row** — there is no separate vendor
-quota table. Where the active adapter supports a live endpoint (the
-postfix adapter talks to Dovecot's doveadm HTTP API as a live
-source), pmwh3 shows live values with fallback to the row columns.
-The daemon-side glue (userdb/passdb queries, dict-quota mapping
-against `pmwh3_mail_accounts`) lives in
-[`contrib/`](contrib/).
+is tracked by Dovecot's recommended `count` driver; pmwh3 reads the
+current values live through the doveadm HTTP API (the postfix
+adapter's `liveQuota()`), with the row columns `used_bytes` /
+`used_messages` as fallback — there is no separate vendor quota
+table. The daemon-side glue (userdb/passdb queries, quota setup,
+doveadm listener) lives in [`contrib/`](contrib/).
 
 ---
 
-## Contributing glue (`contrib/`)
+## Server-side glue (`contrib/`)
 
-`contrib/` holds the **daemon-side configuration templates**
-(postfix SQL map files, dovecot auth/dict-quota snippets, rspamd
-multimap/settings blocks, apache mod_perl reader note). Placeholder
-names only — no credentials, no real domains. pmwh3 is the data
-source; the daemon configs consume the consolidated tables.
+`contrib/` holds the **daemon-side configuration templates** — the
+postfix SQL maps, dovecot auth/quota/doveadm snippets, the proftpd
+mod_sql config, the apache mod_perl vhost reader and the rspamd
+multimap/settings blocks, all reading the consolidated `pmwh3_*`
+tables. Placeholder names only (`@VAR@`) — no credentials, no real
+domains. Fill them with `contrib/render.php` (see
+[`contrib/INSTALL.md`](contrib/INSTALL.md) for the full
+daemon-setup walkthrough) or by hand.
 
 ---
 

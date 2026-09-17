@@ -1,0 +1,15 @@
+# postfix mysql map -> pmwh3 consolidated mail tables
+#
+# wired in main.cf as (1st map of virtual_alias_maps):
+#   virtual_alias_maps =
+#       proxy:mysql:/etc/postfix/sql/mysql-virtual_forwardings.cf
+#       proxy:mysql:/etc/postfix/sql/mysql-virtual_email2email.cf
+# resolves a forward source to its destination(s); a catch-all is an
+# ordinary row with source '@domain'
+#
+# Variables: @DB_HOST@ @DB_NAME@ @DB_USER@ @DB_PASS@
+user = @DB_USER@
+password = @DB_PASS@
+dbname = @DB_NAME@
+hosts = @DB_HOST@
+query = SELECT destination FROM pmwh3_mail_forwardings WHERE source='%s'

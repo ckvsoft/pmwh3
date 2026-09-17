@@ -1,31 +1,42 @@
-# dovecot auth against the CONSOLIDATED pmwh3 tables (pmwh3-mail)
-# drop-in for /etc/dovecot/ (the real file at the server holds the
-# DB creds; placeholders here).
+# dovecot auth (passdb/userdb) against the consolidated pmwh3 tables.
+# Merge into your dovecot.conf -- Dovecot 2.4 inline SQL style.
+#
+# This snippet carries the shared `mysql pmwh3 { }` connection block:
+# every other SQL snippet (see pmwh3-quota.conf.example) reuses it,
+# so merge them into the SAME dovecot.conf.
+#
+# Variables: @DB_HOST@ @DB_NAME@ @DB_USER@ @DB_PASS@ @VMAIL_HOME@
+#
+# Password scheme: default_password_scheme must match how pmwh3
+# stores mailbox passwords (pmwh3 setting ENCRYPT_EMAIL_PASS):
+#   PLAIN -> ENCRYPT_EMAIL_PASS = N (default)
+#   CRYPT -> ENCRYPT_EMAIL_PASS = Y (PHP crypt() hashes)
 
 sql_driver = mysql
 mysql pmwh3 {
-  user = DB_USER
-  password = DB_PASS
-  dbname = PMWH3_DB
+  host = @DB_HOST@
+  user = @DB_USER@
+  password = @DB_PASS@
+  dbname = @DB_NAME@
 }
 
 passdb sql {
   default_password_scheme = PLAIN
-  query = SELECT password AS userdb_password, uid AS userdb_uid, gid AS userdb_gid, \
-          CONCAT(quota_bytes,'B') AS userdb_quota_storage_size \
+  query = SELECT password, uid AS userdb_uid, gid AS userdb_gid, \
+          CONCAT(quota_bytes, 'B') AS userdb_quota_storage_size \
           FROM pmwh3_mail_accounts WHERE email = '%{user}' AND active = 'Y'
 }
 
 userdb sql {
   query = SELECT u.uid, u.gid, \
-    CONCAT('/vhome/vmail/', SUBSTRING_INDEX(u.email,'@',-1),'/',SUBSTRING_INDEX(u.email,'@',1)) AS home, \
+    CONCAT('@VMAIL_HOME@/', SUBSTRING_INDEX(u.email,'@',-1),'/',SUBSTRING_INDEX(u.email,'@',1)) AS home, \
     CONCAT(u.homedir,'/',u.maildir) AS mail, \
     CONCAT(u.quota_bytes,'B') AS quota_storage_size, \
     GROUP_CONCAT(DISTINCT a.source) AS aliases \
-  FROM pmwh3_mail_accounts u \
-  LEFT JOIN pmwh3_mail_forwardings a \
-       ON FIND_IN_SET(LOWER(u.email), REPLACE(LOWER(a.destination), ' ', '')) > 0 \
-  WHERE LOWER(u.email) = LOWER('%{user}') AND u.active = 'Y' GROUP BY u.email;
+    FROM pmwh3_mail_accounts u \
+    LEFT JOIN pmwh3_mail_forwardings a \
+      ON FIND_IN_SET(LOWER(u.email), REPLACE(LOWER(a.destination), ' ', '')) > 0 \
+    WHERE LOWER(u.email) = LOWER('%{user}') AND u.active = 'Y' GROUP BY u.email;
 
   iterate_query = SELECT email AS username FROM pmwh3_mail_accounts WHERE active = 'Y';
 }

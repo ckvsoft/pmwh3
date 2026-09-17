@@ -2,7 +2,7 @@
 
 PHP-basiertes Hosting-Control-Panel als Cevian-Modul. Verwaltet Customers, Domains, Email-Konten, Datenbanken, FTP-Accounts und liefert Reseller-Hierarchie mit Quotas und Paketen.
 
-**Aktuelle Version: **3.0.82**
+**Aktuelle Version:** 3.0.82
 
 > Hinweis: Die alte Setup-Check-Doku wurde nach `SYSCHECK.md` umbenannt.
 
@@ -125,12 +125,11 @@ ist der bislang etablierte Sonderfall; mail/web/ftp folgen demselben
 Muster.)
 
 **Mail-Kontingent:** Zuweisen liegt als `quota_bytes` in
-`pmwh3_mail_accounts`; der VERBRAUCH (`used_bytes`/`used_messages`)
-wird vom Quota-Treiber des Mail-Systems direkt in dieselbe Zeile
-geschrieben — **keine separate Vendor-Tabelle** (früher
-`dovecot_quota`). Wo der Adapter einen Live-Endpoint unterstützt
-(z.B. {dovecot} doveadm HTTP API), zeigt pmwh3 die Live-Werte mit
-Fallback auf die Row-Spalten; Templates: `contrib/`.
+`pmwh3_mail_accounts`; der VERBRAUCH wird von Dovecots
+empfohlenem `count`-Treiber verwaltet, pmwh3 liest die aktuellen
+Werte live über die doveadm HTTP API (mit Fallback auf die
+Row-Spalten `used_bytes`/`used_messages`) — **keine separate
+Vendor-Tabelle** (früher `dovecot_quota`). Templates: `contrib/`.
 
 - **Fehlt ein Node** (z.B. `mail`), fällt der betreffende Adapter auf
   die pmwh3-Modul-DB zurück (fresh-install default: alles in einer DB).
@@ -445,13 +444,11 @@ Settings-Werte sind gruppiert (`GROUP_*`-Konstanten) und werden über `LazyConfi
 
 ## Permissions
 
-ACL läuft über `pmwh3_acl_objects` (Permission-Namen) und `pmwh3_acl_permissions` (Grants pro `cgrp`). Standard-Gruppen:
-
-| gid | Name |
-|-----|------|
-| 1 | admin (Vollzugriff) |
-| 2 | customer |
-| 3 | reseller |
+ACL läuft über die Framework-Tabellen `permissions` / `role_perms` /
+`user_roles` (Modul-Key `pmwh3`, Prefix `pmwh3.`). Der Installer
+legt die Rollen `pmwh3` (Eltern-Rolle) sowie `Ultimate Admin` (alle
+Berechtigungen), `Reseller` und `Customer` an; Gruppen-Berechtigungen
+für Kunden werden in den Customer-/Group-Ansichten verwaltet.
 
 `CustomerUtil::hasAccess($permission)` prüft den eingeloggten User.
 
@@ -474,25 +471,23 @@ Setup über `inc/sql/0.0.0_baseline.sql`. Wichtige Tabellen:
 
 | Tabelle | Inhalt |
 |---|---|
-| `pmwh3_customers` | Customer-Stammdaten + Quota-IST-Werte |
+| `pmwh3_customers` | Customer-Stammdaten (Quota-Werte in `pmwh3_countings`) |
 | `pmwh3_packages` | Hosting-Pakete (Quota-Templates) |
-| `pmwh3_groups` | Customer-Gruppen |
-| `pmwh3_acl_objects` / `pmwh3_acl_permissions` / `pmwh3_acl_groups` | RBAC |
 | `pmwh3_menu` | Sidebar-Menüstruktur |
 | `pmwh3_configuration` | Settings (key/value, Schema in PHP) |
 | `pmwh3_messages` | Customer-Nachrichten |
-| `pmwh3_activity` | Active-Sessions-Liste (BBS-Style) |
-| `pmwh3_domains` / `_subdomains` / `_subdomainaliases` | Domain-Hierarchie |
+| `pmwh3_activity` / `pmwh3_activity_log` | Session-Liste + Änderungs-Historie |
+| `pmwh3_domains` | Domain-Verwaltung |
+| `pmwh3_web_subdomains` | Web-Subdomains/Vhosts (mode/ip/alias_of/ssl_cert/data) |
+| `pmwh3_mail_accounts` / `pmwh3_mail_forwardings` | Mail-Stack (Postfächer, Forwards, Catchall) |
+| `pmwh3_ftp_accounts` / `_groups` / `_quota_limits` / `_quota_tallies` | FTP-Stack |
 | `pmwh3_traffic` | Traffic-Aggregation |
 
 Nicht verwaltet (gehören anderer Software):
 
-- (`pmwh3_mail_*`, `pmwh3_web_*`, `pmwh3_ftp_*` sind ab **3.0.82**
-        die pmwh3-Konsolidiertheit und im baseline GESETZ — die
-        vendor-mirror-Tabellen werden nicht mehr auch angelegt;
-        installationen mit `postfix_users/…` migrieren via
-        `3.0.82.sql`)
-- `mydns_*`, `pdns_*`, `amavis_*`
+- `postfix_transport` — Mail-Stack-Routing (Templates + DDL unter `contrib/postfix/`)
+- `mydns_*`, `pdns_*` — leben in der DNS-DB (`dns.database`-Node);
+  Schemata liegen als Snapshots unter `contrib/sql/`
 
 ---
 
@@ -506,17 +501,12 @@ pmwh3 stellt einen User-Provider unter `utils/multilogin/userprovider.php` berei
 
 Versionsnummer in `config/version.php` (`Version::VERSION`). Bei jeder neuen Migrations-Datei `inc/sql/<version>.sql` muss diese hochgezogen werden, sonst läuft die Migration nicht.
 
-Dateien (Stand 3.0.81):
-
-```
-inc/sql/0.0.0_baseline.sql   Komplettes Schema + Permissions + Default-Menüeinträge
-inc/sql/3.0.7.sql            Legacy-Menülink-Cleanup (`&view=` -> Cevian-Style)
-inc/sql/3.0.8.sql            Activity-Tabelle für Session list
-inc/sql/3.0.9.sql            Permissions/Menü-Einträge für Packages/Groups/Messages
-inc/sql/3.0.10.sql           Mirror der baseline-Seeds für bestehende Installs
-inc/sql/3.0.11.sql           Legacy-Menülinks (UPDATE auf neue CRUD-URLs, Linkstring)
-inc/sql/3.0.12.sql           Bessere Match-Logik via (name, box) PK
-```
+Frisch-Installationen spielen **nur die Baseline**
+(`inc/sql/0.0.0_baseline.sql`) — die Legacy-Kette wird als erledigt
+gestempelt (Updater-Fresh-Path, Cevian ≥ 0.18.4). Ab der ersten
+git-Release-Version (3.0.82) kommen Änderungen als inkrementelle
+Migrations `inc/sql/<version>.sql` dazu; die Pre-Release-Dateien
+(3.0.7–3.0.81) liegen nicht im Repo.
 
 Wichtig: pmwh3 hat eine eigene DB. Migrations werden seit Cevian `0.18.3` korrekt in die pmwh3-DB ausgeführt (Updater-Bugfix). Tabellennamen daher **ohne** `pmwh3.`-Prefix.
 

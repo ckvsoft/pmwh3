@@ -1,6 +1,12 @@
-# postfix mailbox map -> pmwh3 consolidated table
-user = DB_USER
-password = DB_PASS
-dbname = PMWH3_DB
-hosts = mariadb
+# postfix mysql map -> pmwh3 consolidated mail tables
+#
+# wired in main.cf as:
+#   virtual_mailbox_maps = proxy:mysql:/etc/postfix/sql/mysql-virtual_mailbox_maps.cf
+# returns the maildir path for a hosted mailbox (active rows only)
+#
+# Variables: @DB_HOST@ @DB_NAME@ @DB_USER@ @DB_PASS@
+user = @DB_USER@
+password = @DB_PASS@
+dbname = @DB_NAME@
+hosts = @DB_HOST@
 query = SELECT maildir FROM pmwh3_mail_accounts WHERE email='%s' AND active = 'Y'

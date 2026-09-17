@@ -1,0 +1,16 @@
+# postfix mysql map -> mail stack routing table (NOT pmwh3-owned)
+#
+# wired in main.cf as (2nd map of transport_maps):
+#   transport_maps =
+#       proxy:mysql:/etc/postfix/sql/mysql-virtual_transport_maps.cf
+#       proxy:mysql:/etc/postfix/sql/mysql-backup_transport_maps.cf
+# domains THIS server is only the BACKUP MX for (foreign IP in
+# master_destination) -> relay to the master. %% is the escaped
+# literal % for postfix.
+#
+# Variables: @DB_HOST@ @DB_NAME@ @DB_USER@ @DB_PASS@ @MASTER_IP@
+user = @DB_USER@
+password = @DB_PASS@
+dbname = @DB_NAME@
+hosts = @DB_HOST@
+query = SELECT master_destination FROM postfix_transport WHERE domain='%s' AND master_destination NOT LIKE '%%[@MASTER_IP@]%%'
