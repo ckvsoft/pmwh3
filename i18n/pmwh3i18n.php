@@ -20,8 +20,12 @@ class Pmwh3I18n extends \ckvsoft\mvc\Config
                 $lang = $language;
             } elseif (!empty(self::$sharedDb)) {
                 try {
+                    // NO db-name prefix: the sharedDb connection already
+                    // points at the pmwh3 module database -- a hardcoded
+                    // 'pmwh3.' schema name fails on every deployment
+                    // whose module DB is not literally named 'pmwh3'.
                     $row = self::$sharedDb->selectOne(
-                            "SELECT configuration_value FROM pmwh3.pmwh3_configuration WHERE configuration_key = :key LIMIT 1",
+                            "SELECT configuration_value FROM pmwh3_configuration WHERE configuration_key = :key LIMIT 1",
                             ['key' => 'DEFAULT_LANGUAGE']
                     );
                     $lang = ($row['configuration_value'] ?? null) ?: null;
@@ -32,7 +36,7 @@ class Pmwh3I18n extends \ckvsoft\mvc\Config
             }
 
             if ($lang === null) {
-                $lang = 'en_US';
+                $lang = 'en_GB';
             }
         }
 
@@ -113,7 +117,7 @@ class Pmwh3I18n extends \ckvsoft\mvc\Config
     public static function getCurrentLang(): string
     {
         if (self::$currentLang === null) {
-            return 'en_US';
+            return 'en_GB';
         }
 
         // Aktuell aktive Locale vom System holen

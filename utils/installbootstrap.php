@@ -1313,6 +1313,7 @@ class InstallBootstrap
                     'email'    => '',
                     'creator'  => 0,
                     'password' => (string) $in['admin_password'],
+                    'language' => (string) \pmwh3\Config\LazyConfig::get('DEFAULT_LANGUAGE', 'en_GB'),
                 ],
                 $limitMap);
         if ($cid <= 0) {
