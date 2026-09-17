@@ -17,13 +17,13 @@ Before running, the pre-condition is:
 Expected starting state of pmwh3_customers:
 ```
 cid=1  admin   groups=1   (was pointing at old pmwh3_groups.gid=1)
-cid=23 ckvsoft groups=3   (was pointing at old pmwh3_groups.gid=3)
+cid=<CID> <CUSTOMER> groups=3   (was pointing at old pmwh3_groups.gid=3)
 ```
 
 After this migration:
 ```
 cid=1  admin   role_id=13  (points at roles.id=13 = Ultimate Admin)
-cid=23 ckvsoft role_id=17  (points at roles.id=17 = Customer)
+cid=<CID> <CUSTOMER> role_id=17  (points at roles.id=17 = Customer)
 ```
 
 ## SQL

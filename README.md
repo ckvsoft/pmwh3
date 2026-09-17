@@ -1,509 +1,234 @@
-# pmwh3 — PHP MyWebHosting Control Panel
+# pmwh3 — PHP myWebHosting Control Panel
 
-PHP-basiertes Hosting-Control-Panel als Cevian-Modul. Verwaltet Customers, Domains, Email-Konten, Datenbanken, FTP-Accounts und liefert Reseller-Hierarchie mit Quotas und Paketen.
+A PHP hosting control panel implemented as a **Cevian framework module**.
+It manages customers, domains, email accounts, databases, FTP accounts
+and both reseller hierarchies and per-customer quotas/packages.
 
-Aktuelle Version: **3.0.82**
+Current version: **3.0.82** · German documentation: [`README_de.md`](README_de.md)
 
-> Hinweis: Die alte Setup-Check-Doku wurde nach `SYSCHECK.md` umbenannt.
+> The old on-board setup-check documentation lives in `SYSCHECK.md`.
 
 ---
 
+## Requirements
+
+- **Cevian ≥ 0.18.3** (prerequisite — pmwh3 is a Cevian *module*)
+  - `Config::moduleDb()` / `Config::cachedDatabase()` (module DB node API)
+  - `Database::execDdl/tableExists/...` helpers
+  - Updater **fresh-install path** (baseline-only) + `SORT_NATURAL`
+    migration ordering (0.18.4)
+- PHP ≥ 8.0 with `pdo`, `pdo_mysql`, `mbstring` (see `SYSCHECK.md`)
+- MariaDB / MySQL ≥ 10.x
+- One MySQL/MariaDB database for the module (e.g. `pmwh3`); optional
+  separate databases per service (see *Service databases* below).
+
 ---
 
-## Installation (Frisch-Install, ein Befehl → Wizard)
+## Installation (fresh install: copy + open URL)
 
-1. **Cevian installiert haben** (Voraussetzung!) — das pmwh3-Modul lebt
-   im Cevian-Release-Tree:
+1. **Have Cevian running** (prerequisite). Copy the module into the
+   Cevian tree:
    ```bash
    cp -r pmwh3 /path/to/cevian/modules/
    ```
-   (`/path/to/cevian` ist dabei der Cevian-Tree, z.B.
-   `/vhome/<host>/<vhost>/service/cevian`).
 
-2. **URL im Browser öffnen** — der erste pmwh3-Seitenaufruf leitet
-   auf `pmwh3/install` um (AuthMiddleware-Gate), wenn
-   - die `module.json` noch Platzhalter-Creds trägt, oder
-   - die pmwh3-DB-Tabellen (Baseline) noch fehlen.
+2. **Open the site URL** — the first pmwh3 page load redirects to
+   `pmwh3/install` whenever the all-in-one installer state is missing
+   (placeholder credentials in `module.json` or absent tables).
 
-3. **Install-Wizard** (`pmwh3/install`) ausfüllen:
-   - Modul-DB-Credentials (Host / DB-Name / User / Pass — wird in
-     `modules/pmwh3/module.json` geschrieben, Felder dort aus
-     `DB_HOST` / `DB_NAME` / `DB_USER` / `DB_PASS` Platzhaltern
-     ersetzt)
-   - DNS-DB: `same as module DB`-Checkbox (fresh install) ODER
-     eigene `dns.database`-Node-Values (bestehende pdns-DB mit
-     Zonen, z.B. Trennung wie in der Live-Umgebung)
-   - **admin-Kennwort** — das Wizard legt den Ultimate-Admin-Kunden
-     an (limits alle -1)
-   - POST → Baseline (0.0.0_baseline.sql) als FRESH-INSTALL
-     (nur die Baseline; Migrations-Kette wird als bereinigt
-     gestempelt — kein Legacy-ACL-Abort), RBAC-Rollen pmwh3 /
-     Ultimate Admin / Reseller / Customer, 95 Berechtigungs-Slots,
-     `pmwh3_mail_*/pmwh3_web_*/pmwh3_ftp_*`-Konsolidierungstabelle —
-     alles automatisch.
+3. **Fill the install wizard** (`pmwh3/install`):
+   - module DB credentials (host / name / user / pass) — written to
+     `modules/pmwh3/module.json`
+   - DNS database: `same as module DB` checkbox, or separate
+     `dns.database` values (existing pdns/MyDNS zone database)
+   - admin password → creates the Ultimate-Admin customer (all
+     limits `-1`)
+   - POST → baseline replay (`0.0.0_baseline.sql`, **fresh installs
+     replay only the baseline** — the migration chain is stamped as
+     applied), RBAC roles `pmwh3 / Ultimate Admin / Reseller /
+     Customer`, 95 permission keys, consolidated
+     `pmwh3_mail_* / pmwh3_web_* / pmwh3_ftp_*` stores — all automatic.
 
-4. **Login** unter `pmwh3/login` als `admin` bzw. eigener Kunde.
+4. **Log in** (`pmwh3/login`) as `admin`.
 
-> Der Installer ist auch **idempotent** — Re-Run fest, kein zweites
-> Admin-Insert, keine doppelten Berechtigungen (0 new keys beim Re-
-> run). Bei fehlgeschlagenem ersten Versuch einfach aufrufen.
-
-Alles weitere (Formularwerte, Datei-Layout) in
-`/modules/pmwh3/config/` und `SYSCHECK.md`.
+The installer is **idempotent** — re-running is safe (no duplicate
+admin row, no duplicated permission grants).
 
 ---
 
-## Voraussetzungen
+## Service databases (mail / web / ftp / dns)
 
-- **Cevian** ≥ `0.18.3` (Voraussetzung) — pmwh3 ist ein Cevian-Modul
-  und braucht:
-  - `Config::moduleDb($module, $configPath)` + `Config::cachedDatabase`
-    (0.18.3, DB-Architektur)
-  - `Database::execDdl/tableExists/...` Helfer (0.18.3)
-  - den **Updater Fresh-Path** (nur Baseline für fresh installs)
-    + `SORT_NATURAL`-Migrations-Ordnung (0.18.4)
-- PHP ≥ 8.0 mit `pdo`, `pdo_mysql`, `mbstring` (siehe `SYSCHECK.md`)
-- MariaDB / MySQL ≥ 10.x (MariaDB 10.4+ tested)
-- Eigene MySQL/MariaDB-Datenbank (`pmwh3`) — und optional mehr
-  siehe Service-DB unten
+pmwh3 keeps **one consolidated table family per service**:
 
----
+| Service | Tables (in the service DB) |
+|---|---|
+| Mail | `pmwh3_mail_accounts` (email, login, password, name, uid/gid, homedir, maildir, `quota_bytes`, `used_bytes`, `used_messages`, `active`) · `pmwh3_mail_forwardings` (source/destination; catch-all is a row with source `@domain`) |
+| Web | `pmwh3_web_subdomains` (subdomain, domain, customer, path, `mode` = directory/ip/alias, ip, alias_of, ssl_cert, custom, adapter, `data`) |
+| FTP | `pmwh3_ftp_accounts` · `pmwh3_ftp_groups` · `pmwh3_ftp_quota_limits` · `pmwh3_ftp_quota_tallies` |
+| DNS | adapter-owned (`pdns_*` / `mydns_*`) in their **own database** via the `dns.database` node — the exception by design |
 
-## Service-DBs (mail / web / ftp / dns)
+There are **no vendor-mirror tables** in the module database: the
+daemons (postfix/dovecot/proftpd) read the consolidated `pmwh3_*`
+tables with their regular SQL configuration. Templates live in
+[`contrib/`](contrib/).
 
-`module.json` kennt bis zu vier Datenbank-Zugänge. Pro SERVICE gilt:
-**eine konsolidierte pmwh3_*-Tabellenfamilie** — keine ttrennung
-per vendor (postfix_users etc. gehören DEM Postfix, die müssen
-nicht in's pmwh3-DB). Die Daemon-Configs (postfix/dovecot/proftpd)
-lesen die pmwh3_*-Tabellen direkt aus ihrer DB — mit den
-verhaltens-kompatiblen Templates unter `contrib/`.
+### Module configuration (`module.json`)
+
+Standard fresh install — everything in one database:
 
 ```json
 {
     "name": "pmwh3",
     "version": "<VERSION>",
     "core": false,
-    "database":   { "type": "mysql", "host": "mariadb", "name": "pmwh3",
-                    "user": "DB_USER", "pass": "DB_PASS" },
+    "database": {
+        "type": "mysql", "host": "mariadb", "name": "pmwh3",
+        "user": "DB_USER", "pass": "DB_PASS"
+    },
     "dns": {
         "table_prefix": "",
-        "database": { "type": "mysql", "host": "mariadb",
-                      "name": "pdns", "user": "DNS_USER", "pass": "DNS_PASS" }
-    },
-    "mail": { "database": { "type": "mysql", "host": "mariadb",
-              "name": "pmwh3", "user": "DB_USER", "pass": "DB_PASS" } },
-    "web":  { "database": { "type": "mysql", "host": "mariadb",
-              "name": "pmwh3", "user": "DB_USER", "pass": "DB_PASS" } },
-    "ftp":  { "database": { "type": "mysql", "host": "mariadb",
-              "name": "pmwh3", "user": "DB_USER", "pass": "DB_PASS" } }
+        "database": {
+            "type": "mysql", "host": "mariadb", "name": "pdns",
+            "user": "DNS_USER", "pass": "DNS_PASS"
+        }
+    }
 }
 ```
 
-**Mail-Quota („Quota-Lies-Liegen"):** die Zuweisung liegt in
-`pmwh3_mail_accounts.quota_bytes`; der VERBRAUCH wird von Dovecot's
-dict-Quota-Backend direkt in dieselbe Zeile geschrieben (`used_bytes`
-/ `used_messages`) — **keine separate `dovecot_quota`-Tabelle**.
-pmwh3 zeigt Verb: doveadm HTTP API (live) mit dict-Fallback auf die
-Row-Spalten;  Templates: `contrib/dovecot/`.
-
-- **Fehlt ein Node** (z.B. `mail`), fällt der betreffende Adapter auf
-  die pmwh3-Modul-DB zurück (fresh-install default: alles in einer DB).
-  die pmwh3-Modul-DB zurück (fresh-install default: alles in einer DB).
-- Ist ein Node vorhanden aber **unvollständig** (type/host/name/user/
-  pass leer), ist das ein harter Fehler (kein Silent-Fallback).
-- Im Install-Wizard können die Nodes,
-  (`mail.database`/`web.database`/`ftp.database`), auch später
-  manuell in `module.json` gesetzt werden — die Daemon-Configs
-  (postfix/dovecot/proftpd) müssen in demselben Umzug die pmwh3_*-
-  Tabellen lesen (sonst weiß die Mailbox consumer nichts von pmwh3-
-  Neu-Schreibungen — die Migration 3.0.82 erledigt das pmwh3-interne
-  Umbenennen; die Daemon-Configs umstellen ist ein manuelles
-  Deploy-Schritt, Templates unter `contrib/`).
-
----
-
-## Konfiguration
-
-`module.json` definiert die Modul-DB und optional Adapter-Konfigurationen
-(für den Modul-DB-block -- die Service-Nodes siehe oben):
+Separate service databases — only if a service truly needs its own
+database (e.g. a pre-existing mail stack database). A missing node
+falls back to the module database; an incomplete node is a hard
+error:
 
 ```json
 {
-    "database":   { "type": "mysql", "host": "mariadb",
-                    "name": "pmwh3",
-                    "user": "DB_USER", "pass": "DB_PASS" }
+    "mail": { "database": { "type": "mysql", "host": "mariadb",
+              "name": "mailstack", "user": "MAIL_USER", "pass": "MAIL_PASS" } },
+    "web":  { "database": { "type": "mysql", "host": "mariadb",
+              "name": "webstack", "user": "...", "pass": "..." } },
+    "ftp":  { "database": { "type": "mysql", "host": "mariadb",
+              "name": "ftpstack", "user": "FTP_USER", "pass": "FTP_PASS" } }
 }
 ```
 
----
-
-## Architektur
-
-### Schichten
-
-```
-controller/   HTTP-Routing, Permission-Gates, View-Rendering
-   └─ delegiert Business-Operationen an utils/*Manager
-model/        Daten für Views; dünne Wrapper um Manager + UI-spezifische Queries
-utils/        Stateless Business Logic (Manager, Util, Adapter)
-   └─ aufrufbar aus Controller, Scripts, anderen Modulen
-view/         Reine Präsentation. Kein DB-Zugriff, keine Geschäftslogik.
-config/       Modul-Konfiguration (Version, Settings-Schema, Lazy-Config)
-helper/       View-/Menu-Helfer
-i18n/         Lokalisierung (Pmwh3I18n)
-scripts/      CLI-Tools (z.B. Migration aus pmwh2)
-```
-
-### Hauptklassen
-
-| Klasse | Aufgabe |
-|---|---|
-| `CustomerManager` | Customer-CRUD: getById/getByName/listAll/listVisible/create/update/delete/changePassword/verifyPassword |
-| `CustomerUtil` | ACL/Hierarchie: hasAccess, getCustomerHierarchy, getCustomerNameById |
-| `PackageManager` | Hosting-Pakete CRUD |
-| `GroupManager` | Customer-Gruppen CRUD |
-| `MessageManager` | Customer-Nachrichten (inboxFor, sentBy, send, markRead, delete) |
-| `MailManager` | Email-Konten / Forwards / Catchalls (delegiert an Mail-Adapter) |
-| `DnsManager` | DNS-Records (delegiert an DNS-Adapter, z.B. PowerDNS) |
-| `FsManager` | Verzeichnisse anlegen/löschen (delegiert an FS-Adapter) |
-| `CountingUtil` | Quota-Berechnung pro Customer |
-| `SizeConverter` | Bytes/MB/GB-Konvertierung |
-| `AuthMiddleware` | Login-Check + ActivityTracker-Hook |
-| `ActivityTracker` | Schreibt `pmwh3_activity` bei jedem authenticated Request |
-| `AdapterRegistry` | Discovery für Mail/DNS/FS-Adapter |
-
-### Adapter-Pattern
-
-Mail-, DNS- und FS-Operationen sind über Adapter abstrahiert:
-
-```
-utils/mail/   MailAdapterInterface  +  z.B. PostfixAdapter, ExchangeAdapter
-utils/dns/    DnsAdapterInterface   +  z.B. PdnsAdapter, MydnsAdapter
-utils/fs/     FsAdapterInterface    +  LocalFsAdapter, RemoteFsAdapter
-```
-
-Welcher Adapter aktiv ist, steuert die Options-UI bzw. die
-`pmwh3_configuration`-Tabelle (`MAIL_TYPE`, `DNS_TYPE`, `FS_TYPE`).
-In `module.json` stehen nur die Verbindungs-Daten zu DNS / Mail
-(`dns.database`, `dns.table_prefix`, ...).
-
-### Einen neuen DNS-Adapter schreiben
-
-Kurzreferenz für weitere Backends (BIND/file, Cloud-APIs, weitere
-SQL-Schemata wie MyDNS, ...). Datei nach `modules/pmwh3/utils/dns/`
-legen — Discovery (`AdapterRegistry::classes` via `DnsManager`) findet
-alle nicht-abstract Klassen, die `DnsAdapterInterface` implementieren.
-
-```php
-<?php
-// modules/pmwh3/utils/dns/MyBackendAdapter.php
-namespace pmwh3\Utils\Dns;
-
-class MyBackendAdapter extends AbstractDnsAdapter
-{
-    public static function getKey(): string  { return 'mybackend'; }   // = DNS_TYPE Wert
-    public static function getName(): string { return 'MyBackend'; }    // Dropdown-Label
-
-    public static function isAvailable(): bool {
-        // z.B. Service/Schema-Erkennung; false entfernt den Adapter
-        // aus dem Dropdown (AdapterRegistry filtert).
-        return true;
-    }
-
-    public static function capabilities(): array {
-        // Nur wirklich gelieferte Flags deklarieren:
-        // 'zone-write', 'record-write', 'record-manage', 'dnssec', 'api'
-        return ['zone-write', 'record-write', 'record-manage'];
-    }
-
-    // Pflicht (abstract): lookupRecord(...)
-    public static function lookupRecord(string $domain, string $search): ?array {
-        // unified result shape: ['content' => ..., 'type' => 'A'|'CNAME']
-        return null;
-    }
-
-    // Optional überlagern: zoneExists, listRecords, getSoa,
-    // createZone, deleteZone, addRecord, updateRecord, deleteRecord,
-    // bumpSerial, dnssecAvailable, getDnssecStatus, listKeys,
-    // listMetadata, setKeyActive, deleteKey, secureZone, disableDnssec.
-}
-```
-
-Konventionen & Regeln:
-
-- **Statisch wie der Rest** (`getKey/getName/isAvailable`), keine
-  SQLite-DI-Details: DB via `AbstractDnsAdapter::initDb()` (löst
-  `dns.database` aus module.json über `Config::moduleDb()`; Prefix
-  automatisch aus `dns.table_prefix`).
-- **Capability-API vor UI:** Tab/Buttons nur render, wenn
-  `DnsManager::supports(<cap>)` true gibt (z.B. DNSSEC-Tab nur mit
-  'dnssec'). Never annehmen dass ein Stub silent überschrieben wird.
-- **Result-Shapes:** `listRecords` → `id,name,type,content,ttl,prio`;
-  `lookupRecord` → `content,type` (`data` wird an der Read-Site nur
-  kompatibilitätshalber gelesen, nicht mehr erzeugt).
-- **Kein `new Database`/`new PDO`** im Adapter — Framework-DB-API
-  nutzen: siehe `DB_ACCESS.md`.
-- Verify am Server-Teststack: Testzone Lifecycle gegen
-  `pdns-test`/Ziel-DB (nur klar benannte Testzonen), siehe AGENTS.md.
+(The DNS database is the established special case; mail/web/ftp
+follow the same node pattern — `dns` is the only one most
+installations actually need.)
 
 ---
 
-## Funktionsumfang
+## Mail quota model
 
-### Sektion General
-
-- **Overview** — System-Resourcen, Server-Info, Customer-Gruppen, pmwh3-Daten
-- **Password** — Eigenes Passwort ändern (verifizierter Wechsel mit altem Passwort)
-- **Traffic** — Traffic-Statistiken
-- **Messages** — interne Nachrichten (Inbox / Sent / Compose mit Customer-Autocomplete / Reply / Delete)
-- **Session list** — aktive Sessions der letzten 15 min, Admin kann Sessions kicken
-- **Packages** — Hosting-Pakete CRUD
-- **Groups** — Customer-Gruppen CRUD
-
-### Sektion Customer
-
-- Übersicht aller Customers (Hierarchie-gefiltert)
-- Edit/New mit Paket-Auswahl + JS-Auto-Fill der Limit-Felder
-- Passwort-Reset
-
-### Sektion Domain
-
-- Domain-Verwaltung mit Subdomains und Aliases
-- Whois-Info, DNS-Konfiguration
-
-### Sektion Email
-
-- Email-Konten, Forwards, Catchalls
-- **Filtering (Rspamd-Anbindung, Installationsübersicht)** — Details unten
-  unter „Rspamd-Filterung installieren (Schritt für Schritt)“
-  - per-Scope-Schwellen (`pmwh3_filtering`, Vererbung
-    @Mailbox → @Domain; leer = rspamd-Globals). Server-Global (`@.`)
-    ist bewusst NICHT pmwh3-editierbar (rspamd-globals.)
-  - **Whitelist / Blacklist** (`pmwh3_wblist`, W/B pro Scope)
-  - Scope-Dropdown mit existierenden Mailboxen (pmwh2-nah)
-
-### Rspamd-Filterung installieren (Schritt für Schritt)
-
-Nach dem pmwh3-Deploy (Migrations laufen automatisch) sind 3 Stellen
-einzustellen — pmwh3 bleibt die DB-Quelle, rspamd zieht alles per HTTP:
-
-**1. pmwh3-Options → Email (einmal speichern):**
-
-| Setting | Wert / Aufgabe |
-|---|---|
-| `FILTER_POLICY_TYPE` | `rspamd` (pmwh3-DB wird Quelle; `none` = nur UI) |
-| `RSPAMD_MAP_TOKEN` | Generieren z.B. `openssl rand -hex 32` — muss **identisch** am rspamd-Block und den Endpoints stehen |
-| `RSPAMD_API_URL` | Owner-API für pmwh3 (Learn/Stat), default `http://rspamd:11334` |
-| `RSPAMD_API_PASSWORD` | leer = keine Auth |
-| `RSPAMD_WORKER_URL` | für Scan-Hilfe aus pmwh3, default `http://rspamd:11333` |
-
-**2. rspamd `local.d` (am SELBEN Server wie pmwh3, einmalig):**
-
-   ⚠ `<TOKEN>` = Wert aus `RSPAMD_MAP_TOKEN` (beide Server gleich).
-
-`/srv/docker/rspamd/config/local.d/multimap.conf` (+APPEND):
-```
-PMWH3_WHITELIST {
-    type = "from";
-    prefilter = true;
-    action = "accept";
-    map = "https://webhost.example/cevian/pmwh3/filtering/map_wblist/W?key=<TOKEN>";
-}
-PMWH3_BLACKLIST {
-    type = "from";
-    prefilter = true;
-    action = "reject";
-    map = "https://webhost.example/cevian/pmwh3/filtering/map_wblist/B?key=<TOKEN>";
-}
-```
-
-`/srv/docker/rspamd/config/local.d/settings.conf` (+APPEND):
-```
-pmwh3_thresholds {
-    priority = medium;
-    external_map {
-        map {
-            external = true;
-            backend = "https://webhost.example/cevian/pmwh3/filtering/settings_query?key=<TOKEN>";
-            method = "body";          # !NOT "query"; query ersetzt ?key=
-            encode = "json";
-            timeout = 3.0;
-        }
-        selector = "id('rcpt');rcpts:addr.lower";   # exakt so, 'rcpt' währe invalide
-    }
-}
-```
-
-Danach einmal: `docker restart rspamd` (Settings.neuedatei laden)
-und Verify im Log zu einer echten eingehenden Mail an eine Domain mit
-Policy:
-```
-docker logs rspamd | grep "apply settings from external"
-```
-
-**3. Verifikation mit der pmwh3-UI:**
-
-- Email → Tab „Filtering"/„Whitelist/Blacklist“: Zeilen CRUD
-  anlegen (Scope selektierbar aus existierenden Mailboxen)
-- Andere Domains ohne Policy → rspamd-global (kein PMWH3-Einfluss) ✓
-- `@.` (Server-Grausamkeit) bleibt rspamd-`actions.conf` — in pmwh3
-  bewusst NICHT bearbeitbar.
-
-**ns2 (mailbackup / zweiter Standort):** wenn es einen zweiten rspamd
-gibt, in dessen local.d **denselben 2 Blöcke** einspielen; die URLs
-zeigen on HTTPS auf den pmwh3-Host (ns1 rspamd-DB erreicht ns2 nur-
-lesend über HTTPS) — Token, Settings — identisch ns1.
-
-**ns2 (mailbackup / Backup-MX):** der zweite rspamd bekommt die
-selben beiden Blöcke — URLs zeigen HTTPS auf den pmwh3-Host (ns1).
-Wenn ns1 down ist, fällt ns2 per Timeout auf die rspamd-Defaults
-zurück (tolerant, kein Mail-Verlust). Bei Backups gilt:
-`/srv/docker/rspamd/config/local.d/multimap.conf + settings.conf`
-am ns2 analog; Token identisch; danach `docker restart rspamd`.
-**Verify am ns2** (erfolgt 2026-09-14): `PMWH3_WHITELIST` fired,
-action=no action. Bereits études aux live.
-
-### Dovecot-Sieve Learning (beide MX)
-
-Die mailbox-„Junk-E-Mail"-Sieve-Regeln (`report-spam.sieve`,
-`report-ham.sieve`) + Wrapper `/vhome/etc/sbin/rspamc_learn.sh`
-lernt wie pmwh2 gewohnt über die rspamd HTTP API
-(POST `/learnspam` `/learnham`, Header `Deliver-To`). Wichtig:
-der Wrapper-Log muss auf einen vmail-schreibbaren Pfad zeigen
-(conf: `LOG_FILE=/vhome/vmail/sieve/rspamc_learn.log`,
-`chmod 666`) — sonst schreibt er stillschweigend ins Leere und man
-glaubt falsch, das Lernen würde nicht funktionieren.
-
-### Sektion Email (weitere Details)
-
-**PMWH2-Migration (Legacy-Instanzen am Server die noch amavis-Daten
-haben):** `scripts/migrate_amavis.php` (falls vorhanden, sonst DRY
-RUN-Planung) — pmwh2_amavis_policy/-users/-wblist → pmwh3_tables
-einlesen (ALT-Daten bleiben unangetastet; nur-wenn Flag
-`CUSTOMER_EMAIL_POLICY=Y` historische Werte migriert).
-- **Rspamd-API-Client** (`utils/rspamdmanager.php`, analog Dovecot-
-  rspamd-Integration): Controller-API (`/ping`, `/stat`, `/maps`,
-  `/learnspam`/`/learnham`/`/learnforget`) und Worker-Normal
-  (`POST /checkv2`) via curl; Settings `RSPAMD_API_URL`,
-  `RSPAMD_API_PASSWORD`, `RSPAMD_WORKER_URL`. Grundlage für
-  Learn-Buttons und die Verify-Checks (ohne rspamc, das nur im
-  rspamd-Container lebt).
-- **Whitelist / Blacklist** (`pmwh3_wblist`, W/B pro Scope):
-  multimap-Text via `pmwh3/filtering/map_wblist/{W|B}`
-  (multimap-Moduleintrag `prefilter = true`, `action = accept/reject`)
-- Server-Glue (einmalig, in rspamd `local.d`) siehe AGENTS.md
-- Global rspamd-Verhalten (greylist, subject, learning) bleibt
-  unverändert in rspamd-Configs.
-
-### Sektion Options
-
-Alle Module-Settings via Settings-Schema (`config/settingsschema.php`). Sektionen:
-
-- System / Web / Layout / Email / FTP / DNS
-- Databases / Customers / Errorlog / Domains
-- Messages / Confirmations / Sessions
-
-Settings-Werte sind gruppiert (`GROUP_*`-Konstanten) und werden über `LazyConfig::get($key, $default)` gelesen.
-
-### Sektion Tools
-
-- Errorlog-Viewer
-- Menu-Editor
-- Backup
-- News
-- Applications
-- Object Groups
-- Modules
+The assigned quota is `pmwh3_mail_accounts.quota_bytes`. **Usage**
+(`used_bytes` / `used_messages`) is written by the mail system's
+quota driver into the **same row** — there is no separate vendor
+quota table. Where the active adapter supports a live endpoint (the
+postfix adapter talks to Dovecot's doveadm HTTP API as a live
+source), pmwh3 shows live values with fallback to the row columns.
+The daemon-side glue (userdb/passdb queries, dict-quota mapping
+against `pmwh3_mail_accounts`) lives in
+[`contrib/`](contrib/).
 
 ---
 
-## Permissions
+## Contributing glue (`contrib/`)
 
-ACL läuft über `pmwh3_acl_objects` (Permission-Namen) und `pmwh3_acl_permissions` (Grants pro `cgrp`). Standard-Gruppen:
-
-| gid | Name |
-|-----|------|
-| 1 | admin (Vollzugriff) |
-| 2 | customer |
-| 3 | reseller |
-
-`CustomerUtil::hasAccess($permission)` prüft den eingeloggten User.
-
-Wichtige Permissions:
-
-- `view_customers`, `create_customer`, `edit_customer`, `delete_customer`
-- `view_customer_limits`
-- `view_domains`, `create_domain`, `edit_domain`, `delete_domain`
-- `view_email`, `create_email`, `edit_email`, `delete_email`
-- `view_packages`, `create_package`, `edit_package`, `delete_package`
-- `view_groups`, `create_group`, `edit_group`, `delete_group`
-- `send_message`, `delete_message`
-- `view_menu_*` (Menü-Sichtbarkeit)
+`contrib/` holds the **daemon-side configuration templates**
+(postfix SQL map files, dovecot auth/dict-quota snippets, rspamd
+multimap/settings blocks, apache mod_perl reader note). Placeholder
+names only — no credentials, no real domains. pmwh3 is the data
+source; the daemon configs consume the consolidated tables.
 
 ---
 
-## Datenbank-Schema
+## Architecture
 
-Setup über `inc/sql/0.0.0_baseline.sql`. Wichtige Tabellen:
+```
+controller/   HTTP routing, permission gates, view rendering
+   └─ delegates business operations to utils/*Manager
+model/        thin view data wrappers around managers
+utils/        stateless business logic (managers, utilities, adapters)
+view/         pure presentation, no DB access
+config/       module version, settings schema, lazy config
+helper/       view/menu helpers
+i18n/         localization
+contrib/      server-side daemon glue templates
+```
 
-| Tabelle | Inhalt |
-|---|---|
-| `pmwh3_customers` | Customer-Stammdaten + Quota-IST-Werte |
-| `pmwh3_packages` | Hosting-Pakete (Quota-Templates) |
-| `pmwh3_groups` | Customer-Gruppen |
-| `pmwh3_acl_objects` / `pmwh3_acl_permissions` / `pmwh3_acl_groups` | RBAC |
-| `pmwh3_menu` | Sidebar-Menüstruktur |
-| `pmwh3_configuration` | Settings (key/value, Schema in PHP) |
-| `pmwh3_messages` | Customer-Nachrichten |
-| `pmwh3_activity` | Active-Sessions-Liste (BBS-Style) |
-| `pmwh3_domains` / `_subdomains` / `_subdomainaliases` | Domain-Hierarchie |
-| `pmwh3_traffic` | Traffic-Aggregation |
+### Adapter pattern
 
-Nicht verwaltet (gehören anderer Software):
+Each service (dns, mail, web, ftp) has an adapter directory and
+interface; a new backend is a single class file:
 
-- (`pmwh3_mail_*`, `pmwh3_web_*`, `pmwh3_ftp_*` sind ab **3.0.82**
-        die pmwh3-Konsolidiertheit und im baseline GESETZ — die
-        vendor-mirror-Tabellen werden nicht mehr auch angelegt;
-        installationen mit `postfix_users/…` migrieren via
-        `3.0.82.sql`)
-- `mydns_*`, `pdns_*`, `amavis_*`
+- `utils/dns/` — `PdnsAdapter`, `MyDnsAdapter` (capability API +
+  required-table guard); DNS databases live in their **own**
+  databases (`dns.database` node).
+- `utils/mail/` — `PostfixAdapter` (postfix + dovecot) today.
+- `utils/web/` — `ApacheAdapter` today; an `NginxAdapter` renders
+  its own config from the same neutral `pmwh3_web_subdomains` rows.
+- `utils/` managers are the business facade (`MailManager`,
+  `WebManager`, `SubdomainManager`, `DnsManager`, `FtpManager`,
+  `CustomerManager`, ...); controllers stay thin.
+
+Which adapter is active is a module setting (`Options` UI → group):
+`DNS_TYPE`, `MAIL_TYPE`, `WEB_TYPE`, `FS_TYPE`, persisted in
+`pmwh3_configuration`; defaults for a fresh install are
+`pdns` / `postfix` / `apache`.
+
+See [`README_de.md`](README_de.md) for the full German documentation
+including the complete "new DNS adapter" walk-through, database
+schema tables and the Rspamd filtering cookbook.
 
 ---
 
-## MultiLogin-Integration
+## Scope (module sections)
 
-pmwh3 stellt einen User-Provider unter `utils/multilogin/userprovider.php` bereit. Der Framework-MultiLogin-Tool zeigt damit eine Spalte „pmwh3" und lässt Admin-User mit pmwh3-Customers verknüpfen. Provider delegiert an `CustomerManager::listAll()` etc.
+- **General** — overview, password change, traffic stats, internal
+  messages, session list (admin kick), packages, groups,
+  applications
+- **Customer** — hierarchy-filtered list, package auto-fill,
+  password reset, delete cascades
+- **Domain(s)** — domain management, subdomains (directory/ip/alias),
+  aliases, whois/DNS/DNSSEC tabs, per-domain activity + webspace
+- **Email** — mailboxes, forwards, catch-all, filtering (Rspamd),
+  live quota display
+- **FTP** — accounts + quota through the proftpd adapter
+- **Databases** — MySQL accounts per customer (manager/owner roles)
+- **Options** — settings groups with per-group permission slots
+- **Tools** — backup (PHP dump/restore), news, applications,
+  error log viewer
 
 ---
 
 ## Migrations
 
-Versionsnummer in `config/version.php` (`Version::VERSION`). Bei jeder neuen Migrations-Datei `inc/sql/<version>.sql` muss diese hochgezogen werden, sonst läuft die Migration nicht.
-
-Dateien (Stand 3.0.81):
-
-```
-inc/sql/0.0.0_baseline.sql   Komplettes Schema + Permissions + Default-Menüeinträge
-inc/sql/3.0.7.sql            Legacy-Menülink-Cleanup (`&view=` -> Cevian-Style)
-inc/sql/3.0.8.sql            Activity-Tabelle für Session list
-inc/sql/3.0.9.sql            Permissions/Menü-Einträge für Packages/Groups/Messages
-inc/sql/3.0.10.sql           Mirror der baseline-Seeds für bestehende Installs
-inc/sql/3.0.11.sql           Legacy-Menülinks (UPDATE auf neue CRUD-URLs, Linkstring)
-inc/sql/3.0.12.sql           Bessere Match-Logik via (name, box) PK
-```
-
-Wichtig: pmwh3 hat eine eigene DB. Migrations werden seit Cevian `0.18.3` korrekt in die pmwh3-DB ausgeführt (Updater-Bugfix). Tabellennamen daher **ohne** `pmwh3.`-Prefix.
+Fresh installs replay **only** the baseline (`0.0.0_baseline.sql`);
+from the first git release onward, changes ship as incremental
+migrations (`inc/sql/<version>.sql`). Pre-release internal files do
+not live in this repository.
 
 ---
 
-## Internationalisierung
+## RBAC / permissions
 
-UI-Strings via `__('...')`. Locales unter `i18n/locale/<lang>/LC_MESSAGES/pmwh3.po|.mo`.
-
-Aktive Sprache aus `Pmwh3I18n::getCurrentLang()`, Default aus Settings (`DEFAULT_LANGUAGE`).
+pmwh3 uses the framework `permissions` / `role_perms` / `user_roles`
+tables (module-keyed, prefix `pmwh3.`). The installer creates the
+roles `Ultimate Admin` (all permissions), `Reseller` and `Customer`.
+Group-permissions for customers are managed in the Customer/Group
+views.
 
 ---
 
-## Lizenz
+## Internationalization
 
-GPL-3.0 (wie pmwh2/Vorgänger). Siehe `LICENSE` im Framework-Repo.
+`gettext` catalogs per language under `i18n/locale/` (de_DE fully
+translated; other languages follow pmwh2 legacy state). Sources in
+`i18n/locale/po/`, compiled `.mo` files per locale; regenerating:
+`ctl-i18n/generate_pot.php` + `compile msgfmt` (see i18n/tools/).
+
+---
+
+## License
+
+GPL-2.0-or-later (same as the Cevian framework). Copyright © 2005-2026
+Christian Kvasny — see the copyright headers in the source files.
