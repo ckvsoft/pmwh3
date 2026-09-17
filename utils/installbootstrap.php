@@ -219,22 +219,32 @@ class InstallBootstrap
         $rows = [];
 
         // Cevian framework version (>= 0.18.3: moduleDb node API +
-        // baseline-only fresh path + Database DDL helpers)
-        $fwVersion = 'unknown';
-        $updateJson = rtrim(getcwd(), '/') . '/var/update.json';
-        if (is_file($updateJson)) {
-            $cfg = json_decode((string) file_get_contents($updateJson), true);
-            $fwVersion = (string) ($cfg['framework_updated_version'] ?? '0.0.0');
+        // baseline-only fresh path + Database DDL helpers). The
+        // library Version class is the RUNTIME truth (the update.json
+        // stamp may lag behind the shipped library on some installs).
+        $fwVersion = '';
+        try {
+            $fwVersion = (string) explode(' ',
+                    \ckvsoft\Version::version())[0]; // strip git-suffix
+        } catch (\Throwable $e) {
+            // fall through to the update.json stamp as a hint
         }
-        $fwOk = version_compare($fwVersion, '0.18.3', '>=');
+        if ($fwVersion === '') {
+            $updateJson = rtrim(getcwd(), '/') . '/var/update.json';
+            if (is_file($updateJson)) {
+                $cfg = json_decode((string) file_get_contents($updateJson), true);
+                $fwVersion = (string) ($cfg['framework_updated_version'] ?? '0.0.0');
+            }
+        }
+        // numeric part only for the compare (e.g. "0.18.3-260913")
+        $fwNum = preg_replace('/^(\d+(?:\.\d+)*).*$/', '$1', $fwVersion);
+        $fwOk  = version_compare($fwNum ?: '0.0.0', '0.18.3', '>=');
         $rows[] = [
             'label'  => 'Cevian >= 0.18.3',
             'ok'     => $fwOk,
             'detail' => $fwOk
-                    ? 'version found: ' . $fwVersion
-                    : ($fwVersion === '0.0.0'
-                        ? 'var/update.json missing or framework never updated'
-                        : 'version found: ' . $fwVersion . ' (too old)'),
+                    ? 'version found: ' . ($fwVersion !== '' ? $fwVersion : '?')
+                    : 'version found: ' . ($fwVersion !== '' ?: '?') . ' (too old)',
         ];
         if ($fwVersion === '0.0.0' && $fwOk === false) {
             // Fresh framework install without a stamped version: probe
