@@ -1,0 +1,4054 @@
+#: config/settingsschema.php:51
+msgid "System"
+msgstr ""
+
+#: config/settingsschema.php:52 view/domain/edit.php:30
+#: view/domain/new_domain.php:62 view/general/traffic_details.php:15
+#: view/general/traffic.php:10 view/general/traffic.php:45
+#: view/general/traffic.php:71
+msgid "Web"
+msgstr ""
+
+#: config/settingsschema.php:53 controller/email.php:32 controller/email.php:65
+#: controller/email.php:117 controller/email.php:121 controller/email.php:248
+#: controller/email.php:253 controller/email.php:266 controller/email.php:278
+#: controller/email.php:291 controller/email.php:303 controller/email.php:311
+#: controller/email.php:318 controller/email.php:331 controller/email.php:339
+#: controller/email.php:347 controller/email.php:362 controller/email.php:370
+#: controller/email.php:383 controller/email.php:391 controller/email.php:396
+#: controller/email.php:408 controller/email.php:413 controller/email.php:435
+#: controller/email.php:441 controller/email.php:447 controller/email.php:479
+#: controller/email.php:489 controller/email.php:514 controller/email.php:524
+#: controller/email.php:537 controller/email.php:546 controller/email.php:551
+#: controller/email.php:559 controller/email.php:574 controller/email.php:588
+#: controller/email.php:596 controller/email.php:605 controller/email.php:613
+#: controller/email.php:618 controller/email.php:623 view/customer/edit.php:34
+#: view/customer/overview.php:34 view/domain/details.php:13
+#: view/domain/details.php:531 view/email/details_email.php:29
+#: view/general/traffic_details.php:17 view/general/traffic.php:12
+#: view/general/traffic.php:47 view/general/traffic.php:73
+msgid "Email"
+msgstr ""
+
+#: config/settingsschema.php:54 controller/ftp.php:64 controller/ftp.php:88
+#: controller/ftp.php:122 controller/ftp.php:143 controller/ftp.php:152
+#: controller/ftp.php:156 controller/ftp.php:161 controller/ftp.php:198
+#: controller/ftp.php:216 controller/ftp.php:221 controller/ftp.php:240
+#: controller/ftp.php:247 controller/ftp.php:256 controller/ftp.php:268
+#: controller/ftp.php:274 controller/ftp.php:312 controller/ftp.php:320
+#: controller/ftp.php:324 controller/ftp.php:330 controller/ftp.php:339
+#: view/ftp/overview.php:8 view/general/traffic_details.php:16
+#: view/general/traffic.php:11 view/general/traffic.php:46
+#: view/general/traffic.php:72
+msgid "FTP"
+msgstr ""
+
+#: config/settingsschema.php:55 view/domain/details.php:10
+#: view/domain/edit.php:32 view/domain/new_domain.php:64
+msgid "DNS"
+msgstr ""
+
+#: config/settingsschema.php:56 controller/database.php:54
+#: controller/database.php:74 controller/database.php:80
+#: controller/database.php:99 controller/database.php:113
+#: controller/database.php:125 controller/database.php:136
+#: controller/database.php:140 controller/database.php:149
+#: controller/database.php:155 controller/database.php:161
+#: controller/database.php:165 controller/database.php:173
+#: controller/database.php:187 controller/database.php:203
+#: controller/database.php:209 controller/database.php:216
+#: controller/database.php:222 controller/database.php:231
+#: controller/database.php:239 controller/database.php:247
+#: controller/database.php:260 controller/database.php:266
+#: controller/database.php:276 controller/database.php:284
+#: controller/databases.php:54 controller/databases.php:138
+#: controller/databases.php:158 controller/databases.php:166
+#: controller/databases.php:175 controller/databases.php:224
+#: controller/databases.php:229 controller/databases.php:239
+#: controller/databases.php:248 controller/databases.php:271
+#: controller/databases.php:284 controller/databases.php:296
+#: controller/databases.php:302 controller/databases.php:315
+#: controller/databases.php:322 controller/databases.php:329
+#: controller/databases.php:338 controller/databases.php:342
+#: controller/databases.php:348 controller/databases.php:353
+#: controller/databases.php:362 controller/databases.php:370
+#: controller/databases.php:395 controller/databases.php:401
+#: controller/databases.php:409 controller/databases.php:413
+#: controller/databases.php:419 controller/databases.php:425
+#: controller/databases.php:433 controller/databases.php:445
+#: controller/databases.php:452 controller/databases.php:458
+#: view/customer/edit.php:113 view/database/overview.php:9
+#: view/databases/overview.php:18 view/package/edit.php:39
+msgid "Databases"
+msgstr ""
+
+#: config/settingsschema.php:57 view/customer/overview.php:32
+#: view/database/details.php:24 view/database/overview.php:25
+#: view/databases/details.php:24 view/databases/overview.php:37
+#: view/domain/details.php:45 view/domain/details.php:454
+#: view/domain/details.php:643 view/domain/details.php:672
+#: view/domain/details.php:702 view/domain/edit.php:22
+#: view/domain/new_domain.php:40 view/domain/overview_aliases.php:32
+#: view/domain/overview_domains.php:31 view/domain/overview_subdomains.php:31
+#: view/domain/picker.php:22 view/email/overview.php:30
+#: view/email/picker.php:21 view/general/sessions.php:44
+#: view/general/traffic.php:43 view/group/members.php:24
+msgid "Customer"
+msgstr ""
+
+#: config/settingsschema.php:58 controller/domain.php:179
+#: controller/domain.php:217 controller/domain.php:236
+#: controller/domain.php:240 controller/domain.php:244
+#: controller/domain.php:256 controller/domain.php:280
+#: controller/domain.php:286 controller/domain.php:295
+#: controller/domain.php:300 controller/domain.php:313
+#: controller/domain.php:318 controller/domain.php:358
+#: controller/domain.php:365 controller/domain.php:370
+#: controller/domain.php:381 controller/domain.php:396
+#: controller/domain.php:412 controller/domain.php:508
+#: controller/domain.php:522 controller/domain.php:534
+#: controller/domain.php:540 controller/domain.php:548
+#: controller/domain.php:572 controller/domain.php:579
+#: controller/domain.php:586 controller/domain.php:595
+#: controller/domain.php:604 controller/domain.php:613
+#: controller/domain.php:621 controller/domain.php:628
+#: controller/domain.php:637 controller/domain.php:645
+#: controller/domain.php:657 controller/domain.php:665
+#: controller/domain.php:672 controller/domain.php:688
+#: controller/domain.php:720 controller/domain.php:773
+#: controller/domain.php:803 controller/domain.php:851
+#: view/customer/edit.php:109 view/domain/overview_domains.php:14
+#: view/package/edit.php:35 view/package/overview.php:34
+msgid "Domains"
+msgstr ""
+
+#: config/settingsschema.php:59 controller/message.php:31
+#: controller/message.php:88 controller/message.php:139
+#: controller/message.php:145 controller/message.php:149
+#: controller/message.php:158 controller/message.php:162
+msgid "Messages"
+msgstr ""
+
+#: config/settingsschema.php:60
+msgid "Confirmations"
+msgstr ""
+
+#: config/settingsschema.php:61
+msgid "Session"
+msgstr ""
+
+#: config/settingsschema.php:62
+msgid "Layout"
+msgstr ""
+
+#: config/settingsschema.php:63
+msgid "Errorlog"
+msgstr ""
+
+#: controller/customer.php:23 controller/customer.php:54
+#: controller/customer.php:104 controller/customer.php:128
+#: controller/customer.php:141 controller/customer.php:144
+#: controller/customer.php:153 controller/customer.php:160
+#: controller/customer.php:184 controller/customer.php:195
+#: controller/customer.php:198 controller/customer.php:207
+#: controller/customer.php:213 controller/customer.php:218
+#: controller/customer.php:224 controller/customer.php:233
+#: controller/customer.php:239 controller/customer.php:253
+#: controller/customer.php:262 controller/customer.php:268
+#: view/customer/overview.php:17
+msgid "Customers"
+msgstr ""
+
+#: controller/customer.php:54 controller/customer.php:104
+#: controller/customer.php:128 controller/customer.php:153
+#: controller/customer.php:184 controller/customer.php:207
+#: controller/customer.php:233 controller/customer.php:253
+#: controller/database.php:54 controller/database.php:74
+#: controller/database.php:99 controller/database.php:113
+#: controller/database.php:149 controller/database.php:173
+#: controller/database.php:216 controller/database.php:247
+#: controller/databases.php:54 controller/databases.php:138
+#: controller/databases.php:175 controller/databases.php:248
+#: controller/databases.php:271 controller/databases.php:338
+#: controller/databases.php:370 controller/databases.php:409
+#: controller/databases.php:433 controller/domain.php:179
+#: controller/domain.php:217 controller/domain.php:295
+#: controller/domain.php:313 controller/domain.php:365
+#: controller/domain.php:396 controller/domain.php:508
+#: controller/domain.php:548 controller/domain.php:579
+#: controller/domain.php:595 controller/domain.php:621
+#: controller/domain.php:645 controller/domain.php:665
+#: controller/domain.php:688 controller/domain.php:720
+#: controller/domain.php:773 controller/domain.php:803
+#: controller/domain.php:851 controller/email.php:65 controller/email.php:121
+#: controller/email.php:248 controller/email.php:266 controller/email.php:311
+#: controller/email.php:331 controller/email.php:347 controller/email.php:370
+#: controller/email.php:383 controller/email.php:408 controller/email.php:435
+#: controller/email.php:479 controller/email.php:537 controller/email.php:559
+#: controller/email.php:588 controller/email.php:613
+#: controller/filtering.php:96 controller/ftp.php:64 controller/ftp.php:88
+#: controller/ftp.php:122 controller/ftp.php:143 controller/ftp.php:152
+#: controller/ftp.php:198 controller/ftp.php:256 controller/ftp.php:320
+#: controller/group.php:54 controller/group.php:74 controller/group.php:93
+#: controller/group.php:107 controller/group.php:127 controller/group.php:149
+#: controller/group.php:172 controller/group.php:204 controller/group.php:241
+#: controller/options.php:70 controller/options.php:106
+#: controller/options.php:142 controller/options.php:191
+#: controller/package.php:56 controller/package.php:75
+#: controller/package.php:90 controller/package.php:119
+#: controller/package.php:144 controller/package.php:166
+#: controller/tools.php:49 controller/tools.php:65 controller/tools.php:89
+#: controller/tools.php:116 controller/tools.php:141 controller/tools.php:185
+#: controller/tools.php:217 controller/tools.php:242 controller/tools.php:298
+#: controller/tools.php:314 controller/tools.php:335 controller/tools.php:350
+#: controller/tools.php:415 controller/tools.php:433 controller/tools.php:445
+#: controller/tools.php:462 controller/tools.php:471 controller/tools.php:492
+#: controller/tools.php:502 controller/tools.php:514 controller/tools.php:533
+#: controller/tools.php:545 controller/tools.php:562 controller/tools.php:571
+#: controller/tools.php:595
+msgid "Permission denied"
+msgstr ""
+
+#: controller/customer.php:142
+#, php-format
+msgid "Customer #%d created"
+msgstr ""
+
+#: controller/customer.php:144
+msgid "Could not create customer"
+msgstr ""
+
+#: controller/customer.php:160 controller/customer.php:239
+msgid "Customer not found"
+msgstr ""
+
+#: controller/customer.php:196
+#, php-format
+msgid "Customer #%d updated"
+msgstr ""
+
+#: controller/customer.php:198
+msgid "Could not save customer"
+msgstr ""
+
+#: controller/customer.php:214
+msgid "You cannot delete your own account"
+msgstr ""
+
+#: controller/customer.php:219
+msgid "The ultimate admin account (cid=1) cannot be deleted"
+msgstr ""
+
+#: controller/customer.php:225
+#, php-format
+msgid "Customer #%d deleted"
+msgstr ""
+
+#: controller/customer.php:226
+msgid "Could not delete customer"
+msgstr ""
+
+#: controller/customer.php:263
+msgid "Passwords do not match or are empty"
+msgstr ""
+
+#: controller/customer.php:269 controller/database.php:285
+#: controller/databases.php:459 controller/email.php:397
+msgid "Password changed"
+msgstr ""
+
+#: controller/customer.php:269 controller/email.php:397
+msgid "Could not change password"
+msgstr ""
+
+#: controller/database.php:26 controller/databases.php:26
+msgid "Database management"
+msgstr ""
+
+#: controller/database.php:80 controller/database.php:155
+#: controller/database.php:187 controller/databases.php:348
+msgid "Database not found"
+msgstr ""
+
+#: controller/database.php:126 controller/databases.php:285
+msgid "Please enter a database name"
+msgstr ""
+
+#: controller/database.php:141 controller/databases.php:330
+#, php-format
+msgid "Database \"%s\" created"
+msgstr ""
+
+#: controller/database.php:165 controller/databases.php:362
+msgid "Database deleted"
+msgstr ""
+
+#: controller/database.php:210 controller/databases.php:402
+msgid "Database user added"
+msgstr ""
+
+#: controller/database.php:222 controller/database.php:266
+msgid "User not found"
+msgstr ""
+
+#: controller/database.php:240 controller/databases.php:426
+msgid "Database user removed"
+msgstr ""
+
+#: controller/database.php:261 controller/databases.php:446
+msgid "Password cannot be empty"
+msgstr ""
+
+#: controller/databases.php:167
+msgid "Privilege revoked"
+msgstr ""
+
+#: controller/databases.php:167
+msgid "Privilege granted"
+msgstr ""
+
+#: controller/databases.php:202
+msgid "Please pick an existing user"
+msgstr ""
+
+#: controller/databases.php:210
+msgid "Username and password are required"
+msgstr ""
+
+#: controller/databases.php:230
+msgid "Database user assigned"
+msgstr ""
+
+#: controller/databases.php:240
+msgid "Database management is now on the overview page."
+msgstr ""
+
+#: controller/databases.php:297
+msgid "Please pick an owner"
+msgstr ""
+
+#: controller/databases.php:303
+msgid "Unknown owner"
+msgstr ""
+
+#: controller/databases.php:312
+msgid "Databases are not included in this customer's package."
+msgstr ""
+
+#: controller/databases.php:313
+#, php-format
+msgid "Database quota exhausted (%d/%d used)."
+msgstr ""
+
+#: controller/databases.php:342
+msgid "No database specified"
+msgstr ""
+
+#: controller/databases.php:413
+msgid "Missing database or user"
+msgstr ""
+
+#: controller/domain.php:31
+msgid "Domain management"
+msgstr ""
+
+#: controller/domain.php:236
+msgid "Domain name and customer are required"
+msgstr ""
+
+#: controller/domain.php:240
+msgid "Invalid domain name"
+msgstr ""
+
+#: controller/domain.php:245
+#, php-format
+msgid "Domain \"%s\" already exists"
+msgstr ""
+
+#: controller/domain.php:253
+msgid "Domains are not included in this customer's package."
+msgstr ""
+
+#: controller/domain.php:254
+#, php-format
+msgid "Domain quota exhausted (%d/%d used)."
+msgstr ""
+
+#: controller/domain.php:280
+msgid "Failed to create domain"
+msgstr ""
+
+#: controller/domain.php:287
+#, php-format
+msgid "Domain \"%s\" created"
+msgstr ""
+
+#: controller/domain.php:300 controller/domain.php:318
+#: controller/domain.php:370 controller/domain.php:412
+msgid "Domain not found"
+msgstr ""
+
+#: controller/domain.php:359
+#, php-format
+msgid "Domain \"%s\" updated"
+msgstr ""
+
+#: controller/domain.php:382
+#, php-format
+msgid "Domain \"%s\" deleted"
+msgstr ""
+
+#: controller/domain.php:522
+msgid "Record content required"
+msgstr ""
+
+#: controller/domain.php:534
+msgid "Failed to add DNS record"
+msgstr ""
+
+#: controller/domain.php:541
+#, php-format
+msgid "DNS record %s %s added"
+msgstr ""
+
+#: controller/domain.php:572
+msgid "DNS record updated"
+msgstr ""
+
+#: controller/domain.php:586
+msgid "DNS record deleted"
+msgstr ""
+
+#: controller/domain.php:605
+msgid "Zone secured. Submit the DS record to your registrar."
+msgstr ""
+
+#: controller/domain.php:608 controller/domain.php:632
+msgid "Failed"
+msgstr ""
+
+#: controller/domain.php:629
+msgid "DNSSEC disabled. Remove the DS record at your registrar."
+msgstr ""
+
+#: controller/domain.php:658
+msgid "Key activated"
+msgstr ""
+
+#: controller/domain.php:658
+msgid "Key deactivated"
+msgstr ""
+
+#: controller/domain.php:672
+msgid "Key deleted"
+msgstr ""
+
+#: controller/domain.php:748 controller/domain.php:754
+#: controller/domain.php:764 controller/domain.php:829
+#: controller/domain.php:839 controller/domain.php:843
+#: controller/domain.php:869 controller/domain.php:873
+#: view/customer/edit.php:110 view/domain/details.php:12
+#: view/domain/details.php:411 view/domain/overview_domains.php:55
+#: view/domain/overview_subdomains.php:14 view/package/edit.php:36
+#: view/package/overview.php:35
+msgid "Subdomains"
+msgstr ""
+
+#: controller/domain.php:755
+#, php-format
+msgid "Subdomain \"%s\" created"
+msgstr ""
+
+#: controller/domain.php:764
+msgid "Subdomain not found"
+msgstr ""
+
+#: controller/domain.php:829
+msgid "Unknown certificate"
+msgstr ""
+
+#: controller/domain.php:844
+#, php-format
+msgid "Subdomain \"%s\" updated"
+msgstr ""
+
+#: controller/domain.php:874
+#, php-format
+msgid "Subdomain \"%s\" deleted"
+msgstr ""
+
+#: controller/email.php:117
+#, php-format
+msgid "Unknown view: %s"
+msgstr ""
+
+#: controller/email.php:253 controller/email.php:413 controller/email.php:441
+#: controller/email.php:618 controller/filtering.php:85
+msgid "Pick a domain first"
+msgstr ""
+
+#: controller/email.php:278 controller/email.php:489 controller/email.php:546
+#: controller/email.php:596
+msgid "Missing fields"
+msgstr ""
+
+#: controller/email.php:288
+msgid "Email accounts are not included in this customer's package."
+msgstr ""
+
+#: controller/email.php:289
+#, php-format
+msgid "Email quota exhausted (%d/%d used)."
+msgstr ""
+
+#: controller/email.php:304
+msgid "Mailbox created"
+msgstr ""
+
+#: controller/email.php:304
+msgid "Could not create mailbox"
+msgstr ""
+
+#: controller/email.php:318
+msgid "Mailbox not found"
+msgstr ""
+
+#: controller/email.php:340
+msgid "Mailbox updated"
+msgstr ""
+
+#: controller/email.php:340
+msgid "Could not update mailbox"
+msgstr ""
+
+#: controller/email.php:363
+msgid "Mailbox deleted"
+msgstr ""
+
+#: controller/email.php:363
+msgid "Could not delete mailbox"
+msgstr ""
+
+#: controller/email.php:391
+msgid "Password empty"
+msgstr ""
+
+#: controller/email.php:447
+msgid "Forward not found"
+msgstr ""
+
+#: controller/email.php:511
+msgid "Mail forwards are not included in this customer's package."
+msgstr ""
+
+#: controller/email.php:512
+#, php-format
+msgid "Forward quota exhausted (%d/%d used)."
+msgstr ""
+
+#: controller/email.php:525
+msgid "Forward created"
+msgstr ""
+
+#: controller/email.php:525
+msgid "Could not create forward"
+msgstr ""
+
+#: controller/email.php:552
+msgid "Forward updated"
+msgstr ""
+
+#: controller/email.php:552
+msgid "Could not update forward"
+msgstr ""
+
+#: controller/email.php:575
+msgid "Forward deleted"
+msgstr ""
+
+#: controller/email.php:575
+msgid "Could not delete forward"
+msgstr ""
+
+#: controller/email.php:606
+msgid "Catchall set"
+msgstr ""
+
+#: controller/email.php:606
+msgid "Could not set catchall"
+msgstr ""
+
+#: controller/email.php:624
+msgid "Catchall removed"
+msgstr ""
+
+#: controller/email.php:624
+msgid "Could not remove catchall"
+msgstr ""
+
+#: controller/filtering.php:43 controller/filtering.php:56
+#: controller/filtering.php:85 controller/filtering.php:96
+#: controller/filtering.php:143 controller/filtering.php:180
+#: controller/filtering.php:184 controller/filtering.php:195
+#: controller/filtering.php:230 controller/filtering.php:268
+#: controller/filtering.php:272 controller/filtering.php:277
+#: controller/filtering.php:288
+msgid "Filtering"
+msgstr ""
+
+#: controller/filtering.php:143
+msgid "Policy not found"
+msgstr ""
+
+#: controller/filtering.php:180
+msgid "Scope not allowed"
+msgstr ""
+
+#: controller/filtering.php:185
+msgid "Policy saved"
+msgstr ""
+
+#: controller/filtering.php:185
+msgid "Could not save policy"
+msgstr ""
+
+#: controller/filtering.php:196
+msgid "Policy deleted"
+msgstr ""
+
+#: controller/filtering.php:196
+msgid "Could not delete policy"
+msgstr ""
+
+#: controller/filtering.php:230
+msgid "Entry not found"
+msgstr ""
+
+#: controller/filtering.php:268
+msgid "Invalid entry"
+msgstr ""
+
+#: controller/filtering.php:272
+msgid "Invalid address/domain/IP"
+msgstr ""
+
+#: controller/filtering.php:278
+msgid "Entry saved"
+msgstr ""
+
+#: controller/filtering.php:278
+msgid "Could not save entry"
+msgstr ""
+
+#: controller/filtering.php:289
+msgid "Entry deleted"
+msgstr ""
+
+#: controller/filtering.php:289
+msgid "Could not delete entry"
+msgstr ""
+
+#: controller/ftp.php:26
+msgid "FTP management"
+msgstr ""
+
+#: controller/ftp.php:156 controller/ftp.php:269 controller/ftp.php:325
+msgid "No account specified"
+msgstr ""
+
+#: controller/ftp.php:161 controller/ftp.php:275 controller/ftp.php:331
+msgid "Account not found"
+msgstr ""
+
+#: controller/ftp.php:217
+msgid "Username, password and home directory are required"
+msgstr ""
+
+#: controller/ftp.php:222
+msgid "That username already exists"
+msgstr ""
+
+#: controller/ftp.php:241
+msgid "Failed to create account"
+msgstr ""
+
+#: controller/ftp.php:248
+msgid "Account created"
+msgstr ""
+
+#: controller/ftp.php:312
+msgid "Account updated"
+msgstr ""
+
+#: controller/ftp.php:340
+msgid "Account deleted"
+msgstr ""
+
+#: controller/general.php:64
+msgid "Not logged in."
+msgstr ""
+
+#: controller/general.php:70
+msgid "New passwords do not match."
+msgstr ""
+
+#: controller/general.php:76
+msgid "Old password is wrong."
+msgstr ""
+
+#: controller/general.php:83
+msgid "Could not update password."
+msgstr ""
+
+#: controller/general.php:87 controller/login.php:352
+msgid "Password changed."
+msgstr ""
+
+#: controller/group.php:24 controller/group.php:54 controller/group.php:74
+#: controller/group.php:80 controller/group.php:93 controller/group.php:107
+#: controller/group.php:113 controller/group.php:127 controller/group.php:135
+#: controller/group.php:140 controller/group.php:143 controller/group.php:149
+#: controller/group.php:158 controller/group.php:163 controller/group.php:166
+#: controller/group.php:172 controller/group.php:178 controller/group.php:183
+#: controller/group.php:188
+msgid "Groups"
+msgstr ""
+
+#: controller/group.php:80 controller/group.php:113 controller/group.php:178
+#: controller/group.php:209 controller/group.php:214
+msgid "Group not found"
+msgstr ""
+
+#: controller/group.php:135 controller/group.php:158 controller/package.php:129
+msgid "Name is required"
+msgstr ""
+
+#: controller/group.php:140
+msgid "Could not create group (name already exists?)"
+msgstr ""
+
+#: controller/group.php:143
+#, php-format
+msgid "Group \"%s\" created"
+msgstr ""
+
+#: controller/group.php:163
+msgid "Could not update group (name already in use?)"
+msgstr ""
+
+#: controller/group.php:166
+#, php-format
+msgid "Group \"%s\" updated"
+msgstr ""
+
+#: controller/group.php:184
+#, php-format
+msgid "Cannot delete group \"%s\": %d customer(s) are still in it"
+msgstr ""
+
+#: controller/group.php:188
+#, php-format
+msgid "Group \"%s\" deleted"
+msgstr ""
+
+#: controller/group.php:204 controller/group.php:209 controller/group.php:214
+#: controller/group.php:241 controller/group.php:267 controller/group.php:276
+#: view/group/overview.php:52 view/group/permissions.php:34
+msgid "Permissions"
+msgstr ""
+
+#: controller/group.php:267 controller/login.php:228 controller/login.php:301
+msgid "Missing fields."
+msgstr ""
+
+#: controller/group.php:278
+#, php-format
+msgid "%d permission(s) updated, %d skipped."
+msgstr ""
+
+#: controller/login.php:67 controller/login.php:127 controller/login.php:134
+#: view/customer/edit.php:30
+msgid "Login"
+msgstr ""
+
+#: controller/login.php:68
+msgid "Wrong user or password."
+msgstr ""
+
+#: controller/login.php:128
+msgid "Welcome Back!"
+msgstr ""
+
+#: controller/login.php:160 controller/login.php:184 controller/login.php:194
+#: controller/login.php:227 controller/login.php:241 controller/login.php:250
+#: controller/login.php:262 controller/login.php:270
+msgid "Reset Your Password"
+msgstr ""
+
+#: controller/login.php:161
+msgid "Email successfully sent to the specified address."
+msgstr ""
+
+#: controller/login.php:185
+msgid "Invalid activation link."
+msgstr ""
+
+#: controller/login.php:195 controller/login.php:264
+msgid "Activation link is invalid or has expired."
+msgstr ""
+
+#: controller/login.php:201 view/login_activate.php:17
+msgid "Set new password"
+msgstr ""
+
+#: controller/login.php:242 controller/login.php:317
+msgid "Passwords do not match."
+msgstr ""
+
+#: controller/login.php:251 controller/login.php:326
+msgid "Password must be at least 6 characters."
+msgstr ""
+
+#: controller/login.php:263
+msgid "Password changed. You can now log in."
+msgstr ""
+
+#: controller/login.php:300 controller/login.php:316 controller/login.php:325
+#: controller/login.php:334 controller/login.php:351 controller/login.php:359
+msgid "Change Password"
+msgstr ""
+
+#: controller/login.php:335
+msgid "Invalid account type."
+msgstr ""
+
+#: controller/login.php:353
+msgid "Wrong account or password."
+msgstr ""
+
+#: controller/message.php:88 controller/message.php:158
+msgid "Message not found"
+msgstr ""
+
+#: controller/message.php:139
+msgid "Recipient, subject and text are all required"
+msgstr ""
+
+#: controller/message.php:146
+#, php-format
+msgid "Recipient \"%s\" does not exist"
+msgstr ""
+
+#: controller/message.php:149
+msgid "Message sent"
+msgstr ""
+
+#: controller/message.php:162
+msgid "Message deleted"
+msgstr ""
+
+#: controller/options.php:45 controller/options.php:70
+#: controller/options.php:80 controller/options.php:106
+#: controller/options.php:110 controller/options.php:142
+#: controller/options.php:191 controller/options.php:222
+#: controller/options.php:226 controller/options.php:232
+#: view/options/_form.php:25
+msgid "Options"
+msgstr ""
+
+#: controller/options.php:80
+msgid "No accessible options section"
+msgstr ""
+
+#: controller/options.php:111 controller/tools.php:319
+#, php-format
+msgid "%d errorlog entrie(s) purged"
+msgstr ""
+
+#: controller/options.php:223
+#, php-format
+msgid "%d setting(s) saved"
+msgstr ""
+
+#: controller/options.php:227
+#, php-format
+msgid "%d saved, %d skipped: %s"
+msgstr ""
+
+#: controller/options.php:233
+msgid "Nothing was saved"
+msgstr ""
+
+#: controller/package.php:30 controller/package.php:56
+#: controller/package.php:75 controller/package.php:90
+#: controller/package.php:97 controller/package.php:103
+#: controller/package.php:119 controller/package.php:129
+#: controller/package.php:135 controller/package.php:137
+#: controller/package.php:144 controller/package.php:151
+#: controller/package.php:157 controller/package.php:159
+#: controller/package.php:166 controller/package.php:173
+#: controller/package.php:178 view/package/overview.php:15
+msgid "Packages"
+msgstr ""
+
+#: controller/package.php:97 controller/package.php:151
+msgid "Cannot edit this package"
+msgstr ""
+
+#: controller/package.php:103
+msgid "Package not found"
+msgstr ""
+
+#: controller/package.php:135
+#, php-format
+msgid "Package \"%s\" created"
+msgstr ""
+
+#: controller/package.php:137
+msgid "Could not create package (name already exists?)"
+msgstr ""
+
+#: controller/package.php:157
+#, php-format
+msgid "Package \"%s\" updated"
+msgstr ""
+
+#: controller/package.php:159
+msgid "Could not update package"
+msgstr ""
+
+#: controller/package.php:173
+msgid "Cannot delete this package"
+msgstr ""
+
+#: controller/package.php:178
+#, php-format
+msgid "Package \"%s\" deleted"
+msgstr ""
+
+#: controller/pmwh3.php:75 helper/pmwh3menu_helper.php:372
+msgid "None"
+msgstr ""
+
+#: controller/pmwh3.php:83
+msgid "Domain changed"
+msgstr ""
+
+#: controller/pmwh3.php:83
+msgid "Domain changed to: "
+msgstr ""
+
+#: controller/tools.php:27 controller/tools.php:48 controller/tools.php:64
+#: controller/tools.php:298 controller/tools.php:314 controller/tools.php:318
+#: controller/tools.php:335 controller/tools.php:415 controller/tools.php:514
+#: view/tools/overview.php:4
+msgid "Tools"
+msgstr ""
+
+#: controller/tools.php:88 controller/tools.php:115 controller/tools.php:125
+#: controller/tools.php:140 controller/tools.php:152 controller/tools.php:184
+#: controller/tools.php:201 controller/tools.php:216 controller/tools.php:225
+#: controller/tools.php:241 controller/tools.php:250
+msgid "Menu"
+msgstr ""
+
+#: controller/tools.php:126
+msgid "Menu row created."
+msgstr ""
+
+#: controller/tools.php:127
+msgid "Could not create -- name missing or (box, sort) already taken."
+msgstr ""
+
+#: controller/tools.php:153
+msgid "Menu row not found."
+msgstr ""
+
+#: controller/tools.php:202
+msgid "Menu row saved."
+msgstr ""
+
+#: controller/tools.php:203
+msgid ""
+"Could not save -- name missing or new (box, sort) collides with another row."
+msgstr ""
+
+#: controller/tools.php:226
+msgid "Menu row deleted."
+msgstr ""
+
+#: controller/tools.php:227
+msgid "Could not delete -- row not found."
+msgstr ""
+
+#: controller/tools.php:251
+msgid "Visibility toggled."
+msgstr ""
+
+#: controller/tools.php:252
+msgid "Row not found."
+msgstr ""
+
+#: controller/tools.php:350 controller/tools.php:355 controller/tools.php:357
+#: controller/tools.php:372 controller/tools.php:388 controller/tools.php:392
+msgid "Backup"
+msgstr ""
+
+#: controller/tools.php:355
+#, php-format
+msgid "Backup created: %s"
+msgstr ""
+
+#: controller/tools.php:389
+#, php-format
+msgid "Backup deleted: %s"
+msgstr ""
+
+#: controller/tools.php:389
+msgid "Delete failed"
+msgstr ""
+
+#: controller/tools.php:433 controller/tools.php:445 controller/tools.php:450
+#: controller/tools.php:462 controller/tools.php:471 controller/tools.php:485
+#: controller/tools.php:492 controller/tools.php:496 controller/tools.php:502
+#: controller/tools.php:506 view/tools/news.php:9
+msgid "News"
+msgstr ""
+
+#: controller/tools.php:450 controller/tools.php:550
+msgid "Not found"
+msgstr ""
+
+#: controller/tools.php:486
+msgid "Saved"
+msgstr ""
+
+#: controller/tools.php:486
+msgid "Text is empty?"
+msgstr ""
+
+#: controller/tools.php:496
+msgid "Toggled"
+msgstr ""
+
+#: controller/tools.php:506 controller/tools.php:599
+msgid "Deleted"
+msgstr ""
+
+#: controller/tools.php:533 controller/tools.php:545 controller/tools.php:550
+#: controller/tools.php:562 controller/tools.php:571 controller/tools.php:588
+#: controller/tools.php:595 controller/tools.php:599
+#: view/tools/applications.php:10
+msgid "Applications"
+msgstr ""
+
+#: controller/tools.php:589
+msgid "Application saved"
+msgstr ""
+
+#: controller/tools.php:589
+msgid "Name/link empty?"
+msgstr ""
+
+#: model/customer_model.php:113
+msgid "No package"
+msgstr ""
+
+#: model/option_model.php:92
+msgid "Value must be numeric"
+msgstr ""
+
+#: model/option_model.php:96
+msgid "Value must be Y or N"
+msgstr ""
+
+#: model/option_model.php:102
+msgid "Value is not in the allowed option list"
+msgstr ""
+
+#: model/option_model.php:112
+#, php-format
+msgid "Value %s is not in the allowed option list"
+msgstr ""
+
+#: utils/customermanager.php:248
+msgid "Customer name is required"
+msgstr ""
+
+#: utils/customermanager.php:251
+msgid "Password is required"
+msgstr ""
+
+#: utils/customermanager.php:254 utils/customermanager.php:311
+#, php-format
+msgid "Customer '%s' already exists"
+msgstr ""
+
+#: utils/customermanager.php:280
+msgid "Failed to insert customer"
+msgstr ""
+
+#: utils/customermanager.php:304
+#, php-format
+msgid "Customer with cid %d not found"
+msgstr ""
+
+#: utils/mail/postfixadapter.php:166
+msgid "Invalid email address"
+msgstr ""
+
+#: utils/mail/postfixadapter.php:171
+#, php-format
+msgid "Mailbox %s already exists"
+msgstr ""
+
+#: utils/mail/postfixadapter.php:313
+msgid "At least one destination is required"
+msgstr ""
+
+#: view/customer/edit.php:24 view/customer/overview.php:20
+msgid "New customer"
+msgstr ""
+
+#: view/customer/edit.php:24
+msgid "Edit customer"
+msgstr ""
+
+#: view/customer/edit.php:32 view/customer/overview.php:33
+msgid "Real name"
+msgstr ""
+
+#: view/customer/edit.php:36
+msgid "Group"
+msgstr ""
+
+#: view/customer/edit.php:47
+msgid "Customer no."
+msgstr ""
+
+#: view/customer/edit.php:50
+msgid "Street"
+msgstr ""
+
+#: view/customer/edit.php:52
+msgid "Postcode"
+msgstr ""
+
+#: view/customer/edit.php:54
+msgid "City"
+msgstr ""
+
+#: view/customer/edit.php:56
+msgid "Country"
+msgstr ""
+
+#: view/customer/edit.php:58
+msgid "Telephone"
+msgstr ""
+
+#: view/customer/edit.php:60
+msgid "Fax"
+msgstr ""
+
+#: view/customer/edit.php:63 view/package/edit.php:47
+#: view/package/overview.php:39
+msgid "PHP"
+msgstr ""
+
+#: view/customer/edit.php:65 view/package/edit.php:49
+#: view/package/overview.php:40
+msgid "CGI"
+msgstr ""
+
+#: view/customer/edit.php:68
+msgid "Language"
+msgstr ""
+
+#: view/customer/edit.php:71
+msgid " default "
+msgstr ""
+
+#: view/customer/edit.php:82
+msgid "Package"
+msgstr ""
+
+#: view/customer/edit.php:93
+msgid ""
+"Changing the package re-fills the limit fields below; you can still edit "
+"them by hand afterwards."
+msgstr ""
+
+#: view/customer/edit.php:99 view/customer/overview.php:71
+#: view/database/details.php:86 view/databases/details.php:84
+#: view/email/details_email.php:82 view/email/new_email.php:19
+#: view/ftp/edit.php:38
+msgid "Password"
+msgstr ""
+
+#: view/customer/edit.php:104
+msgid "Limits (-1 = unlimited, 0 = disabled)"
+msgstr ""
+
+#: view/customer/edit.php:107 view/package/edit.php:33
+msgid "Webspace (MB)"
+msgstr ""
+
+#: view/customer/edit.php:108 view/package/edit.php:34
+msgid "Traffic (MB/mo)"
+msgstr ""
+
+#: view/customer/edit.php:111 view/package/edit.php:37
+msgid "Email accounts"
+msgstr ""
+
+#: view/customer/edit.php:112 view/domain/details.php:558
+#: view/email/overview.php:32 view/package/edit.php:38
+#: view/package/overview.php:37
+msgid "Forwards"
+msgstr ""
+
+#: view/customer/edit.php:126 view/customer/password.php:23
+#: view/domain/edit.php:50 view/domain/new_domain.php:83
+#: view/email/change_email.php:21 view/email/edit_filtering.php:72
+#: view/email/edit_forward.php:48 view/email/edit_wblist.php:79
+#: view/email/new_email.php:29 view/email/password.php:20
+#: view/general/password.php:29 view/group/edit.php:32
+#: view/message/compose.php:38 view/package/edit.php:57
+#: view/tools/edit_application.php:34 view/tools/edit_menu_row.php:128
+#: view/tools/edit_news.php:30
+msgid "Cancel"
+msgstr ""
+
+#: view/customer/edit.php:128 view/database/new_database.php:26
+#: view/databases/new_database.php:45 view/domain/_domain_form_bulk.php:50
+#: view/domain/new_domain.php:84 view/domain/subdomain_form.php:103
+#: view/email/edit_forward.php:50 view/email/new_email.php:30
+#: view/ftp/edit.php:84 view/group/edit.php:34 view/package/edit.php:59
+msgid "Create"
+msgstr ""
+
+#: view/customer/edit.php:128 view/domain/details.php:126
+#: view/domain/edit.php:51 view/domain/subdomain_form.php:172
+#: view/email/change_email.php:22 view/email/edit_filtering.php:71
+#: view/email/edit_forward.php:50 view/email/edit_wblist.php:78
+#: view/ftp/edit.php:84 view/general/password.php:31 view/group/edit.php:34
+#: view/group/permissions.php:112 view/login_activate.php:31
+#: view/options/_form.php:127 view/package/edit.php:59
+#: view/tools/edit_application.php:33 view/tools/edit_menu_row.php:125
+#: view/tools/edit_news.php:29
+msgid "Save"
+msgstr ""
+
+#: view/customer/overview.php:26
+msgid "No customers visible."
+msgstr ""
+
+#: view/customer/overview.php:36 view/package/overview.php:31
+msgid "Creator"
+msgstr ""
+
+#: view/customer/overview.php:38 view/database/details.php:45
+#: view/database/overview.php:29 view/databases/details.php:41
+#: view/databases/overview.php:44 view/domain/details.php:103
+#: view/domain/details.php:258 view/domain/details.php:457
+#: view/domain/overview_aliases.php:33 view/domain/overview_domains.php:33
+#: view/domain/overview_subdomains.php:34 view/email/details_email.php:31
+#: view/email/details_filtering.php:38 view/email/details_forward.php:28
+#: view/email/details_wblist.php:47 view/ftp/accounts.php:62
+#: view/general/sessions.php:51 view/group/overview.php:28
+#: view/message/inbox.php:37 view/package/overview.php:41
+#: view/tools/applications.php:28 view/tools/backup.php:31
+#: view/tools/menu.php:42 view/tools/news.php:29
+msgid "Actions"
+msgstr ""
+
+#: view/customer/overview.php:55 view/package/overview.php:55
+msgid "system"
+msgstr ""
+
+#: view/customer/overview.php:67 view/domain/overview_domains.php:60
+#: view/email/details_email.php:78 view/email/details_filtering.php:58
+#: view/email/details_forward.php:49 view/email/details_wblist.php:62
+#: view/ftp/accounts.php:94 view/group/overview.php:49
+#: view/package/overview.php:73 view/tools/applications.php:45
+#: view/tools/menu.php:78 view/tools/news.php:42
+msgid "Edit"
+msgstr ""
+
+#: view/customer/overview.php:76
+msgid "Delete customer?"
+msgstr ""
+
+#: view/customer/overview.php:77 view/domain/details.php:132
+#: view/domain/details.php:292 view/domain/details.php:481
+#: view/domain/overview_aliases.php:53 view/domain/overview_domains.php:71
+#: view/domain/overview_subdomains.php:70 view/email/details_email.php:88
+#: view/email/details_filtering.php:64 view/email/details_forward.php:55
+#: view/email/details_wblist.php:68 view/ftp/accounts.php:99
+#: view/group/overview.php:58 view/message/inbox.php:65
+#: view/message/view.php:40 view/package/overview.php:80
+#: view/tools/applications.php:51 view/tools/backup.php:48
+#: view/tools/menu.php:92 view/tools/news.php:54
+msgid "Delete"
+msgstr ""
+
+#: view/customer/password.php:8 view/general/password.php:4
+msgid "Change password"
+msgstr ""
+
+#: view/customer/password.php:12
+#, php-format
+msgid "For customer: %s"
+msgstr ""
+
+#: view/customer/password.php:16 view/email/password.php:14
+#: view/general/password.php:16
+msgid "New password"
+msgstr ""
+
+#: view/customer/password.php:18
+msgid "Repeat"
+msgstr ""
+
+#: view/customer/password.php:24 view/database/details.php:62
+#: view/databases/details.php:60 view/domain/details.php:475
+#: view/domain/overview_aliases.php:46 view/domain/overview_subdomains.php:64
+#: view/email/password.php:21
+msgid "Change"
+msgstr ""
+
+#: view/database/details.php:16 view/databases/details.php:16
+#, php-format
+msgid "Database: %s"
+msgstr ""
+
+#: view/database/details.php:18 view/database/new_database.php:9
+#: view/databases/details.php:18 view/databases/new_database.php:11
+#: view/domain/details.php:27 view/domain/new_domain.php:16
+#: view/domain/overview_aliases.php:17 view/domain/overview_subdomains.php:17
+#: view/domain/subdomain_form.php:25 view/email/details_catchall.php:19
+#: view/email/details_email.php:14 view/email/details_filtering.php:17
+#: view/email/details_forward.php:11 view/email/details_wblist.php:27
+#: view/email/edit_filtering.php:21 view/email/edit_wblist.php:20
+#: view/ftp/accounts.php:38 view/ftp/edit.php:16 view/group/members.php:12
+#: view/group/permissions.php:39 view/message/view.php:13
+#: view/tools/applications.php:12 view/tools/backup.php:11
+#: view/tools/edit_application.php:15 view/tools/edit_menu_row.php:43
+#: view/tools/edit_news.php:14 view/tools/news.php:11
+msgid "Back"
+msgstr ""
+
+#: view/database/details.php:23 view/databases/details.php:23
+#: view/domain/details.php:99 view/domain/details.php:169
+#: view/group/edit.php:24 view/group/overview.php:26 view/package/edit.php:21
+#: view/package/overview.php:30 view/tools/applications.php:26
+#: view/tools/edit_application.php:20 view/tools/edit_menu_row.php:55
+#: view/tools/menu.php:38
+msgid "Name"
+msgstr ""
+
+#: view/database/details.php:25 view/database/overview.php:26
+#: view/domain/details.php:98 view/domain/details.php:156
+#: view/domain/subdomain_form.php:47
+msgid "Type"
+msgstr ""
+
+#: view/database/details.php:26 view/database/details.php:41
+#: view/database/details.php:90 view/database/overview.php:27
+#: view/databases/details.php:38 view/databases/details.php:88
+#: view/databases/overview.php:40
+msgid "Host"
+msgstr ""
+
+#: view/database/details.php:27 view/database/details.php:43
+#: view/database/overview.php:28
+msgid "Created"
+msgstr ""
+
+#: view/database/details.php:31 view/databases/details.php:28
+msgid "Database users"
+msgstr ""
+
+#: view/database/details.php:35 view/databases/details.php:32
+msgid "No users yet. Add one below."
+msgstr ""
+
+#: view/database/details.php:40 view/databases/details.php:37
+#: view/databases/overview.php:39
+msgid "User"
+msgstr ""
+
+#: view/database/details.php:42 view/database/details.php:96
+#: view/databases/details.php:39 view/databases/details.php:94
+msgid "Privileges"
+msgstr ""
+
+#: view/database/details.php:60 view/databases/details.php:58
+msgid "Set a new password for this user?"
+msgstr ""
+
+#: view/database/details.php:61 view/databases/details.php:59
+msgid "new password"
+msgstr ""
+
+#: view/database/details.php:66 view/databases/details.php:64
+#: view/databases/overview.php:137
+msgid "Remove this user?"
+msgstr ""
+
+#: view/database/details.php:66 view/databases/details.php:64
+msgid "Remove"
+msgstr ""
+
+#: view/database/details.php:77 view/databases/details.php:75
+msgid "Add database user"
+msgstr ""
+
+#: view/database/details.php:82 view/databases/details.php:80
+#: view/ftp/accounts.php:56 view/ftp/edit.php:25
+msgid "Username"
+msgstr ""
+
+#: view/database/details.php:92 view/databases/details.php:90
+msgid "% = any, localhost = local, or specific IP"
+msgstr ""
+
+#: view/database/details.php:100 view/databases/details.php:98
+msgid "Full access (ALL PRIVILEGES)"
+msgstr ""
+
+#: view/database/details.php:104 view/databases/details.php:102
+msgid "Or pick specific:"
+msgstr ""
+
+#: view/database/details.php:116 view/databases/details.php:114
+msgid "Add user"
+msgstr ""
+
+#: view/database/new_database.php:7 view/databases/new_database.php:9
+msgid "Create database"
+msgstr ""
+
+#: view/database/new_database.php:15 view/databases/new_database.php:36
+msgid "Database name"
+msgstr ""
+
+#: view/database/new_database.php:21
+msgid ""
+"Letters, digits, underscore only. Will be prefixed with your customer name "
+"(configurable)."
+msgstr ""
+
+#: view/database/overview.php:12 view/databases/overview.php:21
+msgid "New database"
+msgstr ""
+
+#: view/database/overview.php:18 view/databases/overview.php:31
+msgid "No databases yet."
+msgstr ""
+
+#: view/database/overview.php:24 view/databases/overview.php:38
+#: /tmp/opencode/schema_calls.php:155
+msgid "Database"
+msgstr ""
+
+#: view/database/overview.php:45 view/email/overview.php:53
+msgid "Manage"
+msgstr ""
+
+#: view/database/overview.php:49
+msgid "Drop this database AND its users?"
+msgstr ""
+
+#: view/database/overview.php:49
+msgid "Drop"
+msgstr ""
+
+#: view/databases/new_database.php:17
+msgid "Owner"
+msgstr ""
+
+#: view/databases/new_database.php:40
+msgid "Letters, digits, underscore only."
+msgstr ""
+
+#: view/databases/overview.php:27
+msgid "Database backend error:"
+msgstr ""
+
+#: view/databases/overview.php:29
+msgid ""
+"Check Options > Databases (DB_HOST / DB_ADMIN_USER / DB_ADMIN_PASS) and that "
+"pmwh3_admin has SELECT on mysql.*."
+msgstr ""
+
+#: view/databases/overview.php:55 view/domain/details.php:434
+msgid "unlimited"
+msgstr ""
+
+#: view/databases/overview.php:57
+msgid "not in package"
+msgstr ""
+
+#: view/databases/overview.php:70
+msgid "No databases"
+msgstr ""
+
+#: view/databases/overview.php:84
+msgid "No users"
+msgstr ""
+
+#: view/databases/overview.php:89 view/databases/overview.php:132
+msgid "Drop this database?"
+msgstr ""
+
+#: view/databases/overview.php:89 view/databases/overview.php:132
+msgid "Delete DB"
+msgstr ""
+
+#: view/databases/overview.php:93
+msgid "Assign user"
+msgstr ""
+
+#: view/databases/overview.php:137
+msgid "Drop user"
+msgstr ""
+
+#: view/databases/overview.php:153
+#, php-format
+msgid "Assign user to %s"
+msgstr ""
+
+#: view/databases/overview.php:154
+msgid "Create new user"
+msgstr ""
+
+#: view/databases/overview.php:155
+msgid "username"
+msgstr ""
+
+#: view/databases/overview.php:156
+msgid "password"
+msgstr ""
+
+#: view/databases/overview.php:158
+msgid "Assign existing user"
+msgstr ""
+
+#: view/databases/overview.php:159
+msgid "see DB users on the server already"
+msgstr ""
+
+#: view/databases/overview.php:162
+msgid "Host:"
+msgstr ""
+
+#: view/databases/overview.php:164
+msgid "ALL PRIVILEGES"
+msgstr ""
+
+#: view/databases/overview.php:167
+msgid "Or specific:"
+msgstr ""
+
+#: view/databases/overview.php:173
+msgid "Assign"
+msgstr ""
+
+#: view/domain/details.php:9
+msgid "Overview"
+msgstr ""
+
+#: view/domain/details.php:11
+msgid "DNSSEC"
+msgstr ""
+
+#: view/domain/details.php:14
+msgid "Apache"
+msgstr ""
+
+#: view/domain/details.php:15
+msgid "Activity"
+msgstr ""
+
+#: view/domain/details.php:25
+#, php-format
+msgid "Domain details: %s"
+msgstr ""
+
+#: view/domain/details.php:43 view/domain/edit.php:19
+#: view/domain/new_domain.php:48 view/domain/overview_domains.php:29
+#: view/domain/picker.php:21 view/email/overview.php:29
+#: view/email/picker.php:20 view/ftp/edit.php:48 view/ftp/overview.php:18
+#: view/general/traffic.php:69
+msgid "Domain"
+msgstr ""
+
+#: view/domain/details.php:48 view/domain/edit.php:25
+#: view/domain/new_domain.php:51 view/domain/overview_aliases.php:31
+#: view/domain/overview_domains.php:30 view/domain/overview_subdomains.php:30
+msgid "IP Address"
+msgstr ""
+
+#: view/domain/details.php:50
+msgid "Path"
+msgstr ""
+
+#: view/domain/details.php:52 view/domain/edit.php:28
+#: view/domain/new_domain.php:60
+msgid "Services"
+msgstr ""
+
+#: view/domain/details.php:54
+msgid "Registration"
+msgstr ""
+
+#: view/domain/details.php:57
+msgid "Hosting"
+msgstr ""
+
+#: view/domain/details.php:72
+msgid "No DNS zone configured for this domain."
+msgstr ""
+
+#: view/domain/details.php:77
+msgid "SOA"
+msgstr ""
+
+#: view/domain/details.php:79
+msgid "Primary NS"
+msgstr ""
+
+#: view/domain/details.php:81
+msgid "Admin"
+msgstr ""
+
+#: view/domain/details.php:83
+msgid "Serial"
+msgstr ""
+
+#: view/domain/details.php:85
+msgid "Refresh / Retry / Expire / NegTTL"
+msgstr ""
+
+#: view/domain/details.php:93
+msgid "Records"
+msgstr ""
+
+#: view/domain/details.php:100 view/domain/details.php:171
+#: view/domain/details.php:375
+msgid "Content"
+msgstr ""
+
+#: view/domain/details.php:101 view/domain/details.php:173
+msgid "TTL"
+msgstr ""
+
+#: view/domain/details.php:102
+msgid "Prio"
+msgstr ""
+
+#: view/domain/details.php:131
+msgid "Delete this record?"
+msgstr ""
+
+#: view/domain/details.php:151 view/domain/details.php:179
+msgid "Add record"
+msgstr ""
+
+#: view/domain/details.php:175
+msgid "Priority (MX/SRV)"
+msgstr ""
+
+#: view/domain/details.php:198
+msgid ""
+"DNSSEC schema not available on this DNS adapter (cryptokeys / domainmetadata "
+"tables missing)."
+msgstr ""
+
+#: view/domain/details.php:202 view/message/inbox.php:30
+msgid "Status"
+msgstr ""
+
+#: view/domain/details.php:204
+msgid "Signed"
+msgstr ""
+
+#: view/domain/details.php:206 view/domain/details.php:211
+#: view/domain/details.php:276 view/domain/details.php:277
+#: view/package/overview.php:68 view/package/overview.php:69
+msgid "Yes"
+msgstr ""
+
+#: view/domain/details.php:207 view/domain/details.php:211
+#: view/domain/details.php:276 view/domain/details.php:277
+#: view/package/overview.php:68 view/package/overview.php:69
+msgid "No"
+msgstr ""
+
+#: view/domain/details.php:208
+msgid "NSEC mode"
+msgstr ""
+
+#: view/domain/details.php:210
+msgid "Pre-signed"
+msgstr ""
+
+#: view/domain/details.php:212 view/domain/details.php:247
+msgid "Keys"
+msgstr ""
+
+#: view/domain/details.php:215
+msgid "(active / total)"
+msgstr ""
+
+#: view/domain/details.php:224
+msgid "Sign this zone? Generates a default ECDSA-256 CSK."
+msgstr ""
+
+#: view/domain/details.php:226 view/domain/details.php:236
+msgid "PDNS_API_URL not set in Options"
+msgstr ""
+
+#: view/domain/details.php:227
+msgid "Sign zone"
+msgstr ""
+
+#: view/domain/details.php:234
+msgid ""
+"Disable DNSSEC and remove all keys? Resolvers go bogus until the DS at your "
+"registrar is removed."
+msgstr ""
+
+#: view/domain/details.php:237
+msgid "Disable DNSSEC"
+msgstr ""
+
+#: view/domain/details.php:242
+msgid "Set PDNS_API_URL + PDNS_API_KEY in Options to enable signing."
+msgstr ""
+
+#: view/domain/details.php:249
+msgid "No keys."
+msgstr ""
+
+#: view/domain/details.php:253
+msgid "ID"
+msgstr ""
+
+#: view/domain/details.php:254
+msgid "Role"
+msgstr ""
+
+#: view/domain/details.php:255
+msgid "Algorithm"
+msgstr ""
+
+#: view/domain/details.php:256 view/domain/details.php:534
+#: view/tools/news.php:28
+msgid "Active"
+msgstr ""
+
+#: view/domain/details.php:257
+msgid "Published"
+msgstr ""
+
+#: view/domain/details.php:285 view/tools/news.php:46
+msgid "Deactivate"
+msgstr ""
+
+#: view/domain/details.php:285 view/tools/news.php:46
+msgid "Activate"
+msgstr ""
+
+#: view/domain/details.php:291
+msgid ""
+"Delete this key? If it is the only KSK and a DS is published, resolvers go "
+"bogus."
+msgstr ""
+
+#: view/domain/details.php:302
+msgid "DNSKEY"
+msgstr ""
+
+#: view/domain/details.php:306 view/domain/details.php:330
+msgid "Copy"
+msgstr ""
+
+#: view/domain/details.php:312
+msgid "DS records"
+msgstr ""
+
+#: view/domain/details.php:313
+msgid ""
+"Submit one of these to your registrar (e.g. nic.at). SHA-256 (digest type 2) "
+"is the usual choice."
+msgstr ""
+
+#: view/domain/details.php:341
+msgid ""
+"Configure PDNS_API_URL in Options to view DNSKEY/DS records for submission "
+"to the registrar."
+msgstr ""
+
+#: view/domain/details.php:358
+msgid "Copied"
+msgstr ""
+
+#: view/domain/details.php:368
+msgid "Domain metadata"
+msgstr ""
+
+#: view/domain/details.php:370
+msgid "No metadata."
+msgstr ""
+
+#: view/domain/details.php:374
+msgid "Kind"
+msgstr ""
+
+#: view/domain/details.php:402 view/domain/subdomain_form.php:31
+msgid "No web adapter configured -- subdomain rows cannot be managed."
+msgstr ""
+
+#: view/domain/details.php:413
+#, php-format
+msgid "%d subdomain(s) in this domain tree."
+msgstr ""
+
+#: view/domain/details.php:415
+#, php-format
+msgid "Quota: %d per customer."
+msgstr ""
+
+#: view/domain/details.php:417
+msgid "(Subdomains are not part of this customer's package.)"
+msgstr ""
+
+#: view/domain/details.php:419
+msgid "(no per-customer limit)"
+msgstr ""
+
+#: view/domain/details.php:425 view/package/overview.php:32
+msgid "Webspace"
+msgstr ""
+
+#: view/domain/details.php:429
+msgid "not measurable (backend-managed FS)"
+msgstr ""
+
+#: view/domain/details.php:431
+#, php-format
+msgid "Used on disk (live): %s. Assigned: %s."
+msgstr ""
+
+#: view/domain/details.php:434
+#, php-format
+msgid "%d MB"
+msgstr ""
+
+#: view/domain/details.php:435
+msgid "not set"
+msgstr ""
+
+#: view/domain/details.php:438
+msgid ""
+"Traffic figures live in the Traffic view (pmwh3_traffic, fed by the log "
+"collector); the legacy apache_subdomains.traffic column is not written by "
+"pmwh3."
+msgstr ""
+
+#: view/domain/details.php:443 view/domain/overview_subdomains.php:21
+#: view/domain/subdomain_form.php:23
+msgid "New subdomain"
+msgstr ""
+
+#: view/domain/details.php:448
+msgid "No subdomains."
+msgstr ""
+
+#: view/domain/details.php:452 view/domain/overview_subdomains.php:29
+#: view/domain/subdomain_form.php:115
+msgid "Subdomain"
+msgstr ""
+
+#: view/domain/details.php:453 view/domain/subdomain_form.php:124
+msgid "Path / IP"
+msgstr ""
+
+#: view/domain/details.php:455 view/domain/subdomain_form.php:131
+msgid "Alias of"
+msgstr ""
+
+#: view/domain/details.php:456
+msgid "VHost"
+msgstr ""
+
+#: view/domain/details.php:468
+msgid "(IP forwarding)"
+msgstr ""
+
+#: view/domain/details.php:471 view/tools/news.php:38
+msgid "yes"
+msgstr ""
+
+#: view/domain/details.php:471 view/tools/news.php:38
+msgid "no"
+msgstr ""
+
+#: view/domain/details.php:479 view/domain/overview_subdomains.php:68
+#, php-format
+msgid "Delete subdomain %s?"
+msgstr ""
+
+#: view/domain/details.php:489
+msgid "Subdomain changes become active with the next Apache reload."
+msgstr ""
+
+#: view/domain/details.php:500
+msgid "Manage mailboxes"
+msgstr ""
+
+#: view/domain/details.php:502
+msgid "Manage forwards"
+msgstr ""
+
+#: view/domain/details.php:504
+msgid "Manage catchall"
+msgstr ""
+
+#: view/domain/details.php:507 view/email/overview.php:31
+#: view/email/picker.php:22
+msgid "Mailboxes"
+msgstr ""
+
+#: view/domain/details.php:518
+#, php-format
+msgid "Server-side usage: %1$s of %2$s assigned."
+msgstr ""
+
+#: view/domain/details.php:522
+msgid "unlimited / not set"
+msgstr ""
+
+#: view/domain/details.php:526
+msgid "No mailboxes."
+msgstr ""
+
+#: view/domain/details.php:532 view/email/details_email.php:30
+msgid "Quota"
+msgstr ""
+
+#: view/domain/details.php:533
+msgid "Used"
+msgstr ""
+
+#: view/domain/details.php:560
+msgid "No forwards."
+msgstr ""
+
+#: view/domain/details.php:565 view/email/details_forward.php:26
+msgid "Source"
+msgstr ""
+
+#: view/domain/details.php:566 view/email/details_forward.php:27
+msgid "Destination"
+msgstr ""
+
+#: view/domain/details.php:590
+msgid "No apache_subdomains rows for this domain."
+msgstr ""
+
+#: view/domain/details.php:593
+#, php-format
+msgid ""
+"Traffic (apache, last 30 days): %s -- statistics current to %s. Details in "
+"the Traffic view."
+msgstr ""
+
+#: view/domain/details.php:598
+#, php-format
+msgid "%d row(s) in apache_subdomains for this domain."
+msgstr ""
+
+#: view/domain/details.php:600
+msgid "Manage subdomains"
+msgstr ""
+
+#: view/domain/details.php:631
+msgid "No activity recorded for this domain."
+msgstr ""
+
+#: view/domain/details.php:636
+msgid "Live now"
+msgstr ""
+
+#: view/domain/details.php:638
+msgid "(active in the last 5 minutes)"
+msgstr ""
+
+#: view/domain/details.php:644 view/domain/details.php:673
+#: view/domain/details.php:703 view/general/sessions.php:48
+msgid "IP"
+msgstr ""
+
+#: view/domain/details.php:645
+msgid "Currently on"
+msgstr ""
+
+#: view/domain/details.php:646 view/domain/details.php:675
+msgid "Logged in since"
+msgstr ""
+
+#: view/domain/details.php:647 view/domain/details.php:676
+#: view/general/sessions.php:50
+msgid "Last seen"
+msgstr ""
+
+#: view/domain/details.php:665
+msgid "Recent sessions"
+msgstr ""
+
+#: view/domain/details.php:667
+msgid "(active in the last 24 hours)"
+msgstr ""
+
+#: view/domain/details.php:674
+msgid "Last URL"
+msgstr ""
+
+#: view/domain/details.php:694
+msgid "Change history"
+msgstr ""
+
+#: view/domain/details.php:696
+msgid "(last 50 write operations)"
+msgstr ""
+
+#: view/domain/details.php:701
+msgid "When"
+msgstr ""
+
+#: view/domain/details.php:704 view/domain/picker.php:23
+#: view/email/overview.php:34 view/email/picker.php:23
+msgid "Action"
+msgstr ""
+
+#: view/domain/details.php:705
+msgid "Detail"
+msgstr ""
+
+#: view/domain/_domain_form_bulk.php:8
+msgid "Accountable"
+msgstr ""
+
+#: view/domain/_domain_form_bulk.php:18
+msgid "Domains<br />One per line"
+msgstr ""
+
+#: view/domain/_domain_form_bulk.php:22
+msgid "IP Address<br />All domains will share this IP"
+msgstr ""
+
+#: view/domain/_domain_form_bulk.php:32 view/domain/edit.php:34
+#: view/domain/new_domain.php:67
+msgid "Registration start"
+msgstr ""
+
+#: view/domain/_domain_form_bulk.php:36 view/domain/edit.php:37
+#: view/domain/new_domain.php:70
+msgid "Registration end"
+msgstr ""
+
+#: view/domain/_domain_form_bulk.php:40 view/domain/edit.php:40
+#: view/domain/new_domain.php:73
+msgid "Hosting start"
+msgstr ""
+
+#: view/domain/_domain_form_bulk.php:44 view/domain/edit.php:43
+#: view/domain/new_domain.php:76
+msgid "Hosting end"
+msgstr ""
+
+#: view/domain/edit.php:13
+#, php-format
+msgid "Edit domain: %s"
+msgstr ""
+
+#: view/domain/edit.php:21
+msgid "(rename via delete + recreate)"
+msgstr ""
+
+#: view/domain/edit.php:31 view/domain/new_domain.php:63
+msgid "Mail"
+msgstr ""
+
+#: view/domain/new_domain.php:13 view/domain/overview_domains.php:17
+msgid "New domain"
+msgstr ""
+
+#: view/domain/new_domain.php:23
+msgid "Choose how you want to add domains:"
+msgstr ""
+
+#: view/domain/new_domain.php:27
+msgid "Single"
+msgstr ""
+
+#: view/domain/new_domain.php:32
+msgid "Bulk import"
+msgstr ""
+
+#: view/domain/new_domain.php:54
+msgid "(none)"
+msgstr ""
+
+#: view/domain/new_domain.php:65
+msgid ""
+"Web -> webroot + apache vhost. DNS -> zone with default records. Mail -> "
+"reserved (mailboxes added separately)."
+msgstr ""
+
+#: view/domain/new_domain.php:90
+msgid "Bulk import not yet implemented."
+msgstr ""
+
+#: view/domain/new_domain.php:92
+msgid "Back to single"
+msgstr ""
+
+#: view/domain/overview_aliases.php:13
+msgid "Aliases"
+msgstr ""
+
+#: view/domain/overview_aliases.php:22
+msgid "New alias"
+msgstr ""
+
+#: view/domain/overview_aliases.php:30
+msgid "Alias"
+msgstr ""
+
+#: view/domain/overview_aliases.php:51
+#, php-format
+msgid "Delete alias %s?"
+msgstr ""
+
+#: view/domain/overview_domains.php:23
+msgid "No domains."
+msgstr ""
+
+#: view/domain/overview_domains.php:32
+msgid "Sub./Aliases"
+msgstr ""
+
+#: view/domain/overview_domains.php:44 view/email/edit_filtering.php:52
+#: view/email/edit_wblist.php:58
+msgid "current"
+msgstr ""
+
+#: view/domain/overview_domains.php:65
+msgid "Advanced details / DNS / Apache"
+msgstr ""
+
+#: view/domain/overview_domains.php:65 view/general/traffic.php:79
+msgid "Details"
+msgstr ""
+
+#: view/domain/overview_domains.php:70
+msgid "Delete this domain (and all its data)?"
+msgstr ""
+
+#: view/domain/overview.php:3
+msgid "No Assigned Domains or Create Permissions"
+msgstr ""
+
+#: view/domain/overview.php:6
+msgid ""
+"There are currently no assigned domains for this account.<br />There are "
+"also no permissions to create new domains.<br />Please contact your reseller "
+"or administrator."
+msgstr ""
+
+#: view/domain/overview_subdomains.php:32
+msgid "# Aliases"
+msgstr ""
+
+#: view/domain/overview_subdomains.php:33
+msgid "# Subdomains"
+msgstr ""
+
+#: view/domain/overview_subdomains.php:48
+#: view/domain/overview_subdomains.php:57
+msgid "View"
+msgstr ""
+
+#: view/domain/picker.php:9 view/email/picker.php:8
+msgid "Pick a domain"
+msgstr ""
+
+#: view/domain/picker.php:13
+msgid ""
+"Pick a domain to continue. The selection is remembered in the session and "
+"applies to all detail views."
+msgstr ""
+
+#: view/domain/picker.php:16
+msgid "No domains visible to you."
+msgstr ""
+
+#: view/domain/picker.php:35 view/email/overview.php:50
+#: view/email/picker.php:36
+msgid "Pick"
+msgstr ""
+
+#: view/domain/subdomain_form.php:23
+msgid "Edit subdomain"
+msgstr ""
+
+#: view/domain/subdomain_form.php:39
+msgid "Label"
+msgstr ""
+
+#: view/domain/subdomain_form.php:50
+msgid "Directory (local vhost)"
+msgstr ""
+
+#: view/domain/subdomain_form.php:52
+msgid "IP forwarding (DNS only, remote server)"
+msgstr ""
+
+#: view/domain/subdomain_form.php:54
+msgid "Alias of existing subdomain"
+msgstr ""
+
+#: view/domain/subdomain_form.php:58
+msgid "Alias target"
+msgstr ""
+
+#: view/domain/subdomain_form.php:61
+msgid "e.g. www.example.com"
+msgstr ""
+
+#: view/domain/subdomain_form.php:65
+msgid "Directory or IP"
+msgstr ""
+
+#: view/domain/subdomain_form.php:68
+msgid ""
+"Directory name under the webroot (directory mode) or target IP (IP mode)"
+msgstr ""
+
+#: view/domain/subdomain_form.php:71
+msgid "Known server IPs"
+msgstr ""
+
+#: view/domain/subdomain_form.php:80 view/domain/subdomain_form.php:135
+msgid "Custom config"
+msgstr ""
+
+#: view/domain/subdomain_form.php:83
+msgid ""
+"Rendered between the START/END CUSTOM markers in the vhost. Empty = the "
+"configured snippet."
+msgstr ""
+
+#: view/domain/subdomain_form.php:88 view/domain/subdomain_form.php:145
+msgid "TLS certificate"
+msgstr ""
+
+#: view/domain/subdomain_form.php:91
+msgid "Automatic (best match for this name, else http-only)"
+msgstr ""
+
+#: view/domain/subdomain_form.php:92 view/domain/subdomain_form.php:148
+msgid "None (http only)"
+msgstr ""
+
+#: view/domain/subdomain_form.php:97
+msgid ""
+"An https block (*:443) with SSLCertificate directives is rendered before the "
+"http block when a certificate applies."
+msgstr ""
+
+#: view/domain/subdomain_form.php:120
+msgid ""
+"Empty = keep the current name. A rename moves the document root when "
+"possible."
+msgstr ""
+
+#: view/domain/subdomain_form.php:127
+msgid "IP forwarding"
+msgstr ""
+
+#: view/domain/subdomain_form.php:138
+msgid "Content between the START/END CUSTOM markers."
+msgstr ""
+
+#: view/domain/subdomain_form.php:139
+msgid "(No vhost on IP-forwarding rows.)"
+msgstr ""
+
+#: view/domain/subdomain_form.php:149
+msgid "Automatic (best match for this name)"
+msgstr ""
+
+#: view/domain/subdomain_form.php:152
+msgid "(currently set)"
+msgstr ""
+
+#: view/domain/subdomain_form.php:159
+#, php-format
+msgid "Currently bound: %s"
+msgstr ""
+
+#: view/domain/subdomain_form.php:165
+msgid "Regenerate skeleton"
+msgstr ""
+
+#: view/domain/subdomain_form.php:167
+msgid ""
+"Re-render the vhost skeleton (identity, paths, snippet), keeping this custom "
+"section"
+msgstr ""
+
+#: view/email/change_email.php:8
+#, php-format
+msgid "Edit mailbox %s"
+msgstr ""
+
+#: view/email/change_email.php:15 view/email/new_email.php:23
+msgid "Quota (MB, 0 = unlimited)"
+msgstr ""
+
+#: view/email/details_catchall.php:17
+#, php-format
+msgid "Catchall  %s"
+msgstr ""
+
+#: view/email/details_catchall.php:24
+msgid "Currently forwarding all mail for this domain to:"
+msgstr ""
+
+#: view/email/details_catchall.php:31
+msgid "No catchall set for this domain."
+msgstr ""
+
+#: view/email/details_catchall.php:38
+msgid "Forward all mail to"
+msgstr ""
+
+#: view/email/details_catchall.php:39 view/email/edit_forward.php:38
+msgid "One email address per line."
+msgstr ""
+
+#: view/email/details_catchall.php:49
+msgid "Update"
+msgstr ""
+
+#: view/email/details_catchall.php:49
+msgid "Set"
+msgstr ""
+
+#: view/email/details_catchall.php:58
+msgid "Remove catchall?"
+msgstr ""
+
+#: view/email/details_catchall.php:60
+msgid "Remove catchall"
+msgstr ""
+
+#: view/email/details_email.php:12
+#, php-format
+msgid "Mailboxes  %s"
+msgstr ""
+
+#: view/email/details_email.php:17
+msgid "New mailbox"
+msgstr ""
+
+#: view/email/details_email.php:23
+msgid "No mailboxes for this domain."
+msgstr ""
+
+#: view/email/details_email.php:51 view/email/details_email.php:61
+msgid "of"
+msgstr ""
+
+#: view/email/details_email.php:55
+msgid "msgs"
+msgstr ""
+
+#: view/email/details_email.php:65
+#, php-format
+msgid "%d msgs"
+msgstr ""
+
+#: view/email/details_email.php:87
+msgid "Delete mailbox?"
+msgstr ""
+
+#: view/email/details_filtering.php:15
+#, php-format
+msgid "Filtering  %s"
+msgstr ""
+
+#: view/email/details_filtering.php:20
+msgid "New policy"
+msgstr ""
+
+#: view/email/details_filtering.php:25
+msgid ""
+"Empty value = inherit from the next coarser scope (@Mailbox -> @Domain -> "
+"global)."
+msgstr ""
+
+#: view/email/details_filtering.php:28
+msgid "No policies defined yet."
+msgstr ""
+
+#: view/email/details_filtering.php:34 view/email/details_wblist.php:44
+#: view/email/edit_filtering.php:26 view/email/edit_wblist.php:32
+msgid "Scope"
+msgstr ""
+
+#: view/email/details_filtering.php:35
+msgid "Spam tag score"
+msgstr ""
+
+#: view/email/details_filtering.php:36
+msgid "Reject score"
+msgstr ""
+
+#: view/email/details_filtering.php:37
+msgid "Updated"
+msgstr ""
+
+#: view/email/details_filtering.php:47 view/email/details_filtering.php:48
+msgid "(inherit)"
+msgstr ""
+
+#: view/email/details_filtering.php:51 view/email/details_wblist.php:53
+msgid "global"
+msgstr ""
+
+#: view/email/details_filtering.php:63
+msgid "Delete policy?"
+msgstr ""
+
+#: view/email/details_forward.php:9
+#, php-format
+msgid "Forwards  %s"
+msgstr ""
+
+#: view/email/details_forward.php:14
+msgid "New forward"
+msgstr ""
+
+#: view/email/details_forward.php:20
+msgid "No forwards for this domain."
+msgstr ""
+
+#: view/email/details_forward.php:54
+msgid "Delete forward?"
+msgstr ""
+
+#: view/email/details_wblist.php:14 view/email/edit_wblist.php:27
+msgid "Whitelist"
+msgstr ""
+
+#: view/email/details_wblist.php:18 view/email/edit_wblist.php:28
+msgid "Blacklist"
+msgstr ""
+
+#: view/email/details_wblist.php:25
+#, php-format
+msgid "Whitelist / Blacklist  %s"
+msgstr ""
+
+#: view/email/details_wblist.php:30
+msgid "New entry"
+msgstr ""
+
+#: view/email/details_wblist.php:38
+msgid "No entries."
+msgstr ""
+
+#: view/email/details_wblist.php:45
+msgid "Address"
+msgstr ""
+
+#: view/email/details_wblist.php:46 view/email/edit_wblist.php:74
+msgid "Comment"
+msgstr ""
+
+#: view/email/details_wblist.php:67
+msgid "Delete entry?"
+msgstr ""
+
+#: view/email/edit_filtering.php:15
+msgid "@Mailbox or @domain  empty already proposes this domain."
+msgstr ""
+
+#: view/email/edit_filtering.php:19
+msgid "Edit filtering policy"
+msgstr ""
+
+#: view/email/edit_filtering.php:19
+msgid "New filtering policy"
+msgstr ""
+
+#: view/email/edit_filtering.php:30 view/email/edit_wblist.php:36
+msgid " manual entry "
+msgstr ""
+
+#: view/email/edit_filtering.php:32 view/email/edit_wblist.php:38
+msgid "whole domain"
+msgstr ""
+
+#: view/email/edit_filtering.php:41 view/email/edit_wblist.php:47
+msgid "Aliases / forwards"
+msgstr ""
+
+#: view/email/edit_filtering.php:62
+msgid "Spam tag score (add_header)  empty = inherit"
+msgstr ""
+
+#: view/email/edit_filtering.php:67
+msgid "Reject score  empty = inherit"
+msgstr ""
+
+#: view/email/edit_forward.php:13
+#, php-format
+msgid "Edit forward: %s"
+msgstr ""
+
+#: view/email/edit_forward.php:14
+#, php-format
+msgid "New forward in %s"
+msgstr ""
+
+#: view/email/edit_forward.php:25
+msgid "Source local part"
+msgstr ""
+
+#: view/email/edit_forward.php:37
+msgid "Destinations"
+msgstr ""
+
+#: view/email/edit_wblist.php:18
+msgid "Edit whitelist / blacklist entry"
+msgstr ""
+
+#: view/email/edit_wblist.php:18
+msgid "New whitelist / blacklist entry"
+msgstr ""
+
+#: view/email/edit_wblist.php:25
+msgid "List"
+msgstr ""
+
+#: view/email/edit_wblist.php:65
+msgid ""
+"Per-mailbox / alias entries only apply to THIS address  one user's whitelist "
+"does not affect the others. Aliases resolve like their own mailbox at rspamd."
+msgstr ""
+
+#: view/email/edit_wblist.php:68
+msgid "Address / domain / IP/CIDR"
+msgstr ""
+
+#: view/email/new_email.php:7
+#, php-format
+msgid "New mailbox in %s"
+msgstr ""
+
+#: view/email/new_email.php:14
+msgid "Local part"
+msgstr ""
+
+#: view/email/overview.php:11
+msgid "Email  Domains"
+msgstr ""
+
+#: view/email/overview.php:16
+#, php-format
+msgid "Currently active: <strong>%s</strong>"
+msgstr ""
+
+#: view/email/overview.php:19
+msgid "Pick a domain to manage its email."
+msgstr ""
+
+#: view/email/overview.php:23
+msgid "No mail-enabled domains visible."
+msgstr ""
+
+#: view/email/overview.php:33
+msgid "Catchall"
+msgstr ""
+
+#: view/email/password.php:7
+#, php-format
+msgid "Change password for %s"
+msgstr ""
+
+#: view/email/picker.php:12
+msgid ""
+"Pick a domain to manage its email. The selection is remembered for the rest "
+"of the session."
+msgstr ""
+
+#: view/email/picker.php:15
+msgid "No mail-enabled domains visible to you."
+msgstr ""
+
+#: view/ftp/accounts.php:31
+msgid "FTP accounts"
+msgstr ""
+
+#: view/ftp/accounts.php:41
+msgid "New account"
+msgstr ""
+
+#: view/ftp/accounts.php:48
+msgid "Pick a domain first."
+msgstr ""
+
+#: view/ftp/accounts.php:50
+msgid "No FTP accounts."
+msgstr ""
+
+#: view/ftp/accounts.php:57 view/ftp/edit.php:66
+msgid "Home directory"
+msgstr ""
+
+#: view/ftp/accounts.php:58
+msgid "UID/GID"
+msgstr ""
+
+#: view/ftp/accounts.php:59
+msgid "Last access"
+msgstr ""
+
+#: view/ftp/accounts.php:60
+msgid "Traffic in/out"
+msgstr ""
+
+#: view/ftp/accounts.php:99
+msgid "Delete this FTP account?"
+msgstr ""
+
+#: view/ftp/edit.php:9
+msgid "New FTP account"
+msgstr ""
+
+#: view/ftp/edit.php:9
+#, php-format
+msgid "Edit FTP account: %s"
+msgstr ""
+
+#: view/ftp/edit.php:29
+msgid "e.g. user@example.com or just user"
+msgstr ""
+
+#: view/ftp/edit.php:43
+msgid "Leave blank to keep the current password"
+msgstr ""
+
+#: view/ftp/edit.php:51
+msgid " none "
+msgstr ""
+
+#: view/ftp/edit.php:70
+msgid "Absolute path on the server, e.g. /vhome/customer/example.com/www"
+msgstr ""
+
+#: view/ftp/edit.php:74
+msgid "Quota (MB)"
+msgstr ""
+
+#: view/ftp/edit.php:78
+msgid "0 = unlimited"
+msgstr ""
+
+#: view/ftp/overview.php:13
+msgid "No domains assigned."
+msgstr ""
+
+#: view/ftp/overview.php:19
+msgid "Accounts"
+msgstr ""
+
+#: view/ftp/overview.php:31
+msgid "Show accounts"
+msgstr ""
+
+#: view/general/overview.php:11
+msgid "Used resources"
+msgstr ""
+
+#: view/general/overview.php:12
+msgid "Server Summary"
+msgstr ""
+
+#: view/general/overview.php:13
+msgid "Security Details"
+msgstr ""
+
+#: view/general/overview.php:14
+msgid "Group Details"
+msgstr ""
+
+#: view/general/overview.php:15
+msgid "PMWH Details"
+msgstr ""
+
+#: view/general/overview.php:32
+msgid "Free disk space"
+msgstr ""
+
+#: view/general/password.php:12
+msgid "Old user password"
+msgstr ""
+
+#: view/general/password.php:20
+msgid "Repeat password"
+msgstr ""
+
+#: view/general/password.php:50 view/general/password.php:57
+msgid "An error occurred. Please try again later."
+msgstr ""
+
+#: view/general/sessions.php:17
+msgid "Active Sessions"
+msgstr ""
+
+#: view/general/sessions.php:22
+msgid "The pmwh3_activity table is not present in this database."
+msgstr ""
+
+#: view/general/sessions.php:23
+msgid ""
+"Run the module updater (visit any pmwh3 page after deploying this update) to "
+"create it. Until the activity middleware writes rows on each request, this "
+"view will stay empty even after the table is created."
+msgstr ""
+
+#: view/general/sessions.php:30
+#, php-format
+msgid "Showing all sessions active in the last %d minutes."
+msgstr ""
+
+#: view/general/sessions.php:31
+#, php-format
+msgid "Showing your own sessions active in the last %d minutes."
+msgstr ""
+
+#: view/general/sessions.php:38
+msgid "No active sessions."
+msgstr ""
+
+#: view/general/sessions.php:46
+msgid "Module"
+msgstr ""
+
+#: view/general/sessions.php:47
+msgid "Doing"
+msgstr ""
+
+#: view/general/sessions.php:49
+msgid "Started"
+msgstr ""
+
+#: view/general/sessions.php:88
+msgid "Kick this session?"
+msgstr ""
+
+#: view/general/sessions.php:89
+msgid "Kick"
+msgstr ""
+
+#: view/general/traffic_details.php:6
+#, php-format
+msgid "Monthly overview for %s"
+msgstr ""
+
+#: view/general/traffic_details.php:6
+msgid "Monthly overview per day"
+msgstr ""
+
+#: view/general/traffic_details.php:10
+msgid "Back to traffic"
+msgstr ""
+
+#: view/general/traffic_details.php:14 view/message/inbox.php:36
+#: view/message/view.php:22 view/tools/backup.php:29 view/tools/news.php:25
+msgid "Date"
+msgstr ""
+
+#: view/general/traffic_details.php:18 view/general/traffic.php:13
+#: view/general/traffic.php:48 view/general/traffic.php:74
+msgid "Overall"
+msgstr ""
+
+#: view/general/traffic.php:3
+msgid "Monthly overview over all your customers"
+msgstr ""
+
+#: view/general/traffic.php:8
+msgid "Select"
+msgstr ""
+
+#: view/general/traffic.php:9 view/general/traffic.php:44
+#: view/general/traffic.php:70
+msgid "Month"
+msgstr ""
+
+#: view/general/traffic.php:19 view/general/traffic.php:28
+msgid "All"
+msgstr ""
+
+#: view/general/traffic.php:40
+msgid "Monthly Overview per Customer"
+msgstr ""
+
+#: view/general/traffic.php:66
+msgid "Monthly Overview per Domain"
+msgstr ""
+
+#: view/group/edit.php:13 view/group/overview.php:13
+msgid "New group"
+msgstr ""
+
+#: view/group/edit.php:13
+msgid "Edit group"
+msgstr ""
+
+#: view/group/edit.php:21 view/group/overview.php:25
+msgid "Group ID"
+msgstr ""
+
+#: view/group/members.php:10
+#, php-format
+msgid "Members of \"%s\""
+msgstr ""
+
+#: view/group/members.php:17
+msgid "No customers are in this group."
+msgstr ""
+
+#: view/group/members.php:23
+msgid "CID"
+msgstr ""
+
+#: view/group/overview.php:10
+msgid "Customer Groups"
+msgstr ""
+
+#: view/group/overview.php:19
+msgid "No groups defined."
+msgstr ""
+
+#: view/group/overview.php:27
+msgid "Members"
+msgstr ""
+
+#: view/group/overview.php:43
+msgid "Show members"
+msgstr ""
+
+#: view/group/overview.php:57
+msgid "Delete this group?"
+msgstr ""
+
+#: view/group/overview.php:61
+msgid "(has members)"
+msgstr ""
+
+#: view/group/permissions.php:45
+msgid "Self-edit blocked"
+msgstr ""
+
+#: view/group/permissions.php:46
+msgid "You cannot edit the permissions of your own customer group."
+msgstr ""
+
+#: view/group/permissions.php:49
+msgid "No permissions to show."
+msgstr ""
+
+#: view/group/permissions.php:73
+msgid "Granted"
+msgstr ""
+
+#: view/group/permissions.php:74 view/tools/edit_menu_row.php:93
+#: view/tools/menu.php:40
+msgid "Permission"
+msgstr ""
+
+#: view/group/permissions.php:75
+msgid "Key"
+msgstr ""
+
+#: view/login_activate.php:22
+msgid "New Password"
+msgstr ""
+
+#: view/login_activate.php:26
+msgid "Confirm"
+msgstr ""
+
+#: view/login.php:75
+msgid "Password reset"
+msgstr ""
+
+#: view/login.php:75
+msgid "Send email success"
+msgstr ""
+
+#: view/message/compose.php:9
+msgid "Compose Message"
+msgstr ""
+
+#: view/message/compose.php:15 view/message/inbox.php:33
+#: view/message/view.php:20
+msgid "To"
+msgstr ""
+
+#: view/message/compose.php:26
+#, php-format
+msgid "%d customers available"
+msgstr ""
+
+#: view/message/compose.php:29 view/message/inbox.php:35
+msgid "Subject"
+msgstr ""
+
+#: view/message/compose.php:32 view/tools/edit_news.php:19
+#: view/tools/news.php:26
+msgid "Text"
+msgstr ""
+
+#: view/message/compose.php:39
+msgid "Send"
+msgstr ""
+
+#: view/message/inbox.php:10 view/message/inbox.php:13
+msgid "Inbox"
+msgstr ""
+
+#: view/message/inbox.php:10 view/message/inbox.php:13
+msgid "Sent"
+msgstr ""
+
+#: view/message/inbox.php:15
+msgid "Compose"
+msgstr ""
+
+#: view/message/inbox.php:21
+msgid "Could not resolve your customer name."
+msgstr ""
+
+#: view/message/inbox.php:23
+msgid "No messages."
+msgstr ""
+
+#: view/message/inbox.php:23
+msgid "Nothing sent."
+msgstr ""
+
+#: view/message/inbox.php:31 view/message/view.php:18
+msgid "From"
+msgstr ""
+
+#: view/message/inbox.php:47
+msgid "NEW"
+msgstr ""
+
+#: view/message/inbox.php:47
+msgid "read"
+msgstr ""
+
+#: view/message/inbox.php:60
+msgid "Open"
+msgstr ""
+
+#: view/message/inbox.php:64 view/message/view.php:39
+msgid "Delete this message?"
+msgstr ""
+
+#: view/message/view.php:11
+msgid "(no subject)"
+msgstr ""
+
+#: view/message/view.php:34
+msgid "Reply"
+msgstr ""
+
+#: view/options/_form.php:41
+msgid ""
+"No settings to display in this section at the current configuration level."
+msgstr ""
+
+#: view/options/_form.php:100
+msgid "Enabled"
+msgstr ""
+
+#: view/options/_viewer.php:15
+msgid "Error log (last "
+msgstr ""
+
+#: view/options/_viewer.php:28
+msgid "Purge entries older than the retention window?"
+msgstr ""
+
+#: view/options/_viewer.php:29
+msgid "Purge old"
+msgstr ""
+
+#: view/options/_viewer.php:39
+msgid "No db errorlog entries."
+msgstr ""
+
+#: view/options/_viewer.php:57
+#, php-format
+msgid "Nothing in %s (target: %s)."
+msgstr ""
+
+#: view/package/edit.php:14 view/package/overview.php:18
+msgid "New package"
+msgstr ""
+
+#: view/package/edit.php:14
+msgid "Edit package"
+msgstr ""
+
+#: view/package/edit.php:27
+msgid "(rename = delete + create)"
+msgstr ""
+
+#: view/package/edit.php:53
+msgid "-1 means unlimited, 0 means disabled."
+msgstr ""
+
+#: view/package/overview.php:24
+msgid "No packages defined."
+msgstr ""
+
+#: view/package/overview.php:33
+msgid "Traffic"
+msgstr ""
+
+#: view/package/overview.php:36
+msgid "Emails"
+msgstr ""
+
+#: view/package/overview.php:38
+msgid "DBs"
+msgstr ""
+
+#: view/package/overview.php:79
+msgid "Delete this package?"
+msgstr ""
+
+#: view/package/overview.php:89
+msgid ""
+"-1 means unlimited, 0 means disabled. System packages (creator=system) are "
+"read-only for non-admin users."
+msgstr ""
+
+#: view/tools/applications.php:15 view/tools/edit_application.php:13
+msgid "New application"
+msgstr ""
+
+#: view/tools/applications.php:20
+msgid "No applications defined yet."
+msgstr ""
+
+#: view/tools/applications.php:25 view/tools/edit_application.php:30
+#: view/tools/edit_menu_row.php:82 view/tools/menu.php:37
+msgid "Sort"
+msgstr ""
+
+#: view/tools/applications.php:27 view/tools/edit_menu_row.php:60
+#: view/tools/menu.php:39
+msgid "Link"
+msgstr ""
+
+#: view/tools/applications.php:50
+msgid "Delete application?"
+msgstr ""
+
+#: view/tools/applications.php:59
+#, php-format
+msgid "Shown %d per row in the customer Applications view (APPS_PER_ROW)."
+msgstr ""
+
+#: view/tools/backup.php:9
+msgid "Database backup"
+msgstr ""
+
+#: view/tools/backup.php:15
+msgid "Backup now"
+msgstr ""
+
+#: view/tools/backup.php:22
+msgid "No backups yet."
+msgstr ""
+
+#: view/tools/backup.php:28
+msgid "Filename"
+msgstr ""
+
+#: view/tools/backup.php:30
+msgid "Size"
+msgstr ""
+
+#: view/tools/backup.php:42
+msgid "Download"
+msgstr ""
+
+#: view/tools/backup.php:46
+msgid "Delete backup?"
+msgstr ""
+
+#: view/tools/backup.php:58
+msgid ""
+"Backups land in the configured BACKUP_DIR (shadow directory, outside the "
+"source tree)."
+msgstr ""
+
+#: view/tools/edit_application.php:13
+msgid "Edit application"
+msgstr ""
+
+#: view/tools/edit_application.php:25
+msgid "Link (URL)"
+msgstr ""
+
+#: view/tools/edit_menu_row.php:39 view/tools/menu.php:25
+msgid "New menu row"
+msgstr ""
+
+#: view/tools/edit_menu_row.php:40
+msgid "Edit menu row"
+msgstr ""
+
+#: view/tools/edit_menu_row.php:66 view/tools/menu.php:36
+msgid "Box"
+msgstr ""
+
+#: view/tools/edit_menu_row.php:77
+msgid "Existing:"
+msgstr ""
+
+#: view/tools/edit_menu_row.php:87
+msgid "Icon"
+msgstr ""
+
+#: view/tools/edit_menu_row.php:105
+msgid "Convention:"
+msgstr ""
+
+#: view/tools/edit_menu_row.php:107
+msgid "Leave empty for \"visible to everyone\"."
+msgstr ""
+
+#: view/tools/edit_menu_row.php:109
+msgid ""
+"Auto-registered in the framework on first menu render if it doesn't exist "
+"yet."
+msgstr ""
+
+#: view/tools/edit_menu_row.php:114
+msgid "Hidden"
+msgstr ""
+
+#: view/tools/edit_menu_row.php:118
+msgid "If checked, the row is hidden in the nav regardless of permission."
+msgstr ""
+
+#: view/tools/edit_news.php:12
+msgid "Edit news"
+msgstr ""
+
+#: view/tools/edit_news.php:12 view/tools/news.php:14
+msgid "New news"
+msgstr ""
+
+#: view/tools/edit_news.php:26
+msgid "Active (visible on the login page ticker)"
+msgstr ""
+
+#: view/tools/errorlog.php:19
+msgid "Errorlog settings"
+msgstr ""
+
+#: view/tools/menu.php:22
+msgid "Menu rows"
+msgstr ""
+
+#: view/tools/menu.php:31
+msgid "No menu rows."
+msgstr ""
+
+#: view/tools/menu.php:41
+msgid "Visible"
+msgstr ""
+
+#: view/tools/menu.php:83
+msgid "Hide"
+msgstr ""
+
+#: view/tools/menu.php:83
+msgid "Show"
+msgstr ""
+
+#: view/tools/menu.php:91
+#, php-format
+msgid "Delete menu row \"%s\"?"
+msgstr ""
+
+#: view/tools/news.php:19
+msgid "No news items yet."
+msgstr ""
+
+#: view/tools/news.php:27
+msgid "Author"
+msgstr ""
+
+#: view/tools/news.php:53
+msgid "Delete news?"
+msgstr ""
+
+#: view/tools/overview.php:7
+msgid "Pick a sub-tool from the sidebar."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:2
+msgid "Configuration Level"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:3
+msgid "Easy hides advanced settings."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:4
+msgid "Easy"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:5
+msgid "Advanced"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:6
+msgid "Browser Title"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:7
+msgid "Path to phpMyWebHosting"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:8
+msgid "Server IP Addresses"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:9
+msgid ""
+"One IP per line. These are treated as \"own\" -- any other IP is considered "
+"a foreign host."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:10
+msgid "Generated Password Length"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:11
+msgid "Reserved Names"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:12
+msgid ""
+"Comma-separated names that may not be chosen as customer or mailbox names."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:13
+msgid "Show CAPTCHA on Login"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:14
+msgid "SI Units (1000 vs 1024)"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:15
+msgid "Y uses base-1000 (KB/MB/GB); N uses base-1024 (KiB/MiB/GiB)."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:16
+msgid "Admin Level"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:17
+msgid "0"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:18 /tmp/opencode/schema_calls.php:142
+msgid "1"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:19
+msgid "ALL"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:20
+msgid "Default Language"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:21
+msgid "Default Encoding"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:22
+msgid "Save Queries (Debug)"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:23
+msgid "Web Server Adapter"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:24
+msgid ""
+"Adapters detected automatically from utils/web/. Adding a new backend "
+"(nginx, ...) only requires dropping the file in."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:25
+msgid "Generated VHost Address (http)"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:26
+msgid ""
+"Value of the <VirtualHost ...> address the web adapter renders for the plain-"
+"http block (e.g. '*:80'). The https block uses '*:443' when a certificate is "
+"set."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:27
+msgid "Certificate directory"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:28
+msgid ""
+"Directory containing <name>.pem + <name>.key certificate pairs (wildcard = "
+"\"_.domain.tld\"). Must be readable by pmwh3 for the certificate selection "
+"and by the web server, since the paths are rendered into the vhost as "
+"SSLCertificateFile/KeyFile."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:29
+msgid "Web Root"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:30
+msgid "Web Root Structure"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:31
+msgid "Relative path under WEBROOT. Placeholders: [CUSTOMER], [DOMAIN]"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:32
+msgid "Filesystem Adapter"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:33
+msgid "Adapters detected automatically from utils/fs/."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:34
+msgid "Index Filename"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:35
+msgid "Name of the placeholder file dropped into new web roots. Empty = none."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:36
+msgid "Index File Content"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:37
+msgid "Apache VHost Snippet"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:38
+msgid ""
+"Inserted into every generated vhost. Placeholders: [DOMAIN], [SUBDOMAIN], "
+"[DOCROOT], [CUSTOMER]"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:39
+msgid "Mail Backend"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:40
+msgid "Adapters detected automatically from utils/mail/."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:41
+msgid "Mail Home Directory"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:42
+msgid "Mail User UID"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:43
+msgid "Mail User GID"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:44
+msgid "Maildir Pattern"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:45
+msgid "Placeholders: [DOMAIN], [USER]"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:46
+msgid "Use maildrop instead of virtual"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:47
+msgid "Auto-create email accounts"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:48
+msgid ""
+"Comma-separated list (e.g. webmaster, postmaster, abuse, hostmaster). "
+"Created automatically when a domain is added."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:49
+msgid "Welcome Mail Template"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:50
+msgid "Placeholders: [EMAILUSER], [EMAIL], [DOMAIN], [CREATOR_REALNAME]"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:51
+msgid "Customer Email Policy"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:52
+msgid "Encrypt Email Passwords"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:53
+msgid "Check for New Mail"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:54
+msgid "Show New Mail Indicator"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:55
+msgid "Default UID for new FTP accounts"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:56
+msgid ""
+"Numeric UID stored in the proftpd row. Must be >= SQLMinID in proftpd config "
+"(typically 500)."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:57
+msgid "Default GID for new FTP accounts"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:58
+msgid ""
+"Numeric GID stored in the proftpd row. Used unless a per-domain group exists."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:59
+msgid "FTP Quota Type"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:60
+msgid ""
+"Default limit_type for new proftpd_quotalimits rows. soft = warn; hard = "
+"block."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:61
+msgid "soft"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:62
+msgid "hard"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:63
+msgid "Encrypt FTP Passwords"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:64
+msgid ""
+"When off, plain passwords are stored. When on, SHA-256 hex (proftpd "
+"SQLPasswordEngine on / Encoding hex)."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:65
+msgid "Nameservers"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:66
+msgid "One per line. The first is treated as the primary NS in the SOA record."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:67
+msgid "MX Servers"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:68
+msgid "One per line. Used to populate MX records on new zones."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:69
+msgid "DNS Backend"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:70
+msgid ""
+"Adapters detected automatically from utils/dns/. Adding a new adapter only "
+"requires dropping the file in."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:71
+msgid "Filter policy export"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:72
+msgid ""
+"Where pmwh3_filtering / pmwh3_wblist are exported to. rspamd serves HTTP map "
+"endpoints (rspamd pulls), none keeps the tables UI-only."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:73
+msgid "Rspamd (HTTP maps)"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:74
+msgid "No automation (UI only)"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:75
+msgid "Rspamd map token"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:76
+msgid ""
+"Optional shared secret; rspamd map URLs must then carry ?key=<token>. Empty "
+"= open (internal network only)."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:77
+msgid "Rspamd controller API URL"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:78
+msgid ""
+"Used by pmwh3 for ping / stat / learning calls. Default http://rspamd:11334; "
+"empty disables API calls."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:79
+msgid "Rspamd controller password"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:80
+msgid "Optional; sent as the \"Password\" header to the controller API."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:81
+msgid "Rspamd worker-normal URL"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:82
+msgid ""
+"For message checks from pmwh3 (POST /checkv2), Default http://rspamd:11333; "
+"empty disables the scan helper."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:83
+msgid "Dovecot doveadm endpoint"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:84
+msgid ""
+"host:port of the doveadm-server inside the dovecot container (None then live "
+"quota lookups). Used by the mail adapter (postfix) for accurate \"used\" "
+"numbers that match what mail clients see."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:85
+msgid "Dovecot doveadm password"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:86
+msgid ""
+"Shared secret for the doveadm-server (must match the dovecot config). Stored "
+"plain in pmwh3_configuration like the other service credentials."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:87
+msgid "Backup directory"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:88
+msgid ""
+"Directory for pmwh3 SQL dumps. Must NOT be inside the source tree and must "
+"be writable by the web server user. The directory is created on first backup."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:89
+msgid "PowerDNS API base URL"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:90
+msgid ""
+"Base URL of the PowerDNS HTTP API, e.g. http://pdns:8081/api/v1. Required "
+"for DNSSEC zone signing / disabling. If empty, DNSSEC is read-only."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:91
+msgid "PowerDNS API key"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:92
+msgid ""
+"Value of the api-key= setting in pdns.conf. Sent as the X-API-Key header."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:93
+msgid "PowerDNS API server id"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:94
+msgid ""
+"Server identifier in the API path (.../api/v1/servers/<server_id>/...). "
+"Defaults to \"localhost\", which is correct for almost every install."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:95
+msgid "SOA Refresh"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:96
+msgid "SOA Retry"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:97
+msgid "SOA Expire"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:98
+msgid "SOA Minimum"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:99
+msgid "Default Record TTL"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:100
+msgid "Database backend"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:101
+msgid ""
+"Which DB server pmwh3 provisions customer databases on. Only mysql is "
+"implemented for now; the value is here so adapter selection can be added "
+"later (postgres, etc)."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:102
+msgid "MySQL / MariaDB"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:103
+msgid "DB server host"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:104
+msgid ""
+"Hostname or IP of the database server pmwh3 should provision new customer "
+"databases on."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:105
+msgid "DB server port"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:106
+msgid "DB admin user"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:107
+msgid ""
+"User pmwh3 connects with to run CREATE DATABASE / GRANT / DROP. Needs "
+"CREATE, GRANT OPTION, DROP, and the ability to create users (CREATE USER). "
+"Not root by default -- a dedicated pmwh3_admin user is recommended."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:108
+msgid "DB admin password"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:109
+msgid ""
+"Password for the DB admin user above. Stored as plain text in "
+"pmwh3_configuration. Make sure the file/DB is not world-readable."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:110
+msgid "Database name prefix style"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:111
+msgid ""
+"How new database names are composed. customer = prefix with the customer "
+"name and underscore (e.g. customer_blog). none = use the suffix as-is."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:112
+msgid "customer_<suffix>"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:113
+msgid "<suffix>"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:114
+msgid "Default user host for new grants"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:115
+msgid ""
+"The HOST part of new GRANTs (user@host). % allows connections from anywhere; "
+"localhost or an IP restricts access. % is the usual choice when the web "
+"server and the database server are separate containers/hosts."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:116
+msgid "Advanced DB Management"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:117
+msgid ""
+"Show per-grant privilege checkboxes (SELECT/INSERT/UPDATE/...) in the new-"
+"user form. Off = \"full access\" toggle only."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:118
+msgid "phpMyAdmin URL"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:119
+msgid ""
+"Full URL of a phpMyAdmin instance, including scheme (e.g. https://"
+"pma.example.com). Used by the \"Phpmyadmin\" sidebar link in the Databases "
+"box; opens in a new tab. Leave empty to hide the link."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:120
+msgid "Next Customer Number"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:121
+msgid "Create Default Subdomains"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:122
+msgid "Auto-Subdomain Pattern"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:123
+msgid "Format: name(alias1,alias2);name(alias1)"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:124
+msgid "Create Filesystem Directories"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:125
+msgid "Count Subdomain Aliases"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:126
+msgid "When Y, aliases consume the same quota as subdomains."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:127
+msgid "Cascade-Delete Subdomain Aliases"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:128
+msgid "Log Offset (days)"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:129
+msgid "Use Message System"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:130
+msgid "Confirm Changes"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:131
+msgid "Confirm Deletes"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:132
+msgid "Session Storage"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:133
+msgid "cookie"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:134
+msgid "session"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:135
+msgid "Customer Idle Timeout (sec)"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:136
+msgid "Default Template"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:137
+msgid "Small Logo Path"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:138
+msgid "Large Logo Path"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:139
+msgid "HTML Footer"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:140
+msgid "Apps per Row"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:141
+msgid "OFF"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:143
+msgid "2"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:144
+msgid "3"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:145
+msgid "4"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:146
+msgid "5"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:147
+msgid "Show Menu Icons"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:148
+msgid "Icon Theme"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:149
+msgid "Show News"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:150
+msgid "Max News Items"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:151
+msgid "Errorlog target"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:152
+msgid ""
+"Where errors are written. \"file\" writes to ERRORLOG_FILE (relative paths "
+"resolve against the cevian root); \"syslog\" goes to the system logger (not "
+"viewable in the Errorlog viewer); \"db\" persists into pmwh3_errorlog (table "
+"created on first write)."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:153
+msgid "File (var/log by default)"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:154
+msgid "Syslog"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:156
+msgid "Minimum log level"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:157
+msgid "Debug"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:158
+msgid "Info"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:159
+msgid "Notice"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:160
+msgid "Warning"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:161
+msgid "Error"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:162
+msgid "Critical"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:163
+msgid "Capture scope"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:164
+msgid ""
+"Which sources to log. Multiple selections allowed. \"php\" is required for "
+"PHP native errors."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:165
+msgid "Application (pmwh3 modules)"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:166
+msgid "Framework (cevian)"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:167
+msgid "PHP errors / warnings"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:168
+msgid "Database errors"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:169
+msgid "Include stack traces"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:170
+msgid ""
+"Helpful for debugging, but verbose. Turn off in production if log size is a "
+"concern."
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:171
+msgid "Retention (days)"
+msgstr ""
+
+#: /tmp/opencode/schema_calls.php:172
+msgid ""
+"Older entries are eligible for purging by the Errorlog viewer / a cron job. "
+"0 = keep forever."
+msgstr ""
+
+#: modules/pmwh3/model/general_model.php
+msgid "Servername"
+msgstr ""
+
+#: modules/pmwh3/model/general_model.php
+msgid "# Customers"
+msgstr ""
+
+#: modules/pmwh3/model/general_model.php
+msgid "# Domains"
+msgstr ""
+
+#: modules/pmwh3/model/general_model.php
+msgid "# Email addresses"
+msgstr ""
+
+#: modules/pmwh3/model/general_model.php
+msgid "# FTP accounts"
+msgstr ""
+
+#: modules/pmwh3/model/general_model.php
+msgid "Count of MySQL databases"
+msgstr ""
+
+#: modules/pmwh3/model/general_model.php
+msgid "Server software"
+msgstr ""
+
+#: modules/pmwh3/model/general_model.php
+msgid "PHP version"
+msgstr ""
+
+#: modules/pmwh3/model/general_model.php
+msgid "PHP memory limit"
+msgstr ""
+
+#: modules/pmwh3/model/general_model.php
+msgid "MySQL server version"
+msgstr ""
+
+#: modules/pmwh3/model/general_model.php
+msgid "Server Time"
+msgstr ""
+
+#: modules/pmwh3/model/general_model.php
+msgid "Timezone"
+msgstr ""
+
+#: modules/pmwh3/model/general_model.php
+msgid "PMWH version"
+msgstr ""
+
+#: modules/pmwh3/model/general_model.php
+msgid "PMWH Locale"
+msgstr ""
+
+#: modules/pmwh3/model/general_model.php
+msgid "PMWH Encoding"
+msgstr ""
+
+#: modules/pmwh3/model/general_model.php
+msgid "PMWH Locale bound to"
+msgstr ""
+
+#: modules/pmwh3/model/general_model.php
+msgid "PMWH Webroot"
+msgstr ""
+
+#: modules/pmwh3/model/general_model.php
+msgid "Framework"
+msgstr ""
+
+#: modules/pmwh3/model/general_model.php
+msgid "Framework version"
+msgstr ""

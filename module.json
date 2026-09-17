@@ -1,0 +1,23 @@
+{
+    "name": "pmwh3",
+    "version": "3.0.82",
+    "description": "PhpMyWebHosting",
+    "core": false,
+    "database": {
+        "type": "mysql",
+        "host": "DB_HOST",
+        "name": "DB_NAME",
+        "user": "DB_USER",
+        "pass": "DB_PASS"
+    },
+    "dns": {
+        "table_prefix": "",
+        "database": {
+            "type": "mysql",
+            "host": "DNS_DB_HOST",
+            "name": "DNS_DB_NAME",
+            "user": "DNS_DB_USER",
+            "pass": "DNS_DB_PASS"
+        }
+    }
+}

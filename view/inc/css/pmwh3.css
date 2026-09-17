@@ -1,0 +1,927 @@
+
+#flex-container {
+    max-width: 97%;
+}
+
+/*
+#flex-container {
+    transition: margin-left 0.5s;
+    margin-left: 250px;
+    padding: 20px;
+    max-width: calc(100vw - 295px);
+    overflow-x: auto;
+}
+
+#flex-container > div:last-child .widget {
+    display: block;
+    width: 98%;
+}
+*/
+/*
+.widget {
+    background-color: #333;
+    padding-bottom: 6px;
+    padding: 4px;
+    max-width: 750px;
+    border-radius: 10px;
+    border-color: white;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+*/
+
+.widget {
+    /* background-color: #333; */
+    padding-bottom: 6px;
+    padding: 4px;
+    max-width: 100%;
+    border-radius: 10px;
+    border-color: white;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    margin-left: 15px;
+    margin-right: 360px;
+    min-width: 220px;
+}
+
+.widget-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.widget-key {
+    text-align: left;
+    font-weight: bold;
+    padding-right: 6px;
+    width: 45%;
+    vertical-align: top;
+    padding: 5px 0 2px 10px;
+    white-space: nowrap;
+}
+.widget-value {
+    text-align: left;
+    width: 55%;
+    white-space: nowrap;
+    padding: 5px 15px;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 95%;
+    width: 250px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    transition: width 0.5s ease;
+    padding-top: 180px;
+    padding-bottom: 50px;
+    padding-left: 0 !important;
+    /* margin-left: 15px; */
+    box-sizing: border-box;
+    z-index: 1000;
+    /* direction: rtl; */
+}
+
+/* Links im Sidebar */
+.sidebar a {
+    padding: 10px 15px 10px 40px;
+    text-decoration: none;
+    color: #ecf0f1; /* helles Grau */
+    display: block;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+}
+
+.sidebar a:hover {
+    color: #2ecc71; /* frisches Grün */
+    border-left: 3px solid #2ecc71;
+    background-color: rgba(255,255,255,0.05);
+}
+
+::-webkit-scrollbar {
+    background-color: #555; 
+    width: 6px; 
+    height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #888; 
+    border-radius: 4px;     
+}
+
+/* Button */
+.openbtn {
+    font-size: 18px;
+    cursor: pointer;
+    background-color: #191919;
+    color: #ecf0f1;
+    padding: 5px;
+    border: none;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    display: inline-block;
+    margin-bottom: 10px;
+    margin-left: 15px;
+    position: fixed; /*relative; /* bleibt sichtbar */
+    z-index: 1001;
+    left: 215px;
+    top: 145px;
+}
+
+.openbtn:hover {
+    background-color: #2ecc71;
+    color: #ffffff;
+}
+
+/* Flex-Container für Content */
+#flex-container {
+    margin-left: auto;
+    transition: margin-left 0.5s;
+    text-align: left;
+    padding: 20px;
+}
+
+#sidebar li.widget {
+    /* margin-bottom: 10px; */
+    border-radius: 10px;
+    margin-top: 10px; /* statt padding-top auf Sidebar */
+    list-style: none;
+}
+
+#sidebar, #sidebar * {
+    box-sizing: border-box;
+}
+
+#sidebar h2 {
+    cursor: pointer;
+    padding: 8px;
+    margin: 0;
+    background: #333;
+}
+#sidebar ul {
+    margin: 0;
+    padding: 10px;
+    list-style: none;
+    background-color: #191919;
+}
+#sidebar li a {
+    display: block;
+    padding: 5px 10px;
+    transition: padding-left .3s;
+}
+#sidebar li a.active {
+    color: red;
+} /* Aktiver Link rot */
+
+.tooltip {
+    background: #333;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-top: 5px;
+}
+
+#tipinfo {
+    margin-top: 20px;
+    border: 1px dashed #aaa;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.widget h2 {
+    border-radius: 10px;
+    margin: 0;
+    font-size: 18px;
+}
+
+/* Hauptmenü-Button mit Pfeil davor */
+li.widget h2.inactive::before {
+    content: "▸";              /* Pfeil nach rechts */
+    margin-right: 8px;
+    transition: transform 0.3s;
+}
+
+/* wenn geöffnet (active) */
+li.widget h2.active::before {
+    content: "▼";              /* Pfeil nach unten */
+}
+
+.security-red {
+    color: #ff0000; /* schlecht für Security */
+    font-weight: bold;
+}
+
+.security-green {
+    color: #00cc00; /* gut für Security */
+    font-weight: bold;
+}
+
+#top-info {
+    float: right;                /* rechts ausrichten */
+    background-color: #333;      /* dunkler Hintergrund */
+    color: #fff;                 /* Textfarbe */
+    padding: 5px 12px 5px 5px;           /* Innenabstand */
+    border-radius: 8px;          /* abgerundete Ecken */
+    font-size: 12px;
+    margin: 10px 20px 0 0;       /* oben/rechts Abstand */
+    border: 1px solid #ccc;      /* optionaler Rand */
+    position: inherit;
+    top: 180px;
+    right: 10px;
+}
+
+#top-info {
+    min-width: 250px;
+    max-width: 450px;
+    width: auto; /* nimmt Platz nach Inhalt */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* ------------------------- */
+/* 📱 Mobile Ansicht */
+/* ------------------------- */
+@media (max-width: 768px) {
+    /* Sidebar wird oben als normaler Block angezeigt */
+    .sidebar {
+        position: relative;
+        width: 100% !important;
+        height: auto;
+        padding: 10px;
+        margin: 0;
+        overflow: visible;
+        box-sizing: border-box;
+        padding-top: 96px;
+    }
+
+    #sidebar li.widget h2 {
+        display: inline-flex;
+        align-items: center;
+        white-space: nowrap;
+        padding: 8px; /* wie Desktop */
+    }
+
+    /* Sidebar-Button braucht man nicht */
+    .openbtn {
+        display: none;
+    }
+
+    /* Container normal unter Sidebar */
+    #flex-container {
+        margin-left: 0;
+        max-width: 99%;
+        padding: 10px;
+        display: block; /* keine Flex-Zeilen */
+    }
+
+    /* Content bündig */
+    .pmwh3-content {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        line-height: 1.4em;
+    }
+
+    /* Widgets nehmen volle Breite */
+    .widget {
+        width: 98%;
+        max-width: 100%;
+        margin: 10px 0 !important;
+    }
+
+    /* Top-Info auch als Block */
+    #top-info {
+        position: relative;
+        float: none;
+        width: 98%;
+        max-width: 98%;
+        margin: 10px 0 !important;
+        top: auto;
+        right: auto;
+    }
+
+    /* Tabellen sauber umbrechen */
+    .widget-table {
+        width: 98%;
+        table-layout: fixed;
+    }
+
+    .widget-key {
+        width: 40%;
+        white-space: normal;
+        word-break: break-word;
+    }
+
+    .widget-value {
+        width: 59%;
+        white-space: normal;
+        word-break: break-word;
+    }
+}
+
+/* ------------------------- */
+/* Layout: pmwh3-content     */
+/* ------------------------- */
+/* Desktop: shift content right of the 250px sidebar.
+   The mobile @media block above resets this to margin-left:0. */
+.pmwh3-content {
+    margin-left: 250px;
+    transition: margin-left 0.5s;
+}
+
+/* ------------------------- */
+/* Widget header / body      */
+/* Used by all section views (overview, options, email, etc.) */
+/* ------------------------- */
+.widget-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 12px;
+    border-bottom: 1px solid #555;
+    margin-bottom: 6px;
+}
+
+.widget-header h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.widget-body {
+    padding: 10px 15px;
+}
+
+/* ------------------------- */
+/* Options form              */
+/* Used by view/options/_form.php to render one settings section */
+/* ONE shared grid for the whole section: label left, input+help */
+/* right -- all columns align across rows.                       */
+/* ------------------------- */
+.options-form .options-grid {
+    display: grid;
+    grid-template-columns: minmax(min-content, 330px) minmax(0, 1fr);
+    column-gap: 40px;
+    /* keep the 2-col grid readable on wide screens -- the freed up
+       right side stays empty instead of stretching input fields */
+    max-width: 1100px;
+}
+/* style.css (framework base) centers everything globally and
+   right-aligns <label> -- undo that inside the options form. */
+.options-form,
+.options-form .option-label-col,
+.options-form .option-label,
+.options-form .option-control-col,
+.options-form .option-help,
+.options-form .option-checkbox {
+    text-align: left;
+}
+/* the options widget is denser than the generic widget look, but its
+   frame must NOT run under/behind the top-right login info box --
+   keep the generic .widget right margin (360px, room for the info
+   box); the options grid caps itself at 1100px internally. */
+.options-widget {
+    margin-right: 360px;
+}
+.options-form .option-row {
+    display: contents;
+}
+/* divider after each row: generated box participates as a grid    */
+/* item after the row's two cells, spanning both columns.          */
+.options-form .option-row::after {
+    content: "";
+    grid-column: 1 / -1;
+    height: 1px;
+    background: #3a3a3a;
+    margin: 10px 0;
+}
+.options-form .option-row:last-of-type::after {
+    background: none;
+}
+.options-form .option-label-col {
+    padding-top: 5px;
+}
+.options-form .option-label {
+    display: block;
+    font-weight: 600;
+    line-height: 1.3;
+}
+.options-form .option-control-col {
+    max-width: 620px;
+}
+.options-form .option-input input[type=text],
+.options-form .option-input input[type=password],
+.options-form .option-input select,
+.options-form .option-input textarea {
+    float: none;            /* style.css floats inputs left */
+    display: block;
+    margin: 0;              /* style.css indents inputs (5px/10px) */
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px 8px;
+    border: 1px solid #666;
+    border-radius: 3px;
+    background: #2a2a2a;
+    color: #eee;
+}
+.options-form .option-input textarea {
+    font-family: monospace;
+    resize: vertical;
+}
+.options-form .option-input input[type=number].option-input-int {
+    float: none;
+    display: block;
+    margin: 0;
+    width: 10em;
+    padding: 5px 8px;
+    border: 1px solid #666;
+    border-radius: 3px;
+    background: #2a2a2a;
+    color: #eee;
+}
+.options-form .option-checkbox input[type=checkbox] {
+    float: none;
+    display: inline-block;
+    margin: 0;
+    width: auto;
+}
+.options-form .option-checkbox {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    font-weight: normal;
+    padding-top: 3px;
+}
+.options-form .option-help {
+    color: #999;
+    font-size: 0.82em;
+    margin-top: 4px;
+    line-height: 1.4;
+}
+.options-form .option-actions {
+    margin-top: 18px;
+    padding-top: 12px;
+    border-top: 1px solid #555;
+    text-align: right;
+}
+@media (max-width: 900px) {
+    .options-form .options-grid {
+        grid-template-columns: 1fr;
+    }
+    .options-form .option-row::after {
+        margin: 6px 0;
+    }
+    .options-form .option-label-col {
+        padding-top: 0;
+    }
+    .options-form .option-label {
+        white-space: normal;
+    }
+}
+
+/* ------------------------- */
+/* Generic form helpers      */
+/* Used by customer/email/options forms for action button rows  */
+/* and inline post-forms (e.g. delete buttons inside tables).   */
+/* ------------------------- */
+.form-actions {
+    text-align: right;
+    margin-top: 1em;
+}
+
+.inline-form {
+    display: inline;
+}
+
+/* ------------------------- */
+/* Table row highlight       */
+/* Used to mark the "current selection" row in pickers/lists.   */
+/* ------------------------- */
+.widget-table tr.row-current {
+    background: #2a3a4a;
+}
+
+/* ------------------------- */
+/* Message body (pre block)  */
+/* Used by view/message/view.php to render message text with line   */
+/* wrapping but preserved newlines.                                 */
+/* ------------------------- */
+.message-body {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    margin: 8px 0;
+}
+
+/* ------------------------- */
+/* Tab navigation            */
+/* For pages like Domain Details that group content into tabs.      */
+/* ------------------------- */
+.tab-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px 2px;          /* row-gap column-gap */
+    border-bottom: 1px solid #444;
+    margin-bottom: 16px;
+}
+.tab-link {
+    padding: 8px 16px;
+    text-decoration: none;
+    color: #ccc;
+    background: #2a2a2a;
+    border: 1px solid #444;
+    border-radius: 4px 4px 0 0;
+    /* Sat on the content edge originally via margin-bottom:-1px.
+       That trick works for one-line tab bars but makes wrapped
+       rows overlap the next row. Drop it; the active tab now
+       just hides its bottom border via background match. */
+}
+.tab-link:hover { background: #333; }
+.tab-link.active {
+    background: #1a1a1a;
+    color: #ff6f3c;
+    border-bottom: 1px solid #1a1a1a;
+}
+.tab-content { padding: 8px 0; }
+
+/* Sub-header inside a tab body */
+.widget-subheader {
+    font-weight: bold;
+    color: #ff6f3c;
+    margin: 16px 0 8px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 4px;
+}
+
+/* Inline editable row in DNS-records table -- the form spans the
+   whole tr, each input sits in its td. */
+.inline-row td input { width: 100%; }
+
+/* ------------------------- */
+/* DNS records table         */
+/* Long content cells (DKIM TXT records, public-key blobs) have
+   to wrap rather than push the row's width past the available
+   area between sidebar and the right-hand info widget. We don't
+   force a fixed layout (other tables don't either, for visual
+   consistency) -- just cap the content cell and let it break. */
+/* ------------------------- */
+.dns-records-table td:nth-child(3),
+.dns-records-table th:nth-child(3) {
+    max-width: 360px;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+}
+.dns-records-table input[type="number"] {
+    max-width: 80px;
+}
+
+/* ------------------------- */
+/* DNSSEC key detail rows    */
+/* The row beneath each KSK/CSK key shows the DNSKEY plus the */
+/* DS records for submission to the registrar. */
+/* ------------------------- */
+.dnssec-keydetail td {
+    background: #1f2731;
+    padding: 8px 12px;
+}
+.dnssec-record {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin: 4px 0;
+}
+.dnssec-record-label {
+    flex: 0 0 90px;
+    font-weight: bold;
+    font-size: 0.9em;
+    color: #aab;
+}
+.dnssec-record-value {
+    flex: 1 1 auto;
+    word-break: break-all;
+    overflow-wrap: anywhere;
+    background: #14181e;
+    padding: 4px 6px;
+    border-radius: 3px;
+    font-family: monospace;
+    font-size: 0.85em;
+}
+.dnssec-ds-block {
+    margin-top: 8px;
+}
+.dnssec-ds-tag {
+    color: #7be;
+}
+
+/* ------------------------- */
+/* News data table (tools/news.php) ONLY.                      */
+/* Deliberately scoped by .news-table: the earlier generic      */
+/* ".paginated table.widget-table" overrides broke many other   */
+/* views (domain overview, email tabs, ftp, databases...).      */
+/* base style.css sets "td, th { white-space: nowrap }" and     */
+/* "td:last-child { width: 100% }" globally -- undo only here.  */
+/* ------------------------- */
+.widget table.news-table {
+    table-layout: fixed;
+    width: 100%;
+}
+.widget table.news-table td,
+.widget table.news-table th {
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    vertical-align: top;
+}
+/* buttons in data grids: a touch tighter so three of them fit */
+/* the fixed action column without poking out of the widget     */
+.widget table.news-table .button.small-action {
+    min-width: 72px;
+    margin-right: 4px;
+    box-shadow: none;
+    transform: none;
+}
+.widget table.news-table .button.small-action:hover {
+    transform: none;
+}
+.widget table.news-table td:nth-child(1),
+.widget table.news-table th:nth-child(1) { width: 17%; }
+.widget table.news-table td:nth-child(2),
+.widget table.news-table th:nth-child(2) { width: 41%; }
+.widget table.news-table td:nth-child(3),
+.widget table.news-table th:nth-child(3) { width: 13%; }
+.widget table.news-table td:nth-child(4),
+.widget table.news-table th:nth-child(4) { width: 7%; }
+.widget table.news-table td:last-child,
+.widget table.news-table th:last-child {
+    white-space: nowrap;
+    width: 22%;
+    padding-right: 14px;
+}
+.widget table.news-table .inline-form {
+    display: inline-block;
+}
+
+/* ------------------------------------------------------------
+   .button.small-action.create
+   --------------------------
+   The framework's style.css defines .edit / .delete / .save /
+   .cancel / .yellow / .blue. It does NOT define .create, but
+   every pmwh3 overview uses `class="button small-action create"`
+   for the "New <thing>" CTA. Orange so it doesn't visually
+   conflict with .save (green / commit) or .edit (blue).
+   ------------------------------------------------------------ */
+.button.small-action.create {
+    background-color: #cc6600;
+    color: #fff;
+}
+.button.small-action.create:hover {
+    background-color: #e67700;
+    box-shadow: 2px 2px #666;
+    transform: translateY(2px);
+}
+
+/* Inline assign-user form row inside the databases overview.
+   Sits inside a dark widget, so use a slightly lighter dark
+   surface (not light grey -- that gave white-on-white). Inputs
+   get explicit colors so they read on either theme. */
+tr.pmwh3-inline-form {
+    background-color: #3a3a3a;
+    color: #e0e0e0;
+}
+tr.pmwh3-inline-form td {
+    padding: 10px 12px;
+    border-top: 1px solid #555;
+}
+tr.pmwh3-inline-form label {
+    margin-right: 8px;
+    color: #e0e0e0;
+}
+tr.pmwh3-inline-form strong {
+    color: #fff;
+}
+tr.pmwh3-inline-form small {
+    color: #aaa;
+}
+tr.pmwh3-inline-form input[type="text"],
+tr.pmwh3-inline-form input[type="password"],
+tr.pmwh3-inline-form input:not([type]) {
+    background: #fff;
+    color: #222;
+    border: 1px solid #888;
+    border-radius: 3px;
+    padding: 3px 6px;
+    margin-right: 4px;
+}
+
+/* Small "(3/10)" / "(unlimited)" quota label next to a name */
+.pmwh3-quota {
+    font-size: 0.85em;
+    color: #888;
+    margin-left: 6px;
+}
+.pmwh3-quota.warn {
+    color: #c00;
+}
+
+/* ------------------------------------------------------------
+   Utility classes -- replaces ad-hoc style="" attributes that
+   accumulated across the views. Keep this short; layout-only.
+   ------------------------------------------------------------ */
+
+.pmwh3-form-actions {
+    margin-top: 1em;
+}
+.pmwh3-form-inline {
+    display: inline;
+    margin: 0;
+}
+.pmwh3-hidden {
+    display: none;
+}
+.pmwh3-error-block {
+    color: #c00;
+}
+.pmwh3-muted {
+    color: #888;
+    font-weight: normal;
+}
+.pmwh3-success-strong {
+    color: #2e7d32;
+    font-weight: bold;
+}
+.pmwh3-cell-top {
+    vertical-align: top;
+}
+.pmwh3-section-spaced {
+    margin-top: 1.5em;
+}
+
+/* Login form: right-align labels in left column (scoped so it
+   doesn't bleed into other tables on the page) */
+.pmwh3-login-form table td:first-child {
+    width: 250px;
+    white-space: nowrap;
+    padding-right: 10px;
+    text-align: right;
+}
+
+/* Menu icons rendered next to sidebar / nav items. Size lines
+   up with the framework's 16x16 icon themes; vertical-middle
+   so it sits on the text baseline. */
+.pmwh3-menu-icon {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    margin-right: 4px;
+}
+
+/* Logout / icon-button with no chrome (used in nav corner) */
+.pmwh3-iconbutton {
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+/* The little wrapper around the language/encoding selectors in
+   the nav top-right corner */
+.pmwh3-inline-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Nav top-info widget anchored top-right */
+.pmwh3-top-info {
+    float: right;
+    margin-top: 10px;
+    margin-right: 20px;
+}
+
+/* ------------------------------------------------------------
+   Permission-category accordion (group/permissions.php).
+   Each category is rendered as a <details> block with a
+   summary header; click expands. First one is open on render.
+   ------------------------------------------------------------ */
+.pmwh3-permcat {
+    margin: 10px 0;
+    border: 1px solid #444;
+    border-radius: 4px;
+}
+.pmwh3-permcat > summary {
+    cursor: pointer;
+    padding: 8px 12px;
+    background-color: #2a2a2a;
+    user-select: none;
+}
+.pmwh3-permcat > summary:hover {
+    background-color: #333;
+}
+.pmwh3-permcat[open] > summary {
+    border-bottom: 1px solid #444;
+}
+.pmwh3-permcat-count {
+    margin-left: 8px;
+    color: #999;
+    font-weight: normal;
+}
+
+/* ------------------------------------------------------------
+   Menu-row CRUD list (tools/menu.php).
+   ------------------------------------------------------------ */
+.pmwh3-menu-box-sep td {
+    height: 8px;
+    background-color: transparent;
+    border: none;
+}
+.pmwh3-yes {
+    color: #4caf50;
+    font-weight: bold;
+}
+.pmwh3-no {
+    color: #d33;
+    font-weight: bold;
+}
+
+/* ------------------------------------------------------------
+   Permission accordion: technical-key column.
+   Secondary info, smaller and dimmer than the readable label.
+   ------------------------------------------------------------ */
+.pmwh3-permkey-col {
+    color: #888;
+    font-size: 0.85em;
+    text-align: right;
+    width: 1%;
+    white-space: nowrap;
+}
+.pmwh3-permkey-col code {
+    color: inherit;
+    background: transparent;
+    font-size: inherit;
+}
+
+/* ------------------------------------------------------------
+   Login news ticker (G4: SHOW_NEWS / MAX_NEWS).
+   ------------------------------------------------------------ */
+.login-news {
+    max-height: 260px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.login-news-item {
+    border-top: 1px dotted #ccc;
+    padding-top: 6px;
+}
+.login-news-item:first-child {
+    border-top: none;
+    padding-top: 0;
+}
+.login-news-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 0.85em;
+    color: #666;
+}
+.login-news-date { white-space: nowrap; }
+.login-news-author { font-style: italic; }
+.login-news-text {
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+/* ------------------------------------------------------------
+   Applications tiles on the dashboard (pmwh2 "Customer
+   Applications"); columns come inline from APPS_PER_ROW.
+   ------------------------------------------------------------ */
+.apps-grid {
+    display: grid;
+    gap: 10px;
+}
+.apps-tile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 12px 10px;
+    border: 1px solid #555;
+    border-radius: 6px;
+    background: #404040;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    word-break: break-word;
+}
+.apps-tile:hover {
+    background: #4a4a4a;
+    color: #fff;
+}

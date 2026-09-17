@@ -1,0 +1,6 @@
+# Runtime/Deployed outputs (outside repo)
+tests/tmp_module_backup.json
+tests/tmp_module_placeholder.json
+*.bak
+*.bak-*
+*.po~

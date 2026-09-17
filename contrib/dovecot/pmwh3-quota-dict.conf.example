@@ -1,0 +1,26 @@
+# dovecot quota via dict on the CONSOLIDATED pmwh3 rows
+# (dovecot-dict-sql.conf.ext equivalent). Dovecot 2.4 writes the
+# byte/message counters directly into pmwh3_mail_accounts -- there is
+# NO separate dovecot_quota table anywhere.
+
+# dovecot.conf:
+#   quota "User quota" { quota_backend = dict }
+#   map {
+#     pattern = priv/quota/storage
+#     ...
+
+dict_server {
+  dict_map priv/quota/storage {
+    sql_table = pmwh3_mail_accounts
+    username_field = email
+    value_field = used_bytes
+  }
+  dict_map priv/quota/messages {
+    sql_table = pmwh3_mail_accounts
+    username_field = email
+    value_field = used_messages
+  }
+}
+
+# userdb also hands out the assigned LIMIT from the same row:
+#   CONCAT(quota_bytes,'B') AS userdb_quota_storage_size

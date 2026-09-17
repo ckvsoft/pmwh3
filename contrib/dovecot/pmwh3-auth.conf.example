@@ -1,0 +1,31 @@
+# dovecot auth against the CONSOLIDATED pmwh3 tables (pmwh3-mail)
+# drop-in for /etc/dovecot/ (the real file at the server holds the
+# DB creds; placeholders here).
+
+sql_driver = mysql
+mysql pmwh3 {
+  user = DB_USER
+  password = DB_PASS
+  dbname = pmwh3
+}
+
+passdb sql {
+  default_password_scheme = PLAIN
+  query = SELECT password AS userdb_password, uid AS userdb_uid, gid AS userdb_gid, \
+          CONCAT(quota_bytes,'B') AS userdb_quota_storage_size \
+          FROM pmwh3_mail_accounts WHERE email = '%{user}' AND active = 'Y'
+}
+
+userdb sql {
+  query = SELECT u.uid, u.gid, \
+    CONCAT('/vhome/vmail/', SUBSTRING_INDEX(u.email,'@',-1),'/',SUBSTRING_INDEX(u.email,'@',1)) AS home, \
+    CONCAT(u.homedir,'/',u.maildir) AS mail, \
+    CONCAT(u.quota_bytes,'B') AS quota_storage_size, \
+    GROUP_CONCAT(DISTINCT a.source) AS aliases \
+  FROM pmwh3_mail_accounts u \
+  LEFT JOIN pmwh3_mail_forwardings a \
+       ON FIND_IN_SET(LOWER(u.email), REPLACE(LOWER(a.destination), ' ', '')) > 0 \
+  WHERE LOWER(u.email) = LOWER('%{user}') AND u.active = 'Y' GROUP BY u.email;
+
+  iterate_query = SELECT email AS username FROM pmwh3_mail_accounts WHERE active = 'Y';
+}
