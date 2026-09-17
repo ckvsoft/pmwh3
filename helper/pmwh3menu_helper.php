@@ -29,7 +29,13 @@ class Pmwh3Menu_Helper extends \ckvsoft\mvc\Helper
         $menu['items'][] = $this->getDomainBox($activeBox);
 
         // Alle Menüs in einer Abfrage laden
-        $rows = $this->db->select("SELECT * FROM pmwh3.pmwh3_menu ORDER BY box, sort");
+        // NO schema-qualified name: the module DB is whatever
+        // module.json says ('kvasny.at_pmwh3' etc.) -- the old
+        // hardcoded 'pmwh3.pmwh3_menu' hit the LEGACY 'pmwh3' schema
+        // on ns1 (leftover test DB) and broke/shifted menus on every
+        // deployment whose module DB is not literally named 'pmwh3'.
+        $rows = \ckvsoft\mvc\Config::moduleDb()->select(
+                "SELECT * FROM pmwh3_menu ORDER BY box, sort");
 
         $currentBox = null;
         $boxItems = [];
