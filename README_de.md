@@ -10,48 +10,50 @@ PHP-basiertes Hosting-Control-Panel als Cevian-Modul. Verwaltet Customers, Domai
 
 ---
 
-## Installation (Frisch-Install, ein Befehl → Wizard)
+## Installation (Frisch-Install: Modul kopieren → URL öffnen)
 
-1. **Cevian installiert haben** (Voraussetzung!) — das pmwh3-Modul lebt
-   im Cevian-Release-Tree:
+1. **Cevian installiert haben** (Voraussetzung!) — das pmwh3-Modul
+   lebt im Cevian-Release-Tree:
    ```bash
    cp -r pmwh3 /path/to/cevian/modules/
    ```
-   (`/path/to/cevian` ist dabei der Cevian-Tree, z.B.
+   (`/path/to/cevian` = der Cevian-Tree, z.B.
    `/vhome/<host>/<vhost>/service/cevian`).
 
-2. **URL im Browser öffnen** — der erste pmwh3-Seitenaufruf leitet
-   auf `pmwh3/install` um (AuthMiddleware-Gate), wenn
-   - die `module.json` noch Platzhalter-Creds trägt, oder
-   - die pmwh3-DB-Tabellen (Baseline) noch fehlen.
+2. **URL im Browser öffnen** — der erste pmwh3-Aufruf leitet auf
+   `pmwh3/install` um (AuthMiddleware-Gate), wenn
+   - die `module.json` fehlt oder Platzhalter-Creds trägt, oder
+   - die pmwh3-DB-Tabellen (Baseline) fehlen.
 
-3. **Install-Wizard** (`pmwh3/install`) ausfüllen:
-   - Modul-DB-Credentials (Host / DB-Name / User / Pass — wird in
-     `modules/pmwh3/module.json` geschrieben, Felder dort aus
-     `DB_HOST` / `DB_NAME` / `DB_USER` / `DB_PASS` Platzhaltern
-     ersetzt)
-   - DNS-DB: `same as module DB`-Checkbox (fresh install) ODER
-     eigene `dns.database`-Node-Values (bestehende pdns-DB mit
-     Zonen, z.B. Trennung wie in der Live-Umgebung)
-   - **admin-Kennwort** — das Wizard legt den Ultimate-Admin-Kunden
-     an (limits alle -1)
-   - POST → Baseline (0.0.0_baseline.sql) als FRESH-INSTALL
-     (nur die Baseline; Migrations-Kette wird als bereinigt
-     gestempelt — kein Legacy-ACL-Abort), RBAC-Rollen pmwh3 /
-     Ultimate Admin / Reseller / Customer, 95 Berechtigungs-Slots,
-     `pmwh3_mail_*/pmwh3_web_*/pmwh3_ftp_*`-Konsolidierungstabelle —
-     alles automatisch.
+3. **Sicherheits-Token (VOR dem Assistent):** beweise den
+   **Server-Zugriff** — das Assistent-Seite fragt (Schritt 0)
+   nach einer **leeren Datei** `pmwh3_install_<hex>.txt` im
+   **Cevian-Hauptverzeichnis** (exakter Name wird angezeigt);
+   anlegen via SSH `touch` oder FTP-Upload. Das ist dieselbe
+   Mechanik wie beim Cevian-Kern-Installer — Gegenstück: nur der
+   Operator mit echtem Serverzugriff kann installieren.
+   Nach der erfolgreichen Installation werden Token-Datei und
+   Installer-State entfernt.
 
-4. **Login** unter `pmwh3/login` als `admin` bzw. eigener Kunde.
+4. **Assistent ausfüllen** (`pmwh3/install`):
+   - Voraussetzungen werden angezeigt (Cevian-Version >= 0.18.3
+     via `Version::version()`, PHP-Extensions, `var/` schreibbar)
+   - Modul-DB-Credentials → schreiben `module.json` (Platzhalter
+     Version wird ersetzt)
+   - DNS-DB: `same as module DB` oder separater Node (bestehende
+     pdns-/MyDNS-DB bei bereits laufender DNS-Infrastruktur)
+   - **admin-Kennwort** → Ultimate-Admin-Kunde (limits alle -1)
+   - POST → Baseline (FRESH-INSTALL: NUR die Baseline, keine
+     Legacy-Chain), RBAC-Rollen pmwh3 / Ultimate Admin / Reseller /
+     Customer, 95 Berechtigungen — alles automatisch
 
-> Der Installer ist auch **idempotent** — Re-Run fest, kein zweites
-> Admin-Insert, keine doppelten Berechtigungen (0 new keys beim Re-
-> run). Bei fehlgeschlagenem ersten Versuch einfach aufrufen.
+5. **Login** unter `pmwh3/login` als `admin` bzw. eigener Kunde.
 
-Alles weitere (Formularwerte, Datei-Layout) in
-`/modules/pmwh3/config/` und `SYSCHECK.md`.
-
----
+> Der Installer ist **idempotent** — Re-Run sicher, keine doppelten
+> Admin-Zeilen, keine doppelten Berechtigungen (0 new keys beim
+> Re-Run). Fehlgeschlagenes Vorhaben sind mit normalen Re-Runs zu
+> beheben (Requirements-Tabelle im Wizard zeigt die fehlgeschlagenen
+> Checks mit OK/FAIL an).
 
 ## Voraussetzungen
 

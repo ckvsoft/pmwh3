@@ -32,6 +32,16 @@ class Install extends \ckvsoft\mvc\BaseController
                     'login');
         }
 
+        // Step 0: security token (proof of server access, mirroring
+        // the cevian core installer). The wizard opens only after the
+        // token file exists.
+        if (!\pmwh3\Utils\InstallBootstrap::securityTokenOk()) {
+            $this->installRender('pmwh3/install_token', [
+                'activeBox' => 'install',
+                'tokenName' => \pmwh3\Utils\InstallBootstrap::securityTokenName(),
+            ]);
+        }
+
         $this->installRender('pmwh3/install', [
             'activeBox' => 'install',
             // pre-login page: fields stay BLANK. After a failed run()
@@ -55,6 +65,11 @@ class Install extends \ckvsoft\mvc\BaseController
     {
         if (!\pmwh3\Utils\InstallBootstrap::needsInstall()) {
             $this->location(BASE_URI . 'pmwh3/login');
+        }
+        // re-verify the server-access token at POST time (a form the
+        // precheck page produced requires the token as well)
+        if (!\pmwh3\Utils\InstallBootstrap::securityTokenOk()) {
+            $this->flash('error', 'Security token file is missing.', 'install');
         }
 
         $input = new \ckvsoft\Input();

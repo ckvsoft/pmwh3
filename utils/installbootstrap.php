@@ -70,6 +70,49 @@ class InstallBootstrap
         }
     }
 
+    // ----------------------------------------------------------------
+    // Installer security token (same mechanism as the cevian core
+    // installer: a random "pmwh3_install_<hex>.txt" must appear in the
+    // Cevian root BEFORE the wizard opens -- proof that the operator
+    // really has server access, not just the URL).
+    // ----------------------------------------------------------------
+
+    /** Random token file name (stable in var/pmwh3_install_state.json). */
+    public static function securityTokenName(): string
+    {
+        $stateFile = rtrim(getcwd(), '/') . '/var/pmwh3_install_state.json';
+        $state = [];
+        if (is_file($stateFile)) {
+            $state = json_decode((string) file_get_contents($stateFile), true);
+            $state = is_array($state) ? $state : [];
+        }
+        if (empty($state['token_name'])) {
+            $state['token_name'] = 'pmwh3_install_' . bin2hex(random_bytes(8)) . '.txt';
+            @mkdir(dirname($stateFile), 0775, true);
+            @file_put_contents($stateFile, json_encode($state, JSON_PRETTY_PRINT));
+        }
+        return (string) $state['token_name'];
+    }
+
+    /** Absolute path of the token file the operator has to create. */
+    public static function securityTokenPath(): string
+    {
+        return rtrim(getcwd(), '/') . '/' . self::securityTokenName();
+    }
+
+    /** True when the token file exists in the Cevian root (server access proof). */
+    public static function securityTokenOk(): bool
+    {
+        return is_file(self::securityTokenPath());
+    }
+
+    /** Drop state + token (after a successful install). */
+    public static function clearSecurityToken(): void
+    {
+        @unlink(self::securityTokenPath());
+        @unlink(rtrim(getcwd(), '/') . '/var/pmwh3_install_state.json');
+    }
+
     /** Read modules/pmwh3/module.json as an array ([] when missing). */
     private static function moduleJson(): array
     {
@@ -194,10 +237,12 @@ class InstallBootstrap
         }
 
         // 6. the installer is done -- drop the updater's fresh flag
+        //    and the security token state (cleanup)
         $varDir = rtrim(getcwd(), '/') . '/var';
         if (is_file($varDir . '/pmwh3_freshly_installed.flag')) {
             @unlink($varDir . '/pmwh3_freshly_installed.flag');
         }
+        self::clearSecurityToken();
 
         return ['ok' => true, 'steps' => $steps];
     }

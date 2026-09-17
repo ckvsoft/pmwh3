@@ -9292,3 +9292,26 @@ msgid ""
 "http block (e.g. '*:80'). The https block uses '*:443' when a certificate is "
 "set."
 msgstr ""
+msgid "Install pmwh3 &mdash; step 1: server access"
+msgstr "pmwh3 installieren — Schritt 1: Server-Zugriff"
+
+msgid "Before the wizard opens, prove that you have server access (same mechanism as the Cevian core installer): create the following EMPTY text file in the Cevian root"
+msgstr "Bevor der Assistent öffnet, beweise den Server-Zugriff (wie beim Cevian-Kern-Installer): lege die folgende LEERE Textdatei im Cevian-Hauptverzeichnis an"
+
+msgid "Create it e.g. via SSH:"
+msgstr "z.B. via SSH:"
+
+msgid "or upload the file with your FTP client."
+msgstr "oder lade die Datei per FTP-Client hoch."
+
+msgid "The wizard shows up automatically after the file exists. The token file is removed together with the installer state after a successful install."
+msgstr "Der Assistent erscheint automatisch, sobald die Datei existiert. Nach einer erfolgreichen Installation werden Token-Datei und Installer-State entfernt."
+
+msgid "Requirements"
+msgstr "Voraussetzungen"
+
+msgid "Fix the failed requirements and reload this page -- Install cannot run until then."
+msgstr "Behebe die fehlgeschlagenen Voraussetzungen und lade die Seite neu — Install kann erst danach laufen."
+
+msgid "Security token file is missing."
+msgstr "Sicherheits-Token-Datei fehlt."

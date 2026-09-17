@@ -33,6 +33,58 @@ Current version: **3.0.82** · German documentation: [`README_de.md`](README_de.
    ```
 
 2. **Open the site URL** — the first pmwh3 page load redirects to
+   `pmwh3/install` whenever the installer state is missing
+   (no `module.json` / tables).
+
+3. **Security token BEFORE the wizard opens** (same mechanism as the
+   Cevian core installer -- proof the operator really has server
+   access): create an EMPTY file named `pmwh3_install_<hex>.txt` in
+   the Cevian root (the exact name is shown on the wizard's step-0
+   screen; e.g. `touch` via SSH or an FTP upload). Token file and
+   installer state are removed after a successful install.
+
+4. **Fill the install wizard** (`pmwh3/install`):
+   - module DB credentials (host / name / user / pass) — written to
+     `modules/pmwh3/module.json`
+   - DNS database: `same as module DB` checkbox (fresh installs) OR
+     separate `dns.database` values (existing pdns/MyDNS database)
+   - admin password → creates the Ultimate Admin customer (all
+     limits -1)
+   - POST → baseline replay (`0.0.0_baseline.sql`, **fresh installs
+     replay only the baseline**), RBAC roles `pmwh3 / Ultimate
+     Admin / Reseller / Customer`, 95 permission keys, the security
+     precheck enforcing **Cevian >= 0.18.3**, PHP extensions and
+     writable dirs — all automatic.
+
+5. **Log in** (`pmwh3/login`) as `admin`.
+
+The installer is **idempotent** — re-running is safe (no duplicate
+admin row, no duplicated permission grants). The wizard screen
+shows OK/FAIL per requirement before anything runs.
+
+## Requirements
+
+- **Cevian ≥ 0.18.3** (prerequisite — pmwh3 is a Cevian *module*)
+  - `Config::moduleDb()` / `Config::cachedDatabase()` (module DB node API)
+  - `Database::execDdl/tableExists/...` helpers
+  - Updater **fresh-install path** (baseline-only) + `SORT_NATURAL`
+    migration ordering (0.18.4)
+- PHP ≥ 8.0 with `pdo`, `pdo_mysql`, `mbstring` (see `SYSCHECK.md`)
+- MariaDB / MySQL ≥ 10.x
+- One MySQL/MariaDB database for the module (e.g. `pmwh3`); optional
+  separate databases per service (see *Service databases* below).
+
+---
+
+## Installation (fresh install: copy + open URL)
+
+1. **Have Cevian running** (prerequisite). Copy the module into the
+   Cevian tree:
+   ```bash
+   cp -r pmwh3 /path/to/cevian/modules/
+   ```
+
+2. **Open the site URL** — the first pmwh3 page load redirects to
    `pmwh3/install` whenever the all-in-one installer state is missing
    (placeholder credentials in `module.json` or absent tables).
 
