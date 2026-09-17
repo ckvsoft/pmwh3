@@ -283,7 +283,10 @@ class InstallBootstrap
         $rows[] = [
             'label'  => 'var/ writable',
             'ok'     => is_dir($varDir) && is_writable($varDir),
-            'detail' => $varDir . (is_dir($varDir) ? '' : ' (missing, create failed)'),
+            // pre-login page: never leak absolute server paths
+            'detail' => is_dir($varDir)
+                    ? (is_writable($varDir) ? 'writable' : 'not writable')
+                    : 'missing (create failed)',
         ];
 
         // DB-connect probe (when installer form data available)
@@ -298,7 +301,12 @@ class InstallBootstrap
             } catch (Throwable $e) {
                 $rows[] = ['label' => 'Database connect',
                     'ok'    => false,
-                    'detail' => $e->getMessage()];
+                    // pre-login page: generic detail, no server/host info
+                    'detail' => 'connect failed',
+                ];
+                \pmwh3\Utils\ErrorHandler::trace(
+                        '[InstallBootstrap.systemChecks] DB probe failed: '
+                        . $e->getMessage());
             }
         }
 

@@ -82,11 +82,13 @@ class Install extends \ckvsoft\mvc\BaseController
             $fails = [];
             foreach ($result['steps'] as $label => $detail) {
                 if (str_starts_with((string) $detail, 'FAIL')) {
-                    $fails[] = $label . ': ' . $detail;
+                    // sanitize exception output: try to keep cwd-relative
+                    $d = htmlspecialchars((string) $detail);
+                    $d = str_replace([rtrim(getcwd(), '/') . '/', $GLOBALS['__SERVER_PATH__'] ?? ''], './', $d);
+                    $fails[] = $label . ': ' . $d;
                 }
             }
-            $this->flash('error', htmlspecialchars(implode('<br />', $fails)),
-                    'install');
+            $this->flash('error', implode('<br />', $fails), 'install');
         }
 
         $this->flash('success',
