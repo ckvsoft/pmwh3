@@ -4,3 +4,4 @@ tests/tmp_module_placeholder.json
 *.bak
 *.bak-*
 *.po~
+module.json

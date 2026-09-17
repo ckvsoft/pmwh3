@@ -37,6 +37,7 @@ class Install extends \ckvsoft\mvc\BaseController
             'frameworkHost' => $this->frameworkDbHint('host'),
             'frameworkName' => $this->frameworkDbHint('name'),
             'frameworkUser' => $this->frameworkDbHint('user'),
+            'sysChecks' => \pmwh3\Utils\InstallBootstrap::systemChecks(),
         ]);
     }
 

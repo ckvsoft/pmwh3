@@ -84,11 +84,11 @@ diese Form):
 
 ```json
 {
-    "name": "pmwh3",
+    "name": "PMWH3_DB",
     "version": "<VERSION>",
     "core": false,
     "database": {
-        "type": "mysql", "host": "localhost", "name": "pmwh3",
+        "type": "mysql", "host": "localhost", "name": "PMWH3_DB",
         "user": "DB_USER", "pass": "DB_PASS"
     },
     "dns": {
@@ -154,7 +154,7 @@ Fallback auf die Row-Spalten; Templates: `contrib/`.
 ```json
 {
     "database":   { "type": "mysql", "host": "localhost",
-                    "name": "pmwh3",
+                    "name": "PMWH3_DB",
                     "user": "DB_USER", "pass": "DB_PASS" }
 }
 ```

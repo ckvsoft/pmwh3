@@ -3,6 +3,26 @@
         <div class="entry tool">
             <h2><?php echo __('Install pmwh3'); ?></h2>
 
+            <table>
+                <tr><th colspan="2"><?php echo __('Requirements'); ?></th></tr>
+                <?php foreach (($this->data['sysChecks']['rows'] ?? []) as $ic): ?>
+                    <tr>
+                        <td style="white-space: nowrap; float:left;">
+                            <strong style="color: <?php echo $ic['ok'] ? 'green' : 'red'; ?>; font-weight: bold;">
+                                <?php echo $ic['ok'] ? 'OK' : 'FAIL'; ?>
+                            </strong>
+                        </td>
+                        <td><?php echo htmlspecialchars((string) $ic['label']); ?>
+                            &mdash; <?php echo htmlspecialchars($ic['detail']); ?></td>
+                    </tr>
+                <?php endforeach; ?>
+                <?php if (!($this->data['sysChecks']['ok'] ?? true)): ?>
+                    <tr><td colspan="2">
+                        <small><?php echo __('Fix the failed requirements and reload this page -- Install cannot run until then.'); ?></small>
+                    </td></tr>
+                <?php endif; ?>
+            </table>
+
             <form action="<?= BASE_URI ?>pmwh3/install/run" method="post" data-confirm="<?php echo __('Run the pmwh3 install? This writes the module config, creates the schema, RBAC roles and the admin user.'); ?>" data-confirm-type="change">
                 <table>
                     <tr>

@@ -122,6 +122,18 @@ class InstallBootstrap
 
         self::assertInput($in);
 
+        // 0. system prerequisites (Cevian version, PHP extensions, dirs)
+        $checks = self::systemChecks($in);
+        if (!$checks['ok']) {
+            foreach ($checks['rows'] as $row) {
+                if (!$row['ok']) {
+                    $steps['requirement: ' . $row['label']]
+                            = 'FAIL: ' . $row['detail'];
+                }
+            }
+            return ['ok' => false, 'steps' => $steps];
+        }
+
         // 1. module.json (must succeed first -- everything reads it)
         try {
             $n = self::writeModuleJson($in);
@@ -188,6 +200,106 @@ class InstallBootstrap
         }
 
         return ['ok' => true, 'steps' => $steps];
+    }
+
+    // ----------------------------------------------------------------
+    // System prerequisites (checked by the installer, not separately)
+    // ----------------------------------------------------------------
+
+    /**
+     * Pre-install requirement checks -- surfaced in the wizard and
+     * enforced by run() as step 0. $in (when provided from the POST
+     * form) additionally performs a live DB-connect probe with those
+     * credentials.
+     *
+     * @return array{ok:bool, rows:list<array{label:string,ok:bool,detail:string}>}
+     */
+    public static function systemChecks(?array $in = null): array
+    {
+        $rows = [];
+
+        // Cevian framework version (>= 0.18.3: moduleDb node API +
+        // baseline-only fresh path + Database DDL helpers)
+        $fwVersion = 'unknown';
+        $updateJson = rtrim(getcwd(), '/') . '/var/update.json';
+        if (is_file($updateJson)) {
+            $cfg = json_decode((string) file_get_contents($updateJson), true);
+            $fwVersion = (string) ($cfg['framework_updated_version'] ?? '0.0.0');
+        }
+        $fwOk = version_compare($fwVersion, '0.18.3', '>=');
+        $rows[] = [
+            'label'  => 'Cevian >= 0.18.3',
+            'ok'     => $fwOk,
+            'detail' => $fwOk
+                    ? 'version found: ' . $fwVersion
+                    : ($fwVersion === '0.0.0'
+                        ? 'var/update.json missing or framework never updated'
+                        : 'version found: ' . $fwVersion . ' (too old)'),
+        ];
+        if ($fwVersion === '0.0.0' && $fwOk === false) {
+            // Fresh framework install without a stamped version: probe
+            // the library directly for the 0.18.x APIs (moduleDb +
+            // execDdl). Only 0.18.3+ ships them.
+            $probeFile = __DIR__ . '/../../../library/ckvsoft/database.php';
+            if (is_file($probeFile)) {
+                $probe = (string) @file_get_contents($probeFile)
+                    . (string) @file_get_contents(
+                        __DIR__ . '/../../../library/ckvsoft/mvc/config.php');
+                $hasApi = str_contains($probe, 'function moduleDb(')
+                        && str_contains($probe, 'function execDdl(');
+                $rows[count($rows) - 1]['ok'] = $hasApi;
+                $rows[count($rows) - 1]['detail'] = $hasApi
+                    ? 'update.json missing, API probe OK (moduleDb + execDdl found)'
+                    : 'framework too old: moduleDb/execDdl missing in library/ckvsoft/mvc/Database.php';
+            }
+        }
+
+        // PHP extensions
+        foreach (['pdo', 'pdo_mysql', 'mbstring', 'gettext', 'intl'] as $i => $ext) {
+            $required = $i < 3;
+            $loaded = extension_loaded($ext);
+            $rows[] = [
+                'label'  => 'PHP extension ' . $ext . ($required ? ' (required)' : ' (optional)'),
+                'ok'     => $loaded || !$required,
+                'detail' => $loaded ? 'loaded' : ($required ? 'MISSING' : 'not loaded (optional)'),
+            ];
+        }
+
+        // Directory writability (framework var relative to cwd)
+        $varDir = rtrim(getcwd(), '/') . '/var';
+        if (!is_dir($varDir)) {
+            @mkdir($varDir, 0775, true);
+        }
+        $rows[] = [
+            'label'  => 'var/ writable',
+            'ok'     => is_dir($varDir) && is_writable($varDir),
+            'detail' => $varDir . (is_dir($varDir) ? '' : ' (missing, create failed)'),
+        ];
+
+        // DB-connect probe (when installer form data available)
+        if (is_array($in) && !empty($in['db_host'])) {
+            $dsn = 'mysql:host=' . (string) $in['db_host'] . ';port='
+                    . ((int) ($in['db_port'] ?? 3306));
+            try {
+                $pdo = new \PDO($dsn, (string) $in['db_user'],
+                        (string) $in['db_pass'], [\PDO::ATTR_TIMEOUT => 5]);
+                $rows[] = ['label' => 'Database connect', 'ok' => true,
+                    'detail' => (string) $in['db_host']];
+            } catch (Throwable $e) {
+                $rows[] = ['label' => 'Database connect',
+                    'ok'    => false,
+                    'detail' => $e->getMessage()];
+            }
+        }
+
+        $ok = true;
+        foreach ($rows as $row) {
+            if (!$row['ok']) {
+                $ok = false;
+                break;
+            }
+        }
+        return ['ok' => $ok, 'rows' => $rows];
     }
 
     private static function assertInput(array $in): void

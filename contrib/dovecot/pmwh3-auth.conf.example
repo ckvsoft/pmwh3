@@ -6,7 +6,7 @@ sql_driver = mysql
 mysql pmwh3 {
   user = DB_USER
   password = DB_PASS
-  dbname = pmwh3
+  dbname = PMWH3_DB
 }
 
 passdb sql {

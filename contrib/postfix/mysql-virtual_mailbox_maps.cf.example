@@ -1,6 +1,6 @@
 # postfix mailbox map -> pmwh3 consolidated table
 user = DB_USER
 password = DB_PASS
-dbname = pmwh3
+dbname = PMWH3_DB
 hosts = mariadb
 query = SELECT maildir FROM pmwh3_mail_accounts WHERE email='%s' AND active = 'Y'
