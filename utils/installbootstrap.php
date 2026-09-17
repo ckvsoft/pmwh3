@@ -252,6 +252,21 @@ class InstallBootstrap
         $steps = [];
         self::assertInput($in, 'config');
 
+        // 0. requirements incl. LIVE DB probe (with dbname; creates the
+        // missing empty database when the credentials allow it) -- do
+        // NOT write module.json blind: a failing connect would only
+        // surface at P2 baseline time otherwise.
+        $checks = self::systemChecks($in);
+        if (!$checks['ok']) {
+            foreach ($checks['rows'] as $row) {
+                if (!$row['ok']) {
+                    $steps['requirement: ' . $row['label']]
+                            = 'FAIL: ' . $row['detail'];
+                }
+            }
+            return ['ok' => false, 'steps' => $steps];
+        }
+
         try {
             $n = self::writeModuleJson($in);
             $steps['module.json'] = 'ok (' . $n . ' config nodes)';
@@ -450,23 +465,8 @@ class InstallBootstrap
 
         // DB-connect probe (when installer form data available)
         if (is_array($in) && !empty($in['db_host'])) {
-            $dsn = 'mysql:host=' . (string) $in['db_host'] . ';port='
-                    . ((int) ($in['db_port'] ?? 3306));
-            try {
-                $pdo = new \PDO($dsn, (string) $in['db_user'],
-                        (string) $in['db_pass'], [\PDO::ATTR_TIMEOUT => 5]);
-                $rows[] = ['label' => 'Database connect', 'ok' => true,
-                    'detail' => (string) $in['db_host']];
-            } catch (Throwable $e) {
-                $rows[] = ['label' => 'Database connect',
-                    'ok'    => false,
-                    // pre-login page: generic detail, no server/host info
-                    'detail' => 'connect failed',
-                ];
-                \pmwh3\Utils\ErrorHandler::trace(
-                        '[InstallBootstrap.systemChecks] DB probe failed: '
-                        . $e->getMessage());
-            }
+            $probe = self::databaseProbe($in);
+            $rows = array_merge($rows, $probe['rows']);
         }
 
         $ok = true;
@@ -477,6 +477,109 @@ class InstallBootstrap
             }
         }
         return ['ok' => $ok, 'rows' => $rows];
+    }
+
+    /**
+     * Probe the module database WITH its name. On "Unknown database"
+     * the installer CREATES the empty database with the SAME
+     * credentials (a hosting-panel user usually owns its databases)
+     * and re-probes; on a hard privilege failure the row explains the
+     * remaining manual step instead of failing later with an 1049
+     * fatal at baseline time. Pre-login pages never echo hosts.
+     */
+    private static function databaseProbe(array $in): array
+    {
+        $dsn = 'mysql:host=' . (string) $in['db_host'] . ';port='
+                . ((int) ($in['db_port'] ?? 3306)) . ';dbname='
+                . (string) $in['db_name'];
+        try {
+            new \PDO($dsn, (string) $in['db_user'], (string) $in['db_pass'],
+                    [\PDO::ATTR_TIMEOUT => 5]);
+            return ['rows' => [['label' => 'Database connect', 'ok' => true,
+                'detail' => 'ok']]];
+        } catch (Throwable $e) {
+            $msg = $e->getMessage();
+        }
+
+        if (str_contains($msg, 'Unknown database')
+                || (string) $e->getCode() === '1049') {
+            if (self::tryCreateDatabase($in)) {
+                try {
+                    new \PDO($dsn, (string) $in['db_user'],
+                            (string) $in['db_pass'], [\PDO::ATTR_TIMEOUT => 5]);
+                    return ['rows' => [['label' => 'Database connect',
+                        'ok'     => true,
+                        'detail' => 'ok (empty database created by installer)']]];
+                } catch (Throwable $e2) {
+                    \pmwh3\Utils\ErrorHandler::trace(
+                            '[InstallBootstrap.databaseProbe] connect failed after CREATE: '
+                            . $e2->getMessage());
+                }
+            }
+            return ['rows' => [['label' => 'Database connect',
+                'ok'     => false,
+                'detail' => 'database does not exist and could not be'
+                        . ' created with the given credentials -- create the'
+                        . ' EMPTY database in the hosting panel first, then'
+                        . ' retry',
+            ]]];
+        }
+
+        $detail = str_contains($msg, 'Access denied')
+                ? 'access denied -- check user/password'
+                : (str_contains($msg, '2002')
+                    ? 'host unreachable' : 'connect failed');
+        \pmwh3\Utils\ErrorHandler::trace(
+                '[InstallBootstrap.databaseProbe] failed: ' . $msg);
+        return ['rows' => [['label' => 'Database connect',
+            'ok'     => false,
+            'detail' => $detail,
+        ]]];
+    }
+
+    /**
+     * CREATE DATABASE attempt with the submitted credentials. Grants
+     * the SAME user full rights on the new database (best effort --
+     * on hosts that provision GRANTs per database via panel this may
+     * fail silently; the probe afterwards decides).
+     * \cf. only for identifiers from the OPERATOR's own form input.
+     */
+    private static function tryCreateDatabase(array $in): bool
+    {
+        $name = trim((string) ($in['db_name'] ?? ''));
+        $safe = preg_replace('/[^A-Za-z0-9_.\-]/u', '', $name);
+        if ($safe === '' || $safe !== $name) {
+            return false; // no fancy quoting games blindfolded
+        }
+        $dsn = 'mysql:host=' . (string) $in['db_host'] . ';port='
+                . ((int) ($in['db_port'] ?? 3306));
+        try {
+            $pdo = new \PDO($dsn, (string) $in['db_user'],
+                    (string) $in['db_pass'], [\PDO::ATTR_TIMEOUT => 5]);
+            $charset = 'utf8mb4';
+            $collate = 'utf8mb4_unicode_ci';
+            $stmt = $pdo->prepare(
+                    'CREATE DATABASE IF NOT EXISTS `' . str_replace('`', '', $safe)
+                    . "` CHARACTER SET {$charset} COLLATE {$collate}");
+            $stmt->execute();
+            try {
+                $grant = $pdo->prepare('GRANT ALL PRIVILEGES ON `'
+                        . str_replace('`', '', $safe)
+                        . "`.* TO CURRENT_USER()");
+                $grant->execute();
+            } catch (Throwable $e) {
+                // grant usually AUTOMATIC for the owning user; not fatal
+                \pmwh3\Utils\ErrorHandler::trace(
+                        '[InstallBootstrap.tryCreateDatabase] GRANT skipped: '
+                        . $e->getMessage());
+            }
+            return true;
+        } catch (Throwable $e) {
+            \pmwh3\Utils\ErrorHandler::trace(
+                    '[InstallBootstrap.tryCreateDatabase] failed: '
+                    . $e->getMessage());
+            return false;
+        }
     }
 
     private static function assertInput(array $in, string $phase = 'config'): void
