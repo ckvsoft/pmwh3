@@ -82,13 +82,13 @@ Standard fresh install — everything in one database:
     "version": "<VERSION>",
     "core": false,
     "database": {
-        "type": "mysql", "host": "mariadb", "name": "pmwh3",
+        "type": "mysql", "host": "localhost", "name": "pmwh3",
         "user": "DB_USER", "pass": "DB_PASS"
     },
     "dns": {
         "table_prefix": "",
         "database": {
-            "type": "mysql", "host": "mariadb", "name": "pdns",
+            "type": "mysql", "host": "localhost", "name": "pdns",
             "user": "DNS_USER", "pass": "DNS_PASS"
         }
     }
@@ -102,11 +102,11 @@ error:
 
 ```json
 {
-    "mail": { "database": { "type": "mysql", "host": "mariadb",
+    "mail": { "database": { "type": "mysql", "host": "localhost",
               "name": "mailstack", "user": "MAIL_USER", "pass": "MAIL_PASS" } },
-    "web":  { "database": { "type": "mysql", "host": "mariadb",
+    "web":  { "database": { "type": "mysql", "host": "localhost",
               "name": "webstack", "user": "...", "pass": "..." } },
-    "ftp":  { "database": { "type": "mysql", "host": "mariadb",
+    "ftp":  { "database": { "type": "mysql", "host": "localhost",
               "name": "ftpstack", "user": "FTP_USER", "pass": "FTP_PASS" } }
 }
 ```
