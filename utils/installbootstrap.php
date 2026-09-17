@@ -736,6 +736,13 @@ class InstallBootstrap
             if (trim((string) ($in['admin_password'] ?? '')) === '') {
                 throw new CkvException(__('Missing fields') . ' (admin_password)');
             }
+            // human message BEFORE the whole chain runs (the old silent
+            // path pasted ok and broke the login afterwards)
+            if (!\pmwh3\Utils\PasswordUtil::isValidLength((string) ($in['admin_password'] ?? ''))) {
+                throw new CkvException(sprintf(
+                        __('The password must be at least %d characters long.'),
+                        \pmwh3\Utils\PasswordUtil::minLength()));
+            }
             return;
         }
         if ($phase === 'dns') {
@@ -1266,23 +1273,32 @@ class InstallBootstrap
             throw new \RuntimeException('Ultimate Admin role not found (roles step failed)');
         }
 
-        // CustomerManager::insert(fields, limits, password, creatorCid)
-        // -- $limits is the flat [resource => max] map; seedCountings
-        // adds used/granted(0) rows itself.
+        // CustomerManager::create() directly -- NOT insert(): insert
+        // swallows the CkvException into a 0-return (controller
+        // convenience), which made runPhase2 report 'admin customer:
+        // ok' while NO row existed (kvasny: the operator's < 12 char
+        // password failed isValidLength silently). Direct create()
+        // throws the human message for the flash instead.
         $limitMap = [];
         foreach (\pmwh3\Utils\CountingUtil::getResources() ?: [] as $res) {
             $limitMap[$res] = -1; // unlimited for the ultimate admin
         }
-        CustomerManager::insert(
+        $cid = CustomerManager::create(
                 [
                     'customer' => self::ADMIN_NAME,
                     'realname' => 'Ultimate Admin',
                     'role_id'  => $roleId,
                     'email'    => '',
+                    'creator'  => 0,
+                    'password' => (string) $in['admin_password'],
                 ],
-                $limitMap,
-                (string) $in['admin_password'],
-                0);
+                $limitMap);
+        if ($cid <= 0) {
+            throw new \RuntimeException('admin customer could not be created');
+        }
+        if ($cid <= 0) {
+            throw new \RuntimeException('admin customer could not be created');
+        }
     }
 
     // ----------------------------------------------------------------

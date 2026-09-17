@@ -1,4 +1,4 @@
-# postfix mysql map -> mail stack routing table (NOT pmwh3-owned)
+# postfix mysql map -> pmwh3 mail routing (pmwh3-owned)
 #
 # wired in main.cf as (1st map of transport_maps):
 #   transport_maps =
@@ -7,10 +7,13 @@
 # domains THIS server is the master MX for (its own IP in
 # master_destination) -> deliver via `destination` (e.g.
 # lmtp:inet:dovecot:24). %% is the escaped literal % for postfix.
+# Rows are provisioned by pmwh3 (PostfixAdapter::syncDomainTransport)
+# on domain create/update/delete out of MAIL_TRANSPORT / MAIL_MASTER_IP
+# -- NEVER add rows manually.
 #
 # Variables: @DB_HOST@ @DB_NAME@ @DB_USER@ @DB_PASS@ @MASTER_IP@
 user = @DB_USER@
 password = @DB_PASS@
 dbname = @DB_NAME@
 hosts = @DB_HOST@
-query = SELECT destination FROM postfix_transport WHERE domain='%s' AND master_destination LIKE '%%[@MASTER_IP@]%%'
+query = SELECT destination FROM pmwh3_mail_transport WHERE domain='%s' AND master_destination LIKE '%%[@MASTER_IP@]%%'

@@ -174,6 +174,18 @@ class DomainManager
             }
         }
 
+        // 6. Mail transport row (postfix-only soft capability; other
+        //    adapters no-op in MailManager::syncDomainTransport()).
+        //    Best effort -- a missing row just falls back to postfix's
+        //    default transport.
+        if (str_contains($services, 'mail')) {
+            try {
+                MailManager::syncDomainTransport($domain, true);
+            } catch (\Throwable $e) {
+                error_log("DomainManager::create transport: " . $e->getMessage());
+            }
+        }
+
         return true;
     }
 
@@ -202,6 +214,17 @@ class DomainManager
                 'domain = :d',
                 ['d' => $domain]
         );
+
+        // Services switch -> refresh the mail transport row (postfix-only
+        // soft capability; no-op for other adapters). Best effort.
+        if (array_key_exists('services', $allowed)) {
+            try {
+                MailManager::syncDomainTransport($domain, str_contains((string) $allowed['services'], 'mail'));
+            } catch (\Throwable $e) {
+                error_log("DomainManager::update transport: " . $e->getMessage());
+            }
+        }
+
         return true;
     }
 
@@ -239,6 +262,15 @@ class DomainManager
                 DnsManager::deleteZone($domain);
             } catch (\Throwable $e) {
                 error_log("DomainManager::delete dns: " . $e->getMessage());
+            }
+        }
+
+        // 2b. Mail transport row (postfix-only soft capability).
+        if (str_contains($services, 'mail')) {
+            try {
+                MailManager::syncDomainTransport($domain, false);
+            } catch (\Throwable $e) {
+                error_log("DomainManager::delete transport: " . $e->getMessage());
             }
         }
 

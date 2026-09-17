@@ -205,12 +205,15 @@
                             <td><input value="admin" disabled></td>
                         </tr>
                         <tr>
-                            <td><?php echo __('Password'); ?></td>
-                            <td><input type="password" name="admin_password" required></td>
+                            <td><?php echo __('Password'); ?>
+                                <input type="password" name="admin_password" required
+                                       minlength="<?php echo (int) \pmwh3\Utils\PasswordUtil::minLength();
+                                ?>"></td>
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <small><?php echo __('Minimum length: see PASSWORD_LENGTH default 12. The user becomes the "Ultimate Admin" role with all pmwh3 permissions.'); ?></small>
+                                <small><?php echo sprintf(__('Minimum length: %d (PASSWORD_LENGTH). The user becomes the "Ultimate Admin" role with all pmwh3 permissions.'),
+                                        \pmwh3\Utils\PasswordUtil::minLength()); ?></small>
                             </td>
                         </tr>
                     </table>

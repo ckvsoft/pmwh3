@@ -20,7 +20,7 @@ DB_PASS=""
 
 # --- mail routing (postfix transport maps) ------------------------
 # THIS mail server's public IP: it identifies the domains this
-# server is the master MX for (postfix_transport.master_destination)
+# server is the master MX for (pmwh3_mail_transport.master_destination)
 MASTER_IP=""
 
 # --- dovecot / vmail ----------------------------------------------

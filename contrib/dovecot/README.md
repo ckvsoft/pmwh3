@@ -42,6 +42,17 @@ the pmwh3 settings (Options → Email): `DOVEADM_URL` (e.g.
 `http://dovecot:24424`) and `DOVEADM_PASSWORD` — the same secret as
 in `pmwh3-doveadm.conf.example`.
 
+About the driver: Dovecot 2.x removed the old `quota=dict:` backend —
+usage is computed by the `count` driver from the filesystem (index
+files) and read live via IMAP QUOTA (e.g. Roundcube) or the doveadm
+HTTP API (pmwh3). There is **no SQL write path** in the default
+setup. If you need the numbers inside SQL anyway (external consumers
+that only see the database), the optional `quota_clone` block in
+`pmwh3-quota.conf.example` is the only 2.4-conform way to mirror the
+current usage into `used_bytes` / `used_messages` — it does not
+change how usage is computed and never touches `quota_bytes` (the
+limit stays pmwh3's job via passdb).
+
 ## rspamc_learn.sh
 
 - Mount/copy it to where your sieve rules call it (live:

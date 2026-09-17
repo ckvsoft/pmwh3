@@ -66,11 +66,13 @@ where it belongs.
    virtual_mailbox_domains, virtual_mailbox_maps,
    smtpd_sender_login_maps, transport_maps). Adjust
    `virtual_transport` / `virtual_mailbox_base` / static uid-gid to
-   your vmail setup.
-3. Create the routing table once:
-   `mysql ... < postfix/postfix_transport.sql` and insert a row per
-   hosted domain (`destination` = your delivery transport,
-   `master_destination` = `smtp:[<this server's IP>]:25`).
+   your vmail setup, and set `@MASTER_IP@` in the render vars to
+   **this** server's public IP (the transport maps split master/backup
+   on it).
+3. The routing table `pmwh3_mail_transport` is created by the pmwh3
+   baseline and provisioned by pmwh3 itself (domain
+   create/update/delete, out of the settings `MAIL_TRANSPORT` /
+   `MAIL_MASTER_IP`) — no manual DDL or INSERTs.
 4. Check and reload:
 
 ```bash

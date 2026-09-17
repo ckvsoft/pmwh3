@@ -6,9 +6,16 @@ namespace pmwh3\Utils\Mail;
  * Mail backend operations.
  *
  * Currently the only backend is Postfix + Dovecot via shared SQL
- * tables (pmwh3_mail_accounts, pmwh3_mail_forwardings, postfix_transport,
- * dovecot_quota). Other adapters can plug in by implementing this
- * interface and dropping the file into utils/mail/.
+ * tables (pmwh3_mail_accounts, pmwh3_mail_forwardings and the
+ * postfix-only routing table pmwh3_mail_transport). Other adapters
+ * can plug in by implementing this interface and dropping the file
+ * into utils/mail/.
+ *
+ * Optional soft capabilities are time-checked by the facade
+ * (MailManager) via is_callable() and simply no-op when absent --
+ * e.g. liveQuota() (doveadm HTTP API) and syncDomainTransport()
+ * (postfix routing row provisioning). Implement them only when the
+ * backend actually has the concept.
  */
 interface MailAdapterInterface
 {

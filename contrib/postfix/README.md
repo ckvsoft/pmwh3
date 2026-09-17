@@ -10,11 +10,11 @@ translated to the pmwh3 tables:
 | `virtual_mailbox_maps` | `mysql-virtual_mailbox_maps.cf.example` | `pmwh3_mail_accounts` (maildir, `active='Y'`) |
 | `virtual_alias_maps` (1st) | `mysql-virtual_forwardings.cf.example` | `pmwh3_mail_forwardings` (source → destination; catch-all = source `@domain`) |
 | `virtual_alias_maps` (2nd) | `mysql-virtual_email2email.cf.example` | `pmwh3_mail_accounts` (loop breaker) |
-| `virtual_mailbox_domains` | `mysql-virtual_mailbox_domains.cf.example` | `postfix_transport` (see below) |
+| `virtual_mailbox_domains` | `mysql-virtual_mailbox_domains.cf.example` | `pmwh3_mail_transport` (see below) |
 | `smtpd_sender_login_maps` (1st) | `mysql-virtual_alias_maps.cf.example` | `pmwh3_mail_accounts` |
 | `smtpd_sender_login_maps` (2nd) | `mysql-smtp_sender.cf.example` | `pmwh3_mail_forwardings` |
-| `transport_maps` (1st) | `mysql-virtual_transport_maps.cf.example` | `postfix_transport` (domains this server is MASTER for) |
-| `transport_maps` (2nd) | `mysql-backup_transport_maps.cf.example` | `postfix_transport` (domains this server is BACKUP for) |
+| `transport_maps` (1st) | `mysql-virtual_transport_maps.cf.example` | `pmwh3_mail_transport` (domains this server is MASTER for) |
+| `transport_maps` (2nd) | `mysql-backup_transport_maps.cf.example` | `pmwh3_mail_transport` (domains this server is BACKUP for) |
 
 ## main.cf wiring
 
@@ -42,20 +42,37 @@ virtual_gid_maps = static:5000
 describe your vmail setup, not pmwh3 — adjust to your stack. Add the
 maps to `proxy_read_maps` when you use the proxymap service.)
 
-## postfix_transport (stack-owned)
+## pmwh3_mail_transport (pmwh3-owned, created by the baseline)
 
-pmwh3 does not manage domain routing. The baseline therefore does
-not create `postfix_transport`; the transport and mailbox_domains
-maps read it. Fresh installs create it once with
-`postfix_transport.sql` (same directory) and maintain the rows by
-hand or with their own tooling:
+pmwh3 manages domain routing itself: the fresh-install baseline
+creates `pmwh3_mail_transport` in the module DB and
+`PostfixAdapter::syncDomainTransport()` provisions rows on domain
+create / update / delete out of two pmwh3 settings (Options → Email):
 
-- `destination` — transport for domains this server delivers
-  (e.g. `lmtp:inet:dovecot:24`)
-- `master_destination` — where the domain's master MX lives
-  (e.g. `smtp:[203.0.113.10]:25`); this server's own IP here means
-  "I am the master". The two transport maps split on exactly that
-  (`@MASTER_IP@`).
+- `MAIL_TRANSPORT` — the `destination` value (default
+  `lmtp:inet:dovecot:24` = the Dovecot LMTP transport; keep it in
+  sync with `virtual_transport` in main.cf)
+- `MAIL_MASTER_IP` — public IP of the domain's **master MX**. Row
+  shape: `destination` + `master_destination = smtp:[<IP>]:25`.
+
+The two transport maps split exactly on that IP (`@MASTER_IP@` =
+this server's own IP): master MX delivers via `destination`, backup
+MX relays to `master_destination`. `virtual_mailbox_domains` returns
+non-empty only on the master (directly from `destination`).
+
+Behaviour per domain, mirrored by every stack server from the same
+shared DB:
+
+- mail service AND `MAIL_MASTER_IP` set → row created (master/backup
+  routing works)
+- mail service AND `MAIL_MASTER_IP` empty → **no row** (single-server
+  setup; postfix falls back to `virtual_transport`)
+- mail service removed or domain deleted → row deleted
+
+Never add or edit rows by hand (the maps are read-only over the
+proxymap service). During a live migration from a legacy
+`postfix_transport` table, copy the rows once before switching the
+maps to `pmwh3_mail_transport`.
 
 ## Not ported (legacy live files without main.cf wiring)
 
@@ -75,6 +92,6 @@ equivalent and no wiring:
 
 `@DB_HOST@ @DB_NAME@ @DB_USER@ @DB_PASS@ @MASTER_IP@`
 
-The DB user needs SELECT only. Apply `postfix_transport.sql` to the
-same database (`@DB_NAME@`) once, then `postmap -q` your checks and
-`postfix reload`.
+The DB user needs SELECT only. `@MASTER_IP@` must be **this** mail
+server's public IP (it is the split key, not the domain's master MX).
+After wiring, `postmap -q` your checks and `postfix reload`.

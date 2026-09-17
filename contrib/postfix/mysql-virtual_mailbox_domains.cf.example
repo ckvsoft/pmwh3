@@ -1,15 +1,16 @@
-# postfix mysql map -> mail stack routing table (NOT pmwh3-owned)
+# postfix mysql map -> pmwh3 mail routing (pmwh3-owned)
 #
 # wired in main.cf as:
 #   virtual_mailbox_domains =
 #       proxy:mysql:/etc/postfix/sql/mysql-virtual_mailbox_domains.cf
 # non-empty result = this server is the final destination for the
-# domain. Reads the stack-owned postfix_transport table -- see
-# postfix_transport.sql and README.md in this directory.
+# domain. Reads the pmwh3-owned pmwh3_mail_transport table -- rows
+# are provisioned by pmwh3 on domain create/update/delete (see
+# README.md in this directory), NEVER added manually.
 #
 # Variables: @DB_HOST@ @DB_NAME@ @DB_USER@ @DB_PASS@
 user = @DB_USER@
 password = @DB_PASS@
 dbname = @DB_NAME@
 hosts = @DB_HOST@
-query = SELECT destination FROM postfix_transport WHERE domain='%s'
+query = SELECT destination FROM pmwh3_mail_transport WHERE domain='%s'

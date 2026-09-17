@@ -78,6 +78,21 @@ class MailManager
         return $cls::liveQuota($email);
     }
 
+    /**
+     * Sync the backend-specific domain transport row (currently the
+     * postfix pmwh3_mail_transport table). Soft capability: adapters
+     * without syncDomainTransport() simply ignore the call -- callers
+     * (DomainManager) must not hard-depend on a specific backend.
+     */
+    public static function syncDomainTransport(string $domain, bool $enabled): void
+    {
+        $cls = self::adapterClass();
+        if (!is_callable([$cls, 'syncDomainTransport'])) {
+            return;
+        }
+        self::call('syncDomainTransport', [$domain, $enabled]);
+    }
+
     // Forwards
     public static function listForwards(string $domain, string $orderBy = 'source'): array
     { return self::call('listForwards', [$domain, $orderBy]); }

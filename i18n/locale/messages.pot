@@ -3416,10 +3416,6 @@ msgstr ""
 msgid "Placeholders: [DOMAIN], [USER]"
 msgstr ""
 
-#: /tmp/opencode/schema_calls.php:46
-msgid "Use maildrop instead of virtual"
-msgstr ""
-
 #: /tmp/opencode/schema_calls.php:47
 msgid "Auto-create email accounts"
 msgstr ""

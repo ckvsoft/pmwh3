@@ -17,12 +17,17 @@ use pmwh3\Utils\DomainUtil;
  *   pmwh3_mail_accounts    (email PK, login, password, name, uid, gid,
  *                           homedir, maildir, quota_bytes INT, active Y/N)
  *   pmwh3_mail_forwardings (source PK, destination text - comma list)
+ *   pmwh3_mail_transport   (domain PK, destination, master_destination -
+ *                           postfix-only routing, provisioned by
+ *                           syncDomainTransport() out of MAIL_TRANSPORT /
+ *                           MAIL_MASTER_IP on domain create/update/delete)
  *
  * Quota USAGE is NOT stored in these tables -- the live numbers come
- * from the mail system itself (doveadm HTTP API, liveQuota()). The
- * legacy vendor tables (postfix_users, postfix_forwardings,
- * dovecot_quota) live in their stack database and belong to the
- * postfix/dovecot configuration, NOT to pmwh3.
+ * from the mail system itself (doveadm HTTP API, liveQuota()). Optional
+ * quota_clone mirrors them into pmwh3_mail_accounts.used_*. The legacy
+ * vendor tables (postfix_users, postfix_forwardings, dovecot_quota) live
+ * in their stack database and belong to the postfix/dovecot
+ * configuration, NOT to pmwh3.
  *
  * Catchalls are forwardings whose source is '@domain'.
  */
@@ -436,6 +441,42 @@ class PostfixAdapter implements MailAdapterInterface
     }
 
     // ---- safety ----
+
+    /**
+     * Sync the postfix routing row (pmwh3_mail_transport) for a domain.
+     *
+     * Postfix-only concept (soft capability -- MailManager::syncDomainTransport()
+     * no-ops for adapters without this method). Keeps the two transport maps
+     * in contrib/postfix working:
+     *
+     *   - enabled + MAIL_MASTER_IP set  -> row (destination = MAIL_TRANSPORT,
+     *     master_destination = smtp:[<IP>]:25) so master/backup routing works
+     *   - enabled + MAIL_MASTER_IP empty -> no row (single-server: postfix
+     *     uses its default virtual_transport)
+     *   - disabled                       -> row deleted
+     */
+    public static function syncDomainTransport(string $domain, bool $enabled): bool
+    {
+        $db   = self::db();
+        $db->delete('pmwh3_mail_transport', 'domain = :d', ['d' => $domain]);
+        if (!$enabled) {
+            return true;
+        }
+        $masterIp = strtolower(trim((string) LazyConfig::get('MAIL_MASTER_IP', '')));
+        if ($masterIp === '') {
+            return true;
+        }
+        $destination = trim((string) LazyConfig::get('MAIL_TRANSPORT', 'lmtp:inet:dovecot:24'));
+        if ($destination === '') {
+            $destination = 'lmtp:inet:dovecot:24';
+        }
+        $db->insert('pmwh3_mail_transport', [
+            'domain'             => $domain,
+            'destination'        => $destination,
+            'master_destination' => 'smtp:[' . $masterIp . ']:25',
+        ]);
+        return true;
+    }
 
     private static function sanitizeOrder(string $order, array $allowed): string
     {

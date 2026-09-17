@@ -71,7 +71,7 @@ pmwh3 keeps **one consolidated table family per service**:
 
 | Service | Tables (in the service DB) |
 |---|---|
-| Mail | `pmwh3_mail_accounts` (email, login, password, name, uid/gid, homedir, maildir, `quota_bytes`, `used_bytes`, `used_messages`, `active`) · `pmwh3_mail_forwardings` (source/destination; catch-all is a row with source `@domain`) |
+| Mail | `pmwh3_mail_accounts` (email, login, password, name, uid/gid, homedir, maildir, `quota_bytes`, `used_bytes`, `used_messages`, `active`) · `pmwh3_mail_forwardings` (source/destination; catch-all is a row with source `@domain`) · `pmwh3_mail_transport` (postfix-only routing, provisioned from `MAIL_TRANSPORT`/`MAIL_MASTER_IP` on domain create/update/delete) |
 | Web | `pmwh3_web_subdomains` (subdomain, domain, customer, path, `mode` = directory/ip/alias, ip, alias_of, ssl_cert, custom, adapter, `data`) |
 | FTP | `pmwh3_ftp_accounts` · `pmwh3_ftp_groups` · `pmwh3_ftp_quota_limits` · `pmwh3_ftp_quota_tallies` |
 | DNS | adapter-owned (`pdns_*` / `mydns_*`) in their **own database** via the `dns.database` node — the exception by design |
@@ -129,12 +129,16 @@ installations actually need.)
 ## Mail quota model
 
 The assigned quota is `pmwh3_mail_accounts.quota_bytes`. **Usage**
-is tracked by Dovecot's recommended `count` driver; pmwh3 reads the
-current values live through the doveadm HTTP API (the postfix
-adapter's `liveQuota()`), with the row columns `used_bytes` /
-`used_messages` as fallback — there is no separate vendor quota
-table. The daemon-side glue (userdb/passdb queries, quota setup,
-doveadm listener) lives in [`contrib/`](contrib/).
+is tracked by Dovecot's `count` driver (Dovecot 2.x removed the old
+`quota = dict:` driver); clients/backends read it live — Roundcube
+via IMAP QUOTA, pmwh3 through the doveadm HTTP API (the postfix
+adapter's `liveQuota()`). The row columns `used_bytes` /
+`used_messages` are the fallback; they only ever fill up when the
+optional `quota_clone` block in
+[`contrib/dovecot/pmwh3-quota.conf.example`](contrib/dovecot/pmwh3-quota.conf.example)
+is enabled (the only 2.4-conform way to mirror usage into SQL). The
+daemon-side glue (userdb/passdb queries, quota setup, doveadm
+listener) lives in [`contrib/`](contrib/).
 
 ---
 

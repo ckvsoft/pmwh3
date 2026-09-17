@@ -125,11 +125,15 @@ ist der bislang etablierte Sonderfall; mail/web/ftp folgen demselben
 Muster.)
 
 **Mail-Kontingent:** Zuweisen liegt als `quota_bytes` in
-`pmwh3_mail_accounts`; der VERBRAUCH wird von Dovecots
-empfohlenem `count`-Treiber verwaltet, pmwh3 liest die aktuellen
-Werte live über die doveadm HTTP API (mit Fallback auf die
-Row-Spalten `used_bytes`/`used_messages`) — **keine separate
-Vendor-Tabelle** (früher `dovecot_quota`). Templates: `contrib/`.
+`pmwh3_mail_accounts`; der VERBRAUCH wird von Dovecots `count`-
+Treiber (Dovecot 2.x hat das alte `quota=dict:`-Backend entfernt)
+gepflegt, Roundcube liest ihn via IMAP QUOTA, pmwh3 live über die
+doveadm HTTP API. Die Row-Spalten `used_bytes`/`used_messages` sind
+nur Fallback — sie füllen sich ausschließlich, wenn der optionale
+`quota_clone`-Block in `contrib/dovecot/pmwh3-quota.conf.example`
+aktiviert ist (einzig 2.4-konformer Weg zur SQL-Spiegelung) —
+**keine separate Vendor-Tabelle** (früher `dovecot_quota`).
+Templates: `contrib/`.
 
 - **Fehlt ein Node** (z.B. `mail`), fällt der betreffende Adapter auf
   die pmwh3-Modul-DB zurück (fresh-install default: alles in einer DB).
@@ -479,13 +483,12 @@ Setup über `inc/sql/0.0.0_baseline.sql`. Wichtige Tabellen:
 | `pmwh3_activity` / `pmwh3_activity_log` | Session-Liste + Änderungs-Historie |
 | `pmwh3_domains` | Domain-Verwaltung |
 | `pmwh3_web_subdomains` | Web-Subdomains/Vhosts (mode/ip/alias_of/ssl_cert/data) |
-| `pmwh3_mail_accounts` / `pmwh3_mail_forwardings` | Mail-Stack (Postfächer, Forwards, Catchall) |
+| `pmwh3_mail_accounts` / `pmwh3_mail_forwardings` / `pmwh3_mail_transport` | Mail-Stack (Postfächer, Forwards, Catchall, postfix-Routing — von pmwh3 provisioniert) |
 | `pmwh3_ftp_accounts` / `_groups` / `_quota_limits` / `_quota_tallies` | FTP-Stack |
 | `pmwh3_traffic` | Traffic-Aggregation |
 
 Nicht verwaltet (gehören anderer Software):
 
-- `postfix_transport` — Mail-Stack-Routing (Templates + DDL unter `contrib/postfix/`)
 - `mydns_*`, `pdns_*` — leben in der DNS-DB (`dns.database`-Node);
   Schemata liegen als Snapshots unter `contrib/sql/`
 

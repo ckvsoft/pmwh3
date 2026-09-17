@@ -13,7 +13,7 @@ versions live on the server only.
 | Directory | Contents | Consumed by |
 |---|---|---|
 | `apache/` | mod_perl vhost reader — applies the rendered `data` column of `pmwh3_web_subdomains` as Apache config at startup | Apache + mod_perl |
-| `postfix/` | SQL map templates against `pmwh3_mail_accounts` / `pmwh3_mail_forwardings` (+ the stack-owned `postfix_transport` routing table) | Postfix (`proxy:mysql:`) |
+| `postfix/` | SQL map templates against `pmwh3_mail_accounts` / `pmwh3_mail_forwardings` / `pmwh3_mail_transport` (all pmwh3-owned) | Postfix (`proxy:mysql:`) |
 | `dovecot/` | passdb/userdb SQL, quota (`driver = count`), doveadm HTTP API, rspamd learn wrapper | Dovecot 2.4 |
 | `proftpd/` | mod_sql configuration against the `pmwh3_ftp_*` tables | ProFTPD (mod_sql) |
 | `rspamd/` | W/B multimap + per-scope thresholds, pulled from pmwh3 over HTTP | Rspamd |
@@ -44,7 +44,7 @@ script enforces both).
 | `@DB_NAME@` | pmwh3 database name | all SQL consumers |
 | `@DB_USER@` | DB user for the daemons (SELECT is enough for postfix/dovecot/apache; proftpd needs UPDATE/INSERT) | all SQL consumers |
 | `@DB_PASS@` | its password | all SQL consumers |
-| `@MASTER_IP@` | THIS mail server's public IP — the transport maps split on it to tell "I am the master MX for this domain" from "I am the backup" (`postfix_transport.master_destination`) | postfix transport maps |
+| `@MASTER_IP@` | THIS mail server's public IP — the transport maps split on it to tell "I am the master MX for this domain" from "I am the backup" (`pmwh3_mail_transport.master_destination`) | postfix transport maps |
 | `@VMAIL_HOME@` | vmail base directory (`home` = `<vmail>/<domain>/<user>`) | dovecot |
 | `@DOVEADM_PASSWORD@` | shared secret for the doveadm HTTP API (same value as the pmwh3 setting `DOVEADM_PASSWORD`) | dovecot |
 | `@WEBROOT@` | customer webspace root (docroots, per-customer log dirs) | apache |

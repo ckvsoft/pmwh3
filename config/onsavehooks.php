@@ -199,11 +199,4 @@ class OnSaveHooks
     {
         error_log("MAIL_USER_GID changed; you may need to chgrp existing maildirs.");
     }
-
-    public static function updateMaildropUsage(string $key, $newValue, $oldValue): void
-    {
-        error_log("USING_MAILDROP changed; postfix_transport entries for new domains "
-                . "will use " . ($newValue === 'Y' ? 'maildrop:' : 'virtual:') . " from now on. "
-                . "Existing entries are NOT rewritten automatically.");
-    }
 }

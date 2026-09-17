@@ -16,10 +16,11 @@
 --   mydns_* / pdns_* live in their DNS databases (dns.database
 --   module.json node); legacy amavis_* stays with its stack.
 --   The vendor-mirror copies (postfix_users, postfix_forwardings,
---   postfix_transport, dovecot_quota, apache_subdomains,
---   proftpd*) are NOT created by this baseline anymore -- the
---   consolidated pmwh3_mail_* / pmwh3_web_* / pmwh3_ftp_* tables
---   replace them; the daemon configs read them via contrib/.
+--   dovecot_quota, apache_subdomains, proftpd*) are NOT created by
+--   this baseline anymore -- the consolidated pmwh3_mail_* /
+--   pmwh3_web_* / pmwh3_ftp_* tables replace them; the daemon
+--   configs read them via contrib/. (pmwh3_mail_transport IS created
+--   here -- pmwh3 owns the postfix routing table.)
 --
 -- The FTP tables ARE created here (IF NOT EXISTS) because pmwh3
 -- manages them via CRUD. Existing data is preserved (the live
@@ -401,6 +402,23 @@ CREATE TABLE IF NOT EXISTS `pmwh3_mail_forwardings` (
     `source`      VARCHAR(80)  NOT NULL,
     `destination` MEDIUMTEXT   DEFAULT NULL,
     PRIMARY KEY (`source`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- pmwh3_mail_transport: postfix-ONLY domain routing table (owned by
+-- pmwh3, provisioned by the PostfixAdapter::syncDomainTransport() out
+-- of MAIL_TRANSPORT / MAIL_MASTER_IP on domain create/update/delete).
+-- Other mail adapters never touch it; the postfix transport maps in
+-- contrib/postfix read it (master/backup split on master_destination).
+-- destination        = transport THIS server uses to deliver the domain
+--                      (e.g. 'lmtp:inet:dovecot:24')
+-- master_destination = address of the domain's master MX, e.g.
+--                      'smtp:[203.0.113.10]:25' -- equal on every server;
+--                      the map queries split by the LOCAL server's own IP.
+CREATE TABLE IF NOT EXISTS `pmwh3_mail_transport` (
+    `domain`             VARCHAR(128) NOT NULL DEFAULT '',
+    `destination`        VARCHAR(128) NOT NULL DEFAULT '',
+    `master_destination` VARCHAR(128) NOT NULL DEFAULT '',
+    PRIMARY KEY (`domain`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- =====================================================================

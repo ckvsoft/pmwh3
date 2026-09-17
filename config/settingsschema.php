@@ -311,13 +311,21 @@ class SettingsSchema
                 'default' => '[DOMAIN]/[USER]',
                 'level'   => '1',
             ],
-            'USING_MAILDROP' => [
+            'MAIL_TRANSPORT' => [
                 'group'   => self::GROUP_EMAIL,
-                'label'   => 'Use maildrop instead of virtual',
-                'type'    => 'checkbox',
-                'default' => 'N',
+                'label'   => 'Mail transport for new domains',
+                'help'    => 'Postfix transport used as destination when provisioning pmwh3_mail_transport rows for new mail domains (postfix adapter). Default lmtp:inet:dovecot:24 = Dovecot LMTP, matching virtual_transport in your postfix main.cf.',
+                'type'    => 'text',
+                'default' => 'lmtp:inet:dovecot:24',
                 'level'   => '1',
-                'on_save' => 'updateMaildropUsage',
+            ],
+            'MAIL_MASTER_IP' => [
+                'group'   => self::GROUP_EMAIL,
+                'label'   => 'Master MX IP address',
+                'help'    => 'Public IP of the domain master MX. New mail domains get a pmwh3_mail_transport row with master_destination smtp:[<IP>]:25 so the postfix transport maps route master vs backup (single value on every server; the maps split by the local server own IP). Leave empty for single-server: no transport rows are created and postfix uses its default transport.',
+                'type'    => 'text',
+                'default' => '',
+                'level'   => '1',
             ],
             // ROADMAP (G7 Auto-Provision): AUTO_EMAIL wird bei Domain-Add nicht angelegt.
             'AUTO_EMAIL' => [
