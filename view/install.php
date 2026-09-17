@@ -216,9 +216,9 @@
                     </table>
                     <input type="hidden" name="phase" value="2">
                     <div class="pmwh3-form-actions">
-                        <button type="submit" class="button small-action"
+                        <button type="submit" class="button small-action save"
                                 data-confirm="<?php echo __('Create schema, RBAC roles and the admin user with the credentials from steps 3-4?'); ?>"
-                                data-confirm-type="change"><?php echo __('Install (step 3)'); ?></button>
+                                data-confirm-type="change"><?php echo __('Create admin user and finish installation (step 5)'); ?></button>
                     </div>
                 </form>
             <?php } ?>
