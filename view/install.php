@@ -51,6 +51,21 @@
                     </tr>
 
                     <tr>
+                        <th colspan="2"><?php echo __('Database administrator (optional)'); ?></th>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <small><?php echo __('Only needed when the database user above may NOT create databases (common on hosting panels): the installer then uses this login once to create the module database and grant the user above. Never stored.'); ?></small>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><?php echo __('Admin user'); ?></td>
+                        <td><input name="db_admin_user" autocomplete="off"></td>
+                    </tr>
+                    <tr>
+                        <td><?php echo __('Admin password'); ?></td>
+                        <td><input type="password" name="db_admin_pass" autocomplete="off"></td>
+                    </tr>
                         <th colspan="2"><?php echo __('DNS database (PowerDNS / MyDNS)'); ?></th>
                     </tr>
                     <tr>

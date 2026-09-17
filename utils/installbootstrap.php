@@ -286,6 +286,20 @@ class InstallBootstrap
         $steps = [];
         self::assertInput($in, 'bootstrap');
 
+        // The phase-2 POST only carries the admin password -- read the
+        // DATABASE credentials from the module.json written in phase 1
+        // so the requirement checks (incl. the CREATE-on-1049 probe)
+        // run HERE too. A 1049 at baseline time otherwise dies with
+        // 'Unknown database' instead of the actionable row.
+        $mj = self::moduleJson();
+        if (!empty($mj['database'])) {
+            foreach (['db_host' => 'host', 'db_name' => 'name',
+                      'db_user' => 'user', 'db_pass' => 'pass'] as $k => $j) {
+                $in[$k] = (string) ($mj['database'][$j] ?? ($in[$k] ?? ''));
+            }
+            $in['db_port'] = (int) ($mj['database']['port'] ?? 3306);
+        }
+
         // 0. system prerequisites (Cevian version, PHP extensions, dirs)
         $checks = self::systemChecks($in);
         if (!$checks['ok']) {
@@ -519,9 +533,10 @@ class InstallBootstrap
             return ['rows' => [['label' => 'Database connect',
                 'ok'     => false,
                 'detail' => 'database does not exist and could not be'
-                        . ' created with the given credentials -- create the'
-                        . ' EMPTY database in the hosting panel first, then'
-                        . ' retry',
+                        . ' created with the given credentials -- enter an'
+                        . ' optional database administrator login in the form'
+                        . ' below (or create the EMPTY database in the hosting'
+                        . ' panel first), then retry',
             ]]];
         }
 
@@ -538,11 +553,15 @@ class InstallBootstrap
     }
 
     /**
-     * CREATE DATABASE attempt with the submitted credentials. Grants
-     * the SAME user full rights on the new database (best effort --
-     * on hosts that provision GRANTs per database via panel this may
-     * fail silently; the probe afterwards decides).
-     * \cf. only for identifiers from the OPERATOR's own form input.
+     * CREATE DATABASE attempt. Credentials: the module DB user, and
+     * when that is not allowed (no global CREATE privilege, typical
+     * on hosting panels) the OPTIONAL db_admin login that the
+     * operator entered in the wizard is used -- the module user then
+     * receives an explicit GRANT (best effort on '%' and 'localhost'
+     * host patterns). Non-fatal on grant failure; the re-probe after
+     * decides the overall state.
+     * Identifiers sanitized: the DB name must be plain
+     * [A-Za-z0-9_.-], user names alike (no backtick games).
      */
     private static function tryCreateDatabase(array $in): bool
     {
@@ -551,27 +570,48 @@ class InstallBootstrap
         if ($safe === '' || $safe !== $name) {
             return false; // no fancy quoting games blindfolded
         }
-        $dsn = 'mysql:host=' . (string) $in['db_host'] . ';port='
-                . ((int) ($in['db_port'] ?? 3306));
+        $host = (string) $in['db_host'];
+        $port = (int) ($in['db_port'] ?? 3306);
+        $adminUser = trim((string) ($in['db_admin_user'] ?? ''));
+        $dsn = 'mysql:host=' . $host . ';port=' . $port;
+        $connectUser = $adminUser !== ''
+                ? $adminUser
+                : (string) $in['db_user'];
+        $connectPass = $adminUser !== ''
+                ? (string) ($in['db_admin_pass'] ?? '')
+                : (string) $in['db_pass'];
         try {
-            $pdo = new \PDO($dsn, (string) $in['db_user'],
-                    (string) $in['db_pass'], [\PDO::ATTR_TIMEOUT => 5]);
+            $pdo = new \PDO($dsn, $connectUser, $connectPass,
+                    [\PDO::ATTR_TIMEOUT => 5]);
             $charset = 'utf8mb4';
             $collate = 'utf8mb4_unicode_ci';
-            $stmt = $pdo->prepare(
-                    'CREATE DATABASE IF NOT EXISTS `' . str_replace('`', '', $safe)
-                    . "` CHARACTER SET {$charset} COLLATE {$collate}");
-            $stmt->execute();
-            try {
-                $grant = $pdo->prepare('GRANT ALL PRIVILEGES ON `'
-                        . str_replace('`', '', $safe)
-                        . "`.* TO CURRENT_USER()");
-                $grant->execute();
-            } catch (Throwable $e) {
-                // grant usually AUTOMATIC for the owning user; not fatal
-                \pmwh3\Utils\ErrorHandler::trace(
-                        '[InstallBootstrap.tryCreateDatabase] GRANT skipped: '
-                        . $e->getMessage());
+            $bare = str_replace('`', '', $safe);
+            $pdo->prepare("CREATE DATABASE IF NOT EXISTS `{$bare}`"
+                    . " CHARACTER SET {$charset} COLLATE {$collate}")
+                    ->execute();
+            if ($adminUser !== '') {
+                $moduleUser = str_replace(["'", '"', '\\', '`'], '',
+                        (string) $in['db_user']);
+                foreach (['`' . $moduleUser . '`@`%`',
+                          '`' . $moduleUser . '`@localhost'] as $target) {
+                    try {
+                        $pdo->prepare('GRANT ALL PRIVILEGES ON `' . $bare
+                                . "`.* TO {$target}")->execute();
+                    } catch (Throwable $e) {
+                        \pmwh3\Utils\ErrorHandler::trace(
+                                '[InstallBootstrap.tryCreateDatabase] GRANT '
+                                . $target . ' skipped: ' . $e->getMessage());
+                    }
+                }
+            } else {
+                try {
+                    $pdo->prepare('GRANT ALL PRIVILEGES ON `' . $bare
+                            . "`.* TO CURRENT_USER()")->execute();
+                } catch (Throwable $e) {
+                    \pmwh3\Utils\ErrorHandler::trace(
+                            '[InstallBootstrap.tryCreateDatabase] GRANT skipped: '
+                            . $e->getMessage());
+                }
             }
             return true;
         } catch (Throwable $e) {

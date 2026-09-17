@@ -108,6 +108,8 @@ class Install extends \ckvsoft\mvc\BaseController
                 ->post('db_name')
                 ->post('db_user')
                 ->post('db_pass')
+                ->post('db_admin_user')
+                ->post('db_admin_pass')
                 ->post('dns_same')
                 ->post('dns_host')
                 ->post('dns_name')
@@ -122,6 +124,7 @@ class Install extends \ckvsoft\mvc\BaseController
         // $_POST so rememberForm() can't wipe fields with ''. NO
         // unit editor dump concern: the stray keys set no defaults.
         foreach (['phase', 'db_host', 'db_name', 'db_user', 'db_pass',
+                  'db_admin_user', 'db_admin_pass',
                   'dns_same', 'dns_host', 'dns_name', 'dns_user', 'dns_pass',
                   'admin_password'] as $k) {
             if (!array_key_exists($k, $in) && array_key_exists($k, $_POST)) {
