@@ -211,10 +211,9 @@
                                        autocomplete="off"></td>
                         </tr>
                         <tr>
-                            <td><?php echo __('Password'); ?>
-                                <input type="password" name="admin_password" required
-                                       minlength="<?php echo (int) \pmwh3\Utils\PasswordUtil::minLength();
-                                ?>"></td>
+                            <td><?php echo __('Password'); ?></td>
+                            <td><input type="password" name="admin_password" required
+                                       minlength="<?php echo (int) \pmwh3\Utils\PasswordUtil::minLength(); ?>"></td>
                         </tr>
                         <tr>
                             <td colspan="2">
