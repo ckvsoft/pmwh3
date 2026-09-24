@@ -1299,12 +1299,29 @@ class InstallBootstrap
         // swallows the CkvException into a 0-return (controller
         // convenience), which made runPhase2 report 'admin customer:
         // ok' while NO row existed (kvasny: the operator's < 12 char
-        // password failed isValidLength silently). Direct create()
-        // throws the human message for the flash instead.
+        // password failed isValidLength silently). Direct create()/
+        // update() throw the human message for the flash instead.
         $limitMap = [];
         foreach (\pmwh3\Utils\CountingUtil::getResources() ?: [] as $res) {
             $limitMap[$res] = -1; // unlimited for the ultimate admin
         }
+
+        // Re-run friendly: on a re-install (fresh flag recreated by
+        // the updater while the tree was already installed) 'admin'
+        // already exists -- apply the submitted password + role
+        // instead of aborting with 'Customer admin already exists'.
+        $existing = CustomerManager::getByName(self::ADMIN_NAME);
+        if ($existing !== null) {
+            CustomerManager::update((int) $existing['cid'], [
+                'realname' => 'Ultimate Admin',
+                'role_id'  => $roleId,
+                'email'    => $existing['email'] ?? '',
+                'password' => (string) $in['admin_password'],
+                'language' => (string) \pmwh3\Config\LazyConfig::get('DEFAULT_LANGUAGE', 'en_GB'),
+            ], $limitMap);
+            return;
+        }
+
         $cid = CustomerManager::create(
                 [
                     'customer' => self::ADMIN_NAME,
@@ -1316,9 +1333,6 @@ class InstallBootstrap
                     'language' => (string) \pmwh3\Config\LazyConfig::get('DEFAULT_LANGUAGE', 'en_GB'),
                 ],
                 $limitMap);
-        if ($cid <= 0) {
-            throw new \RuntimeException('admin customer could not be created');
-        }
         if ($cid <= 0) {
             throw new \RuntimeException('admin customer could not be created');
         }
