@@ -542,11 +542,11 @@ class InstallBootstrap
             // Fresh framework install without a stamped version: probe
             // the library directly for the 0.18.x APIs (moduleDb +
             // execDdl). Only 0.18.3+ ships them.
-            $probeFile = __DIR__ . '/../../../library/ckvsoft/database.php';
+            $probeFile = \ckvsoft\Paths::coreRoot() . 'library/ckvsoft/database.php';
             if (is_file($probeFile)) {
                 $probe = (string) @file_get_contents($probeFile)
                     . (string) @file_get_contents(
-                        __DIR__ . '/../../../library/ckvsoft/mvc/config.php');
+                        \ckvsoft\Paths::coreRoot() . 'library/ckvsoft/mvc/config.php');
                 $hasApi = str_contains($probe, 'function moduleDb(')
                         && str_contains($probe, 'function execDdl(');
                 $rows[count($rows) - 1]['ok'] = $hasApi;
