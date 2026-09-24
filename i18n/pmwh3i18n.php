@@ -14,22 +14,23 @@ class Pmwh3I18n extends \ckvsoft\mvc\Config
         // -------------------------
         if ($lang === null) {
             $language = \ckvsoft\Session::getNS('pmwh3', 'customer_language');
-            error_log('DEBUG pmwh3 lang: ' . $lang);
-            error_log('DEBUG pmwh3 user lang: ' . $language);
             if (session_status() === PHP_SESSION_ACTIVE && $language) {
                 $lang = $language;
-            } elseif (!empty(self::$sharedDb)) {
+            } else {
                 try {
-                    // NO db-name prefix: the sharedDb connection already
-                    // points at the pmwh3 module database -- a hardcoded
-                    // 'pmwh3.' schema name fails on every deployment
-                    // whose module DB is not literally named 'pmwh3'.
-                    $row = self::$sharedDb->selectOne(
+                    // NO db-name prefix: pmwh3_configuration lives in the
+                    // pmwh3 MODULE database (kvasny.at_pmwh3) -- a hardcoded
+                    // 'pmwh3.' schema name fails on every deployment whose
+                    // module DB is not literally named 'pmwh3'. DO NOT use
+                    // self::$sharedDb here: that is the FRAMEWORK database
+                    // (config.json) and would raise
+                    // "Table 'framework_db.pmwh3_configuration' doesn't exist".
+                    $row = self::moduleDb('pmwh3')->selectOne(
                             "SELECT configuration_value FROM pmwh3_configuration WHERE configuration_key = :key LIMIT 1",
                             ['key' => 'DEFAULT_LANGUAGE']
                     );
                     $lang = ($row['configuration_value'] ?? null) ?: null;
-                } catch (\Exception $e) {
+                } catch (\Throwable $e) {
                     error_log('WARNING pmwh3 database: ' . $e->getMessage());
                     $lang = null;
                 }
