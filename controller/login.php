@@ -119,6 +119,13 @@ class Login extends \ckvsoft\mvc\BaseController
             // MultiLoginManager Login
             \ckvsoft\MultiLoginManager::login('pmwh3', $result['cid'], $dataForSession);
 
+            // Mirror the role into the framework user_roles table: the
+            // ACL resolves roles ONLY from there (see
+            // Acl::syncUserRole). Covers every pre-mirror customer on
+            // their first login after this deploy.
+            \pmwh3\Utils\Acl::syncUserRole(
+                    (int) $result['cid'], (int) $result['role_id']);
+
             // RBAC start structure: existing installs seeded by an OLDER
             // bootstrap (or upgraded from the pre-seed era) get the
             // Reseller/Customer grants on the first login after a deploy.

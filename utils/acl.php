@@ -111,6 +111,34 @@ class Acl
     }
 
     /**
+     * Mirror pmwh3_customers.role_id into the framework user_roles
+     * table.
+     *
+     * The framework ACL resolves a user's roles EXCLUSIVELY via
+     * user_roles (userID = cid) -- it never sees pmwh3_customers.
+     * role_id. Without this mirror every non-admin customer resolved
+     * to zero roles and therefore zero permissions (kvasny
+     * 2026-09-28: a Reseller with 38 seeded role_perms grants still
+     * had an empty menu, because user_roles had no row for his cid;
+     * the legacy service install only worked through pmwh2-era
+     * user_roles rows).
+     *
+     * pmwh3 customers hold exactly ONE role: replace the whole set.
+     */
+    public static function syncUserRole(int $cid, int $roleId): void
+    {
+        if ($cid <= 0 || $roleId <= 0) {
+            return;
+        }
+        $db = \ckvsoft\mvc\Config::db();
+        $db->delete('user_roles', 'userID = :u', ['u' => $cid]);
+        $db->insert('user_roles', ['userID' => $cid, 'roleID' => $roleId]);
+        // drop the per-request ACL cache so later checks in the same
+        // request see the new role mapping
+        unset(self::$aclCache[$cid]);
+    }
+
+    /**
      * Build the framework permKey from a bare pmwh3 key.
      *   'create_customer'  ->  'pmwh3.create_customer'
      */

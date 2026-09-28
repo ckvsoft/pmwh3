@@ -302,6 +302,10 @@ class CustomerManager
             self::adjustGrantedForCreator($creator, $limits, +1);
         }
 
+        // Mirror the role into the framework user_roles table -- the
+        // ACL resolves roles ONLY from there (see Acl::syncUserRole).
+        Acl::syncUserRole((int) $cid, (int) $row['role_id']);
+
         return (int) $cid;
     }
 
@@ -342,6 +346,10 @@ class CustomerManager
         if ($limits !== null) {
             self::updateLimits($cid, $limits, (int) $existing['creator']);
         }
+
+        // Role mirror (also on non-role updates -- cheap and keeps the
+        // framework user_roles table a faithful reflection).
+        Acl::syncUserRole($cid, (int) ($update['role_id'] ?? $existing['role_id'] ?? 0));
 
         return true;
     }
@@ -439,6 +447,15 @@ class CustomerManager
 
         // 7. Finally drop the customer row.
         Config::moduleDb()->delete('pmwh3_customers', 'cid = :c', ['c' => $cid]);
+
+        // 8. Framework role mirror cleanup (user_roles is keyed by
+        //    userID = cid; a stale row would resurrect nothing but
+        //    still stinks in the ACL admin UI).
+        try {
+            Config::db()->delete('user_roles', 'userID = :u', ['u' => $cid]);
+        } catch (\Throwable $e) {
+            // non-fatal: the customer is gone either way
+        }
 
         return true;
     }
