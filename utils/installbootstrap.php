@@ -97,24 +97,22 @@ class InstallBootstrap
                     || ($dns['name'] ?? '') === 'DNS_DB_NAME') {
                 return 'DNS database connection not configured (installer step 4)';
             }
-            // bootstrap (roles, permissions, ADMIN CUSTOMER) may still
-            // be pending: the updater's fresh path plays the baseline
-            // on the FIRST page visit already, so 'baseline exists +
-            // dns node ok' is NOT a completed install -- without this
-            // check the wizard flashed 'already installed', bounced to
-            // the login and the admin user never existed. The
-            // freshly-installed flag is the designed marker; the admin
-            // customer row is the ground truth when the flag is gone.
-            if (is_file(rtrim(getcwd(), '/') . '/var/pmwh3_freshly_installed.flag')) {
-                return 'bootstrap pending (baseline played, roles/admin not created yet)';
-            }
+            // Ground truth FIRST (cevian core installer pattern: the
+            // admin row decides). The updater's fresh-path re-drops
+            // pmwh3_freshly_installed.flag whenever var/update.json
+            // loses the module stamp (shared-split rollout, concurrent
+            // saveConfig wipes) -- on an ALREADY installed tree that
+            // must never bounce back into the wizard. The flag is
+            // therefore deliberately NOT part of this decision at all;
+            // a stale one is just dust and gets cleaned up right here.
             $admin = $mod->selectOne(
                     'SELECT cid FROM pmwh3_customers WHERE customer = :c LIMIT 1',
                     ['c' => self::ADMIN_NAME]);
-            if (!$admin) {
-                return 'admin customer missing (bootstrap step not run)';
+            if ($admin) {
+                @unlink(rtrim(getcwd(), '/') . '/var/pmwh3_freshly_installed.flag');
+                return '';
             }
-            return '';
+            return 'admin customer missing (bootstrap step not run)';
         } catch (\Throwable $e) {
             return 'probe failed: ' . $e->getMessage();
         }
@@ -434,7 +432,7 @@ class InstallBootstrap
         try {
             $mod = Config::moduleDb();
             if (!$mod->tableExists('pmwh3_menu')) {
-                $steps['schema (baseline)'] = 'FAIL: pmwh3_news missing after updater';
+                $steps['schema (baseline)'] = 'FAIL: pmwh3_menu missing after updater';
                 return ['ok' => false, 'steps' => $steps];
             }
         } catch (\Throwable $e) {

@@ -115,6 +115,7 @@ class Install extends \ckvsoft\mvc\BaseController
                 ->post('dns_user')
                 ->post('dns_pass')
                 ->post('dns_type')
+                ->post('password_length')
                 ->post('admin_password');
         $input->submit();
 
@@ -126,7 +127,7 @@ class Install extends \ckvsoft\mvc\BaseController
         foreach (['phase', 'db_host', 'db_name', 'db_user', 'db_pass',
                   'db_admin_user', 'db_admin_pass',
                   'dns_same', 'dns_host', 'dns_name', 'dns_user', 'dns_pass',
-                  'dns_type', 'admin_password'] as $k) {
+                  'dns_type', 'password_length', 'admin_password'] as $k) {
             if (!array_key_exists($k, $in) && array_key_exists($k, $_POST)) {
                 $in[$k] = (string) $_POST[$k];
             }
