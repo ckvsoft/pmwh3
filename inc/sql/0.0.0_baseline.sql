@@ -464,7 +464,10 @@ CREATE TABLE IF NOT EXISTS `pmwh3_menu` (
 
 -- Default menu rows. PK is (box, sort) so INSERT IGNORE is safe to
 -- re-run. Box layout:
---   box  0  -> General (no header row, default landing items)
+--   box  0  -> General (header row REQUIRED: the menu helper only
+--              emits a box when its sort=0 header exists -- without
+--              it $hasMainAccess never flips and the whole box
+--              drops out of the navigation, even with visible items)
 --   box 10  -> Customers
 --   box 20  -> Domains
 --   box 30  -> Databases (with Phpmyadmin row)
@@ -484,8 +487,9 @@ CREATE TABLE IF NOT EXISTS `pmwh3_menu` (
 -- drops the row instead of rendering a broken link.
 
 INSERT IGNORE INTO `pmwh3_menu` (`name`, `link`, `box`, `sort`, `hide`, `icon`, `permission`) VALUES
-    -- General box (box 0) -- no header row by convention
-    ('Overview',         'general/overview',          0,  10, 'N', 'menu_overview.png',     'view_menu_general_overview'),
+    -- General box (box 0) -- header row REQUIRED (see layout note above)
+    ('General',          '',                           0,   0, 'N', 'menu_general.png',      'view_menu_general'),
+    ('Overview',         'general/overview',           0,  10, 'N', 'menu_overview.png',     'view_menu_general_overview'),
     ('Password',         'general/password',          0,  20, 'N', 'menu_password.png',     'view_menu_general_password'),
     ('Traffic',          'general/traffic',           0,  25, 'N', 'menu_traffic.png',      'view_menu_general_traffic'),
     ('Messages',         'message/inbox',             0,  30, 'N', 'menu_messages.png',     'view_menu_general_messages'),
