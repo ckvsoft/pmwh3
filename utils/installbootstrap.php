@@ -31,6 +31,8 @@ class InstallBootstrap
     public const PARENT_ROLE = 'pmwh3';
     public const ADMIN_ROLE  = 'Ultimate Admin';
     public const ADMIN_NAME  = 'admin';
+    public const RESELLER_ROLE = 'Reseller';
+    public const CUSTOMER_ROLE = 'Customer';
 
     /** @var string[]|null cached permission-key list */
     private static ?array $permKeys = null;
@@ -459,6 +461,11 @@ class InstallBootstrap
             return ['ok' => false, 'steps' => $steps];
         }
 
+        // 4b. RBAC start structure for Reseller/Customer (framework DB
+        //     seed from the live-proven service structure). Best effort.
+        self::seedRbac(true);
+        $steps['rbac seed'] = 'ok';
+
         // 5. ultimate admin customer + unlimited counters
         // (persist the password policy from the POST first -- the
         // baseline exists at this point, so pmwh3_configuration is
@@ -737,6 +744,56 @@ class InstallBootstrap
             \pmwh3\Utils\ErrorHandler::trace(
                     '[InstallBootstrap.tryCreateDatabase] failed: '
                     . $e->getMessage());
+            return false;
+        }
+    }
+
+    /** Framework-DB seed marker (pmwh3_configuration, module DB side). */
+    public const RBAC_SEED_VERSION_KEY = 'RBAC_SEED_VERSION';
+    public const RBAC_SEED_VERSION     = '1'; // bump when rbac_seed.sql changes
+
+    /**
+     * Play contrib/sql/rbac_seed.sql into the FRAMEWORK database.
+     *
+     * roles / permissions / role_perms live in the framework DB
+     * (NOT the module DB -- the module baseline cannot carry them).
+     * The seed file holds the pmwh2-migrated, live-proven start
+     * structure (service install: Reseller=38, Customer=21 grants)
+     * so a fresh install does not ship roles with zero permissions
+     * (kvasny 2026-09-28: a new Reseller saw an empty menu).
+     *
+     * Idempotent (INSERT IGNORE semantics, name-based joins) and
+     * guarded by the RBAC_SEED_VERSION configuration value: the file
+     * runs once per seed version, on the first login after a deploy.
+     * The ACL admin UI (Ansicht > Gruppen) remains the truth after
+     * that -- exactly like pmwh2's Gruppenverwaltung.
+     */
+    public static function seedRbac(bool $force = false): bool
+    {
+        try {
+            if (!$force
+                    && (string) \pmwh3\Config\LazyConfig::get(self::RBAC_SEED_VERSION_KEY, '')
+                            === self::RBAC_SEED_VERSION) {
+                return false;
+            }
+            $file = __DIR__ . '/../contrib/sql/rbac_seed.sql';
+            if (!is_file($file)) {
+                \pmwh3\Utils\ErrorHandler::trace(
+                        '[InstallBootstrap.seedRbac] seed file missing');
+                return false;
+            }
+            Config::db()->executeSqlFile($file);
+            \pmwh3\Config\LazyConfig::set(
+                    self::RBAC_SEED_VERSION_KEY, self::RBAC_SEED_VERSION);
+            \pmwh3\Utils\ErrorHandler::trace(
+                    '[InstallBootstrap.seedRbac] applied seed version '
+                    . self::RBAC_SEED_VERSION);
+            return true;
+        } catch (\Throwable $e) {
+            // Best effort: an ACL-UI-tunable install must not die on
+            // a seed hiccup. Logged for the errorlog viewer.
+            \pmwh3\Utils\ErrorHandler::trace(
+                    '[InstallBootstrap.seedRbac] FAIL: ' . $e->getMessage());
             return false;
         }
     }

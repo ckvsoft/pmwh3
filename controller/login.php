@@ -119,6 +119,12 @@ class Login extends \ckvsoft\mvc\BaseController
             // MultiLoginManager Login
             \ckvsoft\MultiLoginManager::login('pmwh3', $result['cid'], $dataForSession);
 
+            // RBAC start structure: existing installs seeded by an OLDER
+            // bootstrap (or upgraded from the pre-seed era) get the
+            // Reseller/Customer grants on the first login after a deploy.
+            // Guarded (RBAC_SEED_VERSION) => cheap no-op afterwards.
+            \pmwh3\Utils\InstallBootstrap::seedRbac();
+
             // Optional: alte pmwh3 Session für Legacy-Module
             ckvsoft\Session::setNs('pmwh3', [
                 'customer_id' => $result['cid'],
