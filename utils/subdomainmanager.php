@@ -66,6 +66,13 @@ class SubdomainManager
         $cid     = (int) ($args['cid'] ?? 0);
         $custom  = (string) ($args['custom'] ?? '');
         $withDns = (bool) ($args['dns'] ?? true);
+        // Per-vhost PHP selection: '' = inherit the customer flag,
+        // 'Y' = force on, 'N' = force off. Storage policy below keeps
+        // the customer flag the ceiling (customer N -> row stores 'N').
+        $phpSel  = strtoupper(trim((string) ($args['php'] ?? '')));
+        if (!in_array($phpSel, ['', 'Y', 'N'], true)) {
+            $phpSel = '';
+        }
 
         if (!preg_match('/^[a-z0-9]([a-z0-9\-]*[a-z0-9])?$/', $sub)) {
             return self::fail('Invalid subdomain label');
@@ -112,11 +119,25 @@ class SubdomainManager
             $auto = WebManager::resolveCert($fqdn);
             $sslArg = $auto !== null ? $auto : '';
         }
+        // PHP storage policy (customer flag = ceiling):
+        //   customer N -> row stores 'N' (no UI selection possible)
+        //   row 'N'    -> stored 'N' (narrowing)
+        //   row 'Y'    -> stored 'Y' (explicit)
+        //   row ''     -> stored '' (inherit; renders as the customer
+        //                 flag via WebManager::resolvePhp)
+        $crowPhp = CustomerManager::getByName($customer);
+        $customerPhp = strtoupper((string) ($crowPhp['php'] ?? 'N')) === 'Y' ? 'Y' : 'N';
+        $php = match (true) {
+            $customerPhp === 'N' => 'N',
+            $phpSel === 'N'      => 'N',
+            $phpSel === 'Y'      => 'Y',
+            default              => '',
+        };
         try {
             return match ($mode) {
-                'ip'        => self::createIpVariant($fqdn, $domain, $customer, $value, $cid, $withDns),
-                'alias'     => self::createAlias($fqdn, $value, $domain, $customer, $custom, $cid, $withDns, $countAlias, $sslArg),
-                default     => self::createDirectory($fqdn, $domain, $sub, $customer, $custom, $cid, $withDns, $sslArg),
+                'ip'        => self::createIpVariant($fqdn, $domain, $customer, $value, $cid, $withDns, $php),
+                'alias'     => self::createAlias($fqdn, $value, $domain, $customer, $custom, $cid, $withDns, $countAlias, $sslArg, $php),
+                default     => self::createDirectory($fqdn, $domain, $sub, $customer, $custom, $cid, $withDns, $sslArg, $php),
             };
         } catch (\Throwable $e) {
             \pmwh3\Utils\ErrorHandler::trace("SubdomainManager::create {$fqdn}: " . $e->getMessage());
@@ -153,6 +174,22 @@ class SubdomainManager
             // binds that certificate, 'auto' re-resolves for (new) fqdn.
             $sslWanted = array_key_exists('ssl_cert', $fields)
                     ? trim((string) $fields['ssl_cert']) : null;
+            // Per-vhost PHP selection ('' inherit / 'Y' / 'N'). The
+            // customer flag is the ceiling: when it is 'N', any request
+            // is normalized to 'N' -- no UI selection is offered then,
+            // this is the belt-and-braces for direct calls.
+            $phpWanted = array_key_exists('php', $fields)
+                    ? strtoupper(trim((string) $fields['php'])) : null;
+            if ($phpWanted !== null && !in_array($phpWanted, ['', 'Y', 'N'], true)) {
+                $phpWanted = null;
+            }
+            if ($phpWanted !== null) {
+                $crow = CustomerManager::getByName((string) $row['customer']);
+                if ($crow === null
+                        || strtoupper((string) ($crow['php'] ?? 'N')) !== 'Y') {
+                    $phpWanted = 'N';
+                }
+            }
 
             $newSub  = strtolower(trim((string) ($fields['sub'] ?? '')));
             $renames = $newSub !== '' && $newSub !== self::labelOf($fqdn);
@@ -193,6 +230,22 @@ class SubdomainManager
                 } elseif ($ssl !== '') {
                     $data = self::renderFromRow($row,
                             $custom ?? WebManager::extractCustom($data), $ssl);
+                }
+            }
+
+            // PHP selection change: re-render the skeleton around the
+            // existing custom section, preserving the TLS binding.
+            if ($phpWanted !== null
+                    && $phpWanted !== strtoupper((string) ($row['php'] ?? ''))) {
+                $row['php'] = $phpWanted;
+                if ($data !== '') {
+                    $sslCur = '';
+                    if (preg_match('/SSLCertificateFile\s+[^\s]*\/([^\/\s]+)\.pem/',
+                                   $data, $sslCurMatch)) {
+                        $sslCur = (string) $sslCurMatch[1];
+                    }
+                    $data = self::renderFromRow($row,
+                            $custom ?? WebManager::extractCustom($data), $sslCur);
                 }
             }
 
@@ -239,6 +292,9 @@ class SubdomainManager
             }
             if ($sslWanted !== null && $sslWanted !== 'auto') {
                 $update['ssl_cert'] = $sslWanted;
+            }
+            if ($phpWanted !== null) {
+                $update['php'] = $phpWanted;
             }
             if (!empty($update)) {
                 WebManager::updateSubdomain($fqdn, $update);
@@ -319,7 +375,8 @@ class SubdomainManager
 
     private static function createDirectory(
             string $fqdn, string $domain, string $sub, string $customer,
-            string $custom, int $cid, bool $withDns, string $sslCert = ''
+            string $custom, int $cid, bool $withDns, string $sslCert = '',
+            string $php = ''
     ): array {
         if ($sub === '' || str_contains($sub, '/')) {
             return self::fail('Directory name must be a plain name (no slashes)');
@@ -336,6 +393,7 @@ class SubdomainManager
             'path'      => $path,
             'custom'    => $custom,
             'ssl_cert'  => $sslCert,
+            'php'       => $php,
         ]);
         WebManager::createSubdomain([
             'subdomain' => $fqdn,
@@ -344,6 +402,7 @@ class SubdomainManager
             'path'      => $path,
             'mode'      => 'directory',
             'ssl_cert'  => ($sslCert !== '' ? $sslCert : null),
+            'php'       => $php,
             'custom'    => ($custom !== '' ? $custom : null),
             'data'      => $data !== '' ? $data : null,
         ]);
@@ -363,7 +422,8 @@ class SubdomainManager
 
     private static function createAlias(
             string $fqdn, string $target, string $domain, string $customer,
-            string $custom, int $cid, bool $withDns, bool $countAlias, string $sslCert = ''
+            string $custom, int $cid, bool $withDns, bool $countAlias,
+            string $sslCert = '', string $php = ''
     ): array {
         $target = strtolower(trim($target, '.'));
         if ($target === '' || !str_contains($target, '.')) {
@@ -391,6 +451,7 @@ class SubdomainManager
             'alias_of'  => $target,
             'custom'    => WebManager::extractCustom($targetData) ?: $custom,
             'ssl_cert'  => $sslCert,
+            'php'       => $php,
         ]);
         WebManager::createSubdomain([
             'subdomain' => $fqdn,
@@ -400,6 +461,7 @@ class SubdomainManager
             'mode'      => 'alias',
             'alias_of'  => $target,
             'ssl_cert'  => ($sslCert !== '' ? $sslCert : null),
+            'php'       => $php,
             'custom'    => ($custom !== '' ? $custom : null),
             'data'      => $data !== '' ? $data : null,
         ]);
@@ -418,7 +480,7 @@ class SubdomainManager
 
     private static function createIpVariant(
             string $fqdn, string $domain, string $customer,
-            string $ip, int $cid, bool $withDns
+            string $ip, int $cid, bool $withDns, string $php = ''
     ): array {
         if (!filter_var($ip, FILTER_VALIDATE_IP)) {
             return self::fail('Invalid IP address');
@@ -432,6 +494,7 @@ class SubdomainManager
             'mode'      => 'ip',
             'ip'        => $ip,
             'path'      => $ip,
+            'php'       => $php,
             'data'      => null,
         ]);
         if ($withDns) {
@@ -593,6 +656,7 @@ class SubdomainManager
             'alias_of'  => $row['alias_of'],
             'custom'    => $custom,
             'ssl_cert'  => $sslCert,
+            'php'       => (string) ($row['php'] ?? ''),
         ]);
     }
 

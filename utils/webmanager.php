@@ -124,7 +124,35 @@ class WebManager
 
     public static function buildVhostData(array $args): string
     {
+        $args['php'] = self::resolvePhp($args);
         return (string) self::call('buildVhostData', $args);
+    }
+
+    /**
+     * Effective PHP mode for one vhost render. The customer flag
+     * (pmwh3_customers.php) is the ceiling: a vhost can narrow
+     * ('Y' -> 'N'), never widen ('N' -> 'Y'). $args['php'] is the
+     * row's own selection ('' = inherit the customer setting,
+     * 'Y' = force on, 'N' = force off). Anything unknown fails
+     * closed ('N') -- a vhost without a resolvable customer never
+     * gets PHP.
+     */
+    public static function resolvePhp(array $args): string
+    {
+        $rowSel = strtoupper(trim((string) ($args['php'] ?? '')));
+        if (!in_array($rowSel, ['Y', 'N'], true)) {
+            $rowSel = '';
+        }
+        $customer = strtolower(trim((string) ($args['customer'] ?? '')));
+        if ($customer === '') {
+            return 'N';
+        }
+        $crow = CustomerManager::getByName($customer);
+        if ($crow === null
+                || strtoupper((string) ($crow['php'] ?? 'N')) !== 'Y') {
+            return 'N';
+        }
+        return $rowSel === 'N' ? 'N' : 'Y';
     }
 
     public static function extractCustom(string $data): string

@@ -215,6 +215,14 @@ class SettingsSchema
                 'default' => '/vhome/ssl',
                 'level'   => '1',
             ],
+            'WEB_OPEN_BASEDIR' => [
+                'group'   => self::GROUP_WEB,
+                'label'   => 'PHP open_basedir paths',
+                'help'    => "Rendered as ProxyFCGISetEnvIf PHP_ADMIN_VALUE open_basedir=... into every PHP-enabled vhost (Apache >= 2.4.10, mod_proxy_fcgi). Placeholders: [DOCROOT], [CUSTOMER], [DOMAIN]. Paths are the PHP-visible ones (container view, e.g. /vhome/...). Keep /tmp for sessions/uploads and add the shared framework path (/vhome/share/cevian) for cevian-based sites.",
+                'type'    => 'text',
+                'default' => '[DOCROOT]/:/vhome/share/cevian/:/tmp/',
+                'level'   => '1',
+            ],
             'WEBROOT' => [
                 'group'   => self::GROUP_WEB,
                 'label'   => 'Web Root',

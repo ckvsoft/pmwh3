@@ -35,7 +35,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PMWH2 0.5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-17 17:49+0200\n"
+"POT-Creation-Date: 2026-10-04 10:20+0200\n"
 "PO-Revision-Date: 2005-11-11 14:10+0100\n"
 "Last-Translator: Christian Kvasny <pmwh@ckvsoft.at>\n"
 "Language-Team: nederlands <pmwh@ckvsoft.at>\n"
@@ -44,8 +44,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/helper/pmwh3menu_helper.php:372
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/helper/pmwh3menu_helper.php:378
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/pmwh3.php:79
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/helper/pmwh3menu_helper.php:372
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/pmwh3.php:75
 #: controller/pmwh3.php:75 helper/pmwh3menu_helper.php:372
 msgid "None"
@@ -255,12 +256,13 @@ msgstr ""
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/databases/new_database.php:11
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/databases/details.php:18
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/overview_subdomains.php:17
-#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:25
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:27
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/details.php:27
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/new_domain.php:16
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/overview_aliases.php:17
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/database/new_database.php:9
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/database/details.php:18
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:25
 #: view/database/details.php:18 view/database/new_database.php:9
 #: view/databases/details.php:18 view/databases/new_database.php:11
 #: view/domain/details.php:27 view/domain/new_domain.php:16
@@ -330,11 +332,12 @@ msgstr ""
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/tools/edit_menu_row.php:125
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/login_activate.php:31
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/general/password.php:33
-#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:172
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:206
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/details.php:128
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/edit.php:51
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/package/edit.php:59
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/options/_form.php:146
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:172
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/customer/edit.php:128
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/group/permissions.php:112
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/ftp/edit.php:84
@@ -557,9 +560,10 @@ msgstr ""
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/tools/edit_news.php:17
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/tools/edit_application.php:18
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/tools/edit_menu_row.php:47
-#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:111
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:128
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/edit.php:17
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/package/edit.php:18
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:111
 msgid "Save changes?"
 msgstr ""
 
@@ -600,11 +604,12 @@ msgstr ""
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/email/new_email.php:30
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/email/edit_forward.php:50
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/databases/new_database.php:45
-#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:103
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:120
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/_domain_form_bulk.php:50
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/new_domain.php:84
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/package/edit.php:59
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/database/new_database.php:26
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:103
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/customer/edit.php:128
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/ftp/edit.php:84
 #: view/customer/edit.php:128 view/database/new_database.php:26
@@ -680,6 +685,7 @@ msgstr "Klanten"
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install_token.php:4
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:4
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:11
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/install.php:201
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/install.php:200
 msgid "Install pmwh3"
 msgstr ""
@@ -876,11 +882,12 @@ msgstr ""
 msgid "User name"
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:208
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:209
 msgid "Min. password length"
 msgstr ""
 
-#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:215
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:214
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/ftp/edit.php:40
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/customer/overview.php:71
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/customer/edit.php:101
@@ -888,6 +895,7 @@ msgstr ""
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/email/details_email.php:82
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/databases/details.php:86
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/database/details.php:88
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:215
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:208
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/customer/edit.php:99
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/ftp/edit.php:38
@@ -900,6 +908,7 @@ msgstr ""
 msgid "Password"
 msgstr "Wachtwoord"
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:220
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:222
 #, php-format
 msgid ""
@@ -907,6 +916,7 @@ msgid ""
 "Admin\" role with all pmwh3 permissions."
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:228
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:230
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:220
 msgid ""
@@ -914,16 +924,19 @@ msgid ""
 "3-4?"
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:229
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:231
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:221
 msgid "Create admin user and finish installation (step 5)"
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:238
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:240
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:230
 msgid "What this installer does"
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:240
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:242
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:232
 msgid ""
@@ -931,6 +944,7 @@ msgid ""
 "with check-again."
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:241
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:243
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:233
 msgid ""
@@ -939,6 +953,7 @@ msgid ""
 "login)."
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:242
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:244
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:234
 msgid ""
@@ -949,6 +964,7 @@ msgid ""
 "pmwh3-side."
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:243
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:245
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:235
 msgid ""
@@ -957,6 +973,7 @@ msgid ""
 "ultimate admin customer (\"admin\") with unlimited counters."
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:244
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:246
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:236
 msgid ""
@@ -1353,9 +1370,9 @@ msgstr ""
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/email.php:634
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/email.php:639
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/config/settingsschema.php:52
-#: /tmp/pmwh3_schema_seed.php:192 /tmp/pmwh3_schema_seed.php:189
-#: /tmp/pmwh3_schema_seed.php:201 /tmp/pmwh3_schema_seed.php:200
-#: /tmp/pmwh3_schema_seed.php:199
+#: /tmp/pmwh3_schema_seed.php:193 /tmp/pmwh3_schema_seed.php:192
+#: /tmp/pmwh3_schema_seed.php:189 /tmp/pmwh3_schema_seed.php:201
+#: /tmp/pmwh3_schema_seed.php:200 /tmp/pmwh3_schema_seed.php:199
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/config/settingsschema.php:53
 #: /tmp/pmwh3_schema_seed.php:203
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/email.php:65
@@ -1474,6 +1491,8 @@ msgstr ""
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/customer/edit.php:30
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:87
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:105
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:180
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:187
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:167
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:174
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:165
@@ -1534,6 +1553,8 @@ msgid "Fax"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/customer/edit.php:63
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:82
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:153
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/package/overview.php:39
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/package/edit.php:47
 #: view/customer/edit.php:63 view/package/edit.php:47
@@ -1638,12 +1659,18 @@ msgstr ""
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:661
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:669
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:676
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:703
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:737
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:791
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:822
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:873
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/config/settingsschema.php:57
+#: /tmp/pmwh3_schema_seed.php:197
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:692
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:724
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:777
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:807
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:855
-#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/config/settingsschema.php:57
 #: /tmp/pmwh3_schema_seed.php:196 /tmp/pmwh3_schema_seed.php:193
 #: /tmp/pmwh3_schema_seed.php:205 /tmp/pmwh3_schema_seed.php:204
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/customer/edit.php:109
@@ -1722,6 +1749,14 @@ msgstr "Domeinen"
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/details.php:421
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/package/overview.php:35
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/package/edit.php:36
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:766
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:772
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:782
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:851
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:861
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:865
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:891
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:895
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:752
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:758
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:768
@@ -1833,8 +1868,9 @@ msgstr ""
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/database.php:280
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/database.php:288
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/config/settingsschema.php:55
-#: /tmp/pmwh3_schema_seed.php:195 /tmp/pmwh3_schema_seed.php:192
-#: /tmp/pmwh3_schema_seed.php:204 /tmp/pmwh3_schema_seed.php:203
+#: /tmp/pmwh3_schema_seed.php:196 /tmp/pmwh3_schema_seed.php:195
+#: /tmp/pmwh3_schema_seed.php:192 /tmp/pmwh3_schema_seed.php:204
+#: /tmp/pmwh3_schema_seed.php:203
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/customer/edit.php:113
 #: /tmp/pmwh3_schema_seed.php:202
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/config/settingsschema.php:56
@@ -2893,6 +2929,7 @@ msgid "Delete menu row \"%s\"?"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/login_activate.php:17
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:266
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:253
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:251
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:237
@@ -2980,9 +3017,9 @@ msgstr ""
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/edit.php:30
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/new_domain.php:62
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/config/settingsschema.php:51
-#: /tmp/pmwh3_schema_seed.php:191 /tmp/pmwh3_schema_seed.php:188
-#: /tmp/pmwh3_schema_seed.php:200 /tmp/pmwh3_schema_seed.php:199
-#: /tmp/pmwh3_schema_seed.php:198
+#: /tmp/pmwh3_schema_seed.php:192 /tmp/pmwh3_schema_seed.php:191
+#: /tmp/pmwh3_schema_seed.php:188 /tmp/pmwh3_schema_seed.php:200
+#: /tmp/pmwh3_schema_seed.php:199 /tmp/pmwh3_schema_seed.php:198
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/config/settingsschema.php:52
 #: /tmp/pmwh3_schema_seed.php:202 config/settingsschema.php:52
 #: view/domain/edit.php:30 view/domain/new_domain.php:62
@@ -3187,11 +3224,11 @@ msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/databases/overview.php:38
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/database/overview.php:24
-#: /tmp/pmwh3_schema_seed.php:169 /tmp/pmwh3_schema_seed.php:166
-#: /tmp/pmwh3_schema_seed.php:178 /tmp/pmwh3_schema_seed.php:177
-#: /tmp/pmwh3_schema_seed.php:176 /tmp/pmwh3_schema_seed.php:180
-#: view/database/overview.php:24 view/databases/overview.php:38
-#: /tmp/opencode/schema_calls.php:155
+#: /tmp/pmwh3_schema_seed.php:170 /tmp/pmwh3_schema_seed.php:169
+#: /tmp/pmwh3_schema_seed.php:166 /tmp/pmwh3_schema_seed.php:178
+#: /tmp/pmwh3_schema_seed.php:177 /tmp/pmwh3_schema_seed.php:176
+#: /tmp/pmwh3_schema_seed.php:180 view/database/overview.php:24
+#: view/databases/overview.php:38 /tmp/opencode/schema_calls.php:155
 msgid "Database"
 msgstr ""
 
@@ -3455,8 +3492,9 @@ msgid "Add user"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/overview_subdomains.php:21
-#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:23
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:25
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/details.php:453
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:23
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/details.php:447
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/details.php:443
 #: view/domain/details.php:443 view/domain/overview_subdomains.php:21
@@ -3465,8 +3503,9 @@ msgid "New subdomain"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/overview_subdomains.php:29
-#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:115
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:132
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/details.php:462
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:115
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/details.php:456
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/details.php:452
 #: view/domain/details.php:452 view/domain/overview_subdomains.php:29
@@ -3520,33 +3559,38 @@ msgid ""
 "or administrator."
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:25
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:23
 #: view/domain/subdomain_form.php:23
 msgid "Edit subdomain"
 msgstr ""
 
-#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:31
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:33
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/details.php:412
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:31
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/details.php:406
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/details.php:402
 #: view/domain/details.php:402 view/domain/subdomain_form.php:31
 msgid "No web adapter configured -- subdomain rows cannot be managed."
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:37
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:35
 msgid "Create subdomain?"
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:41
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:39
 #: view/domain/subdomain_form.php:39
 msgid "Label"
 msgstr ""
 
-#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:47
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:49
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/details.php:98
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/details.php:161
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/database/overview.php:26
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/database/details.php:25
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:47
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/details.php:157
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/details.php:156
 #: view/database/details.php:25 view/database/overview.php:26
@@ -3555,53 +3599,92 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:52
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:50
 #: view/domain/subdomain_form.php:50
 msgid "Directory (local vhost)"
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:54
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:52
 #: view/domain/subdomain_form.php:52
 msgid "IP forwarding (DNS only, remote server)"
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:56
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:54
 #: view/domain/subdomain_form.php:54
 msgid "Alias of existing subdomain"
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:60
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:58
 #: view/domain/subdomain_form.php:58
 msgid "Alias target"
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:63
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:61
 #: view/domain/subdomain_form.php:61
 msgid "e.g. www.example.com"
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:67
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:65
 #: view/domain/subdomain_form.php:65
 msgid "Directory or IP"
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:70
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:68
 #: view/domain/subdomain_form.php:68
 msgid ""
 "Directory name under the webroot (directory mode) or target IP (IP mode)"
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:73
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:71
 #: view/domain/subdomain_form.php:71
 msgid "Known server IPs"
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:85
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:156
+msgid "Disabled (customer setting)"
+msgstr ""
+
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:88
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:159
+msgid "Default (customer setting: enabled)"
+msgstr ""
+
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:89
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:160
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/options/_form.php:119
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/options/_form.php:100
+#: view/options/_form.php:100
+msgid "Enabled"
+msgstr ""
+
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:90
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:161
+msgid "Disabled (403 for PHP files)"
+msgstr ""
+
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:92
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:163
+msgid "Enabled vhosts are confined to their document root (open_basedir)."
+msgstr ""
+
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:97
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:169
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:80
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:135
 #: view/domain/subdomain_form.php:80 view/domain/subdomain_form.php:135
 msgid "Custom config"
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:100
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:83
 #: view/domain/subdomain_form.php:83
 msgid ""
@@ -3609,23 +3692,29 @@ msgid ""
 "configured snippet."
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:105
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:179
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:88
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:145
 #: view/domain/subdomain_form.php:88 view/domain/subdomain_form.php:145
 msgid "TLS certificate"
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:108
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:91
 #: view/domain/subdomain_form.php:91
 msgid "Automatic (best match for this name, else http-only)"
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:109
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:182
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:92
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:148
 #: view/domain/subdomain_form.php:92 view/domain/subdomain_form.php:148
 msgid "None (http only)"
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:114
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:97
 #: view/domain/subdomain_form.php:97
 msgid ""
@@ -3633,6 +3722,7 @@ msgid ""
 "http block when a certificate applies."
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:137
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:120
 #: view/domain/subdomain_form.php:120
 msgid ""
@@ -3640,58 +3730,68 @@ msgid ""
 "possible."
 msgstr ""
 
-#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:124
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:141
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/details.php:463
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:124
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/details.php:457
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/details.php:453
 #: view/domain/details.php:453 view/domain/subdomain_form.php:124
 msgid "Path / IP"
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:144
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:127
 #: view/domain/subdomain_form.php:127
 msgid "IP forwarding"
 msgstr ""
 
-#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:131
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:148
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/details.php:465
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:131
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/details.php:459
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/details.php:455
 #: view/domain/details.php:455 view/domain/subdomain_form.php:131
 msgid "Alias of"
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:172
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:138
 #: view/domain/subdomain_form.php:138
 msgid "Content between the START/END CUSTOM markers."
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:173
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:139
 #: view/domain/subdomain_form.php:139
 msgid "(No vhost on IP-forwarding rows.)"
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:183
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:149
 #: view/domain/subdomain_form.php:149
 msgid "Automatic (best match for this name)"
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:186
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:152
 #: view/domain/subdomain_form.php:152
 msgid "(currently set)"
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:193
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:159
 #: view/domain/subdomain_form.php:159
 #, php-format
 msgid "Currently bound: %s"
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:199
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:165
 #: view/domain/subdomain_form.php:165
 msgid "Regenerate skeleton"
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:201
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/domain/subdomain_form.php:167
 #: view/domain/subdomain_form.php:167
 msgid ""
@@ -4707,12 +4807,6 @@ msgid ""
 "No settings to display in this section at the current configuration level."
 msgstr ""
 
-#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/options/_form.php:119
-#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/options/_form.php:100
-#: view/options/_form.php:100
-msgid "Enabled"
-msgstr ""
-
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/options/_viewer.php:15
 #: view/options/_viewer.php:15
 msgid "Error log (last "
@@ -4855,6 +4949,11 @@ msgstr ""
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:625
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:649
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:669
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:703
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:737
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:791
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:822
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:873
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:692
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:724
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:777
@@ -5196,6 +5295,7 @@ msgstr ""
 msgid "Security file still missing: "
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/install.php:215
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/install.php:214
 msgid "Install"
 msgstr ""
@@ -5272,11 +5372,13 @@ msgid "Old password is wrong."
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/general.php:85
-#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:308
-#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:384
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:321
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:397
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/ftp.php:226
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/email.php:294
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/customermanager.php:260
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:308
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:384
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:306
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:382
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/customermanager.php:259
@@ -5300,6 +5402,7 @@ msgid "Could not update password."
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/general.php:96
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:423
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:410
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:408
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:394
@@ -5312,6 +5415,7 @@ msgid "Password changed."
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:88
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:212
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:199
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:197
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:74
@@ -5329,6 +5433,7 @@ msgstr ""
 msgid "Wrong user or password."
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:181
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:168
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:166
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:152
@@ -5338,6 +5443,15 @@ msgstr ""
 msgid "Welcome Back!"
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:211
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:225
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:249
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:259
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:296
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:310
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:320
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:332
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:340
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:198
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:212
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:236
@@ -5367,7 +5481,6 @@ msgstr ""
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:192
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:216
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:226
-#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:259
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:273
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:160
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:184
@@ -5383,6 +5496,7 @@ msgstr ""
 msgid "Reset Your Password"
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:226
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:213
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:211
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:197
@@ -5392,6 +5506,7 @@ msgstr ""
 msgid "Email successfully sent to the specified address."
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:250
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:237
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:235
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:221
@@ -5401,6 +5516,8 @@ msgstr ""
 msgid "Invalid activation link."
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:260
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:334
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:247
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:321
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:245
@@ -5415,9 +5532,11 @@ msgstr ""
 msgid "Activation link is invalid or has expired."
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:297
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:371
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/group.php:271
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:284
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:358
-#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/group.php:271
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:282
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:356
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:268
@@ -5431,6 +5550,8 @@ msgstr ""
 msgid "Missing fields."
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:311
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:387
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:298
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:374
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:296
@@ -5445,6 +5566,7 @@ msgstr ""
 msgid "Passwords do not match."
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:333
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:320
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:318
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:304
@@ -5454,6 +5576,12 @@ msgstr ""
 msgid "Password changed. You can now log in."
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:370
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:386
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:396
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:405
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:422
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:430
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:357
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:373
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:383
@@ -5486,6 +5614,7 @@ msgstr ""
 msgid "Change Password"
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:406
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:393
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:391
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:377
@@ -5495,6 +5624,7 @@ msgstr ""
 msgid "Invalid account type."
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:424
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:411
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:409
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/login.php:395
@@ -5663,6 +5793,11 @@ msgstr ""
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/email.php:505
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/email.php:562
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/email.php:612
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/installbootstrap.php:805
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/installbootstrap.php:828
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/installbootstrap.php:831
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/installbootstrap.php:836
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/installbootstrap.php:846
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/installbootstrap.php:750
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/installbootstrap.php:773
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/installbootstrap.php:776
@@ -5876,9 +6011,10 @@ msgstr ""
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/filtering.php:276
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/filtering.php:281
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/filtering.php:292
-#: /tmp/pmwh3_schema_seed.php:200 /tmp/pmwh3_schema_seed.php:197
-#: /tmp/pmwh3_schema_seed.php:209 /tmp/pmwh3_schema_seed.php:208
-#: /tmp/pmwh3_schema_seed.php:207 /tmp/pmwh3_schema_seed.php:211
+#: /tmp/pmwh3_schema_seed.php:201 /tmp/pmwh3_schema_seed.php:200
+#: /tmp/pmwh3_schema_seed.php:197 /tmp/pmwh3_schema_seed.php:209
+#: /tmp/pmwh3_schema_seed.php:208 /tmp/pmwh3_schema_seed.php:207
+#: /tmp/pmwh3_schema_seed.php:211
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/filtering.php:56
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/filtering.php:85
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/filtering.php:96
@@ -6526,6 +6662,7 @@ msgstr ""
 msgid "Key deleted"
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:773
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:759
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:755
 #: controller/domain.php:755
@@ -6533,18 +6670,21 @@ msgstr ""
 msgid "Subdomain \"%s\" created"
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:782
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:768
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:764
 #: controller/domain.php:764
 msgid "Subdomain not found"
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:851
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:833
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:829
 #: controller/domain.php:829
 msgid "Unknown certificate"
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:866
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:848
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:844
 #: controller/domain.php:844
@@ -6552,6 +6692,7 @@ msgstr ""
 msgid "Subdomain \"%s\" updated"
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:896
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:878
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/controller/domain.php:874
 #: controller/domain.php:874
@@ -6560,9 +6701,9 @@ msgid "Subdomain \"%s\" deleted"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/config/settingsschema.php:50
-#: /tmp/pmwh3_schema_seed.php:190 /tmp/pmwh3_schema_seed.php:187
-#: /tmp/pmwh3_schema_seed.php:199 /tmp/pmwh3_schema_seed.php:198
-#: /tmp/pmwh3_schema_seed.php:197
+#: /tmp/pmwh3_schema_seed.php:191 /tmp/pmwh3_schema_seed.php:190
+#: /tmp/pmwh3_schema_seed.php:187 /tmp/pmwh3_schema_seed.php:199
+#: /tmp/pmwh3_schema_seed.php:198 /tmp/pmwh3_schema_seed.php:197
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/config/settingsschema.php:51
 #: /tmp/pmwh3_schema_seed.php:201 config/settingsschema.php:51
 msgid "System"
@@ -6575,9 +6716,9 @@ msgid "Confirmations"
 msgstr "Bevestigingen"
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/config/settingsschema.php:60
-#: /tmp/pmwh3_schema_seed.php:199 /tmp/pmwh3_schema_seed.php:196
-#: /tmp/pmwh3_schema_seed.php:208 /tmp/pmwh3_schema_seed.php:207
-#: /tmp/pmwh3_schema_seed.php:206
+#: /tmp/pmwh3_schema_seed.php:200 /tmp/pmwh3_schema_seed.php:199
+#: /tmp/pmwh3_schema_seed.php:196 /tmp/pmwh3_schema_seed.php:208
+#: /tmp/pmwh3_schema_seed.php:207 /tmp/pmwh3_schema_seed.php:206
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/config/settingsschema.php:62
 #: /tmp/pmwh3_schema_seed.php:210 config/settingsschema.php:62
 #, fuzzy
@@ -6591,49 +6732,50 @@ msgid "Errorlog"
 msgstr "ErrorLog"
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:18
-#: /tmp/pmwh3_schema_seed.php:140 /tmp/pmwh3_schema_seed.php:137
-#: /tmp/pmwh3_schema_seed.php:149 /tmp/pmwh3_schema_seed.php:148
-#: /tmp/pmwh3_schema_seed.php:147 /tmp/opencode/schema_calls.php:18
-#: /tmp/opencode/schema_calls.php:142
+#: /tmp/pmwh3_schema_seed.php:141 /tmp/pmwh3_schema_seed.php:140
+#: /tmp/pmwh3_schema_seed.php:137 /tmp/pmwh3_schema_seed.php:149
+#: /tmp/pmwh3_schema_seed.php:148 /tmp/pmwh3_schema_seed.php:147
+#: /tmp/opencode/schema_calls.php:18 /tmp/opencode/schema_calls.php:142
 msgid "1"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:19
-#: /tmp/pmwh3_schema_seed.php:160 /tmp/pmwh3_schema_seed.php:157
-#: /tmp/pmwh3_schema_seed.php:169 /tmp/pmwh3_schema_seed.php:168
-#: /tmp/pmwh3_schema_seed.php:167 /tmp/pmwh3_schema_seed.php:171
-#: /tmp/opencode/schema_calls.php:143
+#: /tmp/pmwh3_schema_seed.php:161 /tmp/pmwh3_schema_seed.php:160
+#: /tmp/pmwh3_schema_seed.php:157 /tmp/pmwh3_schema_seed.php:169
+#: /tmp/pmwh3_schema_seed.php:168 /tmp/pmwh3_schema_seed.php:167
+#: /tmp/pmwh3_schema_seed.php:171 /tmp/opencode/schema_calls.php:143
 msgid "2"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:20
-#: /tmp/pmwh3_schema_seed.php:161 /tmp/pmwh3_schema_seed.php:158
-#: /tmp/pmwh3_schema_seed.php:170 /tmp/pmwh3_schema_seed.php:169
-#: /tmp/pmwh3_schema_seed.php:168 /tmp/pmwh3_schema_seed.php:172
-#: /tmp/opencode/schema_calls.php:144
+#: /tmp/pmwh3_schema_seed.php:162 /tmp/pmwh3_schema_seed.php:161
+#: /tmp/pmwh3_schema_seed.php:158 /tmp/pmwh3_schema_seed.php:170
+#: /tmp/pmwh3_schema_seed.php:169 /tmp/pmwh3_schema_seed.php:168
+#: /tmp/pmwh3_schema_seed.php:172 /tmp/opencode/schema_calls.php:144
 msgid "3"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:21
-#: /tmp/pmwh3_schema_seed.php:162 /tmp/pmwh3_schema_seed.php:159
-#: /tmp/pmwh3_schema_seed.php:171 /tmp/pmwh3_schema_seed.php:170
-#: /tmp/pmwh3_schema_seed.php:169 /tmp/pmwh3_schema_seed.php:173
-#: /tmp/opencode/schema_calls.php:145
+#: /tmp/pmwh3_schema_seed.php:163 /tmp/pmwh3_schema_seed.php:162
+#: /tmp/pmwh3_schema_seed.php:159 /tmp/pmwh3_schema_seed.php:171
+#: /tmp/pmwh3_schema_seed.php:170 /tmp/pmwh3_schema_seed.php:169
+#: /tmp/pmwh3_schema_seed.php:173 /tmp/opencode/schema_calls.php:145
 msgid "4"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:22
-#: /tmp/pmwh3_schema_seed.php:163 /tmp/pmwh3_schema_seed.php:160
-#: /tmp/pmwh3_schema_seed.php:172 /tmp/pmwh3_schema_seed.php:171
-#: /tmp/pmwh3_schema_seed.php:170 /tmp/pmwh3_schema_seed.php:174
-#: /tmp/opencode/schema_calls.php:146
+#: /tmp/pmwh3_schema_seed.php:164 /tmp/pmwh3_schema_seed.php:163
+#: /tmp/pmwh3_schema_seed.php:160 /tmp/pmwh3_schema_seed.php:172
+#: /tmp/pmwh3_schema_seed.php:171 /tmp/pmwh3_schema_seed.php:170
+#: /tmp/pmwh3_schema_seed.php:174 /tmp/opencode/schema_calls.php:146
 msgid "5"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:23
-#: /tmp/pmwh3_schema_seed.php:158 /tmp/pmwh3_schema_seed.php:155
-#: /tmp/pmwh3_schema_seed.php:167 /tmp/pmwh3_schema_seed.php:166
-#: /tmp/pmwh3_schema_seed.php:165 /tmp/opencode/schema_calls.php:113
+#: /tmp/pmwh3_schema_seed.php:159 /tmp/pmwh3_schema_seed.php:158
+#: /tmp/pmwh3_schema_seed.php:155 /tmp/pmwh3_schema_seed.php:167
+#: /tmp/pmwh3_schema_seed.php:166 /tmp/pmwh3_schema_seed.php:165
+#: /tmp/opencode/schema_calls.php:113
 msgid "<suffix>"
 msgstr ""
 
@@ -6643,23 +6785,26 @@ msgid "@Mailbox or @domain  empty already proposes this domain."
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:25
-#: /tmp/pmwh3_schema_seed.php:148 /tmp/pmwh3_schema_seed.php:145
-#: /tmp/pmwh3_schema_seed.php:157 /tmp/pmwh3_schema_seed.php:156
-#: /tmp/pmwh3_schema_seed.php:155 /tmp/opencode/schema_calls.php:19
+#: /tmp/pmwh3_schema_seed.php:149 /tmp/pmwh3_schema_seed.php:148
+#: /tmp/pmwh3_schema_seed.php:145 /tmp/pmwh3_schema_seed.php:157
+#: /tmp/pmwh3_schema_seed.php:156 /tmp/pmwh3_schema_seed.php:155
+#: /tmp/opencode/schema_calls.php:19
 msgid "ALL"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:26
-#: /tmp/pmwh3_schema_seed.php:93 /tmp/pmwh3_schema_seed.php:92
-#: /tmp/pmwh3_schema_seed.php:95 /tmp/pmwh3_schema_seed.php:104
-#: /tmp/pmwh3_schema_seed.php:106 /tmp/opencode/schema_calls.php:33
+#: /tmp/pmwh3_schema_seed.php:94 /tmp/pmwh3_schema_seed.php:93
+#: /tmp/pmwh3_schema_seed.php:92 /tmp/pmwh3_schema_seed.php:95
+#: /tmp/pmwh3_schema_seed.php:104 /tmp/pmwh3_schema_seed.php:106
+#: /tmp/opencode/schema_calls.php:33
 msgid "Adapters detected automatically from utils/fs/."
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:27
-#: /tmp/pmwh3_schema_seed.php:97 /tmp/pmwh3_schema_seed.php:96
-#: /tmp/pmwh3_schema_seed.php:99 /tmp/pmwh3_schema_seed.php:108
-#: /tmp/pmwh3_schema_seed.php:110 /tmp/opencode/schema_calls.php:40
+#: /tmp/pmwh3_schema_seed.php:104 /tmp/pmwh3_schema_seed.php:97
+#: /tmp/pmwh3_schema_seed.php:96 /tmp/pmwh3_schema_seed.php:99
+#: /tmp/pmwh3_schema_seed.php:108 /tmp/pmwh3_schema_seed.php:110
+#: /tmp/opencode/schema_calls.php:40
 msgid "Adapters detected automatically from utils/mail/."
 msgstr ""
 
@@ -6670,50 +6815,53 @@ msgid "Admin Level"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:29
-#: /tmp/pmwh3_schema_seed.php:142 /tmp/pmwh3_schema_seed.php:139
-#: /tmp/pmwh3_schema_seed.php:151 /tmp/pmwh3_schema_seed.php:150
-#: /tmp/pmwh3_schema_seed.php:149 /tmp/opencode/schema_calls.php:5
+#: /tmp/pmwh3_schema_seed.php:143 /tmp/pmwh3_schema_seed.php:142
+#: /tmp/pmwh3_schema_seed.php:139 /tmp/pmwh3_schema_seed.php:151
+#: /tmp/pmwh3_schema_seed.php:150 /tmp/pmwh3_schema_seed.php:149
+#: /tmp/opencode/schema_calls.php:5
 msgid "Advanced"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:30
-#: /tmp/pmwh3_schema_seed.php:63 /tmp/pmwh3_schema_seed.php:62
-#: /tmp/pmwh3_schema_seed.php:65 /tmp/pmwh3_schema_seed.php:68
-#: /tmp/opencode/schema_calls.php:116
+#: /tmp/pmwh3_schema_seed.php:64 /tmp/pmwh3_schema_seed.php:63
+#: /tmp/pmwh3_schema_seed.php:62 /tmp/pmwh3_schema_seed.php:65
+#: /tmp/pmwh3_schema_seed.php:68 /tmp/opencode/schema_calls.php:116
 msgid "Advanced DB Management"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:31
-#: /tmp/pmwh3_schema_seed.php:22 /tmp/pmwh3_schema_seed.php:25
-#: /tmp/opencode/schema_calls.php:37
+#: /tmp/pmwh3_schema_seed.php:23 /tmp/pmwh3_schema_seed.php:22
+#: /tmp/pmwh3_schema_seed.php:25 /tmp/opencode/schema_calls.php:37
 msgid "Apache VHost Snippet"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:32
-#: /tmp/pmwh3_schema_seed.php:186 /tmp/pmwh3_schema_seed.php:183
-#: /tmp/pmwh3_schema_seed.php:195 /tmp/pmwh3_schema_seed.php:194
-#: /tmp/pmwh3_schema_seed.php:193 /tmp/pmwh3_schema_seed.php:197
-#: /tmp/opencode/schema_calls.php:165
+#: /tmp/pmwh3_schema_seed.php:187 /tmp/pmwh3_schema_seed.php:186
+#: /tmp/pmwh3_schema_seed.php:183 /tmp/pmwh3_schema_seed.php:195
+#: /tmp/pmwh3_schema_seed.php:194 /tmp/pmwh3_schema_seed.php:193
+#: /tmp/pmwh3_schema_seed.php:197 /tmp/opencode/schema_calls.php:165
 msgid "Application (pmwh3 modules)"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:33
-#: /tmp/pmwh3_schema_seed.php:74 /tmp/pmwh3_schema_seed.php:73
-#: /tmp/pmwh3_schema_seed.php:76 /tmp/pmwh3_schema_seed.php:85
-#: /tmp/pmwh3_schema_seed.php:87 /tmp/opencode/schema_calls.php:140
+#: /tmp/pmwh3_schema_seed.php:75 /tmp/pmwh3_schema_seed.php:74
+#: /tmp/pmwh3_schema_seed.php:73 /tmp/pmwh3_schema_seed.php:76
+#: /tmp/pmwh3_schema_seed.php:85 /tmp/pmwh3_schema_seed.php:87
+#: /tmp/opencode/schema_calls.php:140
 msgid "Apps per Row"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:34
-#: /tmp/pmwh3_schema_seed.php:67 /tmp/pmwh3_schema_seed.php:66
-#: /tmp/pmwh3_schema_seed.php:69 /tmp/pmwh3_schema_seed.php:72
-#: /tmp/opencode/schema_calls.php:122
+#: /tmp/pmwh3_schema_seed.php:68 /tmp/pmwh3_schema_seed.php:67
+#: /tmp/pmwh3_schema_seed.php:66 /tmp/pmwh3_schema_seed.php:69
+#: /tmp/pmwh3_schema_seed.php:72 /tmp/opencode/schema_calls.php:122
 msgid "Auto-Subdomain Pattern"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:35
-#: /tmp/pmwh3_schema_seed.php:30 /tmp/pmwh3_schema_seed.php:29
-#: /tmp/pmwh3_schema_seed.php:32 /tmp/opencode/schema_calls.php:47
+#: /tmp/pmwh3_schema_seed.php:42 /tmp/pmwh3_schema_seed.php:30
+#: /tmp/pmwh3_schema_seed.php:29 /tmp/pmwh3_schema_seed.php:32
+#: /tmp/opencode/schema_calls.php:47
 msgid "Auto-create email accounts"
 msgstr ""
 
@@ -6735,16 +6883,17 @@ msgid "Came from"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:39
-#: /tmp/pmwh3_schema_seed.php:80 /tmp/pmwh3_schema_seed.php:79
-#: /tmp/pmwh3_schema_seed.php:82 /tmp/pmwh3_schema_seed.php:91
-#: /tmp/pmwh3_schema_seed.php:93 /tmp/opencode/schema_calls.php:163
+#: /tmp/pmwh3_schema_seed.php:81 /tmp/pmwh3_schema_seed.php:80
+#: /tmp/pmwh3_schema_seed.php:79 /tmp/pmwh3_schema_seed.php:82
+#: /tmp/pmwh3_schema_seed.php:91 /tmp/pmwh3_schema_seed.php:93
+#: /tmp/opencode/schema_calls.php:163
 msgid "Capture scope"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:40
-#: /tmp/pmwh3_schema_seed.php:70 /tmp/pmwh3_schema_seed.php:69
-#: /tmp/pmwh3_schema_seed.php:72 /tmp/pmwh3_schema_seed.php:75
-#: /tmp/opencode/schema_calls.php:127
+#: /tmp/pmwh3_schema_seed.php:71 /tmp/pmwh3_schema_seed.php:70
+#: /tmp/pmwh3_schema_seed.php:69 /tmp/pmwh3_schema_seed.php:72
+#: /tmp/pmwh3_schema_seed.php:75 /tmp/opencode/schema_calls.php:127
 msgid "Cascade-Delete Subdomain Aliases"
 msgstr ""
 
@@ -6772,16 +6921,18 @@ msgid "Configuration Level"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:47
-#: /tmp/pmwh3_schema_seed.php:72 /tmp/pmwh3_schema_seed.php:71
-#: /tmp/pmwh3_schema_seed.php:74 /tmp/pmwh3_schema_seed.php:78
+#: /tmp/pmwh3_schema_seed.php:73 /tmp/pmwh3_schema_seed.php:72
+#: /tmp/pmwh3_schema_seed.php:71 /tmp/pmwh3_schema_seed.php:74
+#: /tmp/pmwh3_schema_seed.php:78
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:45
 #: /tmp/opencode/schema_calls.php:130
 msgid "Confirm Changes"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:48
-#: /tmp/pmwh3_schema_seed.php:73 /tmp/pmwh3_schema_seed.php:72
-#: /tmp/pmwh3_schema_seed.php:75 /tmp/pmwh3_schema_seed.php:79
+#: /tmp/pmwh3_schema_seed.php:74 /tmp/pmwh3_schema_seed.php:73
+#: /tmp/pmwh3_schema_seed.php:72 /tmp/pmwh3_schema_seed.php:75
+#: /tmp/pmwh3_schema_seed.php:79
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:46
 #: /tmp/opencode/schema_calls.php:131
 msgid "Confirm Deletes"
@@ -6793,33 +6944,37 @@ msgid "Contributions"
 msgstr "Toevoeging"
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:50
-#: /tmp/pmwh3_schema_seed.php:69 /tmp/pmwh3_schema_seed.php:68
-#: /tmp/pmwh3_schema_seed.php:71 /tmp/pmwh3_schema_seed.php:74
+#: /tmp/pmwh3_schema_seed.php:70 /tmp/pmwh3_schema_seed.php:69
+#: /tmp/pmwh3_schema_seed.php:68 /tmp/pmwh3_schema_seed.php:71
+#: /tmp/pmwh3_schema_seed.php:74
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:48
 #: /tmp/opencode/schema_calls.php:125
 msgid "Count Subdomain Aliases"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:51
-#: /tmp/pmwh3_schema_seed.php:66 /tmp/pmwh3_schema_seed.php:65
-#: /tmp/pmwh3_schema_seed.php:68 /tmp/pmwh3_schema_seed.php:71
+#: /tmp/pmwh3_schema_seed.php:67 /tmp/pmwh3_schema_seed.php:66
+#: /tmp/pmwh3_schema_seed.php:65 /tmp/pmwh3_schema_seed.php:68
+#: /tmp/pmwh3_schema_seed.php:71
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:49
 #: /tmp/opencode/schema_calls.php:121
 msgid "Create Default Subdomains"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:52
-#: /tmp/pmwh3_schema_seed.php:68 /tmp/pmwh3_schema_seed.php:67
-#: /tmp/pmwh3_schema_seed.php:70 /tmp/pmwh3_schema_seed.php:73
+#: /tmp/pmwh3_schema_seed.php:69 /tmp/pmwh3_schema_seed.php:68
+#: /tmp/pmwh3_schema_seed.php:67 /tmp/pmwh3_schema_seed.php:70
+#: /tmp/pmwh3_schema_seed.php:73
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:50
 #: /tmp/opencode/schema_calls.php:124
 msgid "Create Filesystem Directories"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:53
-#: /tmp/pmwh3_schema_seed.php:181 /tmp/pmwh3_schema_seed.php:178
-#: /tmp/pmwh3_schema_seed.php:190 /tmp/pmwh3_schema_seed.php:189
-#: /tmp/pmwh3_schema_seed.php:188 /tmp/pmwh3_schema_seed.php:192
+#: /tmp/pmwh3_schema_seed.php:182 /tmp/pmwh3_schema_seed.php:181
+#: /tmp/pmwh3_schema_seed.php:178 /tmp/pmwh3_schema_seed.php:190
+#: /tmp/pmwh3_schema_seed.php:189 /tmp/pmwh3_schema_seed.php:188
+#: /tmp/pmwh3_schema_seed.php:192
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:51
 #: /tmp/opencode/schema_calls.php:162
 msgid "Critical"
@@ -6838,8 +6993,9 @@ msgid "Customer groups"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:56
-#: /tmp/pmwh3_schema_seed.php:60 /tmp/pmwh3_schema_seed.php:59
-#: /tmp/pmwh3_schema_seed.php:62 /tmp/pmwh3_schema_seed.php:65
+#: /tmp/pmwh3_schema_seed.php:61 /tmp/pmwh3_schema_seed.php:60
+#: /tmp/pmwh3_schema_seed.php:59 /tmp/pmwh3_schema_seed.php:62
+#: /tmp/pmwh3_schema_seed.php:65
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:57
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:55
 #: /tmp/opencode/schema_calls.php:108
@@ -6847,8 +7003,9 @@ msgid "DB admin password"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:57
-#: /tmp/pmwh3_schema_seed.php:59 /tmp/pmwh3_schema_seed.php:58
-#: /tmp/pmwh3_schema_seed.php:61 /tmp/pmwh3_schema_seed.php:64
+#: /tmp/pmwh3_schema_seed.php:60 /tmp/pmwh3_schema_seed.php:59
+#: /tmp/pmwh3_schema_seed.php:58 /tmp/pmwh3_schema_seed.php:61
+#: /tmp/pmwh3_schema_seed.php:64
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:58
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:56
 #: /tmp/opencode/schema_calls.php:106
@@ -6856,8 +7013,9 @@ msgid "DB admin user"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:58
-#: /tmp/pmwh3_schema_seed.php:57 /tmp/pmwh3_schema_seed.php:56
-#: /tmp/pmwh3_schema_seed.php:59 /tmp/pmwh3_schema_seed.php:62
+#: /tmp/pmwh3_schema_seed.php:58 /tmp/pmwh3_schema_seed.php:57
+#: /tmp/pmwh3_schema_seed.php:56 /tmp/pmwh3_schema_seed.php:59
+#: /tmp/pmwh3_schema_seed.php:62
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:59
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:57
 #: /tmp/opencode/schema_calls.php:103
@@ -6865,8 +7023,9 @@ msgid "DB server host"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:59
-#: /tmp/pmwh3_schema_seed.php:58 /tmp/pmwh3_schema_seed.php:57
-#: /tmp/pmwh3_schema_seed.php:60 /tmp/pmwh3_schema_seed.php:63
+#: /tmp/pmwh3_schema_seed.php:59 /tmp/pmwh3_schema_seed.php:58
+#: /tmp/pmwh3_schema_seed.php:57 /tmp/pmwh3_schema_seed.php:60
+#: /tmp/pmwh3_schema_seed.php:63
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:60
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:58
 #: /tmp/opencode/schema_calls.php:105
@@ -6874,8 +7033,9 @@ msgid "DB server port"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:60
-#: /tmp/pmwh3_schema_seed.php:39 /tmp/pmwh3_schema_seed.php:38
-#: /tmp/pmwh3_schema_seed.php:41 /tmp/pmwh3_schema_seed.php:44
+#: /tmp/pmwh3_schema_seed.php:24 /tmp/pmwh3_schema_seed.php:39
+#: /tmp/pmwh3_schema_seed.php:38 /tmp/pmwh3_schema_seed.php:41
+#: /tmp/pmwh3_schema_seed.php:44
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:61
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:59
 #: /tmp/opencode/schema_calls.php:69
@@ -6889,8 +7049,9 @@ msgid "Dashboard"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:62
-#: /tmp/pmwh3_schema_seed.php:56 /tmp/pmwh3_schema_seed.php:55
-#: /tmp/pmwh3_schema_seed.php:58 /tmp/pmwh3_schema_seed.php:61
+#: /tmp/pmwh3_schema_seed.php:57 /tmp/pmwh3_schema_seed.php:56
+#: /tmp/pmwh3_schema_seed.php:55 /tmp/pmwh3_schema_seed.php:58
+#: /tmp/pmwh3_schema_seed.php:61
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:63
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:61
 #: /tmp/opencode/schema_calls.php:100
@@ -6898,9 +7059,9 @@ msgid "Database backend"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:63
-#: /tmp/pmwh3_schema_seed.php:189 /tmp/pmwh3_schema_seed.php:186
-#: /tmp/pmwh3_schema_seed.php:198 /tmp/pmwh3_schema_seed.php:197
-#: /tmp/pmwh3_schema_seed.php:196
+#: /tmp/pmwh3_schema_seed.php:190 /tmp/pmwh3_schema_seed.php:189
+#: /tmp/pmwh3_schema_seed.php:186 /tmp/pmwh3_schema_seed.php:198
+#: /tmp/pmwh3_schema_seed.php:197 /tmp/pmwh3_schema_seed.php:196
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:64
 #: /tmp/pmwh3_schema_seed.php:200
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:62
@@ -6909,8 +7070,9 @@ msgid "Database errors"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:64
-#: /tmp/pmwh3_schema_seed.php:61 /tmp/pmwh3_schema_seed.php:60
-#: /tmp/pmwh3_schema_seed.php:63 /tmp/pmwh3_schema_seed.php:66
+#: /tmp/pmwh3_schema_seed.php:62 /tmp/pmwh3_schema_seed.php:61
+#: /tmp/pmwh3_schema_seed.php:60 /tmp/pmwh3_schema_seed.php:63
+#: /tmp/pmwh3_schema_seed.php:66
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:65
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:63
 #: /tmp/opencode/schema_calls.php:110
@@ -6918,9 +7080,9 @@ msgid "Database name prefix style"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:65
-#: /tmp/pmwh3_schema_seed.php:197 /tmp/pmwh3_schema_seed.php:194
-#: /tmp/pmwh3_schema_seed.php:206 /tmp/pmwh3_schema_seed.php:205
-#: /tmp/pmwh3_schema_seed.php:204
+#: /tmp/pmwh3_schema_seed.php:198 /tmp/pmwh3_schema_seed.php:197
+#: /tmp/pmwh3_schema_seed.php:194 /tmp/pmwh3_schema_seed.php:206
+#: /tmp/pmwh3_schema_seed.php:205 /tmp/pmwh3_schema_seed.php:204
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:66
 #: /tmp/pmwh3_schema_seed.php:208
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:64
@@ -6934,9 +7096,9 @@ msgid "Datenmenge: Monthly overview over all your customers"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:67
-#: /tmp/pmwh3_schema_seed.php:176 /tmp/pmwh3_schema_seed.php:173
-#: /tmp/pmwh3_schema_seed.php:185 /tmp/pmwh3_schema_seed.php:184
-#: /tmp/pmwh3_schema_seed.php:183
+#: /tmp/pmwh3_schema_seed.php:177 /tmp/pmwh3_schema_seed.php:176
+#: /tmp/pmwh3_schema_seed.php:173 /tmp/pmwh3_schema_seed.php:185
+#: /tmp/pmwh3_schema_seed.php:184 /tmp/pmwh3_schema_seed.php:183
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:68
 #: /tmp/pmwh3_schema_seed.php:187
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:66
@@ -6953,8 +7115,9 @@ msgid "Default Encoding"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:69
-#: /tmp/pmwh3_schema_seed.php:34 /tmp/pmwh3_schema_seed.php:33
-#: /tmp/pmwh3_schema_seed.php:36 /tmp/pmwh3_schema_seed.php:39
+#: /tmp/pmwh3_schema_seed.php:46 /tmp/pmwh3_schema_seed.php:34
+#: /tmp/pmwh3_schema_seed.php:33 /tmp/pmwh3_schema_seed.php:36
+#: /tmp/pmwh3_schema_seed.php:39
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:70
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:68
 #: /tmp/opencode/schema_calls.php:57
@@ -6970,8 +7133,9 @@ msgid "Default Language"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:71
-#: /tmp/pmwh3_schema_seed.php:55 /tmp/pmwh3_schema_seed.php:54
-#: /tmp/pmwh3_schema_seed.php:57 /tmp/pmwh3_schema_seed.php:60
+#: /tmp/pmwh3_schema_seed.php:34 /tmp/pmwh3_schema_seed.php:55
+#: /tmp/pmwh3_schema_seed.php:54 /tmp/pmwh3_schema_seed.php:57
+#: /tmp/pmwh3_schema_seed.php:60
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:72
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:70
 #: /tmp/opencode/schema_calls.php:99
@@ -6983,7 +7147,8 @@ msgid "Default Template"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:73
-#: /tmp/pmwh3_schema_seed.php:33 /tmp/pmwh3_schema_seed.php:32
+#: /tmp/pmwh3_schema_seed.php:45 /tmp/pmwh3_schema_seed.php:33
+#: /tmp/pmwh3_schema_seed.php:32
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:72
 #: /tmp/pmwh3_schema_seed.php:80 /tmp/pmwh3_schema_seed.php:82
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:71
@@ -6992,8 +7157,9 @@ msgid "Default UID for new FTP accounts"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:74
-#: /tmp/pmwh3_schema_seed.php:62 /tmp/pmwh3_schema_seed.php:61
-#: /tmp/pmwh3_schema_seed.php:64 /tmp/pmwh3_schema_seed.php:67
+#: /tmp/pmwh3_schema_seed.php:63 /tmp/pmwh3_schema_seed.php:62
+#: /tmp/pmwh3_schema_seed.php:61 /tmp/pmwh3_schema_seed.php:64
+#: /tmp/pmwh3_schema_seed.php:67
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:75
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:73
 #: /tmp/opencode/schema_calls.php:114
@@ -7001,9 +7167,9 @@ msgid "Default user host for new grants"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:75
-#: /tmp/pmwh3_schema_seed.php:194 /tmp/pmwh3_schema_seed.php:191
-#: /tmp/pmwh3_schema_seed.php:203 /tmp/pmwh3_schema_seed.php:202
-#: /tmp/pmwh3_schema_seed.php:201
+#: /tmp/pmwh3_schema_seed.php:195 /tmp/pmwh3_schema_seed.php:194
+#: /tmp/pmwh3_schema_seed.php:191 /tmp/pmwh3_schema_seed.php:203
+#: /tmp/pmwh3_schema_seed.php:202 /tmp/pmwh3_schema_seed.php:201
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:76
 #: /tmp/pmwh3_schema_seed.php:205
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:74
@@ -7012,8 +7178,9 @@ msgid "Dns"
 msgstr "Domeinen"
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:76
-#: /tmp/pmwh3_schema_seed.php:45 /tmp/pmwh3_schema_seed.php:44
-#: /tmp/pmwh3_schema_seed.php:47 /tmp/pmwh3_schema_seed.php:50
+#: /tmp/pmwh3_schema_seed.php:54 /tmp/pmwh3_schema_seed.php:45
+#: /tmp/pmwh3_schema_seed.php:44 /tmp/pmwh3_schema_seed.php:47
+#: /tmp/pmwh3_schema_seed.php:50
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:77
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:75
 #: /tmp/opencode/schema_calls.php:83
@@ -7021,8 +7188,9 @@ msgid "Dovecot doveadm endpoint"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:77
-#: /tmp/pmwh3_schema_seed.php:46 /tmp/pmwh3_schema_seed.php:45
-#: /tmp/pmwh3_schema_seed.php:48 /tmp/pmwh3_schema_seed.php:51
+#: /tmp/pmwh3_schema_seed.php:55 /tmp/pmwh3_schema_seed.php:46
+#: /tmp/pmwh3_schema_seed.php:45 /tmp/pmwh3_schema_seed.php:48
+#: /tmp/pmwh3_schema_seed.php:51
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:78
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:76
 #: /tmp/opencode/schema_calls.php:85
@@ -7030,9 +7198,9 @@ msgid "Dovecot doveadm password"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:78
-#: /tmp/pmwh3_schema_seed.php:141 /tmp/pmwh3_schema_seed.php:138
-#: /tmp/pmwh3_schema_seed.php:150 /tmp/pmwh3_schema_seed.php:149
-#: /tmp/pmwh3_schema_seed.php:148
+#: /tmp/pmwh3_schema_seed.php:142 /tmp/pmwh3_schema_seed.php:141
+#: /tmp/pmwh3_schema_seed.php:138 /tmp/pmwh3_schema_seed.php:150
+#: /tmp/pmwh3_schema_seed.php:149 /tmp/pmwh3_schema_seed.php:148
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:79
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:77
 #: /tmp/opencode/schema_calls.php:4
@@ -7040,8 +7208,9 @@ msgid "Easy"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:79
-#: /tmp/pmwh3_schema_seed.php:83 /tmp/pmwh3_schema_seed.php:82
-#: /tmp/pmwh3_schema_seed.php:85 /tmp/pmwh3_schema_seed.php:94
+#: /tmp/pmwh3_schema_seed.php:84 /tmp/pmwh3_schema_seed.php:83
+#: /tmp/pmwh3_schema_seed.php:82 /tmp/pmwh3_schema_seed.php:85
+#: /tmp/pmwh3_schema_seed.php:94
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:80
 #: /tmp/pmwh3_schema_seed.php:96
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:78
@@ -7057,8 +7226,9 @@ msgid "Email  Domains"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:81
-#: /tmp/pmwh3_schema_seed.php:32 /tmp/pmwh3_schema_seed.php:31
-#: /tmp/pmwh3_schema_seed.php:34 /tmp/pmwh3_schema_seed.php:35
+#: /tmp/pmwh3_schema_seed.php:44 /tmp/pmwh3_schema_seed.php:32
+#: /tmp/pmwh3_schema_seed.php:31 /tmp/pmwh3_schema_seed.php:34
+#: /tmp/pmwh3_schema_seed.php:35
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:82
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:80
 #: /tmp/opencode/schema_calls.php:52
@@ -7066,8 +7236,9 @@ msgid "Encrypt Email Passwords"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:82
-#: /tmp/pmwh3_schema_seed.php:36 /tmp/pmwh3_schema_seed.php:35
-#: /tmp/pmwh3_schema_seed.php:38 /tmp/pmwh3_schema_seed.php:41
+#: /tmp/pmwh3_schema_seed.php:48 /tmp/pmwh3_schema_seed.php:36
+#: /tmp/pmwh3_schema_seed.php:35 /tmp/pmwh3_schema_seed.php:38
+#: /tmp/pmwh3_schema_seed.php:41
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:83
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:81
 #: /tmp/opencode/schema_calls.php:63
@@ -7075,9 +7246,9 @@ msgid "Encrypt FTP Passwords"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:83
-#: /tmp/pmwh3_schema_seed.php:180 /tmp/pmwh3_schema_seed.php:177
-#: /tmp/pmwh3_schema_seed.php:189 /tmp/pmwh3_schema_seed.php:188
-#: /tmp/pmwh3_schema_seed.php:187
+#: /tmp/pmwh3_schema_seed.php:181 /tmp/pmwh3_schema_seed.php:180
+#: /tmp/pmwh3_schema_seed.php:177 /tmp/pmwh3_schema_seed.php:189
+#: /tmp/pmwh3_schema_seed.php:188 /tmp/pmwh3_schema_seed.php:187
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:84
 #: /tmp/pmwh3_schema_seed.php:191
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:82
@@ -7086,8 +7257,9 @@ msgid "Error"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:84
-#: /tmp/pmwh3_schema_seed.php:78 /tmp/pmwh3_schema_seed.php:77
-#: /tmp/pmwh3_schema_seed.php:80 /tmp/pmwh3_schema_seed.php:89
+#: /tmp/pmwh3_schema_seed.php:79 /tmp/pmwh3_schema_seed.php:78
+#: /tmp/pmwh3_schema_seed.php:77 /tmp/pmwh3_schema_seed.php:80
+#: /tmp/pmwh3_schema_seed.php:89
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:85
 #: /tmp/pmwh3_schema_seed.php:91
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:83
@@ -7102,8 +7274,9 @@ msgid "Events"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:86
-#: /tmp/pmwh3_schema_seed.php:35 /tmp/pmwh3_schema_seed.php:34
-#: /tmp/pmwh3_schema_seed.php:37 /tmp/pmwh3_schema_seed.php:40
+#: /tmp/pmwh3_schema_seed.php:47 /tmp/pmwh3_schema_seed.php:35
+#: /tmp/pmwh3_schema_seed.php:34 /tmp/pmwh3_schema_seed.php:37
+#: /tmp/pmwh3_schema_seed.php:40
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:87
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:85
 #: /tmp/opencode/schema_calls.php:59
@@ -7119,7 +7292,8 @@ msgid "File (var/log by default)"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:88
-#: /tmp/pmwh3_schema_seed.php:19 /tmp/pmwh3_schema_seed.php:22
+#: /tmp/pmwh3_schema_seed.php:20 /tmp/pmwh3_schema_seed.php:19
+#: /tmp/pmwh3_schema_seed.php:22
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:89
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:87
 #: /tmp/opencode/schema_calls.php:32
@@ -7127,8 +7301,9 @@ msgid "Filesystem Adapter"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:89
-#: /tmp/pmwh3_schema_seed.php:40 /tmp/pmwh3_schema_seed.php:39
-#: /tmp/pmwh3_schema_seed.php:42 /tmp/pmwh3_schema_seed.php:45
+#: /tmp/pmwh3_schema_seed.php:49 /tmp/pmwh3_schema_seed.php:40
+#: /tmp/pmwh3_schema_seed.php:39 /tmp/pmwh3_schema_seed.php:42
+#: /tmp/pmwh3_schema_seed.php:45
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:90
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:88
 #: /tmp/opencode/schema_calls.php:71
@@ -7161,9 +7336,9 @@ msgid "Forwards  %s"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:93
-#: /tmp/pmwh3_schema_seed.php:187 /tmp/pmwh3_schema_seed.php:184
-#: /tmp/pmwh3_schema_seed.php:196 /tmp/pmwh3_schema_seed.php:195
-#: /tmp/pmwh3_schema_seed.php:194
+#: /tmp/pmwh3_schema_seed.php:188 /tmp/pmwh3_schema_seed.php:187
+#: /tmp/pmwh3_schema_seed.php:184 /tmp/pmwh3_schema_seed.php:196
+#: /tmp/pmwh3_schema_seed.php:195 /tmp/pmwh3_schema_seed.php:194
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:94
 #: /tmp/pmwh3_schema_seed.php:198
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:92
@@ -7172,9 +7347,9 @@ msgid "Framework (cevian)"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:94
-#: /tmp/pmwh3_schema_seed.php:193 /tmp/pmwh3_schema_seed.php:190
-#: /tmp/pmwh3_schema_seed.php:202 /tmp/pmwh3_schema_seed.php:201
-#: /tmp/pmwh3_schema_seed.php:200
+#: /tmp/pmwh3_schema_seed.php:194 /tmp/pmwh3_schema_seed.php:193
+#: /tmp/pmwh3_schema_seed.php:190 /tmp/pmwh3_schema_seed.php:202
+#: /tmp/pmwh3_schema_seed.php:201 /tmp/pmwh3_schema_seed.php:200
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:95
 #: /tmp/pmwh3_schema_seed.php:204
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:93
@@ -7237,8 +7412,9 @@ msgid "reCAPTCHA v3 Score Threshold"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:103
-#: /tmp/pmwh3_schema_seed.php:85 /tmp/pmwh3_schema_seed.php:84
-#: /tmp/pmwh3_schema_seed.php:87 /tmp/pmwh3_schema_seed.php:96
+#: /tmp/pmwh3_schema_seed.php:86 /tmp/pmwh3_schema_seed.php:85
+#: /tmp/pmwh3_schema_seed.php:84 /tmp/pmwh3_schema_seed.php:87
+#: /tmp/pmwh3_schema_seed.php:96
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:104
 #: /tmp/pmwh3_schema_seed.php:98
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:101
@@ -7248,8 +7424,9 @@ msgid ""
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:104
-#: /tmp/pmwh3_schema_seed.php:86 /tmp/pmwh3_schema_seed.php:85
-#: /tmp/pmwh3_schema_seed.php:88 /tmp/pmwh3_schema_seed.php:97
+#: /tmp/pmwh3_schema_seed.php:87 /tmp/pmwh3_schema_seed.php:86
+#: /tmp/pmwh3_schema_seed.php:85 /tmp/pmwh3_schema_seed.php:88
+#: /tmp/pmwh3_schema_seed.php:97
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:105
 #: /tmp/pmwh3_schema_seed.php:99
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:102
@@ -7259,8 +7436,9 @@ msgid ""
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:105
-#: /tmp/pmwh3_schema_seed.php:87 /tmp/pmwh3_schema_seed.php:86
-#: /tmp/pmwh3_schema_seed.php:89 /tmp/pmwh3_schema_seed.php:98
+#: /tmp/pmwh3_schema_seed.php:88 /tmp/pmwh3_schema_seed.php:87
+#: /tmp/pmwh3_schema_seed.php:86 /tmp/pmwh3_schema_seed.php:89
+#: /tmp/pmwh3_schema_seed.php:98
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:106
 #: /tmp/pmwh3_schema_seed.php:100
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:103
@@ -7271,8 +7449,9 @@ msgid ""
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:106
-#: /tmp/pmwh3_schema_seed.php:88 /tmp/pmwh3_schema_seed.php:87
-#: /tmp/pmwh3_schema_seed.php:90 /tmp/pmwh3_schema_seed.php:99
+#: /tmp/pmwh3_schema_seed.php:89 /tmp/pmwh3_schema_seed.php:88
+#: /tmp/pmwh3_schema_seed.php:87 /tmp/pmwh3_schema_seed.php:90
+#: /tmp/pmwh3_schema_seed.php:99
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:107
 #: /tmp/pmwh3_schema_seed.php:101
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:104
@@ -7282,18 +7461,18 @@ msgid ""
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:107
-#: /tmp/pmwh3_schema_seed.php:146 /tmp/pmwh3_schema_seed.php:143
-#: /tmp/pmwh3_schema_seed.php:155 /tmp/pmwh3_schema_seed.php:154
-#: /tmp/pmwh3_schema_seed.php:153
+#: /tmp/pmwh3_schema_seed.php:147 /tmp/pmwh3_schema_seed.php:146
+#: /tmp/pmwh3_schema_seed.php:143 /tmp/pmwh3_schema_seed.php:155
+#: /tmp/pmwh3_schema_seed.php:154 /tmp/pmwh3_schema_seed.php:153
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:108
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:105
 msgid "reCAPTCHA v2"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:108
-#: /tmp/pmwh3_schema_seed.php:147 /tmp/pmwh3_schema_seed.php:144
-#: /tmp/pmwh3_schema_seed.php:156 /tmp/pmwh3_schema_seed.php:155
-#: /tmp/pmwh3_schema_seed.php:154
+#: /tmp/pmwh3_schema_seed.php:148 /tmp/pmwh3_schema_seed.php:147
+#: /tmp/pmwh3_schema_seed.php:144 /tmp/pmwh3_schema_seed.php:156
+#: /tmp/pmwh3_schema_seed.php:155 /tmp/pmwh3_schema_seed.php:154
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:109
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:106
 msgid "reCAPTCHA v3"
@@ -7304,7 +7483,8 @@ msgid "HTML Footer"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:110
-#: /tmp/pmwh3_schema_seed.php:76 /tmp/pmwh3_schema_seed.php:75
+#: /tmp/pmwh3_schema_seed.php:77 /tmp/pmwh3_schema_seed.php:76
+#: /tmp/pmwh3_schema_seed.php:75
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:109
 #: /tmp/pmwh3_schema_seed.php:83 /tmp/pmwh3_schema_seed.php:85
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:107
@@ -7314,8 +7494,9 @@ msgid "Icon Theme"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:111
-#: /tmp/pmwh3_schema_seed.php:81 /tmp/pmwh3_schema_seed.php:80
-#: /tmp/pmwh3_schema_seed.php:83 /tmp/pmwh3_schema_seed.php:92
+#: /tmp/pmwh3_schema_seed.php:82 /tmp/pmwh3_schema_seed.php:81
+#: /tmp/pmwh3_schema_seed.php:80 /tmp/pmwh3_schema_seed.php:83
+#: /tmp/pmwh3_schema_seed.php:92
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:112
 #: /tmp/pmwh3_schema_seed.php:94
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:109
@@ -7325,7 +7506,8 @@ msgid "Include stack traces"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:112
-#: /tmp/pmwh3_schema_seed.php:21 /tmp/pmwh3_schema_seed.php:24
+#: /tmp/pmwh3_schema_seed.php:22 /tmp/pmwh3_schema_seed.php:21
+#: /tmp/pmwh3_schema_seed.php:24
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:113
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:110
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:100
@@ -7334,8 +7516,9 @@ msgid "Index File Content"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:113
-#: /tmp/pmwh3_schema_seed.php:95 /tmp/pmwh3_schema_seed.php:94
-#: /tmp/pmwh3_schema_seed.php:97 /tmp/pmwh3_schema_seed.php:106
+#: /tmp/pmwh3_schema_seed.php:96 /tmp/pmwh3_schema_seed.php:95
+#: /tmp/pmwh3_schema_seed.php:94 /tmp/pmwh3_schema_seed.php:97
+#: /tmp/pmwh3_schema_seed.php:106
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:114
 #: /tmp/pmwh3_schema_seed.php:108
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:111
@@ -7345,7 +7528,8 @@ msgid ""
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:114
-#: /tmp/pmwh3_schema_seed.php:20 /tmp/pmwh3_schema_seed.php:23
+#: /tmp/pmwh3_schema_seed.php:21 /tmp/pmwh3_schema_seed.php:20
+#: /tmp/pmwh3_schema_seed.php:23
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:115
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:112
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:111
@@ -7355,9 +7539,9 @@ msgid "Index Filename"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:115
-#: /tmp/pmwh3_schema_seed.php:177 /tmp/pmwh3_schema_seed.php:174
-#: /tmp/pmwh3_schema_seed.php:186 /tmp/pmwh3_schema_seed.php:185
-#: /tmp/pmwh3_schema_seed.php:184
+#: /tmp/pmwh3_schema_seed.php:178 /tmp/pmwh3_schema_seed.php:177
+#: /tmp/pmwh3_schema_seed.php:174 /tmp/pmwh3_schema_seed.php:186
+#: /tmp/pmwh3_schema_seed.php:185 /tmp/pmwh3_schema_seed.php:184
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:116
 #: /tmp/pmwh3_schema_seed.php:188
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:113
@@ -7388,8 +7572,9 @@ msgid "Logout"
 msgstr "Log uit"
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:119
-#: /tmp/pmwh3_schema_seed.php:38 /tmp/pmwh3_schema_seed.php:37
-#: /tmp/pmwh3_schema_seed.php:40 /tmp/pmwh3_schema_seed.php:43
+#: /tmp/pmwh3_schema_seed.php:29 /tmp/pmwh3_schema_seed.php:38
+#: /tmp/pmwh3_schema_seed.php:37 /tmp/pmwh3_schema_seed.php:40
+#: /tmp/pmwh3_schema_seed.php:43
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:120
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:117
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:116
@@ -7399,7 +7584,8 @@ msgid "MX Servers"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:120
-#: /tmp/pmwh3_schema_seed.php:23 /tmp/pmwh3_schema_seed.php:26
+#: /tmp/pmwh3_schema_seed.php:35 /tmp/pmwh3_schema_seed.php:23
+#: /tmp/pmwh3_schema_seed.php:26
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:121
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:118
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:117
@@ -7409,7 +7595,8 @@ msgid "Mail Backend"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:121
-#: /tmp/pmwh3_schema_seed.php:24 /tmp/pmwh3_schema_seed.php:27
+#: /tmp/pmwh3_schema_seed.php:36 /tmp/pmwh3_schema_seed.php:24
+#: /tmp/pmwh3_schema_seed.php:27
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:122
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:119
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:118
@@ -7419,7 +7606,8 @@ msgid "Mail Home Directory"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:122
-#: /tmp/pmwh3_schema_seed.php:26 /tmp/pmwh3_schema_seed.php:29
+#: /tmp/pmwh3_schema_seed.php:38 /tmp/pmwh3_schema_seed.php:26
+#: /tmp/pmwh3_schema_seed.php:29
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:123
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:120
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:119
@@ -7429,7 +7617,8 @@ msgid "Mail User GID"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:123
-#: /tmp/pmwh3_schema_seed.php:25 /tmp/pmwh3_schema_seed.php:28
+#: /tmp/pmwh3_schema_seed.php:37 /tmp/pmwh3_schema_seed.php:25
+#: /tmp/pmwh3_schema_seed.php:28
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:124
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:121
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:120
@@ -7449,7 +7638,8 @@ msgid "Mailboxes  %s"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:125
-#: /tmp/pmwh3_schema_seed.php:27 /tmp/pmwh3_schema_seed.php:30
+#: /tmp/pmwh3_schema_seed.php:39 /tmp/pmwh3_schema_seed.php:27
+#: /tmp/pmwh3_schema_seed.php:30
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:126
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:123
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:122
@@ -7459,7 +7649,7 @@ msgid "Maildir Pattern"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:126
-#: /tmp/pmwh3_schema_seed.php:28
+#: /tmp/pmwh3_schema_seed.php:40 /tmp/pmwh3_schema_seed.php:28
 msgid "Mail transport for new domains"
 msgstr ""
 
@@ -7472,12 +7662,12 @@ msgid "Manager"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:128
-#: /tmp/pmwh3_schema_seed.php:29
+#: /tmp/pmwh3_schema_seed.php:41 /tmp/pmwh3_schema_seed.php:29
 msgid "Master MX IP address"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:129
-#: /tmp/pmwh3_schema_seed.php:75
+#: /tmp/pmwh3_schema_seed.php:76 /tmp/pmwh3_schema_seed.php:75
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:127
 #: /tmp/pmwh3_schema_seed.php:74 /tmp/pmwh3_schema_seed.php:77
 #: /tmp/pmwh3_schema_seed.php:86
@@ -7519,7 +7709,7 @@ msgid "Message"
 msgstr "Berichten"
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:133
-#: /tmp/pmwh3_schema_seed.php:79
+#: /tmp/pmwh3_schema_seed.php:80 /tmp/pmwh3_schema_seed.php:79
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:131
 #: /tmp/pmwh3_schema_seed.php:78 /tmp/pmwh3_schema_seed.php:81
 #: /tmp/pmwh3_schema_seed.php:90
@@ -7542,7 +7732,7 @@ msgid "Modules"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:135
-#: /tmp/pmwh3_schema_seed.php:155
+#: /tmp/pmwh3_schema_seed.php:156 /tmp/pmwh3_schema_seed.php:155
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:133
 #: /tmp/pmwh3_schema_seed.php:152 /tmp/pmwh3_schema_seed.php:164
 #: /tmp/pmwh3_schema_seed.php:163 /tmp/pmwh3_schema_seed.php:162
@@ -7555,7 +7745,7 @@ msgid "MySQL / MariaDB"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:136
-#: /tmp/pmwh3_schema_seed.php:94
+#: /tmp/pmwh3_schema_seed.php:95 /tmp/pmwh3_schema_seed.php:94
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:134
 #: /tmp/pmwh3_schema_seed.php:93 /tmp/pmwh3_schema_seed.php:96
 #: /tmp/pmwh3_schema_seed.php:105
@@ -7569,7 +7759,7 @@ msgid "Name of the placeholder file dropped into new web roots. Empty = none."
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:137
-#: /tmp/pmwh3_schema_seed.php:37
+#: /tmp/pmwh3_schema_seed.php:28 /tmp/pmwh3_schema_seed.php:37
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:135
 #: /tmp/pmwh3_schema_seed.php:36 /tmp/pmwh3_schema_seed.php:39
 #: /tmp/pmwh3_schema_seed.php:42
@@ -7582,7 +7772,7 @@ msgid "Nameservers"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:138
-#: /tmp/pmwh3_schema_seed.php:65
+#: /tmp/pmwh3_schema_seed.php:66 /tmp/pmwh3_schema_seed.php:65
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:136
 #: /tmp/pmwh3_schema_seed.php:64 /tmp/pmwh3_schema_seed.php:67
 #: /tmp/pmwh3_schema_seed.php:70
@@ -7595,7 +7785,7 @@ msgid "Next Customer Number"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:139
-#: /tmp/pmwh3_schema_seed.php:153
+#: /tmp/pmwh3_schema_seed.php:154 /tmp/pmwh3_schema_seed.php:153
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:137
 #: /tmp/pmwh3_schema_seed.php:150 /tmp/pmwh3_schema_seed.php:162
 #: /tmp/pmwh3_schema_seed.php:161 /tmp/pmwh3_schema_seed.php:160
@@ -7608,7 +7798,7 @@ msgid "No automation (UI only)"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:140
-#: /tmp/pmwh3_schema_seed.php:178
+#: /tmp/pmwh3_schema_seed.php:179 /tmp/pmwh3_schema_seed.php:178
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:138
 #: /tmp/pmwh3_schema_seed.php:175 /tmp/pmwh3_schema_seed.php:187
 #: /tmp/pmwh3_schema_seed.php:186 /tmp/pmwh3_schema_seed.php:185
@@ -7622,7 +7812,7 @@ msgid "Notice"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:141
-#: /tmp/pmwh3_schema_seed.php:159
+#: /tmp/pmwh3_schema_seed.php:160 /tmp/pmwh3_schema_seed.php:159
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:139
 #: /tmp/pmwh3_schema_seed.php:156 /tmp/pmwh3_schema_seed.php:168
 #: /tmp/pmwh3_schema_seed.php:167 /tmp/pmwh3_schema_seed.php:166
@@ -7654,7 +7844,7 @@ msgid "Object groups (legacy)"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:144
-#: /tmp/pmwh3_schema_seed.php:107
+#: /tmp/pmwh3_schema_seed.php:102 /tmp/pmwh3_schema_seed.php:107
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:142
 #: /tmp/pmwh3_schema_seed.php:104 /tmp/pmwh3_schema_seed.php:116
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:143
@@ -7667,7 +7857,7 @@ msgid "One per line. The first is treated as the primary NS in the SOA record."
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:145
-#: /tmp/pmwh3_schema_seed.php:108
+#: /tmp/pmwh3_schema_seed.php:103 /tmp/pmwh3_schema_seed.php:108
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:143
 #: /tmp/pmwh3_schema_seed.php:105 /tmp/pmwh3_schema_seed.php:117
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:144
@@ -7707,7 +7897,7 @@ msgid "Other"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:149
-#: /tmp/pmwh3_schema_seed.php:188
+#: /tmp/pmwh3_schema_seed.php:189 /tmp/pmwh3_schema_seed.php:188
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:147
 #: /tmp/pmwh3_schema_seed.php:185 /tmp/pmwh3_schema_seed.php:197
 #: /tmp/pmwh3_schema_seed.php:196 /tmp/pmwh3_schema_seed.php:195
@@ -7756,7 +7946,7 @@ msgid "Phpmyadmin"
 msgstr "PHPMyAdmin"
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:154
-#: /tmp/pmwh3_schema_seed.php:98
+#: /tmp/pmwh3_schema_seed.php:105 /tmp/pmwh3_schema_seed.php:98
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:152
 #: /tmp/pmwh3_schema_seed.php:97 /tmp/pmwh3_schema_seed.php:100
 #: /tmp/pmwh3_schema_seed.php:109
@@ -7791,7 +7981,7 @@ msgid "Pmwh3"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:157
-#: /tmp/pmwh3_schema_seed.php:48
+#: /tmp/pmwh3_schema_seed.php:25 /tmp/pmwh3_schema_seed.php:48
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:155
 #: /tmp/pmwh3_schema_seed.php:47 /tmp/pmwh3_schema_seed.php:50
 #: /tmp/pmwh3_schema_seed.php:53
@@ -7804,7 +7994,7 @@ msgid "PowerDNS API base URL"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:158
-#: /tmp/pmwh3_schema_seed.php:49
+#: /tmp/pmwh3_schema_seed.php:26 /tmp/pmwh3_schema_seed.php:49
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:156
 #: /tmp/pmwh3_schema_seed.php:48 /tmp/pmwh3_schema_seed.php:51
 #: /tmp/pmwh3_schema_seed.php:54
@@ -7817,7 +8007,7 @@ msgid "PowerDNS API key"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:159
-#: /tmp/pmwh3_schema_seed.php:50
+#: /tmp/pmwh3_schema_seed.php:27 /tmp/pmwh3_schema_seed.php:50
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:157
 #: /tmp/pmwh3_schema_seed.php:49 /tmp/pmwh3_schema_seed.php:52
 #: /tmp/pmwh3_schema_seed.php:55
@@ -7840,7 +8030,7 @@ msgid "Reject score  empty = inherit"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:161
-#: /tmp/pmwh3_schema_seed.php:92
+#: /tmp/pmwh3_schema_seed.php:93 /tmp/pmwh3_schema_seed.php:92
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:159
 #: /tmp/pmwh3_schema_seed.php:91 /tmp/pmwh3_schema_seed.php:94
 #: /tmp/pmwh3_schema_seed.php:103
@@ -7875,7 +8065,7 @@ msgid "Reserved Names"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:164
-#: /tmp/pmwh3_schema_seed.php:82
+#: /tmp/pmwh3_schema_seed.php:83 /tmp/pmwh3_schema_seed.php:82
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:162
 #: /tmp/pmwh3_schema_seed.php:81 /tmp/pmwh3_schema_seed.php:84
 #: /tmp/pmwh3_schema_seed.php:93
@@ -7889,7 +8079,7 @@ msgid "Retention (days)"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:165
-#: /tmp/pmwh3_schema_seed.php:152
+#: /tmp/pmwh3_schema_seed.php:153 /tmp/pmwh3_schema_seed.php:152
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:163
 #: /tmp/pmwh3_schema_seed.php:149 /tmp/pmwh3_schema_seed.php:161
 #: /tmp/pmwh3_schema_seed.php:160 /tmp/pmwh3_schema_seed.php:159
@@ -7902,7 +8092,7 @@ msgid "Rspamd (HTTP maps)"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:167
-#: /tmp/pmwh3_schema_seed.php:42
+#: /tmp/pmwh3_schema_seed.php:51 /tmp/pmwh3_schema_seed.php:42
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:165
 #: /tmp/pmwh3_schema_seed.php:41 /tmp/pmwh3_schema_seed.php:44
 #: /tmp/pmwh3_schema_seed.php:47
@@ -7915,7 +8105,7 @@ msgid "Rspamd controller API URL"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:168
-#: /tmp/pmwh3_schema_seed.php:43
+#: /tmp/pmwh3_schema_seed.php:52 /tmp/pmwh3_schema_seed.php:43
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:166
 #: /tmp/pmwh3_schema_seed.php:42 /tmp/pmwh3_schema_seed.php:45
 #: /tmp/pmwh3_schema_seed.php:48
@@ -7928,7 +8118,7 @@ msgid "Rspamd controller password"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:169
-#: /tmp/pmwh3_schema_seed.php:41
+#: /tmp/pmwh3_schema_seed.php:50 /tmp/pmwh3_schema_seed.php:41
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:167
 #: /tmp/pmwh3_schema_seed.php:40 /tmp/pmwh3_schema_seed.php:43
 #: /tmp/pmwh3_schema_seed.php:46
@@ -7941,7 +8131,7 @@ msgid "Rspamd map token"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:170
-#: /tmp/pmwh3_schema_seed.php:44
+#: /tmp/pmwh3_schema_seed.php:53 /tmp/pmwh3_schema_seed.php:44
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:168
 #: /tmp/pmwh3_schema_seed.php:43 /tmp/pmwh3_schema_seed.php:46
 #: /tmp/pmwh3_schema_seed.php:49
@@ -7966,7 +8156,7 @@ msgid "SI Units (1000 vs 1024)"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:173
-#: /tmp/pmwh3_schema_seed.php:53
+#: /tmp/pmwh3_schema_seed.php:32 /tmp/pmwh3_schema_seed.php:53
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:171
 #: /tmp/pmwh3_schema_seed.php:52 /tmp/pmwh3_schema_seed.php:55
 #: /tmp/pmwh3_schema_seed.php:58
@@ -7979,7 +8169,7 @@ msgid "SOA Expire"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:174
-#: /tmp/pmwh3_schema_seed.php:54
+#: /tmp/pmwh3_schema_seed.php:33 /tmp/pmwh3_schema_seed.php:54
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:172
 #: /tmp/pmwh3_schema_seed.php:53 /tmp/pmwh3_schema_seed.php:56
 #: /tmp/pmwh3_schema_seed.php:59
@@ -7992,7 +8182,7 @@ msgid "SOA Minimum"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:175
-#: /tmp/pmwh3_schema_seed.php:51
+#: /tmp/pmwh3_schema_seed.php:30 /tmp/pmwh3_schema_seed.php:51
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:173
 #: /tmp/pmwh3_schema_seed.php:50 /tmp/pmwh3_schema_seed.php:53
 #: /tmp/pmwh3_schema_seed.php:56
@@ -8005,7 +8195,7 @@ msgid "SOA Refresh"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:176
-#: /tmp/pmwh3_schema_seed.php:52
+#: /tmp/pmwh3_schema_seed.php:31 /tmp/pmwh3_schema_seed.php:52
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:174
 #: /tmp/pmwh3_schema_seed.php:51 /tmp/pmwh3_schema_seed.php:54
 #: /tmp/pmwh3_schema_seed.php:57
@@ -8054,7 +8244,7 @@ msgid "Session list"
 msgstr "Sessies"
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:181
-#: /tmp/pmwh3_schema_seed.php:198
+#: /tmp/pmwh3_schema_seed.php:199 /tmp/pmwh3_schema_seed.php:198
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:179
 #: /tmp/pmwh3_schema_seed.php:195 /tmp/pmwh3_schema_seed.php:207
 #: /tmp/pmwh3_schema_seed.php:206 /tmp/pmwh3_schema_seed.php:205
@@ -8085,7 +8275,7 @@ msgid "Show New Mail Indicator"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:185
-#: /tmp/pmwh3_schema_seed.php:77
+#: /tmp/pmwh3_schema_seed.php:78 /tmp/pmwh3_schema_seed.php:77
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:183
 #: /tmp/pmwh3_schema_seed.php:76
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:181
@@ -8124,7 +8314,7 @@ msgid "Stats counts (legacy)"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:189
-#: /tmp/pmwh3_schema_seed.php:168
+#: /tmp/pmwh3_schema_seed.php:169 /tmp/pmwh3_schema_seed.php:168
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:187
 #: /tmp/pmwh3_schema_seed.php:165 /tmp/pmwh3_schema_seed.php:177
 #: /tmp/pmwh3_schema_seed.php:176 /tmp/pmwh3_schema_seed.php:175
@@ -8145,7 +8335,7 @@ msgid "Tools & Content"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:191
-#: /tmp/pmwh3_schema_seed.php:71
+#: /tmp/pmwh3_schema_seed.php:72 /tmp/pmwh3_schema_seed.php:71
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:189
 #: /tmp/pmwh3_schema_seed.php:70 /tmp/pmwh3_schema_seed.php:73
 #: /tmp/pmwh3_schema_seed.php:77
@@ -8222,7 +8412,7 @@ msgid "View wblist"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:199
-#: /tmp/pmwh3_schema_seed.php:179
+#: /tmp/pmwh3_schema_seed.php:180 /tmp/pmwh3_schema_seed.php:179
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:198
 #: /tmp/pmwh3_schema_seed.php:176 /tmp/pmwh3_schema_seed.php:188
 #: /tmp/pmwh3_schema_seed.php:187 /tmp/pmwh3_schema_seed.php:186
@@ -8236,7 +8426,7 @@ msgid "Warning"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:200
-#: /tmp/pmwh3_schema_seed.php:17
+#: /tmp/pmwh3_schema_seed.php:18 /tmp/pmwh3_schema_seed.php:17
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:199
 #: /tmp/pmwh3_schema_seed.php:20
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:201
@@ -8248,7 +8438,7 @@ msgid "Web Root"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:201
-#: /tmp/pmwh3_schema_seed.php:18
+#: /tmp/pmwh3_schema_seed.php:19 /tmp/pmwh3_schema_seed.php:18
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:200
 #: /tmp/pmwh3_schema_seed.php:21
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:202
@@ -8272,7 +8462,7 @@ msgid "Web Server Adapter"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:203
-#: /tmp/pmwh3_schema_seed.php:31
+#: /tmp/pmwh3_schema_seed.php:43 /tmp/pmwh3_schema_seed.php:31
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:202
 #: /tmp/pmwh3_schema_seed.php:30 /tmp/pmwh3_schema_seed.php:33
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:204
@@ -8284,7 +8474,7 @@ msgid "Welcome Mail Template"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:204
-#: /tmp/pmwh3_schema_seed.php:131
+#: /tmp/pmwh3_schema_seed.php:132 /tmp/pmwh3_schema_seed.php:131
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:203
 #: /tmp/pmwh3_schema_seed.php:128 /tmp/pmwh3_schema_seed.php:140
 #: /tmp/pmwh3_schema_seed.php:139
@@ -8309,7 +8499,7 @@ msgid "Whitelist / Blacklist  %s"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:206
-#: /tmp/pmwh3_schema_seed.php:89
+#: /tmp/pmwh3_schema_seed.php:90 /tmp/pmwh3_schema_seed.php:89
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:205
 #: /tmp/pmwh3_schema_seed.php:88 /tmp/pmwh3_schema_seed.php:91
 #: /tmp/pmwh3_schema_seed.php:100
@@ -8452,7 +8642,7 @@ msgid "create_package"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:221
-#: /tmp/pmwh3_schema_seed.php:157
+#: /tmp/pmwh3_schema_seed.php:158 /tmp/pmwh3_schema_seed.php:157
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:220
 #: /tmp/pmwh3_schema_seed.php:154 /tmp/pmwh3_schema_seed.php:166
 #: /tmp/pmwh3_schema_seed.php:165 /tmp/pmwh3_schema_seed.php:164
@@ -8690,7 +8880,7 @@ msgid "edit_package"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:247
-#: /tmp/pmwh3_schema_seed.php:150
+#: /tmp/pmwh3_schema_seed.php:151 /tmp/pmwh3_schema_seed.php:150
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:246
 #: /tmp/pmwh3_schema_seed.php:147 /tmp/pmwh3_schema_seed.php:159
 #: /tmp/pmwh3_schema_seed.php:158 /tmp/pmwh3_schema_seed.php:157
@@ -8712,7 +8902,7 @@ msgid "manual entry"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:249
-#: /tmp/pmwh3_schema_seed.php:143
+#: /tmp/pmwh3_schema_seed.php:144 /tmp/pmwh3_schema_seed.php:143
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:248
 #: /tmp/pmwh3_schema_seed.php:140 /tmp/pmwh3_schema_seed.php:152
 #: /tmp/pmwh3_schema_seed.php:151 /tmp/pmwh3_schema_seed.php:150
@@ -8724,7 +8914,7 @@ msgid "none"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:250
-#: /tmp/pmwh3_schema_seed.php:64
+#: /tmp/pmwh3_schema_seed.php:65 /tmp/pmwh3_schema_seed.php:64
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:249
 #: /tmp/pmwh3_schema_seed.php:63 /tmp/pmwh3_schema_seed.php:66
 #: /tmp/pmwh3_schema_seed.php:69
@@ -8749,7 +8939,7 @@ msgid "session"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:252
-#: /tmp/pmwh3_schema_seed.php:149
+#: /tmp/pmwh3_schema_seed.php:150 /tmp/pmwh3_schema_seed.php:149
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/i18n/tools/runtime_strings.php:251
 #: /tmp/pmwh3_schema_seed.php:146 /tmp/pmwh3_schema_seed.php:158
 #: /tmp/pmwh3_schema_seed.php:157 /tmp/pmwh3_schema_seed.php:156
@@ -9228,11 +9418,13 @@ msgstr ""
 msgid "At least one destination is required"
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/installbootstrap.php:813
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/installbootstrap.php:758
 #, php-format
 msgid "Invalid minimum length (allowed: %d-%d)."
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/installbootstrap.php:820
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/installbootstrap.php:765
 #, php-format
 msgid "The password must be at least %d characters long."
@@ -9255,6 +9447,7 @@ msgid "Password is required"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/customermanager.php:264
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/customermanager.php:328
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/customermanager.php:324
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/customermanager.php:263
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/customermanager.php:323
@@ -9265,6 +9458,7 @@ msgid "Customer name '%s' is reserved"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/customermanager.php:267
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/customermanager.php:331
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/customermanager.php:327
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/customermanager.php:266
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/customermanager.php:326
@@ -9285,6 +9479,7 @@ msgstr ""
 msgid "Failed to insert customer"
 msgstr ""
 
+#: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/customermanager.php:321
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/customermanager.php:317
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/customermanager.php:316
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/utils/customermanager.php:315
@@ -9294,25 +9489,36 @@ msgstr ""
 msgid "Customer with cid %d not found"
 msgstr ""
 
-#: /tmp/pmwh3_schema_seed.php:84 /tmp/pmwh3_schema_seed.php:83
-#: /tmp/pmwh3_schema_seed.php:86 /tmp/pmwh3_schema_seed.php:95
-#: /tmp/pmwh3_schema_seed.php:97 /tmp/opencode/schema_calls.php:9
+#: /tmp/pmwh3_schema_seed.php:17
+msgid "PHP open_basedir paths"
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:56
+msgid "Backup directory (admin)"
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:85 /tmp/pmwh3_schema_seed.php:84
+#: /tmp/pmwh3_schema_seed.php:83 /tmp/pmwh3_schema_seed.php:86
+#: /tmp/pmwh3_schema_seed.php:95 /tmp/pmwh3_schema_seed.php:97
+#: /tmp/opencode/schema_calls.php:9
 msgid ""
 "One IP per line. These are treated as \"own\" -- any other IP is considered "
 "a foreign host."
 msgstr ""
 
-#: /tmp/pmwh3_schema_seed.php:90 /tmp/pmwh3_schema_seed.php:89
-#: /tmp/pmwh3_schema_seed.php:92 /tmp/pmwh3_schema_seed.php:101
-#: /tmp/pmwh3_schema_seed.php:103 /tmp/opencode/schema_calls.php:24
+#: /tmp/pmwh3_schema_seed.php:91 /tmp/pmwh3_schema_seed.php:90
+#: /tmp/pmwh3_schema_seed.php:89 /tmp/pmwh3_schema_seed.php:92
+#: /tmp/pmwh3_schema_seed.php:101 /tmp/pmwh3_schema_seed.php:103
+#: /tmp/opencode/schema_calls.php:24
 msgid ""
 "Adapters detected automatically from utils/web/. Adding a new backend "
 "(nginx, ...) only requires dropping the file in."
 msgstr ""
 
-#: /tmp/pmwh3_schema_seed.php:91 /tmp/pmwh3_schema_seed.php:90
-#: /tmp/pmwh3_schema_seed.php:93 /tmp/pmwh3_schema_seed.php:102
-#: /tmp/pmwh3_schema_seed.php:104 /tmp/opencode/schema_calls.php:28
+#: /tmp/pmwh3_schema_seed.php:92 /tmp/pmwh3_schema_seed.php:91
+#: /tmp/pmwh3_schema_seed.php:90 /tmp/pmwh3_schema_seed.php:93
+#: /tmp/pmwh3_schema_seed.php:102 /tmp/pmwh3_schema_seed.php:104
+#: /tmp/opencode/schema_calls.php:28
 msgid ""
 "Directory containing <name>.pem + <name>.key certificate pairs (wildcard = "
 "\"_.domain.tld\"). Must be readable by pmwh3 for the certificate selection "
@@ -9320,22 +9526,54 @@ msgid ""
 "SSLCertificateFile/KeyFile."
 msgstr ""
 
-#: /tmp/pmwh3_schema_seed.php:96 /tmp/pmwh3_schema_seed.php:95
-#: /tmp/pmwh3_schema_seed.php:98 /tmp/pmwh3_schema_seed.php:107
-#: /tmp/pmwh3_schema_seed.php:109 /tmp/opencode/schema_calls.php:38
+#: /tmp/pmwh3_schema_seed.php:97 /tmp/pmwh3_schema_seed.php:96
+#: /tmp/pmwh3_schema_seed.php:95 /tmp/pmwh3_schema_seed.php:98
+#: /tmp/pmwh3_schema_seed.php:107 /tmp/pmwh3_schema_seed.php:109
+#: /tmp/opencode/schema_calls.php:38
 msgid ""
 "Inserted into every generated vhost. Placeholders: [DOMAIN], [SUBDOMAIN], "
 "[DOCROOT], [CUSTOMER]"
 msgstr ""
 
-#: /tmp/pmwh3_schema_seed.php:99
+#: /tmp/pmwh3_schema_seed.php:98 /tmp/pmwh3_schema_seed.php:109
+#: /tmp/pmwh3_schema_seed.php:106 /tmp/pmwh3_schema_seed.php:118
+#: /tmp/pmwh3_schema_seed.php:120 /tmp/opencode/schema_calls.php:70
+msgid ""
+"Adapters detected automatically from utils/dns/. Adding a new adapter only "
+"requires dropping the file in."
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:99 /tmp/pmwh3_schema_seed.php:118
+#: /tmp/pmwh3_schema_seed.php:115 /tmp/pmwh3_schema_seed.php:127
+#: /tmp/pmwh3_schema_seed.php:129 /tmp/opencode/schema_calls.php:90
+msgid ""
+"Base URL of the PowerDNS HTTP API, e.g. http://pdns:8081/api/v1. Required "
+"for DNSSEC zone signing / disabling. If empty, DNSSEC is read-only."
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:100 /tmp/pmwh3_schema_seed.php:119
+#: /tmp/pmwh3_schema_seed.php:116 /tmp/pmwh3_schema_seed.php:128
+#: /tmp/pmwh3_schema_seed.php:130 /tmp/opencode/schema_calls.php:92
+msgid ""
+"Value of the api-key= setting in pdns.conf. Sent as the X-API-Key header."
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:101 /tmp/pmwh3_schema_seed.php:120
+#: /tmp/pmwh3_schema_seed.php:117 /tmp/pmwh3_schema_seed.php:129
+#: /tmp/pmwh3_schema_seed.php:131 /tmp/opencode/schema_calls.php:94
+msgid ""
+"Server identifier in the API path (.../api/v1/servers/<server_id>/...). "
+"Defaults to \"localhost\", which is correct for almost every install."
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:106 /tmp/pmwh3_schema_seed.php:99
 msgid ""
 "Postfix transport used as destination when provisioning pmwh3_mail_transport "
 "rows for new mail domains (postfix adapter). Default lmtp:inet:dovecot:24 = "
 "Dovecot LMTP, matching virtual_transport in your postfix main.cf."
 msgstr ""
 
-#: /tmp/pmwh3_schema_seed.php:100
+#: /tmp/pmwh3_schema_seed.php:107 /tmp/pmwh3_schema_seed.php:100
 msgid ""
 "Public IP of the domain master MX. New mail domains get a "
 "pmwh3_mail_transport row with master_destination smtp:[<IP>]:25 so the "
@@ -9344,112 +9582,391 @@ msgid ""
 "no transport rows are created and postfix uses its default transport."
 msgstr ""
 
-#: /tmp/pmwh3_schema_seed.php:101 /tmp/pmwh3_schema_seed.php:98
-#: /tmp/pmwh3_schema_seed.php:110
+#: /tmp/pmwh3_schema_seed.php:108 /tmp/pmwh3_schema_seed.php:101
+#: /tmp/pmwh3_schema_seed.php:98 /tmp/pmwh3_schema_seed.php:110
 msgid ""
 "Role forwards created on the FIRST mailbox of a domain, pointing to that "
 "mailbox. postmaster@ is mandatory (RFC 2142) and is always created; every "
 "other role comes from this comma list (default webmaster, abuse, hostmaster)."
 msgstr ""
 
-#: /tmp/pmwh3_schema_seed.php:102 /tmp/pmwh3_schema_seed.php:99
-#: /tmp/pmwh3_schema_seed.php:111
+#: /tmp/pmwh3_schema_seed.php:109 /tmp/pmwh3_schema_seed.php:102
+#: /tmp/pmwh3_schema_seed.php:99 /tmp/pmwh3_schema_seed.php:111
 msgid ""
 "Sent to a freshly created mailbox (initialises the maildir via first "
 "delivery). Placeholders: [EMAILUSER], [EMAIL], [DOMAIN], [CREATOR], "
 "[CREATOR_REALNAME]. Empty = no welcome mail."
 msgstr ""
 
-#: /tmp/pmwh3_schema_seed.php:103 /tmp/pmwh3_schema_seed.php:100
-#: /tmp/pmwh3_schema_seed.php:112 /tmp/pmwh3_schema_seed.php:114
-#: /tmp/opencode/schema_calls.php:56
+#: /tmp/pmwh3_schema_seed.php:110 /tmp/pmwh3_schema_seed.php:103
+#: /tmp/pmwh3_schema_seed.php:100 /tmp/pmwh3_schema_seed.php:112
+#: /tmp/pmwh3_schema_seed.php:114 /tmp/opencode/schema_calls.php:56
 msgid ""
 "Numeric UID stored in the proftpd row. Must be >= SQLMinID in proftpd config "
 "(typically 500)."
 msgstr ""
 
-#: /tmp/pmwh3_schema_seed.php:104 /tmp/pmwh3_schema_seed.php:101
-#: /tmp/pmwh3_schema_seed.php:113 /tmp/pmwh3_schema_seed.php:115
-#: /tmp/opencode/schema_calls.php:58
+#: /tmp/pmwh3_schema_seed.php:111 /tmp/pmwh3_schema_seed.php:104
+#: /tmp/pmwh3_schema_seed.php:101 /tmp/pmwh3_schema_seed.php:113
+#: /tmp/pmwh3_schema_seed.php:115 /tmp/opencode/schema_calls.php:58
 msgid ""
 "Numeric GID stored in the proftpd row. Used unless a per-domain group exists."
 msgstr ""
 
-#: /tmp/pmwh3_schema_seed.php:105
+#: /tmp/pmwh3_schema_seed.php:112 /tmp/pmwh3_schema_seed.php:105
 msgid ""
 "Default limit_type for new pmwh3_ftp_quota_limits rows. soft = warn; hard = "
 "block."
 msgstr ""
 
-#: /tmp/pmwh3_schema_seed.php:106 /tmp/pmwh3_schema_seed.php:103
-#: /tmp/pmwh3_schema_seed.php:115 /tmp/pmwh3_schema_seed.php:117
-#: /tmp/opencode/schema_calls.php:64
+#: /tmp/pmwh3_schema_seed.php:113 /tmp/pmwh3_schema_seed.php:106
+#: /tmp/pmwh3_schema_seed.php:103 /tmp/pmwh3_schema_seed.php:115
+#: /tmp/pmwh3_schema_seed.php:117 /tmp/opencode/schema_calls.php:64
 msgid ""
 "When off, plain passwords are stored. When on, SHA-256 hex (proftpd "
 "SQLPasswordEngine on / Encoding hex)."
 msgstr ""
 
-#: /tmp/pmwh3_schema_seed.php:109 /tmp/pmwh3_schema_seed.php:106
-#: /tmp/pmwh3_schema_seed.php:118 /tmp/pmwh3_schema_seed.php:120
-#: /tmp/opencode/schema_calls.php:70
-msgid ""
-"Adapters detected automatically from utils/dns/. Adding a new adapter only "
-"requires dropping the file in."
-msgstr ""
-
-#: /tmp/pmwh3_schema_seed.php:110 /tmp/pmwh3_schema_seed.php:107
-#: /tmp/pmwh3_schema_seed.php:119 /tmp/pmwh3_schema_seed.php:121
-#: /tmp/opencode/schema_calls.php:72
+#: /tmp/pmwh3_schema_seed.php:114 /tmp/pmwh3_schema_seed.php:110
+#: /tmp/pmwh3_schema_seed.php:107 /tmp/pmwh3_schema_seed.php:119
+#: /tmp/pmwh3_schema_seed.php:121 /tmp/opencode/schema_calls.php:72
 msgid ""
 "Where pmwh3_filtering / pmwh3_wblist are exported to. rspamd serves HTTP map "
 "endpoints (rspamd pulls), none keeps the tables UI-only."
 msgstr ""
 
-#: /tmp/pmwh3_schema_seed.php:111 /tmp/pmwh3_schema_seed.php:108
-#: /tmp/pmwh3_schema_seed.php:120 /tmp/pmwh3_schema_seed.php:122
-#: /tmp/opencode/schema_calls.php:76
+#: /tmp/pmwh3_schema_seed.php:115 /tmp/pmwh3_schema_seed.php:111
+#: /tmp/pmwh3_schema_seed.php:108 /tmp/pmwh3_schema_seed.php:120
+#: /tmp/pmwh3_schema_seed.php:122 /tmp/opencode/schema_calls.php:76
 msgid ""
 "Optional shared secret; rspamd map URLs must then carry ?key=<token>. Empty "
 "= open (internal network only)."
 msgstr ""
 
-#: /tmp/pmwh3_schema_seed.php:112 /tmp/pmwh3_schema_seed.php:109
-#: /tmp/pmwh3_schema_seed.php:121 /tmp/pmwh3_schema_seed.php:123
-#: /tmp/opencode/schema_calls.php:78
+#: /tmp/pmwh3_schema_seed.php:116 /tmp/pmwh3_schema_seed.php:112
+#: /tmp/pmwh3_schema_seed.php:109 /tmp/pmwh3_schema_seed.php:121
+#: /tmp/pmwh3_schema_seed.php:123 /tmp/opencode/schema_calls.php:78
 msgid ""
 "Used by pmwh3 for ping / stat / learning calls. Default http://rspamd:11334; "
 "empty disables API calls."
 msgstr ""
 
-#: /tmp/pmwh3_schema_seed.php:113 /tmp/pmwh3_schema_seed.php:110
-#: /tmp/pmwh3_schema_seed.php:122 /tmp/pmwh3_schema_seed.php:124
-#: /tmp/opencode/schema_calls.php:80
+#: /tmp/pmwh3_schema_seed.php:117 /tmp/pmwh3_schema_seed.php:113
+#: /tmp/pmwh3_schema_seed.php:110 /tmp/pmwh3_schema_seed.php:122
+#: /tmp/pmwh3_schema_seed.php:124 /tmp/opencode/schema_calls.php:80
 msgid "Optional; sent as the \"Password\" header to the controller API."
 msgstr ""
 
-#: /tmp/pmwh3_schema_seed.php:114 /tmp/pmwh3_schema_seed.php:111
-#: /tmp/pmwh3_schema_seed.php:123 /tmp/pmwh3_schema_seed.php:125
-#: /tmp/opencode/schema_calls.php:82
+#: /tmp/pmwh3_schema_seed.php:118 /tmp/pmwh3_schema_seed.php:114
+#: /tmp/pmwh3_schema_seed.php:111 /tmp/pmwh3_schema_seed.php:123
+#: /tmp/pmwh3_schema_seed.php:125 /tmp/opencode/schema_calls.php:82
 msgid ""
 "For message checks from pmwh3 (POST /checkv2), Default http://rspamd:11333; "
 "empty disables the scan helper."
 msgstr ""
 
-#: /tmp/pmwh3_schema_seed.php:115 /tmp/pmwh3_schema_seed.php:112
-#: /tmp/pmwh3_schema_seed.php:124 /tmp/pmwh3_schema_seed.php:126
-#: /tmp/opencode/schema_calls.php:84
+#: /tmp/pmwh3_schema_seed.php:119 /tmp/pmwh3_schema_seed.php:115
+#: /tmp/pmwh3_schema_seed.php:112 /tmp/pmwh3_schema_seed.php:124
+#: /tmp/pmwh3_schema_seed.php:126 /tmp/opencode/schema_calls.php:84
 msgid ""
 "host:port of the doveadm-server inside the dovecot container (None then live "
 "quota lookups). Used by the mail adapter (postfix) for accurate \"used\" "
 "numbers that match what mail clients see."
 msgstr ""
 
-#: /tmp/pmwh3_schema_seed.php:116 /tmp/pmwh3_schema_seed.php:113
-#: /tmp/pmwh3_schema_seed.php:125 /tmp/pmwh3_schema_seed.php:127
-#: /tmp/opencode/schema_calls.php:86
+#: /tmp/pmwh3_schema_seed.php:120 /tmp/pmwh3_schema_seed.php:116
+#: /tmp/pmwh3_schema_seed.php:113 /tmp/pmwh3_schema_seed.php:125
+#: /tmp/pmwh3_schema_seed.php:127 /tmp/opencode/schema_calls.php:86
 msgid ""
 "Shared secret for the doveadm-server (must match the dovecot config). Stored "
 "plain in pmwh3_configuration like the other service credentials."
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:121
+msgid ""
+"Target for the ADMIN-side backups (Tools): pmwh3 database dumps, not a "
+"customer-facing webspace backup. Must NOT be inside the source tree and must "
+"be writable by the web server user. The directory is created on first backup."
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:122 /tmp/pmwh3_schema_seed.php:121
+#: /tmp/pmwh3_schema_seed.php:118 /tmp/pmwh3_schema_seed.php:130
+#: /tmp/pmwh3_schema_seed.php:132 /tmp/opencode/schema_calls.php:101
+msgid ""
+"Which DB server pmwh3 provisions customer databases on. Only mysql is "
+"implemented for now; the value is here so adapter selection can be added "
+"later (postgres, etc)."
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:123 /tmp/pmwh3_schema_seed.php:122
+#: /tmp/pmwh3_schema_seed.php:119 /tmp/pmwh3_schema_seed.php:131
+#: /tmp/pmwh3_schema_seed.php:133 /tmp/opencode/schema_calls.php:104
+msgid ""
+"Hostname or IP of the database server pmwh3 should provision new customer "
+"databases on."
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:124 /tmp/pmwh3_schema_seed.php:123
+#: /tmp/pmwh3_schema_seed.php:120 /tmp/pmwh3_schema_seed.php:132
+#: /tmp/pmwh3_schema_seed.php:134 /tmp/opencode/schema_calls.php:107
+msgid ""
+"User pmwh3 connects with to run CREATE DATABASE / GRANT / DROP. Needs "
+"CREATE, GRANT OPTION, DROP, and the ability to create users (CREATE USER). "
+"Not root by default -- a dedicated pmwh3_admin user is recommended."
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:125 /tmp/pmwh3_schema_seed.php:124
+#: /tmp/pmwh3_schema_seed.php:121 /tmp/pmwh3_schema_seed.php:133
+#: /tmp/pmwh3_schema_seed.php:135 /tmp/opencode/schema_calls.php:109
+msgid ""
+"Password for the DB admin user above. Stored as plain text in "
+"pmwh3_configuration. Make sure the file/DB is not world-readable."
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:126 /tmp/pmwh3_schema_seed.php:125
+#: /tmp/pmwh3_schema_seed.php:122 /tmp/pmwh3_schema_seed.php:134
+#: /tmp/pmwh3_schema_seed.php:136 /tmp/opencode/schema_calls.php:111
+msgid ""
+"How new database names are composed. customer = prefix with the customer "
+"name and underscore (e.g. customer_blog). none = use the suffix as-is."
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:127 /tmp/pmwh3_schema_seed.php:126
+#: /tmp/pmwh3_schema_seed.php:123 /tmp/pmwh3_schema_seed.php:135
+#: /tmp/pmwh3_schema_seed.php:137 /tmp/opencode/schema_calls.php:115
+msgid ""
+"The HOST part of new GRANTs (user@host). % allows connections from anywhere; "
+"localhost or an IP restricts access. % is the usual choice when the web "
+"server and the database server are separate containers/hosts."
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:128 /tmp/pmwh3_schema_seed.php:127
+#: /tmp/pmwh3_schema_seed.php:124 /tmp/pmwh3_schema_seed.php:136
+#: /tmp/pmwh3_schema_seed.php:138 /tmp/opencode/schema_calls.php:117
+msgid ""
+"Show per-grant privilege checkboxes (SELECT/INSERT/UPDATE/...) in the new-"
+"user form. Off = \"full access\" toggle only."
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:129 /tmp/pmwh3_schema_seed.php:128
+#: /tmp/pmwh3_schema_seed.php:125 /tmp/pmwh3_schema_seed.php:137
+#: /tmp/pmwh3_schema_seed.php:139 /tmp/opencode/schema_calls.php:119
+msgid ""
+"Full URL of a phpMyAdmin instance, including scheme (e.g. https://"
+"pma.example.com). Used by the \"Phpmyadmin\" sidebar link in the Databases "
+"box; opens in a new tab. Leave empty to hide the link."
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:130 /tmp/pmwh3_schema_seed.php:129
+#: /tmp/pmwh3_schema_seed.php:126 /tmp/pmwh3_schema_seed.php:138
+msgid ""
+"On a new domain, automatically create the standard subdomains from the "
+"pattern below. Only when the customer row has \"Standard subdomains\" "
+"checked."
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:131 /tmp/pmwh3_schema_seed.php:130
+#: /tmp/pmwh3_schema_seed.php:127 /tmp/pmwh3_schema_seed.php:139
+msgid ""
+"Format: name(alias1,alias2);name(alias1) -- name becomes a directory "
+"subdomain, the aliases become alias rows of it."
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:133 /tmp/pmwh3_schema_seed.php:132
+#: /tmp/pmwh3_schema_seed.php:129 /tmp/pmwh3_schema_seed.php:141
+#: /tmp/pmwh3_schema_seed.php:140 /tmp/pmwh3_schema_seed.php:142
+msgid ""
+"Show a confirmation dialog before saving changes (e.g. password resets, "
+"DNSSEC signing). When off, changes apply immediately."
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:134 /tmp/pmwh3_schema_seed.php:133
+#: /tmp/pmwh3_schema_seed.php:130 /tmp/pmwh3_schema_seed.php:142
+#: /tmp/pmwh3_schema_seed.php:141 /tmp/pmwh3_schema_seed.php:143
+msgid ""
+"Show a confirmation dialog before deleting entries (customers, domains, "
+"mailboxes, records, etc.). When off, deletes apply immediately."
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:135 /tmp/pmwh3_schema_seed.php:134
+#: /tmp/pmwh3_schema_seed.php:131 /tmp/pmwh3_schema_seed.php:143
+msgid ""
+"How many news items the login ticker and the admin news overview show at "
+"most."
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:136
+msgid ""
+"Where errors are written. \"file\" writes to the log path the cevian config "
+"defines (default var/log/error.log); the Errorlog viewer reads that file. "
+"\"syslog\" goes to the system logger (viewer: no). \"db\" persists into "
+"pmwh3_errorlog (table created on first write)."
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:137 /tmp/pmwh3_schema_seed.php:136
+#: /tmp/pmwh3_schema_seed.php:133 /tmp/pmwh3_schema_seed.php:145
+#: /tmp/pmwh3_schema_seed.php:144 /tmp/pmwh3_schema_seed.php:143
+#: /tmp/opencode/schema_calls.php:164
+msgid ""
+"Which sources to log. Multiple selections allowed. \"php\" is required for "
+"PHP native errors."
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:138 /tmp/pmwh3_schema_seed.php:137
+#: /tmp/pmwh3_schema_seed.php:134 /tmp/pmwh3_schema_seed.php:146
+#: /tmp/pmwh3_schema_seed.php:145 /tmp/pmwh3_schema_seed.php:144
+#: /tmp/opencode/schema_calls.php:170
+msgid ""
+"Helpful for debugging, but verbose. Turn off in production if log size is a "
+"concern."
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:139 /tmp/pmwh3_schema_seed.php:138
+#: /tmp/pmwh3_schema_seed.php:135 /tmp/pmwh3_schema_seed.php:147
+#: /tmp/pmwh3_schema_seed.php:146 /tmp/pmwh3_schema_seed.php:145
+#: /tmp/opencode/schema_calls.php:172
+msgid ""
+"Older entries are eligible for purging by the Errorlog viewer / a cron job. "
+"0 = keep forever."
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:140 /tmp/pmwh3_schema_seed.php:139
+#: /tmp/pmwh3_schema_seed.php:136 /tmp/pmwh3_schema_seed.php:148
+#: /tmp/pmwh3_schema_seed.php:147 /tmp/pmwh3_schema_seed.php:146
+#: /tmp/opencode/schema_calls.php:17
+msgid "0"
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:145 /tmp/pmwh3_schema_seed.php:144
+#: /tmp/pmwh3_schema_seed.php:141 /tmp/pmwh3_schema_seed.php:153
+#: /tmp/pmwh3_schema_seed.php:152 /tmp/pmwh3_schema_seed.php:151
+msgid "recaptcha_v2"
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:146 /tmp/pmwh3_schema_seed.php:145
+#: /tmp/pmwh3_schema_seed.php:142 /tmp/pmwh3_schema_seed.php:154
+#: /tmp/pmwh3_schema_seed.php:153 /tmp/pmwh3_schema_seed.php:152
+msgid "recaptcha_v3"
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:152 /tmp/pmwh3_schema_seed.php:151
+#: /tmp/pmwh3_schema_seed.php:148 /tmp/pmwh3_schema_seed.php:160
+#: /tmp/pmwh3_schema_seed.php:159 /tmp/pmwh3_schema_seed.php:158
+msgid "rspamd"
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:155 /tmp/pmwh3_schema_seed.php:154
+#: /tmp/pmwh3_schema_seed.php:151 /tmp/pmwh3_schema_seed.php:163
+#: /tmp/pmwh3_schema_seed.php:162 /tmp/pmwh3_schema_seed.php:161
+msgid "mysql"
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:157 /tmp/pmwh3_schema_seed.php:156
+#: /tmp/pmwh3_schema_seed.php:153 /tmp/pmwh3_schema_seed.php:165
+#: /tmp/pmwh3_schema_seed.php:164 /tmp/pmwh3_schema_seed.php:163
+msgid "customer"
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:165 /tmp/pmwh3_schema_seed.php:164
+#: /tmp/pmwh3_schema_seed.php:161 /tmp/pmwh3_schema_seed.php:173
+#: /tmp/pmwh3_schema_seed.php:172 /tmp/pmwh3_schema_seed.php:171
+#: /tmp/pmwh3_schema_seed.php:175
+msgid "file"
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:166 /tmp/pmwh3_schema_seed.php:165
+#: /tmp/pmwh3_schema_seed.php:162 /tmp/pmwh3_schema_seed.php:174
+#: /tmp/pmwh3_schema_seed.php:173 /tmp/pmwh3_schema_seed.php:172
+#: /tmp/pmwh3_schema_seed.php:176
+msgid "syslog"
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:167 /tmp/pmwh3_schema_seed.php:166
+#: /tmp/pmwh3_schema_seed.php:163 /tmp/pmwh3_schema_seed.php:175
+#: /tmp/pmwh3_schema_seed.php:174 /tmp/pmwh3_schema_seed.php:173
+#: /tmp/pmwh3_schema_seed.php:177
+msgid "db"
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:168
+msgid "File"
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:171 /tmp/pmwh3_schema_seed.php:170
+#: /tmp/pmwh3_schema_seed.php:167 /tmp/pmwh3_schema_seed.php:179
+#: /tmp/pmwh3_schema_seed.php:178 /tmp/pmwh3_schema_seed.php:177
+#: /tmp/pmwh3_schema_seed.php:181
+msgid "debug"
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:172 /tmp/pmwh3_schema_seed.php:171
+#: /tmp/pmwh3_schema_seed.php:168 /tmp/pmwh3_schema_seed.php:180
+#: /tmp/pmwh3_schema_seed.php:179 /tmp/pmwh3_schema_seed.php:178
+#: /tmp/pmwh3_schema_seed.php:182
+msgid "info"
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:173 /tmp/pmwh3_schema_seed.php:172
+#: /tmp/pmwh3_schema_seed.php:169 /tmp/pmwh3_schema_seed.php:181
+#: /tmp/pmwh3_schema_seed.php:180 /tmp/pmwh3_schema_seed.php:179
+#: /tmp/pmwh3_schema_seed.php:183
+msgid "notice"
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:174 /tmp/pmwh3_schema_seed.php:173
+#: /tmp/pmwh3_schema_seed.php:170 /tmp/pmwh3_schema_seed.php:182
+#: /tmp/pmwh3_schema_seed.php:181 /tmp/pmwh3_schema_seed.php:180
+#: /tmp/pmwh3_schema_seed.php:184
+msgid "warning"
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:175 /tmp/pmwh3_schema_seed.php:174
+#: /tmp/pmwh3_schema_seed.php:171 /tmp/pmwh3_schema_seed.php:183
+#: /tmp/pmwh3_schema_seed.php:182 /tmp/pmwh3_schema_seed.php:181
+#: /tmp/pmwh3_schema_seed.php:185
+msgid "error"
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:176 /tmp/pmwh3_schema_seed.php:175
+#: /tmp/pmwh3_schema_seed.php:172 /tmp/pmwh3_schema_seed.php:184
+#: /tmp/pmwh3_schema_seed.php:183 /tmp/pmwh3_schema_seed.php:182
+#: /tmp/pmwh3_schema_seed.php:186
+msgid "critical"
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:183 /tmp/pmwh3_schema_seed.php:182
+#: /tmp/pmwh3_schema_seed.php:179 /tmp/pmwh3_schema_seed.php:191
+#: /tmp/pmwh3_schema_seed.php:190 /tmp/pmwh3_schema_seed.php:189
+#: /tmp/pmwh3_schema_seed.php:193
+msgid "app"
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:184 /tmp/pmwh3_schema_seed.php:183
+#: /tmp/pmwh3_schema_seed.php:180 /tmp/pmwh3_schema_seed.php:192
+#: /tmp/pmwh3_schema_seed.php:191 /tmp/pmwh3_schema_seed.php:190
+#: /tmp/pmwh3_schema_seed.php:194
+msgid "framework"
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:185 /tmp/pmwh3_schema_seed.php:184
+#: /tmp/pmwh3_schema_seed.php:181 /tmp/pmwh3_schema_seed.php:193
+#: /tmp/pmwh3_schema_seed.php:192 /tmp/pmwh3_schema_seed.php:191
+#: /tmp/pmwh3_schema_seed.php:195
+msgid "php"
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:186 /tmp/pmwh3_schema_seed.php:185
+#: /tmp/pmwh3_schema_seed.php:182 /tmp/pmwh3_schema_seed.php:194
+#: /tmp/pmwh3_schema_seed.php:193 /tmp/pmwh3_schema_seed.php:192
+#: /tmp/pmwh3_schema_seed.php:196
+msgid "database"
+msgstr ""
+
+#: /tmp/pmwh3_schema_seed.php:202 /tmp/pmwh3_schema_seed.php:201
+#: /tmp/pmwh3_schema_seed.php:198 /tmp/pmwh3_schema_seed.php:210
+#: /tmp/pmwh3_schema_seed.php:209 /tmp/pmwh3_schema_seed.php:208
+#: /tmp/pmwh3_schema_seed.php:212
+msgid "Wblist"
 msgstr ""
 
 #: /tmp/pmwh3_schema_seed.php:117 /tmp/pmwh3_schema_seed.php:114
@@ -9458,135 +9975,6 @@ msgstr ""
 msgid ""
 "Directory for pmwh3 SQL dumps. Must NOT be inside the source tree and must "
 "be writable by the web server user. The directory is created on first backup."
-msgstr ""
-
-#: /tmp/pmwh3_schema_seed.php:118 /tmp/pmwh3_schema_seed.php:115
-#: /tmp/pmwh3_schema_seed.php:127 /tmp/pmwh3_schema_seed.php:129
-#: /tmp/opencode/schema_calls.php:90
-msgid ""
-"Base URL of the PowerDNS HTTP API, e.g. http://pdns:8081/api/v1. Required "
-"for DNSSEC zone signing / disabling. If empty, DNSSEC is read-only."
-msgstr ""
-
-#: /tmp/pmwh3_schema_seed.php:119 /tmp/pmwh3_schema_seed.php:116
-#: /tmp/pmwh3_schema_seed.php:128 /tmp/pmwh3_schema_seed.php:130
-#: /tmp/opencode/schema_calls.php:92
-msgid ""
-"Value of the api-key= setting in pdns.conf. Sent as the X-API-Key header."
-msgstr ""
-
-#: /tmp/pmwh3_schema_seed.php:120 /tmp/pmwh3_schema_seed.php:117
-#: /tmp/pmwh3_schema_seed.php:129 /tmp/pmwh3_schema_seed.php:131
-#: /tmp/opencode/schema_calls.php:94
-msgid ""
-"Server identifier in the API path (.../api/v1/servers/<server_id>/...). "
-"Defaults to \"localhost\", which is correct for almost every install."
-msgstr ""
-
-#: /tmp/pmwh3_schema_seed.php:121 /tmp/pmwh3_schema_seed.php:118
-#: /tmp/pmwh3_schema_seed.php:130 /tmp/pmwh3_schema_seed.php:132
-#: /tmp/opencode/schema_calls.php:101
-msgid ""
-"Which DB server pmwh3 provisions customer databases on. Only mysql is "
-"implemented for now; the value is here so adapter selection can be added "
-"later (postgres, etc)."
-msgstr ""
-
-#: /tmp/pmwh3_schema_seed.php:122 /tmp/pmwh3_schema_seed.php:119
-#: /tmp/pmwh3_schema_seed.php:131 /tmp/pmwh3_schema_seed.php:133
-#: /tmp/opencode/schema_calls.php:104
-msgid ""
-"Hostname or IP of the database server pmwh3 should provision new customer "
-"databases on."
-msgstr ""
-
-#: /tmp/pmwh3_schema_seed.php:123 /tmp/pmwh3_schema_seed.php:120
-#: /tmp/pmwh3_schema_seed.php:132 /tmp/pmwh3_schema_seed.php:134
-#: /tmp/opencode/schema_calls.php:107
-msgid ""
-"User pmwh3 connects with to run CREATE DATABASE / GRANT / DROP. Needs "
-"CREATE, GRANT OPTION, DROP, and the ability to create users (CREATE USER). "
-"Not root by default -- a dedicated pmwh3_admin user is recommended."
-msgstr ""
-
-#: /tmp/pmwh3_schema_seed.php:124 /tmp/pmwh3_schema_seed.php:121
-#: /tmp/pmwh3_schema_seed.php:133 /tmp/pmwh3_schema_seed.php:135
-#: /tmp/opencode/schema_calls.php:109
-msgid ""
-"Password for the DB admin user above. Stored as plain text in "
-"pmwh3_configuration. Make sure the file/DB is not world-readable."
-msgstr ""
-
-#: /tmp/pmwh3_schema_seed.php:125 /tmp/pmwh3_schema_seed.php:122
-#: /tmp/pmwh3_schema_seed.php:134 /tmp/pmwh3_schema_seed.php:136
-#: /tmp/opencode/schema_calls.php:111
-msgid ""
-"How new database names are composed. customer = prefix with the customer "
-"name and underscore (e.g. customer_blog). none = use the suffix as-is."
-msgstr ""
-
-#: /tmp/pmwh3_schema_seed.php:126 /tmp/pmwh3_schema_seed.php:123
-#: /tmp/pmwh3_schema_seed.php:135 /tmp/pmwh3_schema_seed.php:137
-#: /tmp/opencode/schema_calls.php:115
-msgid ""
-"The HOST part of new GRANTs (user@host). % allows connections from anywhere; "
-"localhost or an IP restricts access. % is the usual choice when the web "
-"server and the database server are separate containers/hosts."
-msgstr ""
-
-#: /tmp/pmwh3_schema_seed.php:127 /tmp/pmwh3_schema_seed.php:124
-#: /tmp/pmwh3_schema_seed.php:136 /tmp/pmwh3_schema_seed.php:138
-#: /tmp/opencode/schema_calls.php:117
-msgid ""
-"Show per-grant privilege checkboxes (SELECT/INSERT/UPDATE/...) in the new-"
-"user form. Off = \"full access\" toggle only."
-msgstr ""
-
-#: /tmp/pmwh3_schema_seed.php:128 /tmp/pmwh3_schema_seed.php:125
-#: /tmp/pmwh3_schema_seed.php:137 /tmp/pmwh3_schema_seed.php:139
-#: /tmp/opencode/schema_calls.php:119
-msgid ""
-"Full URL of a phpMyAdmin instance, including scheme (e.g. https://"
-"pma.example.com). Used by the \"Phpmyadmin\" sidebar link in the Databases "
-"box; opens in a new tab. Leave empty to hide the link."
-msgstr ""
-
-#: /tmp/pmwh3_schema_seed.php:129 /tmp/pmwh3_schema_seed.php:126
-#: /tmp/pmwh3_schema_seed.php:138
-msgid ""
-"On a new domain, automatically create the standard subdomains from the "
-"pattern below. Only when the customer row has \"Standard subdomains\" "
-"checked."
-msgstr ""
-
-#: /tmp/pmwh3_schema_seed.php:130 /tmp/pmwh3_schema_seed.php:127
-#: /tmp/pmwh3_schema_seed.php:139
-msgid ""
-"Format: name(alias1,alias2);name(alias1) -- name becomes a directory "
-"subdomain, the aliases become alias rows of it."
-msgstr ""
-
-#: /tmp/pmwh3_schema_seed.php:132 /tmp/pmwh3_schema_seed.php:129
-#: /tmp/pmwh3_schema_seed.php:141 /tmp/pmwh3_schema_seed.php:140
-#: /tmp/pmwh3_schema_seed.php:142
-msgid ""
-"Show a confirmation dialog before saving changes (e.g. password resets, "
-"DNSSEC signing). When off, changes apply immediately."
-msgstr ""
-
-#: /tmp/pmwh3_schema_seed.php:133 /tmp/pmwh3_schema_seed.php:130
-#: /tmp/pmwh3_schema_seed.php:142 /tmp/pmwh3_schema_seed.php:141
-#: /tmp/pmwh3_schema_seed.php:143
-msgid ""
-"Show a confirmation dialog before deleting entries (customers, domains, "
-"mailboxes, records, etc.). When off, deletes apply immediately."
-msgstr ""
-
-#: /tmp/pmwh3_schema_seed.php:134 /tmp/pmwh3_schema_seed.php:131
-#: /tmp/pmwh3_schema_seed.php:143
-msgid ""
-"How many news items the login ticker and the admin news overview show at "
-"most."
 msgstr ""
 
 #: /tmp/pmwh3_schema_seed.php:135 /tmp/pmwh3_schema_seed.php:132
@@ -9600,154 +9988,10 @@ msgid ""
 "created on first write)."
 msgstr ""
 
-#: /tmp/pmwh3_schema_seed.php:136 /tmp/pmwh3_schema_seed.php:133
-#: /tmp/pmwh3_schema_seed.php:145 /tmp/pmwh3_schema_seed.php:144
-#: /tmp/pmwh3_schema_seed.php:143 /tmp/opencode/schema_calls.php:164
-msgid ""
-"Which sources to log. Multiple selections allowed. \"php\" is required for "
-"PHP native errors."
-msgstr ""
-
-#: /tmp/pmwh3_schema_seed.php:137 /tmp/pmwh3_schema_seed.php:134
-#: /tmp/pmwh3_schema_seed.php:146 /tmp/pmwh3_schema_seed.php:145
-#: /tmp/pmwh3_schema_seed.php:144 /tmp/opencode/schema_calls.php:170
-msgid ""
-"Helpful for debugging, but verbose. Turn off in production if log size is a "
-"concern."
-msgstr ""
-
-#: /tmp/pmwh3_schema_seed.php:138 /tmp/pmwh3_schema_seed.php:135
-#: /tmp/pmwh3_schema_seed.php:147 /tmp/pmwh3_schema_seed.php:146
-#: /tmp/pmwh3_schema_seed.php:145 /tmp/opencode/schema_calls.php:172
-msgid ""
-"Older entries are eligible for purging by the Errorlog viewer / a cron job. "
-"0 = keep forever."
-msgstr ""
-
-#: /tmp/pmwh3_schema_seed.php:139 /tmp/pmwh3_schema_seed.php:136
-#: /tmp/pmwh3_schema_seed.php:148 /tmp/pmwh3_schema_seed.php:147
-#: /tmp/pmwh3_schema_seed.php:146 /tmp/opencode/schema_calls.php:17
-msgid "0"
-msgstr ""
-
-#: /tmp/pmwh3_schema_seed.php:144 /tmp/pmwh3_schema_seed.php:141
-#: /tmp/pmwh3_schema_seed.php:153 /tmp/pmwh3_schema_seed.php:152
-#: /tmp/pmwh3_schema_seed.php:151
-msgid "recaptcha_v2"
-msgstr ""
-
-#: /tmp/pmwh3_schema_seed.php:145 /tmp/pmwh3_schema_seed.php:142
-#: /tmp/pmwh3_schema_seed.php:154 /tmp/pmwh3_schema_seed.php:153
-#: /tmp/pmwh3_schema_seed.php:152
-msgid "recaptcha_v3"
-msgstr ""
-
-#: /tmp/pmwh3_schema_seed.php:151 /tmp/pmwh3_schema_seed.php:148
-#: /tmp/pmwh3_schema_seed.php:160 /tmp/pmwh3_schema_seed.php:159
-#: /tmp/pmwh3_schema_seed.php:158
-msgid "rspamd"
-msgstr ""
-
-#: /tmp/pmwh3_schema_seed.php:154 /tmp/pmwh3_schema_seed.php:151
-#: /tmp/pmwh3_schema_seed.php:163 /tmp/pmwh3_schema_seed.php:162
-#: /tmp/pmwh3_schema_seed.php:161
-msgid "mysql"
-msgstr ""
-
-#: /tmp/pmwh3_schema_seed.php:156 /tmp/pmwh3_schema_seed.php:153
-#: /tmp/pmwh3_schema_seed.php:165 /tmp/pmwh3_schema_seed.php:164
-#: /tmp/pmwh3_schema_seed.php:163
-msgid "customer"
-msgstr ""
-
-#: /tmp/pmwh3_schema_seed.php:164 /tmp/pmwh3_schema_seed.php:161
-#: /tmp/pmwh3_schema_seed.php:173 /tmp/pmwh3_schema_seed.php:172
-#: /tmp/pmwh3_schema_seed.php:171 /tmp/pmwh3_schema_seed.php:175
-msgid "file"
-msgstr ""
-
-#: /tmp/pmwh3_schema_seed.php:165 /tmp/pmwh3_schema_seed.php:162
-#: /tmp/pmwh3_schema_seed.php:174 /tmp/pmwh3_schema_seed.php:173
-#: /tmp/pmwh3_schema_seed.php:172 /tmp/pmwh3_schema_seed.php:176
-msgid "syslog"
-msgstr ""
-
-#: /tmp/pmwh3_schema_seed.php:166 /tmp/pmwh3_schema_seed.php:163
-#: /tmp/pmwh3_schema_seed.php:175 /tmp/pmwh3_schema_seed.php:174
-#: /tmp/pmwh3_schema_seed.php:173 /tmp/pmwh3_schema_seed.php:177
-msgid "db"
-msgstr ""
-
 #: /tmp/pmwh3_schema_seed.php:167 /tmp/pmwh3_schema_seed.php:164
 #: /tmp/pmwh3_schema_seed.php:176 /tmp/pmwh3_schema_seed.php:175
 #: /tmp/pmwh3_schema_seed.php:174
 msgid "File (cevian log path)"
-msgstr ""
-
-#: /tmp/pmwh3_schema_seed.php:170 /tmp/pmwh3_schema_seed.php:167
-#: /tmp/pmwh3_schema_seed.php:179 /tmp/pmwh3_schema_seed.php:178
-#: /tmp/pmwh3_schema_seed.php:177 /tmp/pmwh3_schema_seed.php:181
-msgid "debug"
-msgstr ""
-
-#: /tmp/pmwh3_schema_seed.php:171 /tmp/pmwh3_schema_seed.php:168
-#: /tmp/pmwh3_schema_seed.php:180 /tmp/pmwh3_schema_seed.php:179
-#: /tmp/pmwh3_schema_seed.php:178 /tmp/pmwh3_schema_seed.php:182
-msgid "info"
-msgstr ""
-
-#: /tmp/pmwh3_schema_seed.php:172 /tmp/pmwh3_schema_seed.php:169
-#: /tmp/pmwh3_schema_seed.php:181 /tmp/pmwh3_schema_seed.php:180
-#: /tmp/pmwh3_schema_seed.php:179 /tmp/pmwh3_schema_seed.php:183
-msgid "notice"
-msgstr ""
-
-#: /tmp/pmwh3_schema_seed.php:173 /tmp/pmwh3_schema_seed.php:170
-#: /tmp/pmwh3_schema_seed.php:182 /tmp/pmwh3_schema_seed.php:181
-#: /tmp/pmwh3_schema_seed.php:180 /tmp/pmwh3_schema_seed.php:184
-msgid "warning"
-msgstr ""
-
-#: /tmp/pmwh3_schema_seed.php:174 /tmp/pmwh3_schema_seed.php:171
-#: /tmp/pmwh3_schema_seed.php:183 /tmp/pmwh3_schema_seed.php:182
-#: /tmp/pmwh3_schema_seed.php:181 /tmp/pmwh3_schema_seed.php:185
-msgid "error"
-msgstr ""
-
-#: /tmp/pmwh3_schema_seed.php:175 /tmp/pmwh3_schema_seed.php:172
-#: /tmp/pmwh3_schema_seed.php:184 /tmp/pmwh3_schema_seed.php:183
-#: /tmp/pmwh3_schema_seed.php:182 /tmp/pmwh3_schema_seed.php:186
-msgid "critical"
-msgstr ""
-
-#: /tmp/pmwh3_schema_seed.php:182 /tmp/pmwh3_schema_seed.php:179
-#: /tmp/pmwh3_schema_seed.php:191 /tmp/pmwh3_schema_seed.php:190
-#: /tmp/pmwh3_schema_seed.php:189 /tmp/pmwh3_schema_seed.php:193
-msgid "app"
-msgstr ""
-
-#: /tmp/pmwh3_schema_seed.php:183 /tmp/pmwh3_schema_seed.php:180
-#: /tmp/pmwh3_schema_seed.php:192 /tmp/pmwh3_schema_seed.php:191
-#: /tmp/pmwh3_schema_seed.php:190 /tmp/pmwh3_schema_seed.php:194
-msgid "framework"
-msgstr ""
-
-#: /tmp/pmwh3_schema_seed.php:184 /tmp/pmwh3_schema_seed.php:181
-#: /tmp/pmwh3_schema_seed.php:193 /tmp/pmwh3_schema_seed.php:192
-#: /tmp/pmwh3_schema_seed.php:191 /tmp/pmwh3_schema_seed.php:195
-msgid "php"
-msgstr ""
-
-#: /tmp/pmwh3_schema_seed.php:185 /tmp/pmwh3_schema_seed.php:182
-#: /tmp/pmwh3_schema_seed.php:194 /tmp/pmwh3_schema_seed.php:193
-#: /tmp/pmwh3_schema_seed.php:192 /tmp/pmwh3_schema_seed.php:196
-msgid "database"
-msgstr ""
-
-#: /tmp/pmwh3_schema_seed.php:201 /tmp/pmwh3_schema_seed.php:198
-#: /tmp/pmwh3_schema_seed.php:210 /tmp/pmwh3_schema_seed.php:209
-#: /tmp/pmwh3_schema_seed.php:208 /tmp/pmwh3_schema_seed.php:212
-msgid "Wblist"
 msgstr ""
 
 #: /home/chris/NetBeansProjects/cevian/modules/pmwh3/view/install.php:213

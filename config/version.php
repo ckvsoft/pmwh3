@@ -6,7 +6,7 @@ class Version
 {
 
     // Statische Konstante
-    public const VERSION = '3.0.83-260928';
+    public const VERSION = '3.0.84-261004';
 
     // Optional: Getter-Methode
     public static function getVersion(): string

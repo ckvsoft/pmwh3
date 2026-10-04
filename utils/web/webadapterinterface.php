@@ -101,6 +101,11 @@ interface WebAdapterInterface
      *              adapter renders a :443 vhost wrapping/behind the
      *              http one. When the adapters declares the 'ssl'
      *              capability.
+     *   php        effective PHP mode ('Y' | 'N'), resolved by
+     *              WebManager::resolvePhp() (customer-flag ceiling +
+     *              row selection). 'Y' renders an open_basedir
+     *              confinement (WEB_OPEN_BASEDIR), 'N' a hard deny
+     *              for *.php/phtml/phar.
      */
     public static function buildVhostData(array $args): string;
 

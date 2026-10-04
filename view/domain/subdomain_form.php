@@ -13,6 +13,8 @@ $isIpRow    = $row !== null && filter_var((string) ($row['path'] ?? ''), FILTER_
 $label      = $fqdn === '' ? '' : explode('.', $fqdn, 2)[0];
 $certs      = (array) ($viewData['certs'] ?? []);
 $sslCapable = !empty($viewData['sslCapable']);
+$customerPhp = ($viewData['customerPhp'] ?? 'Y') === 'N' ? 'N' : 'Y';
+$rowPhp      = strtoupper((string) ($row['php'] ?? ''));
 $hasTls     = $row !== null && (string) strpos((string) ($row['data'] ?? ''), 'SSLEngine on') !== false;
 preg_match('/SSLCertificateFile\s+[^\s]*\/([^\/\s]+)\.pem/', (string) ($row['data'] ?? ''), $certMatch);
 $sslCurrent = $certMatch[1] ?? '';
@@ -76,6 +78,21 @@ $sslCurrent = $certMatch[1] ?? '';
                                     <?php endif; ?>
                                 </td>
                             </tr>
+                            <tr data-mode="directory,alias">
+                                <th align="right"><?php echo __('PHP'); ?></th>
+                                <td class="widget-value">
+                                    <?php if ($customerPhp === 'N'): ?>
+                                        <em><?php echo __('Disabled (customer setting)'); ?></em>
+                                    <?php else: ?>
+                                        <select name="php">
+                                            <option value="" selected><?php echo __('Default (customer setting: enabled)'); ?></option>
+                                            <option value="Y"><?php echo __('Enabled'); ?></option>
+                                            <option value="N"><?php echo __('Disabled (403 for PHP files)'); ?></option>
+                                        </select>
+                                        <br><small><?php echo __('Enabled vhosts are confined to their document root (open_basedir).'); ?></small>
+                                    <?php endif; ?>
+                                </td>
+                            </tr>
                             <tr>
                                 <th align="right" valign="top"><?php echo __('Custom config'); ?></th>
                                 <td class="widget-value">
@@ -131,6 +148,23 @@ $sslCurrent = $certMatch[1] ?? '';
                                 <th align="right"><?php echo __('Alias of'); ?></th>
                                 <td class="widget-value"><?php echo ((string) ($row['alias_of'] ?? '')) === '' ? '—' : htmlspecialchars((string) $row['alias_of']); ?></td>
                             </tr>
+                            <?php if (!$isIpRow): ?>
+                            <tr>
+                                <th align="right"><?php echo __('PHP'); ?></th>
+                                <td class="widget-value">
+                                    <?php if ($customerPhp === 'N'): ?>
+                                        <em><?php echo __('Disabled (customer setting)'); ?></em>
+                                    <?php else: ?>
+                                        <select name="php">
+                                            <option value=""<?php echo $rowPhp === '' ? ' selected' : ''; ?>><?php echo __('Default (customer setting: enabled)'); ?></option>
+                                            <option value="Y"<?php echo $rowPhp === 'Y' ? ' selected' : ''; ?>><?php echo __('Enabled'); ?></option>
+                                            <option value="N"<?php echo $rowPhp === 'N' ? ' selected' : ''; ?>><?php echo __('Disabled (403 for PHP files)'); ?></option>
+                                        </select>
+                                        <br><small><?php echo __('Enabled vhosts are confined to their document root (open_basedir).'); ?></small>
+                                    <?php endif; ?>
+                                </td>
+                            </tr>
+                            <?php endif; ?>
                             <tr>
                                 <th align="right" valign="top"><?php echo __('Custom config'); ?></th>
                                 <td class="widget-value">

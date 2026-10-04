@@ -62,6 +62,7 @@ $db->execDdl("CREATE TABLE pmwh3_web_subdomains (
     mode       VARCHAR(16)  NOT NULL DEFAULT 'directory',
     ip         VARCHAR(45)  DEFAULT NULL,
     ssl_cert   VARCHAR(255) DEFAULT NULL,
+    php        CHAR(1)      NOT NULL DEFAULT '',
     custom     TEXT         DEFAULT NULL,
     adapter    VARCHAR(32)  NOT NULL DEFAULT 'apache',
     PRIMARY KEY (subdomain),
@@ -90,8 +91,10 @@ $domainName = 'sdmtest-' . substr(md5((string) time()), 0, 6) . '.example.org';
 
 // --- cleanup any earlier run ------------------------------------------
 $db->delete('pmwh3_web_subdomains', 'subdomain LIKE :p', ['p' => 'sdmtest-%']);
+$db->delete('pmwh3_web_subdomains', 'subdomain LIKE :p', ['p' => 'php%.']);
 $db->delete('pmwh3_domains', 'cid = :c', ['c' => $cid]);
 $db->delete('pmwh3_countings', 'cid = :c', ['c' => $cid]);
+$db->delete('pmwh3_customers', 'customer = :c', ['c' => 'sdmtst']);
 
 // --- seed -------------------------------------------------------------
 $db->insert('pmwh3_domains', [
@@ -392,6 +395,61 @@ t('ssl: create resolved automatically', $r['ok'] ?? false, $r);
 $crtData = (string) (WebManager::getRow('tlsauto.' . $domainName)['data'] ?? '');
 t('ssl: auto picked the wildcard cert',
     str_contains($crtData, '_.' . $domainName . '.pem'));
+
+// --- php: per-vhost selection with the customer flag as ceiling --------
+$db->insert('pmwh3_customers', [
+    'customer' => 'sdmtst',
+    'cid'      => $cid,
+    'php'      => 'Y',
+]);
+$r = SubdomainManager::create([
+    'sub' => 'phpy', 'domain' => $domainName, 'mode' => 'directory',
+    'value' => 'phpy', 'cid' => $cid,
+]);
+t('php: create with customer Y (row inherit)', $r['ok'] ?? false, $r);
+$row = WebManager::getRow('phpy.' . $domainName);
+$pyData = (string) ($row['data'] ?? '');
+t('php: open_basedir rendered (inherit Y)',
+    str_contains($pyData, 'ProxyFCGISetEnvIf')
+    && str_contains($pyData, 'open_basedir=')
+    && str_contains($pyData, $webTmp . '/sdmtst/' . $domainName . '/phpy/')
+    && !str_contains($pyData, 'FilesMatch'), ['len' => strlen($pyData)]);
+t('php: row flag stored as inherit', ($row['php'] ?? 'x') === '');
+
+// explicit Y on create while the customer allows PHP
+$r = SubdomainManager::create([
+    'sub' => 'phpx', 'domain' => $domainName, 'mode' => 'directory',
+    'value' => 'phpx', 'cid' => $cid, 'php' => 'Y',
+]);
+t('php: explicit Y create ok', $r['ok'] ?? false, $r);
+$pxRow = WebManager::getRow('phpx.' . $domainName);
+t('php: explicit Y stored + rendered',
+    strtoupper((string) ($pxRow['php'] ?? '')) === 'Y'
+    && str_contains((string) ($pxRow['data'] ?? ''), 'ProxyFCGISetEnvIf'));
+
+$r = SubdomainManager::update('phpy.' . $domainName, ['php' => 'N'], $cid);
+t('php: update to N', $r['ok'], $r);
+$row = WebManager::getRow('phpy.' . $domainName);
+$pnData = (string) ($row['data'] ?? '');
+t('php: deny rendered after N',
+    str_contains($pnData, 'FilesMatch')
+    && str_contains($pnData, 'Require all denied')
+    && !str_contains($pnData, 'ProxyFCGISetEnvIf'));
+t('php: row flag stored N', strtoupper((string) ($row['php'] ?? '')) === 'N');
+
+// customer flips to N: the row selection is capped, Y is impossible
+$db->update('pmwh3_customers', ['php' => 'N'], 'customer = :c', ['c' => 'sdmtst']);
+$r = SubdomainManager::update('phpy.' . $domainName, ['php' => 'Y'], $cid);
+t('php: capped update ok', $r['ok'], $r);
+$row = WebManager::getRow('phpy.' . $domainName);
+$pcData = (string) ($row['data'] ?? '');
+t('php: customer N caps selection to N',
+    strtoupper((string) ($row['php'] ?? '')) === 'N'
+    && str_contains($pcData, 'FilesMatch')
+    && !str_contains($pcData, 'ProxyFCGISetEnvIf'));
+
+SubdomainManager::delete('phpy.' . $domainName, $cid);
+$db->delete('pmwh3_customers', 'customer = :c', ['c' => 'sdmtst']);
 
 // --- cleanup -----------------------------------------------------------
 SubdomainManager::delete($dnReg, $cid);

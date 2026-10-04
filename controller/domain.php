@@ -685,6 +685,17 @@ class Domain extends BaseController
         return (int) ($row['cid'] ?? 0);
     }
 
+    /**
+     * Customer-level PHP flag ('Y'|'N') -- the ceiling for the
+     * per-vhost PHP selection in the subdomain form.
+     */
+    private function customerPhpFlag(string $customer): string
+    {
+        $cRow = \pmwh3\Utils\CustomerManager::getByName(strtolower(trim($customer)));
+        return ($cRow !== null
+                && strtoupper((string) ($cRow['php'] ?? '')) === 'Y') ? 'Y' : 'N';
+    }
+
     public function subdomain_new($domain = '')
     {
         $cid = (int) Session::getNs('pmwh3', 'customer_id');
@@ -713,6 +724,8 @@ class Domain extends BaseController
             'webEnabled'=> WebManager::isEnabled(),
             'certs'     => WebManager::listCerts(),
             'sslCapable'=> WebManager::supports('ssl'),
+            'customerPhp' => $this->customerPhpFlag(
+                    (string) (DomainManager::getByName($domain)['customer'] ?? '')),
             'quota'     => \pmwh3\Utils\SubdomainManager::quota(
                     $this->subdomainOwnerCid($domain) ?: $cid),
         ]);
@@ -725,7 +738,7 @@ class Domain extends BaseController
             return;
         }
         $input = new \ckvsoft\Input();
-        $input->post('sub')->post('mode_v')->post('value')->post('alias_of')->post('custom')->post('ssl_cert');
+        $input->post('sub')->post('mode_v')->post('value')->post('alias_of')->post('custom')->post('ssl_cert')->post('php');
         $in = $input->fetch();
         $mode = (string) ($in['mode_v'] ?? 'directory');
         $value = match ($mode) {
@@ -747,6 +760,7 @@ class Domain extends BaseController
             'cid'       => $this->subdomainOwnerCid($domain),
             'custom'    => (string) ($in['custom'] ?? ''),
             'ssl_cert'  => $sslCert,
+            'php'       => (string) ($in['php'] ?? ''),
         ]);
         if (!$result['ok']) {
             $this->flash('error', __('Subdomains'), (string) $result['error'],
@@ -798,6 +812,7 @@ class Domain extends BaseController
             'webEnabled'=> WebManager::isEnabled(),
             'certs'     => WebManager::listCerts(),
             'sslCapable'=> WebManager::supports('ssl'),
+            'customerPhp' => $this->customerPhpFlag((string) $row['customer']),
         ]);
     }
 
@@ -812,11 +827,14 @@ class Domain extends BaseController
             return;
         }
         $input = new \ckvsoft\Input();
-        $input->post('sub')->post('custom')->post('ssl_cert')->post('regenerate');
+        $input->post('sub')->post('custom')->post('ssl_cert')->post('regenerate')->post('php');
         $in = $input->fetch();
         $fields = [];
         if (isset($in['sub']) && trim((string) $in['sub']) !== '') {
             $fields['sub'] = (string) $in['sub'];
+        }
+        if (isset($in['php'])) {
+            $fields['php'] = (string) $in['php'];
         }
         if (isset($in['custom'])) {
             $fields['custom'] = (string) $in['custom'];

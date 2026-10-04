@@ -440,6 +440,7 @@ CREATE TABLE IF NOT EXISTS `pmwh3_web_subdomains` (
     `ip`            VARCHAR(45)  DEFAULT NULL,
     `alias_of`      VARCHAR(128) DEFAULT NULL,
     `ssl_cert`      VARCHAR(255) DEFAULT NULL,
+    `php`           CHAR(1)      NOT NULL DEFAULT '',
     `custom`        TEXT         DEFAULT NULL,
     `adapter`       VARCHAR(32)  NOT NULL DEFAULT 'apache',
     `data`          LONGTEXT     DEFAULT NULL,

@@ -104,7 +104,7 @@ class ApacheAdapter implements WebAdapterInterface
     {
         $row = self::db()->selectOne(
                 "SELECT subdomain, domain, customer, path, mode, ip,
-                        alias_of, ssl_cert, custom, adapter, data
+                        alias_of, ssl_cert, php, custom, adapter, data
                    FROM pmwh3_web_subdomains
                   WHERE subdomain = :s",
                 ['s' => self::normalize($fqdn)]
@@ -117,7 +117,7 @@ class ApacheAdapter implements WebAdapterInterface
         $domain = self::normalize($domain);
         return self::db()->select(
                 "SELECT subdomain, domain, customer, path, mode, ip,
-                        alias_of, ssl_cert, custom, adapter, data
+                        alias_of, ssl_cert, php, custom, adapter, data
                    FROM pmwh3_web_subdomains
                   WHERE subdomain = :exact
                      OR subdomain LIKE :pattern
@@ -152,7 +152,7 @@ class ApacheAdapter implements WebAdapterInterface
         if ($oldFqdn === '' || !self::rowExists($oldFqdn)) {
             return false;
         }
-        $allowed = ['subdomain', 'path', 'data', 'alias_of', 'mode', 'ip', 'ssl_cert', 'custom', 'adapter'];
+        $allowed = ['subdomain', 'path', 'data', 'alias_of', 'mode', 'ip', 'ssl_cert', 'php', 'custom', 'adapter'];
         $update = [];
         foreach ($allowed as $col) {
             if (!array_key_exists($col, $fields)) {
@@ -197,6 +197,11 @@ class ApacheAdapter implements WebAdapterInterface
                 ? self::normalize((string) $args['alias_of']) : '';
         $custom   = (string) ($args['custom'] ?? '');
         $sslCert  = trim((string) ($args['ssl_cert'] ?? ''));
+        // Effective PHP mode ('Y' = open_basedir confinement, 'N' = hard
+        // deny). The resolution (customer-flag ceiling + row selection)
+        // lives in WebManager::resolvePhp(); a missing key defaults to
+        // the historical plain rendering.
+        $php      = strtoupper((string) ($args['php'] ?? 'Y')) === 'N' ? 'N' : 'Y';
 
         if ($fqdn === '' || $path === '') {
             return '';
@@ -211,7 +216,7 @@ class ApacheAdapter implements WebAdapterInterface
                 $custom
         );
 
-        $block = function (string $port, bool $tls) use ($fqdn, $domain, $path, $custom, $sslCert): string {
+        $block = function (string $port, bool $tls) use ($fqdn, $domain, $path, $customer, $custom, $sslCert, $php): string {
             $out  = "<VirtualHost {$port}>\n";
             $out .= "    ServerName {$fqdn}\n";
             if ($domain !== '' && $fqdn === 'www.' . $domain) {
@@ -221,6 +226,28 @@ class ApacheAdapter implements WebAdapterInterface
             $indexFile = trim((string) LazyConfig::get('CREATE_INDEXFILE', ''));
             if ($indexFile !== '') {
                 $out .= "    DirectoryIndex " . $indexFile . "\n";
+            }
+            if ($php === 'N') {
+                // PHP off for this vhost: hard deny -- no execution and
+                // no source download.
+                $out .= "    # PHP disabled (customer/vhost setting)\n";
+                $out .= "    <FilesMatch \"\\.(php[0-9]?|phtml|phar)$\">\n";
+                $out .= "        Require all denied\n";
+                $out .= "    </FilesMatch>\n";
+            } else {
+                // PHP on: confine file access to the document root plus
+                // the configured extra paths (WEB_OPEN_BASEDIR). Needs
+                // mod_proxy_fcgi and Apache >= 2.4.10.
+                $paths = (string) LazyConfig::get(
+                        'WEB_OPEN_BASEDIR', '[DOCROOT]/:/vhome/share/cevian/:/tmp/');
+                $paths = str_replace(
+                        ['[DOCROOT]', '[CUSTOMER]', '[DOMAIN]'],
+                        [$path, $customer, $domain], $paths);
+                $paths = trim(str_replace(["\r", "\n", '"'], ' ', $paths));
+                if ($paths !== '') {
+                    $out .= "    # PHP enabled: open_basedir confinement\n";
+                    $out .= "    ProxyFCGISetEnvIf \"true\" PHP_ADMIN_VALUE \"open_basedir={$paths}\"\n";
+                }
             }
             if ($tls) {
                 $dir = rtrim((string) LazyConfig::get('WEB_SSL_DIR', '/vhome/ssl'), '/');
@@ -331,6 +358,7 @@ class ApacheAdapter implements WebAdapterInterface
             'alias_of'  => $row['alias_of'],
             'custom'    => $custom,
             'ssl_cert'  => $sslCert,
+            'php'       => (string) ($row['php'] ?? ''),
         ]);
         if ($new === '') {
             return false;
